@@ -61,13 +61,13 @@ class J2H (object):
             if len(text) >= length:
                 if text.startswith(k):
                     for  (yomi, tail) in v:
-                        if max_len <= length:
-                            if tail is '':
+                        if tail is '':
+                            if max_len < length:
                                 Hstr = yomi
                                 max_len = length
-                            elif self.isCletter(tail, text[length]):
-                                Hstr=''.join([yomi,text[length]])
-                                max_len = length
+                        elif max_len < length+1 and len(text) > length and self.isCletter(tail, text[length]):
+                            Hstr=''.join([yomi,text[length]])
+                            max_len = length+1
             elif text[2:].startswith(k):
                     match_more = True
 
