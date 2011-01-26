@@ -22,6 +22,9 @@ class TestPyKakasi(unittest.TestCase):
 
         TESTS = [
             (u"かんたん",   ("ka", 1)),
+            (u"にゃ", ("nya",2)),
+            (u"っき", ("kki",2)),
+            (u"っふぁ", ("ffa", 3)),
         ]
 
         h = pykakasi.H2a()
