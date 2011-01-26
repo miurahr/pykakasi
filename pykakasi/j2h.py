@@ -44,41 +44,31 @@ class J2H (object):
     def __init__(self):
         self.kanwa = jisyo()  
 
-    def isCLettter(self, l, c):
+    def isCletter(self, l, c):
         if (ord(u"ぁ") <= ord(c) and  ord(c) <= 0x309f) and (  l in self.cl_table[ord(c) - ord(u"ぁ")-1]):
-        	    return True
+            return True
         return False
 
-    def J2H(self, text):
+    def convert(self, text):
         max_len = 0
         match_more = False
+        Hstr = ""
         table = self.kanwa.load_jisyo(text[0])
+        if table is None:
+            return ("", 0, False)
         for (k,v) in table.iteritems():
             length = len(k)
-            yomi = v[1]                
-            tail = v[2]
             if len(text) >= length:
                 if text.startswith(k):
-                    if self.isCletter(tail, text[length]) and (max_len < length):
-		                if tail is not None:
-		                    Hstr=''.join(yomi,text[length])
-                        else:
-                            Hstr=yomi
-                    max_len = max(length, max_len) 
-
-            if len(text) == 1:
-                match_more = True
-            else if k.startswith(text[2:]):
-                match_more = True
-
-        if max_len is 0:
-            return ("", 1, False)
-
-        if text[max_len-1] is u"っ":
-    	    if len(text) <= max_len+1:
-                match_more = True
-        else 
-                max_len += 1
-		        Hstr.join(text[max_len+1])
+                    for  (yomi, tail) in v:
+                        if max_len <= length:
+                            if tail is '':
+                                Hstr = yomi
+                                max_len = length
+                            elif self.isCletter(tail, text[length]):
+                                Hstr=''.join([yomi,text[length]])
+                                max_len = length
+            elif text[2:].startswith(k):
+                    match_more = True
 
         return (Hstr, max_len, match_more)
