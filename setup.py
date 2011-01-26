@@ -27,7 +27,8 @@ class TestCommand(Command):
             unittest.defaultTestLoader.loadTestsFromNames( 
                                 UNITTESTS ) )
 
-        result = unittest.TextTestRunner(verbosity=2).run(suite)
+        result = unittest.TextTestRunner(verbosity=3).run(suite)
+
 class GenKanwa(Command):
     user_options = [ ]
 
@@ -39,7 +40,7 @@ class GenKanwa(Command):
 
     def run(self):
         src = os.path.join('data','kakasidict.utf8')        
-        dst = os.path.join('unihandecode','kanwadict2.db')
+        dst = os.path.join('pykakasi','kanwadict2.db')
         try:
             os.unlink(dst)
         except:
@@ -47,7 +48,7 @@ class GenKanwa(Command):
         kanwa = genkanwadict.mkkanwa()
         kanwa.run(src, dst)
         src = os.path.join('data','itaijidict.utf8')
-        dst = os.path.join('unihandecode','itaijidict2.pickle')
+        dst = os.path.join('pykakasi','itaijidict2.pickle')
         try:
             os.unlink(dst)
         except:
