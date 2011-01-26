@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
 import unittest
-from j2h import J2H
 
-class TestUnidecode(unittest.TestCase):
-	def test_basic(self):
+class TestPyKakasi(unittest.TestCase):
 
-	    TESTS = [
-				(u"Hello, World!", 
-				"Hello, World!"),
+    def test_J2H(self):
+        import pykakasi
+
+        TESTS = [
+            (u"構成",         (u"こうせい",2,False)),
+            (u"好き",          (u"すき",2,False)),
+            (u"大きい",       (u"おおき",2,False)),
         ]
 
-		j = J2H()
-		for case, result in TESTS:
-			self.failUnlessEqual(j.convert(case), result)
+        j = pykakasi.J2H()
+        for case, result in TESTS:
+            self.failUnlessEqual(j.convert(case), result)
+
 
