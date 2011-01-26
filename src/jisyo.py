@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
-#  j2h.py
+#  jisyo.py
 #
 # Copyright 2011 Hiroshi Miura <miurahr@linux.com>
 #
-
 #
 # * KAKASI (Kanji Kana Simple inversion program)
-# * $Id: jj2.c,v 1.7 2001-04-12 05:57:34 rug Exp $
 # * Copyright (C) 1992
 # * Hironobu Takahashi (takahasi@tiny.or.jp)
 # *
