@@ -25,23 +25,25 @@
 # */
 
 import anydbm,marshal
-from zlib import uncompress
+from zlib import decompress
 
 class jisyo (object):
     kanwadict = None
-    jisyo_table = []
+    jisyo_table = {}
 
     def __init__(self):
         if self.kanwadict is None:
-            self.kanwadict = anydbm.open('kanwadict2.db','r')
+            self.kanwadict = anydbm.open('pykakasi/kanwadict2.db','r')
 
-    def load_jisyo(self, key):
-        try:
+    def load_jisyo(self, char):
+        try:#python2
+            key = "%04x"%ord(unicode(char))
+        except:#python3
+            key = "%04x"%ord(char)
+
+        try: #already exist?
             table = self.jisyo_table[key]
         except:
-            try:
-                self.jisyo_table[key]  = marshal.loads(uncompress(self.kanwadict[key]))
-            except:
-                self.jisyo_table[key] = None
-        return self.jisyo_table[key]
+            table = self.jisyo_table[key]  = marshal.loads(decompress(self.kanwadict[key]))
+        return table
 
