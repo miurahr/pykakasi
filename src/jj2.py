@@ -3,7 +3,6 @@
 #
 # Copyright 2011 Hiroshi Miura <miurahr@linux.com>
 #
-
 #
 # * KAKASI (Kanji Kana Simple inversion program)
 # * $Id: jj2.c,v 1.7 2001-04-12 05:57:34 rug Exp $
@@ -45,14 +44,8 @@ class J2H (object):
     def __init__(self):
         self.kanwa = jisyo()  
 
-    def isHiragana(self, c):
-        if  ord(u"ぁ") <= ord(c) and  ord(c) <= 0x309f: #end of Hiragana region
-            return True
-        return False 
-
-    def J2_cletter(self, l, c):
-        if self.isHiragana(c):        
-    	    if  l in self.cl_table[ord(c) - ord(u"ぁ")-1]:
+    def isCLettter(self, l, c):
+        if (ord(u"ぁ") <= ord(c) and  ord(c) <= 0x309f) and (  l in self.cl_table[ord(c) - ord(u"ぁ")-1]):
         	    return True
         return False
 
@@ -66,7 +59,7 @@ class J2H (object):
             tail = v[2]
             if len(text) >= length:
                 if text.startswith(k):
-                    if self.J2_cletter(tail, text[length]) and (max_len < length):
+                    if self.isCletter(tail, text[length]) and (max_len < length):
 		                if tail is not None:
 		                    Hstr=''.join(yomi,text[length])
                         else:
@@ -89,4 +82,3 @@ class J2H (object):
 		        Hstr.join(text[max_len+1])
 
         return (Hstr, max_len, match_more)
-
