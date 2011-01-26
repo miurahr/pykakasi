@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-#  jisyo.py
+#  h2a.py
 #
 # Copyright 2011 Hiroshi Miura <miurahr@linux.com>
 #
 #
 # * KAKASI (Kanji Kana Simple inversion program)
+# * $Id: jj2.c,v 1.7 2001-04-12 05:57:34 rug Exp $
 # * Copyright (C) 1992
 # * Hironobu Takahashi (takahasi@tiny.or.jp)
 # *
@@ -24,29 +25,28 @@
 # * 02111-1307, USA.
 # */
 
-import anydbm,marshal
-from zlib import decompress
+from jisyo import jisyo
 
-class jisyo (object):
-    kanwadict = None
-    jisyo_table = {}
+class H2a (object):
 
-    def __init__(self):
-        if self.kanwadict is None:
-            self.kanwadict = anydbm.open('pykakasi/kanwadict2.db','r')
+    H2a_table = {
+        u"\u3041":"a", u"\u3042":"a",
+        u"\u3043":"i", u"\u3044":"i",
+        u"\u3045":"u", u"\u3046":"u",
+        u"\u3046\u309b":"vu", u"\u3046\u309b\u3041":"va",
+        u"\u3046\u309b\u3043":"vi", u"\u3046\u309b\u3047":"ve",
+        u"\u3046\u309b\u3049":"vo",
+        u"\u3047":"e", u"\u3048":"e",
+        u"\u3049":"o", u"\u304a":"o",
 
-    def load_jisyo(self, char):
-        try:#python2
-            key = "%04x"%ord(unicode(char))
-        except:#python3
-            key = "%04x"%ord(char)
+        u"\u304b":"ka", u"\u304c":"ga",
+        u"\u304d":"ki", u"\u304d\u3083":"kya",
+        u"\u304d\u3045":"kyu",
+    }
 
-        try: #already exist?
-            table = self.jisyo_table[key]
-        except:
-            try:
-                table = self.jisyo_table[key]  = marshal.loads(decompress(self.kanwadict[key]))
-            except:
-                return None
-        return table
+    def convert(self, text):
+        for x in xrange(4):
+            if text[:x] in self.H2a_table:
+                return (self.H2a_table[text[:x]], x) 
+        return ("", 1)
 

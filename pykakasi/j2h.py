@@ -55,7 +55,7 @@ class J2H (object):
         Hstr = ""
         table = self.kanwa.load_jisyo(text[0])
         if table is None:
-            return ("", 0, False)
+            return ("", 0)
         for (k,v) in table.iteritems():
             length = len(k)
             if len(text) >= length:
@@ -68,7 +68,4 @@ class J2H (object):
                         elif max_len < length+1 and len(text) > length and self.isCletter(tail, text[length]):
                             Hstr=''.join([yomi,text[length]])
                             max_len = length+1
-            elif text[2:].startswith(k):
-                    match_more = True
-
-        return (Hstr, max_len, match_more)
+        return (Hstr, max_len)
