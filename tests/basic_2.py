@@ -47,6 +47,9 @@ class TestPyKakasi(unittest.TestCase):
             (u"にゃ",          "nya"),
             (u"っき",           "kki"),
             (u"っふぁ",        "ffa"),
+            (u"漢字とひらがな交じり文", "kanjitohiraganamajiribun"),
+            (u"Alphabet 123 and 漢字", "Alphabet 123 and kanji"),
+            (u"日経新聞", "nikkeishinbun"),
         ]
 
         k = pykakasi.kakasi()
