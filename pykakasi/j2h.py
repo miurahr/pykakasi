@@ -46,7 +46,7 @@ class J2H (object):
         self.kanwa = jisyo()  
 
     def isKanji(self, c):
-        return ( 0x3400 < ord(c) and ord(c) < 0xfa2d)
+        return ( 0x3400 <= ord(c) and ord(c) < 0xfa2e)
 
     def isCletter(self, l, c):
         if (ord(u"ぁ") <= ord(c) and  ord(c) <= 0x309f) and (  l in self.cl_table[ord(c) - ord(u"ぁ")-1]):
