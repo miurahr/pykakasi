@@ -3,7 +3,7 @@
 #
 # Copyright 2011 Hiroshi Miura <miurahr@linux.com>
 #
-#
+# Original copyright:
 # * KAKASI (Kanji Kana Simple inversion program)
 # * $Id: jj2.c,v 1.7 2001-04-12 05:57:34 rug Exp $
 # * Copyright (C) 1992
@@ -162,6 +162,9 @@ class H2a (object):
         u"\u3093\u3046":"n'u", u"\u3093\u3048":"n'e",
         u"\u3093\u304a":"n'o",
     }
+
+    def isHiragana(self, char):
+        return ( 0x3040 < ord(char) and ord(char) < 0x3094)
 
     def convert(self, text):
         Hstr = ""

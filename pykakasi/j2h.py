@@ -3,7 +3,7 @@
 #
 # Copyright 2011 Hiroshi Miura <miurahr@linux.com>
 #
-#
+#  Original Copyright:
 # * KAKASI (Kanji Kana Simple inversion program)
 # * $Id: jj2.c,v 1.7 2001-04-12 05:57:34 rug Exp $
 # * Copyright (C) 1992
@@ -26,6 +26,7 @@
 # */
 
 from jisyo import jisyo
+import re
 
 class J2H (object):
 
@@ -44,10 +45,22 @@ class J2H (object):
     def __init__(self):
         self.kanwa = jisyo()  
 
+    def isKanji(self, c):
+        return ( 0x3400 < ord(c) and ord(c) < 0xfa2d)
+
     def isCletter(self, l, c):
         if (ord(u"ぁ") <= ord(c) and  ord(c) <= 0x309f) and (  l in self.cl_table[ord(c) - ord(u"ぁ")-1]):
             return True
         return False
+
+    def itaiji_conv(self, text):
+        r = []
+        for c in text:
+            if c in self.kanwa.itaijidict:
+                r.append(c)
+        for c in r:
+            text = re.sub(c, self.kanwa.itaijidict[c], text)
+        return text
 
     def convert(self, text):
         max_len = 0
