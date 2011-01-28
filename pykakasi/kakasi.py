@@ -48,12 +48,13 @@ class kakasi(object):
             if i >= len(text):
                 break
 
-            if (self.j2h.isKanji(text[i])):
+            if self.j2h.isKanji(text[i]):
                 (t, l) = self.j2h.convert(text[i:])
                 if l <= 0:
                     break
                 i = i + l
                 m = 0
+                tmptext = ""
                 while True: 
                     if m >= len(t):
                         break
@@ -61,13 +62,23 @@ class kakasi(object):
                     if n <= 0:
                         break
                     m = m + n
-                    otext = otext+s
- 
-            elif (self.h2a.isHiragana(text[i])):
-                (t, l) = self.h2a.convert(text[i:])
-                otext = otext+t
-                i = i + l
-
+                    tmptext = tmptext+s
+                if i >= len(text):
+                    otext = otext + tmptext.capitalize()
+                else:
+                    otext = otext + tmptext.capitalize() +' ' 
+            elif self.h2a.isHiragana(text[i]):
+                tmptext = ''
+                while True:
+                    (t, l) = self.h2a.convert(text[i:])
+                    tmptext = tmptext+t
+                    i = i + l
+                    if i >= len(text):
+                        otext = otext + tmptext                    
+                        break
+                    elif not self.h2a.isHiragana(text[i]):
+                        otext = otext + tmptext + ' '
+                        break
             else:
                 otext  = otext + text[i]
                 i += 1

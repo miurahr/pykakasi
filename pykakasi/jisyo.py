@@ -5,6 +5,7 @@
 from cPickle import load
 import anydbm,marshal
 from zlib import decompress
+import os
 
 class jisyo (object):
     kanwadict = None
@@ -13,9 +14,11 @@ class jisyo (object):
 
     def __init__(self):
         if self.kanwadict is None:
-            self.kanwadict = anydbm.open('pykakasi/kanwadict2.db','r')
+            dictpath = os.path.join('pykakasi','kanwadict2.db')
+            self.kanwadict = anydbm.open(dictpath,'r')
         if self.itaijidict is  None:
-            itaiji_pkl = open('pykakasi/itaijidict2.pickle', 'rb')
+            itaijipath = os.path.join('pykakasi','itaijidict2.pickle')
+            itaiji_pkl = open(itaijipath, 'rb')
             self.itaijidict = load(itaiji_pkl)
 
     def load_jisyo(self, char):

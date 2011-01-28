@@ -40,16 +40,16 @@ class TestPyKakasi(unittest.TestCase):
     def test_kakasi(self):
 
         TESTS = [
-            (u"構成",         "kousei"),
-            (u"好き",          "suki"),
-            (u"大きい",       "ookii"),
+            (u"構成",         "Kousei"),
+            (u"好き",          "Suki"),
+            (u"大きい",       "Ooki i"),
             (u"かんたん",  "kantan"),
             (u"にゃ",          "nya"),
             (u"っき",           "kki"),
             (u"っふぁ",        "ffa"),
-            (u"漢字とひらがな交じり文", "kanjitohiraganamajiribun"),
-            (u"Alphabet 123 and 漢字", "Alphabet 123 and kanji"),
-            (u"日経新聞", "nikkeishinbun"),
+            (u"漢字とひらがな交じり文", "Kanji tohiragana Majiri Bun"),
+            (u"Alphabet 123 and 漢字", "Alphabet 123 and Kanji"),
+            (u"日経新聞", "Nikkeishinbun"),
         ]
 
         k = pykakasi.kakasi()
