@@ -29,16 +29,19 @@ import re
 import sys, os
 from j2h import J2H
 from h2a import H2a
+from k2a import K2a
 
 class kakasi(object):
 
     j2h = None
     h2a = None
+    k2a = None
 
     def __init__(self, mode="-J2a -H2a -K2a"):
         #now we don't allow mode selection
         self.j2h = J2H()
         self.h2a = H2a() 
+        self.k2a = K2a()
         return
 
     def do(self, text):
@@ -77,6 +80,18 @@ class kakasi(object):
                         otext = otext + tmptext                    
                         break
                     elif not self.h2a.isHiragana(text[i]):
+                        otext = otext + tmptext + ' '
+                        break
+            elif self.k2a.isKatakana(text[i]):
+                tmptext = ''
+                while True:
+                    (t, l) = self.k2a.convert(text[i:])
+                    tmptext = tmptext+t
+                    i = i + l
+                    if i >= len(text):
+                        otext = otext + tmptext                    
+                        break
+                    elif not self.k2a.isKatakana(text[i]):
                         otext = otext + tmptext + ' '
                         break
             else:
