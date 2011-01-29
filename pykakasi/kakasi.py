@@ -27,22 +27,38 @@
 
 import re
 import sys, os
-from j2h import J2H
-from h2a import H2a
-from k2a import K2a
 
 class kakasi(object):
 
-    j2h = None
-    h2a = None
-    k2a = None
+#instances
+    _jconv = None
+    _hconv = None
+    _kconv = None
 
-    def __init__(self, mode="-J2a -H2a -K2a"):
-        #now we don't allow mode selection
-        self.j2h = J2H()
-        self.h2a = H2a() 
-        self.k2a = K2a()
-        return
+#mode flags
+    _flag = {"W":False}
+    _mode = {"J":"a", "H":"a", "K":"a"}
+    _values = ["a", "h", "k"]
+
+    def __init__(self):
+        pass
+
+    def setMode(self, fr, to):
+        if fr in self._mode:
+            if to in self._values:
+                self._mode[fr] = to
+        if fr in self._flag:
+            if to in [True,False]:
+                self._flag[fr] = to
+
+    def getConverter(self):
+        from j2h import J2H
+        from h2a import H2a
+        from k2a import K2a
+        self._jconv = J2H()
+        self._hconv = H2a() 
+        self._kconv = K2a()
+        return self
 
     def do(self, text):
         otext =  ''
@@ -51,8 +67,8 @@ class kakasi(object):
             if i >= len(text):
                 break
 
-            if self.j2h.isKanji(text[i]):
-                (t, l) = self.j2h.convert(text[i:])
+            if self._jconv.isKanji(text[i]):
+                (t, l) = self._jconv.convert(text[i:])
                 if l <= 0:
                     break
                 i = i + l
@@ -61,7 +77,7 @@ class kakasi(object):
                 while True: 
                     if m >= len(t):
                         break
-                    (s, n) = self.h2a.convert(t[m:])
+                    (s, n) = self._hconv.convert(t[m:])
                     if n <= 0:
                         break
                     m = m + n
@@ -70,28 +86,28 @@ class kakasi(object):
                     otext = otext + tmptext.capitalize()
                 else:
                     otext = otext + tmptext.capitalize() +' ' 
-            elif self.h2a.isHiragana(text[i]):
+            elif self._hconv.isHiragana(text[i]):
                 tmptext = ''
                 while True:
-                    (t, l) = self.h2a.convert(text[i:])
+                    (t, l) = self._hconv.convert(text[i:])
                     tmptext = tmptext+t
                     i = i + l
                     if i >= len(text):
                         otext = otext + tmptext                    
                         break
-                    elif not self.h2a.isHiragana(text[i]):
+                    elif not self._hconv.isHiragana(text[i]):
                         otext = otext + tmptext + ' '
                         break
-            elif self.k2a.isKatakana(text[i]):
+            elif self._kconv.isKatakana(text[i]):
                 tmptext = ''
                 while True:
-                    (t, l) = self.k2a.convert(text[i:])
+                    (t, l) = self._kconv.convert(text[i:])
                     tmptext = tmptext+t
                     i = i + l
                     if i >= len(text):
                         otext = otext + tmptext                    
                         break
-                    elif not self.k2a.isKatakana(text[i]):
+                    elif not self._kconv.isKatakana(text[i]):
                         otext = otext + tmptext + ' '
                         break
             else:

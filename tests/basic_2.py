@@ -65,8 +65,12 @@ class TestPyKakasi(unittest.TestCase):
             (u"日経新聞", "Nikkeishinbun"),
         ]
 
-        k = pykakasi.kakasi()
+        kakasi = pykakasi.kakasi()
+        kakasi.setMode("H","a")
+        kakasi.setMode("K","a")
+        kakasi.setMode("J","a")
+        converter  = kakasi.getConverter()
         for case, result in TESTS:
-            self.failUnlessEqual(k.do(case), result)
+            self.failUnlessEqual(converter.do(case), result)
 
 
