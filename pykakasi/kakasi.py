@@ -34,11 +34,15 @@ class kakasi(object):
     _jconv = None
     _hconv = None
     _kconv = None
+    _aconv = None
 
 #mode flags
-    _flag = {"W":False}
+    _flag = {"W":False, "C":True, "c":True, }
     _mode = {"J":"a", "H":"a", "K":"a"}
     _values = ["a", "h", "k"]
+
+#variables
+    _separator = ''
 
     def __init__(self):
         pass
@@ -52,64 +56,77 @@ class kakasi(object):
                 self._flag[fr] = to
 
     def getConverter(self):
-        from j2h import J2H
-        from h2a import H2a
-        from k2a import K2a
-        self._jconv = J2H()
-        self._hconv = H2a() 
-        self._kconv = K2a()
+        if self._mode["H"] is "a":
+            from h2a import H2a
+            self._hconv = H2a() 
+        else:
+            from nop import NOP
+            self._hconv = NOP()
+
+        if self._mode["K"] is "a":
+            from k2a import K2a
+            self._kconv = K2a()
+        else:
+            from nop import NOP
+            self._kconv = NOP()
+
+        if self._mode["J"] is "a":
+            from j2a import J2a
+            self._jconv = J2a()
+            if self._flag["C"]:
+                self._separator = ' '
+            else:
+                self._separator = ''
+
         return self
 
     def do(self, text):
+
         otext =  ''
         i = 0
         while True:
             if i >= len(text):
                 break
 
-            if self._jconv.isKanji(text[i]):
+            if self._jconv.isRegion(text[i]):
                 (t, l) = self._jconv.convert(text[i:])
                 if l <= 0:
+                    i = i + 1
                     break
                 i = i + l
-                m = 0
-                tmptext = ""
-                while True: 
-                    if m >= len(t):
-                        break
-                    (s, n) = self._hconv.convert(t[m:])
-                    if n <= 0:
-                        break
-                    m = m + n
-                    tmptext = tmptext+s
+                if self._flag["c"]:
+                    t = t.capitalize()
                 if i >= len(text):
-                    otext = otext + tmptext.capitalize()
+                    otext = otext + t
                 else:
-                    otext = otext + tmptext.capitalize() +' ' 
-            elif self._hconv.isHiragana(text[i]):
+                    otext = otext + t + self._separator
+
+            elif self._hconv.isRegion(text[i]):
                 tmptext = ''
-                while True:
+                while True: # eat mode
                     (t, l) = self._hconv.convert(text[i:])
                     tmptext = tmptext+t
                     i = i + l
                     if i >= len(text):
-                        otext = otext + tmptext                    
+                        otext = otext + tmptext                 
                         break
-                    elif not self._hconv.isHiragana(text[i]):
-                        otext = otext + tmptext + ' '
+                    elif not self._hconv.isRegion(text[i]):
+                        otext = otext + tmptext + self._separator
                         break
-            elif self._kconv.isKatakana(text[i]):
+
+            elif self._kconv.isRigion(text[i]):
                 tmptext = ''
-                while True:
+                while True: # eat mode
                     (t, l) = self._kconv.convert(text[i:])
                     tmptext = tmptext+t
                     i = i + l
                     if i >= len(text):
                         otext = otext + tmptext                    
                         break
-                    elif not self._kconv.isKatakana(text[i]):
-                        otext = otext + tmptext + ' '
+                    elif not self._kconv.isRigion(text[i]):
+                        otext = otext + tmptext + self._separator
                         break
+
             else:
                 otext  = otext + text[i]
                 i += 1

@@ -166,7 +166,7 @@ class K2a (object):
         u"\u30f6":"ke",
     }
 
-    def isKatakana(self, char):
+    def isRigion(self, char):
         return ( 0x30a0 < ord(char) and ord(char) < 0x30f7)
 
     def convert(self, text):

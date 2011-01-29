@@ -163,7 +163,7 @@ class H2a (object):
         u"\u3093\u304a":"n'o",
     }
 
-    def isHiragana(self, char):
+    def isRegion(self, char):
         return ( 0x3040 < ord(char) and ord(char) < 0x3094)
 
     def convert(self, text):

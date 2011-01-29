@@ -45,7 +45,7 @@ class J2H (object):
     def __init__(self):
         self.kanwa = jisyo()  
 
-    def isKanji(self, c):
+    def isRegion(self, c):
         return ( 0x3400 <= ord(c) and ord(c) < 0xfa2e)
 
     def isCletter(self, l, c):
