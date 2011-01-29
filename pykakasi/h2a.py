@@ -29,6 +29,8 @@ from jisyo import jisyo
 
 class H2a (object):
 
+    # todo: this class should be Singleton
+
     H2a_table = {
         u"\u3041":"a", u"\u3042":"a",
         u"\u3043":"i", u"\u3044":"i",

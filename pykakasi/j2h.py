@@ -30,6 +30,8 @@ import re
 
 class J2H (object):
 
+    # todo: this class should be Singleton
+
     kanwa = None
 
     cl_table = [

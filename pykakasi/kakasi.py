@@ -56,6 +56,7 @@ class kakasi(object):
                 self._flag[fr] = to
 
     def getConverter(self):
+
         if self._mode["H"] is "a":
             from h2a import H2a
             self._hconv = H2a() 

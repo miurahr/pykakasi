@@ -29,6 +29,8 @@ from jisyo import jisyo
 
 class K2a (object):
 
+    # todo: this class should be Singleton
+
     K2a_table = {
         u"\u30a1":"a", u"\u30a2":"a",
         u"\u30a3":"i", u"\u30a4":"i",
