@@ -38,7 +38,7 @@ class kakasi(object):
 
 #mode flags
     _flag = {"W":False, "C":True, "c":True, }
-    _mode = {"J":"a", "H":"a", "K":"a"}
+    _mode = {"J":"a", "H":"a", "K":"a", "a":None}
     _values = ["a", "h", "k"]
 
 #variables
@@ -77,6 +77,11 @@ class kakasi(object):
                 self._separator = ' '
             else:
                 self._separator = ''
+
+        if self._mode["a"] is None:
+            self._aconv = NOP()
+        else:
+            self._aconv = NOP()
 
         return self
 
