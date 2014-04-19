@@ -122,7 +122,7 @@ class kakasi(object):
                         otext = otext + tmptext + self._separator
                         break
 
-            elif self._kconv.isRigion(text[i]):
+            elif self._kconv.isRegion(text[i]):
                 tmptext = ''
                 while True: # eat mode
                     (t, l) = self._kconv.convert(text[i:])

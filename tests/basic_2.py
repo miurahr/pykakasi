@@ -31,22 +31,51 @@ class TestPyKakasi(unittest.TestCase):
             (u"にゃ", ("nya",2)),
             (u"っき", ("kki",2)),
             (u"っふぁ", ("ffa", 3)),
+            (u"しつもん",   ("shi",1)),
+            (u"ちがい", ("chi",1)),
         ]
 
         h = pykakasi.H2a()
         for case, result in TESTS:
             self.failUnlessEqual(h.convert(case), result)
 
-    def test_H2a(self):
+    def test_K2a(self):
 
         TESTS = [
             (u"カンタン",   ("ka", 1)),
             (u"ニャ", ("nya",2)),
             (u"ッキ", ("kki",2)),
             (u"ッファ", ("ffa", 3)),
+            (u"シツモン",   ("shi", 1)),
+            (u"チガイ",  ("chi", 1)),
+            (u"ジ", ("ji",1)),
         ]
 
         h = pykakasi.K2a()
+        for case, result in TESTS:
+            self.failUnlessEqual(h.convert(case), result)
+
+    def test_H2a_kunrei(self):
+
+        TESTS = [
+            (u"しつもん",   ("si",1)),
+            (u"ちがい", ("ti",1)),
+            (u"じ", ("zi", 1)),
+        ]
+
+        h = pykakasi.H2a(method="Kunrei")
+        for case, result in TESTS:
+            self.failUnlessEqual(h.convert(case), result)
+
+    def test_K2a_kunrei(self):
+
+        TESTS = [
+            (u"シツモン",   ("si", 1)),
+            (U"チガイ", ("ti", 1)),
+            (u"ジ", ("zi",1)),
+        ]
+
+        h = pykakasi.K2a(method="Kunrei")
         for case, result in TESTS:
             self.failUnlessEqual(h.convert(case), result)
 

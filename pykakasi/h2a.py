@@ -52,5 +52,5 @@ class H2a (object):
                 if max_len < x:
                     max_len = x
                     Hstr = self.H2a_table[text[:x]]
-        return (Hstr, max_len) 
+        return (Hstr, max_len)
 

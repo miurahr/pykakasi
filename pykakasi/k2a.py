@@ -39,7 +39,7 @@ class K2a (object):
             from k2ar import K2ar
             self.__class__ = K2ar
 
-    def isRigion(self, char):
+    def isRegion(self, char):
         return ( 0x30a0 < ord(char) and ord(char) < 0x30f7)
 
     def convert(self, text):
@@ -51,5 +51,5 @@ class K2a (object):
                 if max_len < x:
                     max_len = x
                     Hstr = self.K2a_table[text[:x]]
-        return (Hstr, max_len) 
+        return (Hstr, max_len)
 
