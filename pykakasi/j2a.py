@@ -33,11 +33,11 @@ class J2a (object):
     _jconv = None
     _hconv = None
 
-    def __init__(self):
+    def __init__(self, method="Hepburn"):
         from j2h import J2H
         from h2a import H2a
         self._jconv = J2H()
-        self._hconv = H2a()
+        self._hconv = H2a(method)
 
     def isRegion(self, char):
         return self._jconv.isRegion(char)
