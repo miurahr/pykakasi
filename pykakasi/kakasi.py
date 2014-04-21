@@ -38,8 +38,10 @@ class kakasi(object):
 
 #mode flags
     _flag = {"W":False, "C":True, "c":True}
-    _mode = {"J":"a", "H":"a", "K":"a", "a":None, "M":"Hepburn"}
-    _values = ["a", "h", "k", "Hepburn", "Kunrei"]
+    _mode = {"J":"a", "H":"a", "K":"a", "a":None, "r":"Hepburn"}
+    _values = ["a", "h", "k"]
+    _option = {"r":"Hepburn"}
+    _optvals = {"r":["Hepburn", "Kunrei"]}
 
 #variables
     _separator = ''
@@ -55,26 +57,29 @@ class kakasi(object):
         if fr in self._flag:
             if to in [True,False]:
                 self._flag[fr] = to
+        if fr in self._option:
+            if to in self._optvals[fr]:
+                self._option[fr] = to
 
     def getConverter(self):
 
         if self._mode["H"] == "a":
             from h2a import H2a
-            self._hconv = H2a(method = self._mode["M"]) 
+            self._hconv = H2a(method = self._option["r"]) 
         else:
             from nop import NOP
             self._hconv = NOP()
 
         if self._mode["K"] == "a":
             from k2a import K2a
-            self._kconv = K2a(method = self._mode["M"])
+            self._kconv = K2a(method = self._option["r"])
         else:
             from nop import NOP
             self._kconv = NOP()
 
         if self._mode["J"] == "a":
             from j2a import J2a
-            self._jconv = J2a(method = self._mode["M"])
+            self._jconv = J2a(method = self._option["r"])
             if self._flag["C"]:
                 self._separator = ' '
             else:
@@ -116,7 +121,7 @@ class kakasi(object):
                     tmptext = tmptext+t
                     i = i + l
                     if i >= len(text):
-                        otext = otext + tmptext                 
+                        otext = otext + tmptext
                         break
                     elif not self._hconv.isRegion(text[i]):
                         otext = otext + tmptext + self._separator
@@ -129,7 +134,7 @@ class kakasi(object):
                     tmptext = tmptext+t
                     i = i + l
                     if i >= len(text):
-                        otext = otext + tmptext                    
+                        otext = otext + tmptext
                         break
                     elif not self._kconv.isRigion(text[i]):
                         otext = otext + tmptext + self._separator

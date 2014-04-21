@@ -122,6 +122,7 @@ class TestPyKakasi(unittest.TestCase):
         kakasi.setMode("H","a")
         kakasi.setMode("K","a")
         kakasi.setMode("J","a")
+        kakasi.setMode("r","Hepburn")
         converter  = kakasi.getConverter()
         for case, result in TESTS:
             self.failUnlessEqual(converter.do(case), result)
