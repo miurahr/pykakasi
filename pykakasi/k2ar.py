@@ -43,6 +43,8 @@ class K2ar (K2a):
         u"\u30ab":"ka", u"\u30ac":"ga",
         u"\u30ad":"ki", u"\u30ad\u30a1":"kya",
         u"\u30ad\u30a5":"kyu", u"\u30ad\u30a9":"kyo",
+        u"\u30ad\u30e3":"kya",
+        u"\u30ad\u30e5":"kyu", u"\u30ad\u30e7":"kyo",
         u"\u30ae":"gi", u"\u30b0\u30e3":"gya",
         u"\u30ae\u30a5":"gyu", u"\u30ae\u30e7":"gyo",
         u"\u30af":"ku", u"\u30b0":"gu",

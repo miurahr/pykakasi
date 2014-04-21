@@ -44,7 +44,7 @@ class H2ar (H2a):
         u"\u304d":"ki", u"\u304d\u3041":"kya",
         u"\u304d\u3045":"kyu", u"\u304d\u3049":"kyo",
         u"\u304d\u3083":"kya",
-        u"\u304d\u3085":"kyu", u"\u304d\u3088":"kyo",
+        u"\u304d\u3085":"kyu", u"\u304d\u3087":"kyo",
         u"\u304e":"gi", u"\u3050\u3083":"gya",
         u"\u304e\u3045":"gyu", u"\u304e\u3087":"gyo",
         u"\u304f":"ku", u"\u3050":"gu",
