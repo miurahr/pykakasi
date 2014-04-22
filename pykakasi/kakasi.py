@@ -37,9 +37,11 @@ class kakasi(object):
     _aconv = None
 
 #mode flags
-    _flag = {"W":False, "C":True, "c":True, }
-    _mode = {"J":"a", "H":"a", "K":"a", "a":None}
+    _flag = {"W":False, "C":True, "c":True}
+    _mode = {"J":"a", "H":"a", "K":"a", "a":None, "r":"Hepburn"}
     _values = ["a", "h", "k"]
+    _option = {"r":"Hepburn"}
+    _optvals = {"r":["Hepburn", "Kunrei"]}
 
 #variables
     _separator = ''
@@ -47,6 +49,7 @@ class kakasi(object):
     def __init__(self):
         pass
 
+#fixme: value chck
     def setMode(self, fr, to):
         if fr in self._mode:
             if to in self._values:
@@ -54,32 +57,36 @@ class kakasi(object):
         if fr in self._flag:
             if to in [True,False]:
                 self._flag[fr] = to
+        if fr in self._option:
+            if to in self._optvals[fr]:
+                self._option[fr] = to
 
     def getConverter(self):
 
-        if self._mode["H"] is "a":
+        if self._mode["H"] == "a":
             from h2a import H2a
-            self._hconv = H2a()
+            self._hconv = H2a(method = self._option["r"]) 
         else:
             from nop import NOP
             self._hconv = NOP()
 
-        if self._mode["K"] is "a":
+        if self._mode["K"] == "a":
             from k2a import K2a
-            self._kconv = K2a()
+            self._kconv = K2a(method = self._option["r"])
         else:
             from nop import NOP
             self._kconv = NOP()
 
-        if self._mode["J"] is "a":
+        if self._mode["J"] == "a":
             from j2a import J2a
-            self._jconv = J2a()
+            self._jconv = J2a(method = self._option["r"])
             if self._flag["C"]:
                 self._separator = ' '
             else:
                 self._separator = ''
 
-        if self._mode["a"] is None:
+        from nop import NOP
+        if self._mode["a"] == None:
             self._aconv = NOP()
         else:
             self._aconv = NOP()
@@ -114,20 +121,20 @@ class kakasi(object):
                     tmptext = tmptext+t
                     i = i + l
                     if i >= len(text):
-                        otext = otext + tmptext                 
+                        otext = otext + tmptext
                         break
                     elif not self._hconv.isRegion(text[i]):
                         otext = otext + tmptext + self._separator
                         break
 
-            elif self._kconv.isRigion(text[i]):
+            elif self._kconv.isRegion(text[i]):
                 tmptext = ''
                 while True: # eat mode
                     (t, l) = self._kconv.convert(text[i:])
                     tmptext = tmptext+t
                     i = i + l
                     if i >= len(text):
-                        otext = otext + tmptext                    
+                        otext = otext + tmptext
                         break
                     elif not self._kconv.isRigion(text[i]):
                         otext = otext + tmptext + self._separator
