@@ -35,10 +35,11 @@ Options
 These switch alphabets are derived from original Kakasi.
 Now it support following options:
 
-| option | description | possible values | note |
-| "K" | Katakana convertion | "a" or None | roman or noconversion |
-| "H" | Hiragana convertion | "a" or None | roman or noconversion |
-| "J" | Kanji conversion | "a", "h", "k", or None | roman or Hiragana, Katakana |
+| option | description         | possible values | note                  |
+| ------ | :----------         | --------------- | :----------           |
+| "K"    | Katakana convertion | "a" or None     | roman or noconversion |
+| "H"    | Hiragana convertion | "a" or None     | roman or noconversion |
+| "J"    | Kanji conversion    | "a", "h", "k", or None | roman or Hiragana, Katakana |
 
 Original kakasi defines following options:
 
