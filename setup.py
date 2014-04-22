@@ -57,16 +57,14 @@ class GenKanwa(Command):
 
 setup(name='pykakasi',
       version='0.01',
-      description='',
-      url='http://launchpad.net/miurahr/+junk/pykakasi',
+      description='Python implementation of kakasi - kana kanji simple inversion library',
+      url='http://github.com/miurahr/pykakasi',
       license='GPLv3',
       long_description="",
       author='Hioshi Miura',
       author_email='miurahr@linux.com',
-
       packages = [ 'pykakasi' ],
-
       provides = [ 'pykakasi' ],
-
+      include_package_data = True,
       cmdclass = { 'test': TestCommand, 'genkanwa':GenKanwa }
 )

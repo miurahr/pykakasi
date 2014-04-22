@@ -1,0 +1,5 @@
+include *.md
+include GPL-3
+recursive-include data *.txt *.utf8
+recursive-include pykakasi *.pickle *.db
+recursive-include tests *.py
