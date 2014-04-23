@@ -25,16 +25,14 @@
 # * 02111-1307, USA.
 # */
 
-from jisyo import jisyo
+from .kanwa import kanwa
 import re
 
 class J2H (object):
 
-    # todo: this class should be Singleton
+    _kanwa = None
 
-    kanwa = None
-
-    cl_table = [
+    _cl_table = [
 	"","aiueow", "aiueow", "aiueow", "aiueow", "aiueow", "aiueow", "aiueow",
 	"aiueow", "aiueow", "aiueow", "k", "g", "k", "g", "k", "g", "k", "g", "k",
 	"g", "s", "zj", "s", "zj", "s", "zj", "s", "zj", "s", "zj", "t", "d", "tc",
@@ -45,33 +43,33 @@ class J2H (object):
 	"k", "", "", "", "", "", "", "", "", ""]
 
     def __init__(self):
-        self.kanwa = jisyo()  
+        self._kanwa = kanwa()
 
-    def isRegion(self, c):
-        return ( 0x3400 <= ord(c) and ord(c) < 0xfa2e)
+    def canConvert(self, c):
+        return ( 0x3400 <= ord(c[0]) and ord(c[0]) < 0xfa2e)
 
     def isCletter(self, l, c):
-        if (ord(u"ぁ") <= ord(c) and  ord(c) <= 0x309f) and (  l in self.cl_table[ord(c) - ord(u"ぁ")-1]):
+        if (0x3041 <= ord(c) and  ord(c) <= 0x309f) and (l in self._cl_table[ord(c) - 0x3040]): # ぁ:= u\3041
             return True
         return False
 
     def itaiji_conv(self, text):
         r = []
         for c in text:
-            if c in self.kanwa.itaijidict:
+            if self._kanwa.haskey(c):
                 r.append(c)
         for c in r:
-            text = re.sub(c, self.kanwa.itaijidict[c], text)
+            text = re.sub(c, self._kanwa.lookup(c), text)
         return text
 
     def convert(self, text):
         max_len = 0
         match_more = False
         Hstr = ""
-        table = self.kanwa.load_jisyo(text[0])
+        table = self._kanwa.load(text[0])
         if table is None:
             return ("", 0)
-        for (k,v) in table.iteritems():
+        for (k,v) in table.items():
             length = len(k)
             if len(text) >= length:
                 if text.startswith(k):
