@@ -8,4 +8,4 @@ python:
 #  - "sudo apt-get install -qq python-setuptools python3-setuptools"
 install: "pip install -r requirements.txt --use-mirrors"
 # command to run tests
-script: python setup.py test
+script: nosetests -v

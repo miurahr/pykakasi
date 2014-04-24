@@ -6,28 +6,7 @@ from setuptools import Command,setup
 import unittest
 import os
 import genkanwadict
-
-UNITTESTS = [
-        "tests", 
-    ]
-
-class TestCommand(Command):
-    user_options = [ ]
-
-    def initialize_options(self):
-        pass
-
-    def finalize_options(self):
-        pass
-
-    def run(self):
-        suite = unittest.TestSuite()
-
-        suite.addTests( 
-            unittest.defaultTestLoader.loadTestsFromNames( 
-                                UNITTESTS ) )
-
-        result = unittest.TextTestRunner(verbosity=3).run(suite)
+import nose
 
 class GenKanwa(Command):
     user_options = [ ]
@@ -66,5 +45,6 @@ setup(name='pykakasi',
       packages = [ 'pykakasi' ],
       provides = [ 'pykakasi' ],
       include_package_data = True,
-      cmdclass = { 'test': TestCommand, 'genkanwa':GenKanwa }
+      test_suite = 'nose.collector',
+      cmdclass = { 'genkanwa':GenKanwa }
 )
