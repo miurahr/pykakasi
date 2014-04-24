@@ -25,6 +25,11 @@
 # * 02111-1307, USA.
 # */
 
+try:
+    xrange
+except:
+    # Python3.x
+    xrange = range
 
 class K2a (object):
 
