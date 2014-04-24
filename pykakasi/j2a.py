@@ -33,8 +33,8 @@ class J2a (object):
     _hconv = None
 
     def __init__(self, method="Hepburn"):
-        from j2h import J2H
-        from h2a import H2a
+        from .j2h import J2H
+        from .h2a import H2a
         self._jconv = J2H()
         self._hconv = H2a(method)
 

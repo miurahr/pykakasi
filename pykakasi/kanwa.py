@@ -32,7 +32,7 @@ class kanwa (object):
 
     def __init__(self):
         if self._kanwadict is None:
-            dictpath = resource_filename(__name__, 'kanwadict2')
+            dictpath = resource_filename(__name__, 'kanwadict2.db')
             self._kanwadict = dbm.open(dictpath,'r')
         if self._itaijidict is None:
             itaijipath = resource_filename(__name__, 'itaijidict2.pickle')

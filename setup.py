@@ -5,7 +5,6 @@ from setuptools import Command,setup
 
 import unittest
 import os
-import genkanwadict
 import nose
 
 class GenKanwa(Command):
@@ -18,6 +17,7 @@ class GenKanwa(Command):
         pass
 
     def run(self):
+        import genkanwadict
         src = os.path.join('data','kakasidict.utf8')        
         dst = os.path.join('pykakasi','kanwadict2.db')
         try:

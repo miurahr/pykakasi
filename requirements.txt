@@ -1,4 +1,1 @@
 setuptools
-nose
-mock
-pinocchio

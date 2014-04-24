@@ -25,7 +25,7 @@
 # * 02111-1307, USA.
 # */
 
-from k2a import K2a
+from .k2a import K2a
 
 class K2ar (K2a):
 
