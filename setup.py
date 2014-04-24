@@ -32,7 +32,7 @@ class GenKanwa(Command):
             os.unlink(dst)
         except:
             pass
-        kanwa.mkitaiji(src, dst)
+        kanwa.mkdict(src, dst)
 
 setup(name='pykakasi',
       version='0.01',
