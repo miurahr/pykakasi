@@ -25,7 +25,6 @@
 # * 02111-1307, USA.
 # */
 
-from jisyo import jisyo
 from h2a import H2a
 
 class H2ah (H2a):
