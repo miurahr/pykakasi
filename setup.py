@@ -33,7 +33,9 @@ class GenKanwa(Command):
         DICTS = [
             ('itaijidict.utf8', 'itaijidict2.pickle'),
             ('hepburndict.utf8', 'hepburndict2.pickle'),
-            ('kunreidict.utf8', 'kunreidict2.pickle')
+            ('kunreidict.utf8', 'kunreidict2.pickle'),
+            ('hepburnhira.utf8', 'hepburnhira2.pickle'),
+            ('kunreihira.utf8', 'kunreihira2.pickle')
         ]
         for (s,p) in DICTS:
             self.genDict(s, p)
