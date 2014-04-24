@@ -63,6 +63,6 @@ class mkkanwa(object):
 
     def kanwaout(self, out):
         dic = dbm.open(out, 'c')
-        for (k, v) in self.records.iteritems():
+        for (k, v) in self.records.items():
             dic[k] = compress(dumps(v))
         dic.close()
