@@ -2,10 +2,13 @@ language: python
 python:
   - "2.7"
   - "3.3"
+  - "3.4"
 # command to install dependencies
 #before_install:
 #  - "sudo apt-get update -qq"
 #  - "sudo apt-get install -qq python-setuptools python3-setuptools"
 install: "pip install -r requirements.txt --use-mirrors"
 # command to run tests
-script: nosetests -v
+script:
+  - python setup.py genkanwa
+  - nosetests -v
