@@ -45,7 +45,7 @@ class J2H (object):
     def __init__(self):
         self._kanwa = kanwa()
 
-    def canConvert(self, c):
+    def isRegion(self, c):
         return ( 0x3400 <= ord(c[0]) and ord(c[0]) < 0xfa2e)
 
     def isCletter(self, l, c):

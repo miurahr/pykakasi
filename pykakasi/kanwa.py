@@ -12,9 +12,9 @@ except:
     from pickle import load
 
 try:
-    import dumbdbm as dbm
+    import anydbm as dbm
 except:
-    import dbm.dumb as dbm
+    import dbm
 
 class kanwa (object):
 
