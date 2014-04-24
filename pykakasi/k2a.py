@@ -32,10 +32,10 @@ class K2a (object):
 
     def __init__(self, method="Hepburn"):
         if method == "Hepburn":
-            from k2ah import K2ah
+            from .k2ah import K2ah
             self.__class__ = K2ah
         else:
-            from k2ar import K2ar
+            from .k2ar import K2ar
             self.__class__ = K2ar
 
     def isRegion(self, char):

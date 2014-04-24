@@ -64,28 +64,28 @@ class kakasi(object):
     def getConverter(self):
 
         if self._mode["H"] == "a":
-            from h2a import H2a
+            from .h2a import H2a
             self._hconv = H2a(method = self._option["r"]) 
         else:
-            from nop import NOP
+            from .nop import NOP
             self._hconv = NOP()
 
         if self._mode["K"] == "a":
-            from k2a import K2a
+            from .k2a import K2a
             self._kconv = K2a(method = self._option["r"])
         else:
-            from nop import NOP
+            from .nop import NOP
             self._kconv = NOP()
 
         if self._mode["J"] == "a":
-            from j2a import J2a
+            from .j2a import J2a
             self._jconv = J2a(method = self._option["r"])
             if self._flag["C"]:
                 self._separator = ' '
             else:
                 self._separator = ''
 
-        from nop import NOP
+        from .nop import NOP
         if self._mode["a"] == None:
             self._aconv = NOP()
         else:

@@ -33,10 +33,10 @@ class H2a (object):
     # default Hepburn convert method
     def __init__(self, method="Hepburn"):
         if method == "Hepburn":
-            from h2ah import H2ah
+            from .h2ah import H2ah
             self.__class__ = H2ah
         else:
-            from h2ar import H2ar
+            from .h2ar import H2ar
             self.__class__ = H2ar
 
     def isRegion(self, char):

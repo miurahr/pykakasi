@@ -25,7 +25,7 @@
 # * 02111-1307, USA.
 # */
 
-from h2a import H2a
+from .h2a import H2a
 
 class H2ah (H2a):
 
