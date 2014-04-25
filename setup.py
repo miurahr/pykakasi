@@ -16,8 +16,30 @@ class GenKanwa(Command):
     def finalize_options(self):
         pass
 
+    def genDict(self, src_f, pkl_f):
+        import genkanwadict
+        kanwa = genkanwadict.mkkanwa()
+        src = os.path.join('data',src_f)
+        dst = os.path.join('pykakasi',pkl_f)
+        try:
+            os.unlink(dst)
+        except:
+            pass
+        kanwa.mkdict(src, dst)
+
     def run(self):
         import genkanwadict
+
+        DICTS = [
+            ('itaijidict.utf8', 'itaijidict2.pickle'),
+            ('hepburndict.utf8', 'hepburndict2.pickle'),
+            ('kunreidict.utf8', 'kunreidict2.pickle'),
+            ('hepburnhira.utf8', 'hepburnhira2.pickle'),
+            ('kunreihira.utf8', 'kunreihira2.pickle')
+        ]
+        for (s,p) in DICTS:
+            self.genDict(s, p)
+
         src = os.path.join('data','kakasidict.utf8')        
         dst = os.path.join('pykakasi','kanwadict2.db')
         try:
@@ -26,13 +48,6 @@ class GenKanwa(Command):
             pass
         kanwa = genkanwadict.mkkanwa()
         kanwa.run(src, dst)
-        src = os.path.join('data','itaijidict.utf8')
-        dst = os.path.join('pykakasi','itaijidict2.pickle')
-        try:
-            os.unlink(dst)
-        except:
-            pass
-        kanwa.mkdict(src, dst)
 
 setup(name='pykakasi',
       version='0.01',

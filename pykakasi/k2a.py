@@ -30,30 +30,29 @@ try:
 except:
     # Python3.x
     xrange = range
+from .jisyo import jisyo
 
 class K2a (object):
 
-    K2a_table = {}
+    _kanadict = None
 
     def __init__(self, method="Hepburn"):
         if method == "Hepburn":
-            from .k2ah import K2ah
-            self.__class__ = K2ah
+           self._kanadict = jisyo('hepburndict2.pickle')
         else:
-            from .k2ar import K2ar
-            self.__class__ = K2ar
+           self._kanadict = jisyo('kunreidict2.pickle')
 
     def isRegion(self, char):
-        return ( 0x30a0 < ord(char) and ord(char) < 0x30f7)
+           return  (0x30a0 < ord(char[0]) and ord(char[0]) < 0x30fd)
 
     def convert(self, text):
         Hstr = ""
         max_len = -1
         r = min(4, len(text)+1)
         for x in xrange(r):
-            if text[:x] in self.K2a_table:
+            if self._kanadict.haskey(text[:x]):
                 if max_len < x:
                     max_len = x
-                    Hstr = self.K2a_table[text[:x]]
+                    Hstr = self._kanadict.lookup(text[:x])
         return (Hstr, max_len)
 
