@@ -49,12 +49,16 @@ class GenKanwa(Command):
         kanwa = genkanwadict.mkkanwa()
         kanwa.run(src, dst)
 
+def readme():
+    with open(os.path.join(os.path.dirname(__file__),'README.rst')) as f:
+        return f.read()
+
 setup(name='pykakasi',
-      version='0.01',
+      version='0.2',
       description='Python implementation of kakasi - kana kanji simple inversion library',
       url='http://github.com/miurahr/pykakasi',
       license='GPLv3',
-      long_description="",
+      long_description=readme(),
       author='Hioshi Miura',
       author_email='miurahr@linux.com',
       packages = [ 'pykakasi' ],
