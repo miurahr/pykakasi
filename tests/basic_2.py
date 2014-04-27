@@ -10,6 +10,7 @@ class TestPyKakasi(unittest.TestCase):
             (u"構成",         (u"こうせい",2)),
             (u"好き",          (u"すき",2)),
             (u"大きい",       (u"おおき",2)),
+            (u"日本国民は、", (u"にほんこくみん", 4))
       ]
 
         I_TEST = [
@@ -139,6 +140,7 @@ class TestPyKakasi(unittest.TestCase):
             (u"構成",         (u"コウセイ",2)),
             (u"好き",          (u"スキ",2)),
             (u"大きい",       (u"オオキ",2)),
+            (u"日本国民は、", (u"ニホンコクミン", 4))
       ]
 
         I_TEST = [
@@ -166,6 +168,7 @@ class TestPyKakasi(unittest.TestCase):
             (u"漢字とひらがな交じり文", "Kanji tohiragana Majiri Bun"),
             (u"Alphabet 123 and 漢字", "Alphabet 123 and Kanji"),
             (u"日経新聞", "Nikkeishinbun"),
+            (u"日本国民は、","Nihonkokumin ha,")
         ]
 
         kakasi = pykakasi.kakasi()
@@ -176,7 +179,6 @@ class TestPyKakasi(unittest.TestCase):
         converter  = kakasi.getConverter()
         for case, result in TESTS:
             self.failUnlessEqual(converter.do(case), result)
-
 
     def test_wakati(self):
         TESTS = [

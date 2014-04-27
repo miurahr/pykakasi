@@ -5,3 +5,5 @@ if version_info[0] >= 3:
     from .advanced_3 import *
 else:
     from .basic_2 import *
+    from .advanced_2 import *
+

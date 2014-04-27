@@ -10,6 +10,7 @@ class TestPyKakasi(unittest.TestCase):
             ("構成",         ("こうせい",2)),
             ("好き",         ("すき",2)),
             ("大きい",       ("おおき",2)),
+            ("日本国民は、", ("にほんこくみん", 4))
       ]
 
         I_TEST = [
@@ -140,6 +141,7 @@ class TestPyKakasi(unittest.TestCase):
             ("構成",         ("コウセイ",2)),
             ("好き",         ("スキ",2)),
             ("大きい",       ("オオキ",2)),
+            ("日本国民は、", ("ニホンコクミン", 4))
       ]
 
         I_TEST = [
@@ -167,6 +169,7 @@ class TestPyKakasi(unittest.TestCase):
             ("漢字とひらがな交じり文", "Kanji tohiragana Majiri Bun"),
             ("Alphabet 123 and 漢字", "Alphabet 123 and Kanji"),
             ("日経新聞", "Nikkeishinbun"),
+            ("日本国民は、","Nihonkokumin ha,")
         ]
 
         kakasi = pykakasi.kakasi()
