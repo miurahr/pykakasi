@@ -178,4 +178,13 @@ class TestPyKakasi(unittest.TestCase):
         for case, result in TESTS:
             self.failUnlessEqual(converter.do(case), result)
 
-
+    def test_wakati(self):
+        TESTS = [
+        ("交じり文", "交じり 文"),
+        ("ひらがな交じり文", "ひらがな 交じり 文"),
+        ("漢字とひらがな交じり文", "漢字 とひらがな 交じり 文")
+        ]
+        wakati = pykakasi.wakati()
+        converter = wakati.getConverter()
+        for case, result in TESTS:
+            self.failUnlessEqual(converter.do(case), result)

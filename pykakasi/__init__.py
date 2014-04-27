@@ -5,6 +5,7 @@ from .h2a import H2a
 from .h2k import H2K
 from .k2h import K2H
 from .kakasi import kakasi
+from .wakati import wakati
 
 __all__ = ["pykakasi"]
 
