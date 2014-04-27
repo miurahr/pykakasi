@@ -38,10 +38,13 @@ class wakati(kakasi):
 
     def do(self, text):
 
+        if len(text) == 0:
+            return ""
+
         otext =  ''
         i = 0
         while True:
-            if i > len(text):
+            if i >= len(text):
                 break
 
             if self._jconv.isRegion(text[i]):
