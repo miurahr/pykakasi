@@ -37,9 +37,9 @@ class kakasi(object):
     _aconv = None
 
 #mode flags
-    _flag = {"W":False, "C":True, "c":True}
+    _flag = {"C":True, "c":True}
     _mode = {"J":"a", "H":"a", "K":"a", "a":None, "r":"Hepburn"}
-    _values = ["a", "h", "k"]
+    _values = ["a", "H", "K"]
     _option = {"r":"Hepburn"}
     _optvals = {"r":["Hepburn", "Kunrei"]}
 
@@ -67,8 +67,8 @@ class kakasi(object):
             from .h2a import H2a
             self._hconv = H2a(method = self._option["r"])
         elif self._mode["H"] == "k":
-            from .h2k import H2k
-            self._hconv = H2k()
+            from .h2k import H2K
+            self._hconv = H2K()
         else:
             from .nop import NOP
             self._hconv = NOP()
@@ -77,8 +77,8 @@ class kakasi(object):
             from .k2a import K2a
             self._kconv = K2a(method = self._option["r"])
         elif self._mode["K"] == "h":
-            from .k2h import K2h
-            self._kconv = K2h()
+            from .k2h import K2H
+            self._kconv = K2H()
         else:
             from .nop import NOP
             self._kconv = NOP()
@@ -91,8 +91,8 @@ class kakasi(object):
             else:
                 self._separator = ''
         elif self._mode["J"] == "h":
-            from .j2h import J2h
-            self._jconv = J2h()
+            from .j2h import J2H
+            self._jconv = J2H()
             if self._flag["C"]:
                 self._separator = ' '
             else:
