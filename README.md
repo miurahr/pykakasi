@@ -38,38 +38,18 @@ Options
 These switch alphabets are derived from original Kakasi.
 Now it support following options:
 
-| option | description         | possible values | note                  |
-| ------ | :----------         | --------------- | :----------           |
-| "K"    | Katakana convertion | "a" or None     | roman or noconversion |
-| "H"    | Hiragana convertion | "a" or None     | roman or noconversion |
-| "J"    | Kanji conversion    | "a", "h", "k", or None | roman or Hiragana, Katakana |
+| Option | Description         | Values     | Note                        |
+| ------ | :----------         | --------   | :----------                 |
+| K      | Katakana convertion | a,H,None   | roman or noconversion       |
+| H      | Hiragana convertion | a,K,None   | roman or noconversion       |
+| J      | Kanji conversion    | a,H,K,None | roman or Hiragana, Katakana |
 
-Original kakasi defines following options:
+Each character means character sets as follows:
 
 ```
-  -a[jE] -j[aE] -g[ajE] -k[ajKH]
-  -E[aj] -K[ajkH] -H[ajkK] -J[ajkKH]
-  -i{oldjis,newjis,dec,euc,sjis}
-   -o{oldjis,newjis,dec,euc,sjis}
-  -r{hepburn,kunrei} -p -s -f -c"chars" 
-   [jisyo1, jisyo2,,,]
-
   Character Sets:
        a: ascii  j: jisroman  g: graphic  k: kana 
        (j,k     defined in jisx0201)
        E: kigou  K: katakana  H: hiragana J: kanji
        (E,K,H,J defined in jisx0208)
-
-  Options:
-    -i: input coding system    -o: output coding system
-    -r: romaji conversion system
-    -p: list all readings (with -J option)
-    -s: insert separate characters (with -J option)
-    -f: furigana mode (with -J option)
-    -c: skip chars within jukugo
-        (with -J option: default TAB CR LF BLANK)
-    -C: romaji Capitalize (with -Ja or -Jj option)
-    -U: romaji Upcase     (with -Ja or -Jj option)
-    -u: call fflush() after 1 character output
-    -w: wakatigaki mode
 ```

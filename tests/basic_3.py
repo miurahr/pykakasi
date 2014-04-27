@@ -39,6 +39,37 @@ class TestPyKakasi(unittest.TestCase):
         for case, result in TESTS:
             self.failUnlessEqual(h.convert(case), result)
 
+
+    def test_H2K(self):
+
+        TESTS = [
+            ("かんたん",   ("カンタン", 4)),
+            ("にゃ",       ("ニャ",2)),
+            ("っき",       ("ッキ",2)),
+            ("っふぁ",     ("ッファ", 3)),
+            ("しつもん",   ("シツモン",4)),
+            ("ちがい",     ("チガイ",3)),
+        ]
+
+        h = pykakasi.H2K()
+        for case, result in TESTS:
+            self.failUnlessEqual(h.convert(case), result)
+
+    def test_K2H(self):
+
+        TESTS = [
+            ("カンタン",   ("かんたん", 4)),
+            ("ニャ",       ("にゃ",2)),
+            ("ッキ",       ("っき",2)),
+            ("ッファ",     ("っふぁ", 3)),
+            ("シツモン",   ("しつもん",4)),
+            ("チガイ",     ("ちがい",3)),
+        ]
+
+        h = pykakasi.K2H()
+        for case, result in TESTS:
+            self.failUnlessEqual(h.convert(case), result)
+
     def test_K2a(self):
 
         TESTS = [
@@ -102,6 +133,26 @@ class TestPyKakasi(unittest.TestCase):
         h = pykakasi.K2a(method="Kunrei")
         for case, result in TESTS:
             self.failUnlessEqual(h.convert(case), result)
+
+    def test_J2K(self):
+
+        TESTS = [
+            ("構成",         ("コウセイ",2)),
+            ("好き",         ("スキ",2)),
+            ("大きい",       ("オオキ",2)),
+      ]
+
+        I_TEST = [
+            ("菟", "兎"),
+            ("菟集", "兎集"),
+            ("熙", "煕"),
+        ]
+
+        j = pykakasi.J2K()
+        for case, result in TESTS:
+            self.failUnlessEqual(j.convert(case), result)
+        for case, result in I_TEST:
+            self.failUnlessEqual(j.itaiji_conv(case), result)
 
     def test_kakasi(self):
 

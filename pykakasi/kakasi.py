@@ -65,7 +65,10 @@ class kakasi(object):
 
         if self._mode["H"] == "a":
             from .h2a import H2a
-            self._hconv = H2a(method = self._option["r"]) 
+            self._hconv = H2a(method = self._option["r"])
+        elif self._mode["H"] == "k":
+            from .h2k import H2k
+            self._hconv = H2k()
         else:
             from .nop import NOP
             self._hconv = NOP()
@@ -73,6 +76,9 @@ class kakasi(object):
         if self._mode["K"] == "a":
             from .k2a import K2a
             self._kconv = K2a(method = self._option["r"])
+        elif self._mode["K"] == "h":
+            from .k2h import K2h
+            self._kconv = K2h()
         else:
             from .nop import NOP
             self._kconv = NOP()
@@ -84,6 +90,22 @@ class kakasi(object):
                 self._separator = ' '
             else:
                 self._separator = ''
+        elif self._mode["J"] == "h":
+            from .j2h import J2h
+            self._jconv = J2h()
+            if self._flag["C"]:
+                self._separator = ' '
+            else:
+                self._separator = ''
+        elif self._mode["J"] == "k":
+            from .j2k import J2k
+            self._jconv = J2k(method = self._option["r"])
+            if self._flag["C"]:
+                self._separator = ' '
+            else:
+                self._separator = ''
+        else:
+            self._jconv = NOP()
 
         from .nop import NOP
         if self._mode["a"] == None:
