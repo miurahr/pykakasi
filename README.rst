@@ -9,7 +9,7 @@ How To Use pykakasi
 
 ::
 
-    import pykakasi.kakasi as kakasi
+    from pykakasi import kakasi,wakati
     
     kakasi = kakasi()
     kakasi.setMode("H","a") # default: Hiragana -> Roman
@@ -19,6 +19,10 @@ How To Use pykakasi
     kakasi.setMode("C", true) # default: Separator
     kakasi.setMode("c", false) # default: no Capitalize
     conv = kakasi.getConverter()
+    result = conv.do(text)
+    
+    wakati = wakati()
+    conv = kawati.getConverter()
     result = conv.do(text)
 
 You can use output `Mode` values from "h", "k", "a" which is each means

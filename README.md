@@ -10,7 +10,7 @@ How To Use pykakasi
 ------------------
 
 ```python
-    import pykakasi.kakasi as kakasi
+    from pykakasi import kakasi,wakati
 
     kakasi = kakasi()
     kakasi.setMode("H","a") # default: Hiragana -> Roman
@@ -20,6 +20,10 @@ How To Use pykakasi
     kakasi.setMode("C", true) # default: Separator
     kakasi.setMode("c", false) # default: no Capitalize
     conv = kakasi.getConverter()
+    result = conv.do(text)
+
+    wakati = wakati()
+    conv = wakati.getConverter()
     result = conv.do(text)
 ```
 
@@ -31,6 +35,7 @@ Also there is values of "H", "K" that means "Hiragana", and "Katakana".
 You can use  "Hepburn" or "Kunrei" as mode "r", Roman table switch.
 Also "C" used for separator switch, "c" for capitalize switch.
 
+`wakati` is an implementation of kakasi's wakati gaki option.
 
 Options
 -------------------
