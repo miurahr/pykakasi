@@ -143,9 +143,9 @@ class TestPyKakasi(unittest.TestCase):
       ]
 
         I_TEST = [
-            (u"菟", u"兎"),
-            (u"菟集", u"兎集"),
-            (u"熙", u"煕"),
+            ("菟", "兎"),
+            ("菟集", "兎集"),
+            ("熙", "煕"),
         ]
 
         j = pykakasi.J2K()
