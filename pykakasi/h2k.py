@@ -32,7 +32,7 @@ except:
     xrange = range
     unichr = chr
 
-class H2k (object):
+class H2K (object):
 
     _diff = 0x30a1 - 0x3041 # KATAKANA LETTER A - HIRAGANA A
 

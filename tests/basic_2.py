@@ -39,7 +39,7 @@ class TestPyKakasi(unittest.TestCase):
         for case, result in TESTS:
             self.failUnlessEqual(h.convert(case), result)
 
-    def test_H2k(self):
+    def test_H2K(self):
 
         TESTS = [
             (u"かんたん",   (u"カンタン", 4)),
@@ -50,7 +50,7 @@ class TestPyKakasi(unittest.TestCase):
             (u"ちがい",     (u"チガイ",3)),
         ]
 
-        h = pykakasi.H2k()
+        h = pykakasi.H2K()
         for case, result in TESTS:
             self.failUnlessEqual(h.convert(case), result)
 
@@ -132,7 +132,7 @@ class TestPyKakasi(unittest.TestCase):
             (u"熙", u"煕"),
         ]
 
-        j = pykakasi.J2k()
+        j = pykakasi.J2K()
         for case, result in TESTS:
             self.failUnlessEqual(j.convert(case), result)
         for case, result in I_TEST:

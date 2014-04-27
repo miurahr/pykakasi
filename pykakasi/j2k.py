@@ -27,16 +27,16 @@
 
 import re
 
-class J2k (object):
+class J2K (object):
 
     _jconv = None
     _hconv = None
 
     def __init__(self):
         from .j2h import J2H
-        from .h2k import H2k
+        from .h2k import H2K
         self._jconv = J2H()
-        self._hconv = H2k()
+        self._hconv = H2K()
 
     def isRegion(self, char):
         return self._jconv.isRegion(char)
