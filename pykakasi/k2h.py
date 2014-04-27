@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#  h2k.py
+#  k2h.py
 #
 # Copyright 2011,2014 Hiroshi Miura <miurahr@linux.com>
 #
@@ -32,7 +32,7 @@ except:
     xrange = range
     unichr = chr
 
-class H2K (object):
+class K2H (object):
 
     _diff = 0x30a1 - 0x3041 # KATAKANA LETTER A - HIRAGANA A
 
@@ -40,7 +40,7 @@ class H2K (object):
         pass
 
     def isRegion(self, char):
-        return (0x3040 < ord(char[0]) and ord(char[0]) < 0x3097)
+        return (0x30a0 < ord(char[0]) and ord(char[0]) < 0x30f7)
 
     def convert(self, text):
         Hstr = ""
@@ -48,7 +48,7 @@ class H2K (object):
         r = len(text)
         for x in xrange(r):
             if self.isRegion(text[x]):
-                Hstr = Hstr + unichr(ord(text[x]) + self._diff)
+                Hstr = Hstr + unichr(ord(text[x]) - self._diff)
                 max_len = max_len + 1
             else:
                 break

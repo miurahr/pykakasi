@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#  j2a.py
+#  j2k.py
 #
 # Copyright 2011,2014 Hiroshi Miura <miurahr@linux.com>
 #

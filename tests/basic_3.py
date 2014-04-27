@@ -55,6 +55,21 @@ class TestPyKakasi(unittest.TestCase):
         for case, result in TESTS:
             self.failUnlessEqual(h.convert(case), result)
 
+    def test_K2H(self):
+
+        TESTS = [
+            ("カンタン",   ("かんたん", 4)),
+            ("ニャ",       ("にゃ",2)),
+            ("ッキ",       ("っき",2)),
+            ("ッファ",     ("っふぁ", 3)),
+            ("シツモン",   ("しつもん",4)),
+            ("チガイ",     ("ちがい",3)),
+        ]
+
+        h = pykakasi.K2H()
+        for case, result in TESTS:
+            self.failUnlessEqual(h.convert(case), result)
+
     def test_K2a(self):
 
         TESTS = [
