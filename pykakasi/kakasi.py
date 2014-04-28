@@ -62,6 +62,7 @@ class kakasi(object):
                 self._option[fr] = to
 
     def getConverter(self):
+        from .nop import NOP
 
         if self._mode["H"] == "a":
             from .h2a import H2a
@@ -70,8 +71,8 @@ class kakasi(object):
             from .h2k import H2K
             self._hconv = H2K()
         else:
-            from .nop import NOP
             self._hconv = NOP()
+
 
         if self._mode["K"] == "a":
             from .k2a import K2a
@@ -80,38 +81,30 @@ class kakasi(object):
             from .k2h import K2H
             self._kconv = K2H()
         else:
-            from .nop import NOP
             self._kconv = NOP()
+
 
         if self._mode["J"] == "a":
             from .j2a import J2a
             self._jconv = J2a(method = self._option["r"])
-            if self._flag["C"]:
-                self._separator = ' '
-            else:
-                self._separator = ''
         elif self._mode["J"] == "h":
             from .j2h import J2H
             self._jconv = J2H()
-            if self._flag["C"]:
-                self._separator = ' '
-            else:
-                self._separator = ''
         elif self._mode["J"] == "k":
-            from .j2k import J2k
-            self._jconv = J2k(method = self._option["r"])
-            if self._flag["C"]:
-                self._separator = ' '
-            else:
-                self._separator = ''
+            from .j2k import J2K
+            self._jconv = J2K(method = self._option["r"])
         else:
             self._jconv = NOP()
 
-        from .nop import NOP
         if self._mode["a"] == None:
             self._aconv = NOP()
         else:
             self._aconv = NOP()
+
+        if self._flag["C"]:
+            self._separator = ' '
+        else:
+            self._separator = ''
 
         return self
 
