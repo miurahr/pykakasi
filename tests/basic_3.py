@@ -9,7 +9,7 @@ class TestPyKakasi(unittest.TestCase):
         TESTS = [
             ("構成",         ("こうせい",2)),
             ("好き",         ("すき",2)),
-            ("大きい",       ("おおき",2)),
+            ("大きい",       ("おおきい",3)),
             ("日本国民は、", ("にほんこくみん", 4))
       ]
 
@@ -140,7 +140,7 @@ class TestPyKakasi(unittest.TestCase):
         TESTS = [
             ("構成",         ("コウセイ",2)),
             ("好き",         ("スキ",2)),
-            ("大きい",       ("オオキ",2)),
+            ("大きい",       ("オオキイ",3)),
             ("日本国民は、", ("ニホンコクミン", 4))
       ]
 
@@ -159,17 +159,17 @@ class TestPyKakasi(unittest.TestCase):
     def test_kakasi(self):
 
         TESTS = [
-            ("構成",         "Kousei"),
-            ("好き",          "Suki"),
-            ("大きい",       "Ookii"),
+            ("構成",         "kousei"),
+            ("好き",          "suki"),
+            ("大きい",       "ookii"),
             ("かんたん",  "kantan"),
             ("にゃ",          "nya"),
             ("っき",           "kki"),
             ("っふぁ",        "ffa"),
-            ("漢字とひらがな交じり文", "Kanji tohiragana Majiri Bun"),
-            ("Alphabet 123 and 漢字", "Alphabet 123 and Kanji"),
-            ("日経新聞", "Nikkeishinbun"),
-            ("日本国民は、","Nihonkokumin ha,")
+            ("漢字とひらがな交じり文", "kanji tohiragana majiri bun"),
+            ("Alphabet 123 and 漢字", "Alphabet 123 and kanji"),
+            ("日経新聞", "nikkeishinbun"),
+            ("日本国民は、","nihonkokumin ha,")
         ]
 
         kakasi = pykakasi.kakasi()
@@ -177,6 +177,58 @@ class TestPyKakasi(unittest.TestCase):
         kakasi.setMode("K","a")
         kakasi.setMode("J","a")
         kakasi.setMode("r","Hepburn")
+        converter  = kakasi.getConverter()
+        for case, result in TESTS:
+            self.assertEqual(converter.do(case), result)
+
+
+    def test_kakasi_kunrei(self):
+
+        TESTS = [
+            ("構成",         "kousei"),
+            ("好き",          "suki"),
+            ("大きい",       "ookii"),
+            ("かんたん",  "kantan"),
+            ("にゃ",          "nya"),
+            ("っき",           "kki"),
+            ("っふぁ",        "ffa"),
+            ("漢字とひらがな交じり文", "kanzi tohiragana maziri bun"),
+            ("Alphabet 123 and 漢字", "Alphabet 123 and kanzi"),
+            ("日経新聞", "nikkeisinbun"),
+            ("日本国民は、","nihonkokumin ha,")
+        ]
+
+        kakasi = pykakasi.kakasi()
+        kakasi.setMode("H","a")
+        kakasi.setMode("K","a")
+        kakasi.setMode("J","a")
+        kakasi.setMode("r","Kunrei")
+        kakasi.setMode("C",True)
+        converter  = kakasi.getConverter()
+        for case, result in TESTS:
+            self.assertEqual(converter.do(case), result)
+
+    def test_kakasi_J2H(self):
+
+        TESTS = [
+            ("構成",         "こうせい"),
+            ("好き",          "すき"),
+            ("大きい",       "おおきい"),
+            ("かんたん",  "かんたん"),
+            ("にゃ",          "にゃ"),
+            ("っき",           "っき"),
+            ("っふぁ",        "っふぁ"),
+            ("漢字とひらがな交じり文", "かんじとひらがなまじりぶん"),
+            ("Alphabet 123 and 漢字", "Alphabet 123 and かんじ"),
+            ("日経新聞", "にっけいしんぶん"),
+            ("日本国民は、","にほんこくみんは、")
+        ]
+
+        kakasi = pykakasi.kakasi()
+        kakasi.setMode("H",None)
+        kakasi.setMode("K",None)
+        kakasi.setMode("J","H")
+        kakasi.setMode("C",False)
         converter  = kakasi.getConverter()
         for case, result in TESTS:
             self.assertEqual(converter.do(case), result)
