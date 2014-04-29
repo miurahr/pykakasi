@@ -21,9 +21,9 @@ class TestPyKakasi(unittest.TestCase):
 
         j = pykakasi.J2H()
         for case, result in TESTS:
-            self.failUnlessEqual(j.convert(case), result)
+            self.assertEqual(j.convert(case), result)
         for case, result in I_TEST:
-            self.failUnlessEqual(j.itaiji_conv(case), result)
+            self.assertEqual(j.itaiji_conv(case), result)
 
     def test_H2a(self):
 
@@ -38,7 +38,7 @@ class TestPyKakasi(unittest.TestCase):
 
         h = pykakasi.H2a()
         for case, result in TESTS:
-            self.failUnlessEqual(h.convert(case), result)
+            self.assertEqual(h.convert(case), result)
 
     def test_H2K(self):
 
@@ -53,7 +53,7 @@ class TestPyKakasi(unittest.TestCase):
 
         h = pykakasi.H2K()
         for case, result in TESTS:
-            self.failUnlessEqual(h.convert(case), result)
+            self.assertEqual(h.convert(case), result)
 
     def test_K2H(self):
 
@@ -68,7 +68,7 @@ class TestPyKakasi(unittest.TestCase):
 
         h = pykakasi.K2H()
         for case, result in TESTS:
-            self.failUnlessEqual(h.convert(case), result)
+            self.assertEqual(h.convert(case), result)
 
     def test_K2a(self):
 
@@ -84,7 +84,7 @@ class TestPyKakasi(unittest.TestCase):
 
         h = pykakasi.K2a()
         for case, result in TESTS:
-            self.failUnlessEqual(h.convert(case), result)
+            self.assertEqual(h.convert(case), result)
 
     def test_H2a_kunrei(self):
 
@@ -106,7 +106,7 @@ class TestPyKakasi(unittest.TestCase):
 
         h = pykakasi.H2a(method="Kunrei")
         for case, result in TESTS:
-            self.failUnlessEqual(h.convert(case), result)
+            self.assertEqual(h.convert(case), result)
 
     def test_K2a_kunrei(self):
 
@@ -132,7 +132,7 @@ class TestPyKakasi(unittest.TestCase):
 
         h = pykakasi.K2a(method="Kunrei")
         for case, result in TESTS:
-            self.failUnlessEqual(h.convert(case), result)
+            self.assertEqual(h.convert(case), result)
 
     def test_J2K(self):
 
@@ -151,9 +151,9 @@ class TestPyKakasi(unittest.TestCase):
 
         j = pykakasi.J2K()
         for case, result in TESTS:
-            self.failUnlessEqual(j.convert(case), result)
+            self.assertEqual(j.convert(case), result)
         for case, result in I_TEST:
-            self.failUnlessEqual(j.itaiji_conv(case), result)
+            self.assertEqual(j.itaiji_conv(case), result)
 
     def test_kakasi(self):
 
@@ -178,7 +178,7 @@ class TestPyKakasi(unittest.TestCase):
         kakasi.setMode("r","Hepburn")
         converter  = kakasi.getConverter()
         for case, result in TESTS:
-            self.failUnlessEqual(converter.do(case), result)
+            self.assertEqual(converter.do(case), result)
 
     def test_wakati(self):
         TESTS = [
@@ -189,4 +189,4 @@ class TestPyKakasi(unittest.TestCase):
         wakati = pykakasi.wakati()
         converter = wakati.getConverter()
         for case, result in TESTS:
-            self.failUnlessEqual(converter.do(case), result)
+            self.assertEqual(converter.do(case), result)
