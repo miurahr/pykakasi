@@ -34,9 +34,10 @@ class kakasi(object):
     _conv = {}
 
 #mode flags
-    _flag = {"C":True, "c":True}
+    _flag = {"C":True, "c":False}
     _mode = {"J":"a", "H":"a", "K":"a", "a":None, "r":"Hepburn"}
-    _values = ["a", "H", "K"]
+    _keys = ["J","H","K","a","r"]
+    _values = ["a", "H", "K", None]
     _option = {"r":"Hepburn"}
     _optvals = {"r":["Hepburn", "Kunrei"]}
 
@@ -49,13 +50,13 @@ class kakasi(object):
 
 #fixme: value chck
     def setMode(self, fr, to):
-        if fr in self._mode:
+        if fr in self._keys:
             if to in self._values:
                 self._mode[fr] = to
-        if fr in self._flag:
+        if fr in self._flag.keys():
             if to in [True,False]:
                 self._flag[fr] = to
-        if fr in self._option:
+        if fr in self._option.keys():
             if to in self._optvals[fr]:
                 self._option[fr] = to
 
@@ -65,7 +66,7 @@ class kakasi(object):
         if self._mode["H"] == "a":
             from .h2a import H2a
             self._conv["H"] = H2a(method = self._option["r"])
-        elif self._mode["H"] == "k":
+        elif self._mode["H"] == "K":
             from .h2k import H2K
             self._conv["H"] = H2K()
         else:
@@ -74,7 +75,7 @@ class kakasi(object):
         if self._mode["K"] == "a":
             from .k2a import K2a
             self._conv["K"] = K2a(method = self._option["r"])
-        elif self._mode["K"] == "h":
+        elif self._mode["K"] == "H":
             from .k2h import K2H
             self._conv["K"] = K2H()
         else:
@@ -83,12 +84,12 @@ class kakasi(object):
         if self._mode["J"] == "a":
             from .j2a import J2a
             self._conv["J"] = J2a(method = self._option["r"])
-        elif self._mode["J"] == "h":
+        elif self._mode["J"] == "H":
             from .j2h import J2H
             self._conv["J"] = J2H()
-        elif self._mode["J"] == "k":
-            from .j2k import J2k
-            self._conv["J"] = J2k(method = self._option["r"])
+        elif self._mode["J"] == "K":
+            from .j2k import J2K
+            self._conv["J"] = J2K(method = self._option["r"])
         else:
             self._conv["J"] = NOP()
 
