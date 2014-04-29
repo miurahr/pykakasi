@@ -161,7 +161,7 @@ class TestPyKakasi(unittest.TestCase):
         TESTS = [
             ("構成",         "Kousei"),
             ("好き",          "Suki"),
-            ("大きい",       "Ooki i"),
+            ("大きい",       "Ookii"),
             ("かんたん",  "kantan"),
             ("にゃ",          "nya"),
             ("っき",           "kki"),
