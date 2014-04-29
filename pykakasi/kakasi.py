@@ -126,41 +126,78 @@ class kakasi(object):
             if self._jconv.isRegion(text[i]):
                 (t, l) = self._jconv.convert(text[i:])
                 if l <= 0:
-                    i = i + 1
-                    break
+                    i += 1
+                    continue
                 i = i + l
                 if self._flag["c"]:
                     t = t.capitalize()
                 if i >= len(text):
                     otext = otext + t
                 else:
-                    otext = otext + t + self._separator
+                    if ord(text[i]) in [0x002c, 0x002e, 0x3001, 0x3002]:
+                        otext = otext + t
+                    else:
+                        otext = otext + t + self._separator
 
             elif self._hconv.isRegion(text[i]):
                 tmptext = ''
                 while True: # eat mode
                     (t, l) = self._hconv.convert(text[i:])
-                    tmptext = tmptext+t
+                    if l <= 0:
+                        # XXX: problem happens.
+                        i += 1
+                        continue
+                    tmptext = tmptext + t
                     i = i + l
                     if i >= len(text):
-                        otext = otext + tmptext
+                        if self._flag["c"]:
+                            otext = otext + tmptext.capitalize()
+                        else:
+                            otext = otext + tmptext
                         break
                     elif not self._hconv.isRegion(text[i]):
-                        otext = otext + tmptext + self._separator
+                        if self._flag["c"]:
+                            otext = otext + tmptext.capitalize()
+                        else:
+                            otext = otext + tmptext
+                        if not ord(text[i]) in [0x002c, 0x002e, 0x3001, 0x3002]:
+                            otext = otext + self._separator
                         break
+                    else:
+                        pass
 
             elif self._kconv.isRegion(text[i]):
                 tmptext = ''
                 while True: # eat mode
                     (t, l) = self._kconv.convert(text[i:])
-                    tmptext = tmptext+t
+                    if l <= 0:
+                        # XXX: problem happens.
+                        i += 1
+                        continue
+                    if self._flag["c"]:
+                        t = t.capitalize()
+                    tmptext = tmptext + t
                     i = i + l
                     if i >= len(text):
-                        otext = otext + tmptext
+                        # finished all text
+                        if self._flag["c"]:
+                            otext = otext + tmptext.capitalize()
+                        else:
+                            otext = otext + tmptext
                         break
-                    elif not self._kconv.isRigion(text[i]):
-                        otext = otext + tmptext + self._separator
+                    elif not self._kconv.isRegion(text[i]):
+                        # this means we found word boundary.
+                        # Inserting ' ' to indicate word boundary.
+                        # except for end marks
+                        if self._flag["c"]:
+                            otext = otext + tmptext.capitalize()
+                        else:
+                            otext = otext + tmptext
+                        if not ord(text[i]) in [0x002c, 0x002e, 0x3001, 0x3002]:
+                            otext = otext + self._separator
                         break
+                    else:
+                        pass
 
             else:
                 otext  = otext + text[i]
