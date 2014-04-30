@@ -44,6 +44,7 @@ class kakasi(object):
 #variables
     _separator = ' '
     _endmark = [0x002c, 0x002e, 0x3001, 0x3002]
+    _MAXLEN  = 32
 
     def __init__(self):
         pass
@@ -114,7 +115,8 @@ class kakasi(object):
                 break
 
             if self._conv["J"].isRegion(text[i]):
-                (t, l) = self._conv["J"].convert(text[i:])
+                w = min(i+self._MAXLEN, len(text))
+                (t, l) = self._conv["J"].convert(text[i:w])
                 if l <= 0:
                     i += 1
                     continue
@@ -129,7 +131,8 @@ class kakasi(object):
             elif self._conv["H"].isRegion(text[i]):
                 tmptext = ''
                 while True: # eat mode
-                    (t, l) = self._conv["H"].convert(text[i:])
+                    w = min(i+self._MAXLEN, len(text))
+                    (t, l) = self._conv["H"].convert(text[i:w])
                     if l <= 0:
                         # XXX: problem happens.
                         i += 1
@@ -160,7 +163,8 @@ class kakasi(object):
             elif self._conv["K"].isRegion(text[i]):
                 tmptext = ''
                 while True: # eat mode
-                    (t, l) = self._conv["K"].convert(text[i:])
+                    w = min(i+self._MAXLEN, len(text))
+                    (t, l) = self._conv["K"].convert(text[i:w])
                     if l <= 0:
                         # XXX: problem happens.
                         i += 1
