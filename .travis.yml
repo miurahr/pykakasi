@@ -8,9 +8,9 @@ env:
     - TOXENV=py33
     - TOXENV=py34
 
-before_install:
-  - sudo apt-get update
-  - sudo apt-get install python3.4 python3.4-dev
+#before_install:
+# - sudo apt-get update
+# - sudo apt-get install python3.4 python3.4-dev
 
 install:
   - pip install tox
