@@ -14,6 +14,8 @@ class TestPyKakasiAdvanced(unittest.TestCase):
         kakasi.setMode("K","a")
         kakasi.setMode("J","a")
         kakasi.setMode("r","Hepburn")
+        kakasi.setMode("C", True)
+        kakasi.setMode("s", True)
         converter  = kakasi.getConverter()
         self.maxDiff = None
         self.assertEqual(converter.do(original_text), result)

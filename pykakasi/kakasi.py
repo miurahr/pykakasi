@@ -24,6 +24,26 @@
 # * Software Foundation Inc., 59 Temple Place - Suite 330, Boston, MA
 # * 02111-1307, USA.
 # */
+__license__ = 'GPL 3'
+__copyright__ = '2014, Hiroshi Miura <miurahr@linux.com>'
+__docformat__ = 'restructuredtext en'
+
+'''
+Flags: 
+  These flags are as same as KAKASI.
+
+  p: List all possible readings. If there exist two or more
+     possible readings, KAKASI shows them in braces {aaa,bbb}.(not implemented yet)
+  s: Insert a separate character between words.
+  f: Furigana mode. Shows the original kanji word with reading.
+  c: Skip characters within word. ( default TAB CR LF BLANK )(not implemented yet)
+  C: Capitalize Romaji word (with -Ja or -Jj option)
+  U: Upcase romaji word (with -Ja or -Jj option)
+  u: Unbufferd mode.(not implemented yet)
+  w: wakatigaki mode. 'wakatigaki' is word segmentation for
+     Japanese sentences.(implemented as wakati class)
+
+'''
 
 import re
 import sys, os
@@ -34,7 +54,8 @@ class kakasi(object):
     _conv = {}
 
 #mode flags
-    _flag = {"C":True, "c":False}
+    _flag = {"p":False, "s":True, "f":False, "c":False, "C":True, "U":False,
+             "u":False}
     _mode = {"J":"a", "H":"a", "K":"a", "a":None, "r":"Hepburn"}
     _keys = ["J","H","K","a","r"]
     _values = ["a", "H", "K", None]
@@ -99,7 +120,7 @@ class kakasi(object):
         else:
             self._conv["a"] = NOP()
 
-        if self._flag["C"]:
+        if self._flag["s"]:
             self._separator = ' '
         else:
             self._separator = ''
@@ -117,13 +138,19 @@ class kakasi(object):
             if self._conv["J"].isRegion(text[i]):
                 w = min(i+self._MAXLEN, len(text))
                 (t, l) = self._conv["J"].convert(text[i:w])
+
                 if l <= 0:
                     i += 1
                     continue
+
                 i = i + l
-                if self._flag["c"]:
-                    t = t.capitalize()
-                otext = otext + t
+                if self._flag["U"]:
+                    otext = otext + t.upcase()
+                elif self._flag["C"]:
+                    otext = otext + t.capitalize()
+                else:
+                    otext = otext + t
+
                 # Not insert space BEFORE end marks and text end.
                 if (i < len(text)) and not (ord(text[i]) in self._endmark):
                     otext = otext + self._separator
@@ -140,18 +167,12 @@ class kakasi(object):
                     tmptext = tmptext + t
                     i = i + l
                     if i >= len(text):
-                        if self._flag["c"]:
-                            otext = otext + tmptext.capitalize()
-                        else:
-                            otext = otext + tmptext
+                        otext = otext + tmptext
                         break
                     elif not self._conv["H"].isRegion(text[i]):
                         # Found a place _conv["H"] cannot convert.
                         # this means we found word boundary.
-                        if self._flag["c"]:
-                            otext = otext + tmptext.capitalize()
-                        else:
-                            otext = otext + tmptext
+                        otext = otext + tmptext
                         # Inserting word separator(space) to indicate word boundary.
                         # Not inserting space BEFORE comma and full stop
                         if not ord(text[i]) in self._endmark:
@@ -169,16 +190,11 @@ class kakasi(object):
                         # XXX: problem happens.
                         i += 1
                         continue
-                    if self._flag["c"]:
-                        t = t.capitalize()
                     tmptext = tmptext + t
                     i = i + l
                     if i >= len(text):
                         # finished all text
-                        if self._flag["c"]:
-                            otext = otext + tmptext.capitalize()
-                        else:
-                            otext = otext + tmptext
+                        otext = otext + tmptext
                         break
                     elif not self._conv["K"].isRegion(text[i]):
                         # this means we found word boundary.
