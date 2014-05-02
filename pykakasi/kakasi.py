@@ -24,6 +24,26 @@
 # * Software Foundation Inc., 59 Temple Place - Suite 330, Boston, MA
 # * 02111-1307, USA.
 # */
+__license__ = 'GPL 3'
+__copyright__ = '2014, Hiroshi Miura <miurahr@linux.com>'
+__docformat__ = 'restructuredtext en'
+
+'''
+Flags: 
+  These flags are as same as KAKASI.
+
+  p: List all possible readings. If there exist two or more
+     possible readings, KAKASI shows them in braces {aaa,bbb}.(not implemented yet)
+  s: Insert a separate character between words.
+  f: Furigana mode. Shows the original kanji word with reading.
+  c: Skip characters within word. ( default TAB CR LF BLANK )(not implemented yet)
+  C: Capitalize Romaji word (with -Ja or -Jj option)
+  U: Upcase romaji word (with -Ja or -Jj option)
+  u: Unbufferd mode.(not implemented yet)
+  w: wakatigaki mode. 'wakatigaki' is word segmentation for
+     Japanese sentences.(implemented as wakati class)
+
+'''
 
 import re
 import sys, os
@@ -31,33 +51,34 @@ import sys, os
 class kakasi(object):
 
 #instances
-    _jconv = None
-    _hconv = None
-    _kconv = None
-    _aconv = None
+    _conv = {}
 
 #mode flags
-    _flag = {"C":True, "c":True}
+    _flag = {"p":False, "s":True, "f":False, "c":False, "C":True, "U":False,
+             "u":False}
     _mode = {"J":"a", "H":"a", "K":"a", "a":None, "r":"Hepburn"}
-    _values = ["a", "H", "K"]
+    _keys = ["J","H","K","a","r"]
+    _values = ["a", "H", "K", None]
     _option = {"r":"Hepburn"}
     _optvals = {"r":["Hepburn", "Kunrei"]}
 
 #variables
-    _separator = ''
+    _separator = ' '
+    _endmark = [0x002c, 0x002e, 0x3001, 0x3002]
+    _MAXLEN  = 32
 
     def __init__(self):
         pass
 
 #fixme: value chck
     def setMode(self, fr, to):
-        if fr in self._mode:
+        if fr in self._keys:
             if to in self._values:
                 self._mode[fr] = to
-        if fr in self._flag:
+        if fr in self._flag.keys():
             if to in [True,False]:
                 self._flag[fr] = to
-        if fr in self._option:
+        if fr in self._option.keys():
             if to in self._optvals[fr]:
                 self._option[fr] = to
 
@@ -66,42 +87,40 @@ class kakasi(object):
 
         if self._mode["H"] == "a":
             from .h2a import H2a
-            self._hconv = H2a(method = self._option["r"])
-        elif self._mode["H"] == "k":
+            self._conv["H"] = H2a(method = self._option["r"])
+        elif self._mode["H"] == "K":
             from .h2k import H2K
-            self._hconv = H2K()
+            self._conv["H"] = H2K()
         else:
-            self._hconv = NOP()
-
+            self._conv["H"] = NOP()
 
         if self._mode["K"] == "a":
             from .k2a import K2a
-            self._kconv = K2a(method = self._option["r"])
-        elif self._mode["K"] == "h":
+            self._conv["K"] = K2a(method = self._option["r"])
+        elif self._mode["K"] == "H":
             from .k2h import K2H
-            self._kconv = K2H()
+            self._conv["K"] = K2H()
         else:
-            self._kconv = NOP()
-
+            self._conv["K"] = NOP()
 
         if self._mode["J"] == "a":
             from .j2a import J2a
-            self._jconv = J2a(method = self._option["r"])
-        elif self._mode["J"] == "h":
+            self._conv["J"] = J2a(method = self._option["r"])
+        elif self._mode["J"] == "H":
             from .j2h import J2H
-            self._jconv = J2H()
-        elif self._mode["J"] == "k":
+            self._conv["J"] = J2H()
+        elif self._mode["J"] == "K":
             from .j2k import J2K
-            self._jconv = J2K(method = self._option["r"])
+            self._conv["J"] = J2K(method = self._option["r"])
         else:
-            self._jconv = NOP()
+            self._conv["J"] = NOP()
 
         if self._mode["a"] == None:
-            self._aconv = NOP()
+            self._conv["a"] = NOP()
         else:
-            self._aconv = NOP()
+            self._conv["a"] = NOP()
 
-        if self._flag["C"]:
+        if self._flag["s"]:
             self._separator = ' '
         else:
             self._separator = ''
@@ -116,44 +135,82 @@ class kakasi(object):
             if i >= len(text):
                 break
 
-            if self._jconv.isRegion(text[i]):
-                (t, l) = self._jconv.convert(text[i:])
+            if self._conv["J"].isRegion(text[i]):
+                w = min(i+self._MAXLEN, len(text))
+                (t, l) = self._conv["J"].convert(text[i:w])
+
                 if l <= 0:
-                    i = i + 1
-                    break
+                    i += 1
+                    continue
+
                 i = i + l
-                if self._flag["c"]:
-                    t = t.capitalize()
-                if i >= len(text):
-                    otext = otext + t
+                if self._flag["U"]:
+                    otext = otext + t.upcase()
+                elif self._flag["C"]:
+                    otext = otext + t.capitalize()
                 else:
-                    otext = otext + t + self._separator
+                    otext = otext + t
 
-            elif self._hconv.isRegion(text[i]):
+                # Not insert space BEFORE end marks and text end.
+                if (i < len(text)) and not (ord(text[i]) in self._endmark):
+                    otext = otext + self._separator
+
+            elif self._conv["H"].isRegion(text[i]):
                 tmptext = ''
                 while True: # eat mode
-                    (t, l) = self._hconv.convert(text[i:])
-                    tmptext = tmptext+t
+                    w = min(i+self._MAXLEN, len(text))
+                    (t, l) = self._conv["H"].convert(text[i:w])
+                    if l <= 0:
+                        # XXX: problem happens.
+                        i += 1
+                        continue
+                    tmptext = tmptext + t
                     i = i + l
                     if i >= len(text):
                         otext = otext + tmptext
                         break
-                    elif not self._hconv.isRegion(text[i]):
-                        otext = otext + tmptext + self._separator
+                    elif not self._conv["H"].isRegion(text[i]):
+                        # Found a place _conv["H"] cannot convert.
+                        # this means we found word boundary.
+                        otext = otext + tmptext
+                        # Inserting word separator(space) to indicate word boundary.
+                        # Not inserting space BEFORE comma and full stop
+                        if not ord(text[i]) in self._endmark:
+                            otext = otext + self._separator
                         break
+                    else:
+                        pass
 
-            elif self._kconv.isRegion(text[i]):
+            elif self._conv["K"].isRegion(text[i]):
                 tmptext = ''
                 while True: # eat mode
-                    (t, l) = self._kconv.convert(text[i:])
-                    tmptext = tmptext+t
+                    w = min(i+self._MAXLEN, len(text))
+                    (t, l) = self._conv["K"].convert(text[i:w])
+                    if l <= 0:
+                        # XXX: problem happens.
+                        i += 1
+                        continue
+                    tmptext = tmptext + t
                     i = i + l
                     if i >= len(text):
+                        # finished all text
                         otext = otext + tmptext
                         break
-                    elif not self._kconv.isRigion(text[i]):
-                        otext = otext + tmptext + self._separator
+                    elif not self._conv["K"].isRegion(text[i]):
+                        # this means we found word boundary.
+                        # Inserting ' ' to indicate word boundary.
+                        # except for end marks
+                        if self._flag["c"]:
+                            otext = otext + tmptext.capitalize()
+                        else:
+                            otext = otext + tmptext
+                        # Inserting word separator(space) to indicate word boundary.
+                        # Not inserting space BEFORE comma and full stop
+                        if not ord(text[i]) in self._endmark:
+                            otext = otext + self._separator
                         break
+                    else:
+                        pass
 
             else:
                 otext  = otext + text[i]

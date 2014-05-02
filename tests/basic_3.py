@@ -9,7 +9,8 @@ class TestPyKakasi(unittest.TestCase):
         TESTS = [
             ("構成",         ("こうせい",2)),
             ("好き",         ("すき",2)),
-            ("大きい",       ("おおき",2)),
+            ("大きい",       ("おおきい",3)),
+            ("日本国民は、", ("にほんこくみん", 4))
       ]
 
         I_TEST = [
@@ -20,9 +21,9 @@ class TestPyKakasi(unittest.TestCase):
 
         j = pykakasi.J2H()
         for case, result in TESTS:
-            self.failUnlessEqual(j.convert(case), result)
+            self.assertEqual(j.convert(case), result)
         for case, result in I_TEST:
-            self.failUnlessEqual(j.itaiji_conv(case), result)
+            self.assertEqual(j.itaiji_conv(case), result)
 
     def test_H2a(self):
 
@@ -37,7 +38,7 @@ class TestPyKakasi(unittest.TestCase):
 
         h = pykakasi.H2a()
         for case, result in TESTS:
-            self.failUnlessEqual(h.convert(case), result)
+            self.assertEqual(h.convert(case), result)
 
 
     def test_H2K(self):
@@ -53,7 +54,7 @@ class TestPyKakasi(unittest.TestCase):
 
         h = pykakasi.H2K()
         for case, result in TESTS:
-            self.failUnlessEqual(h.convert(case), result)
+            self.assertEqual(h.convert(case), result)
 
     def test_K2H(self):
 
@@ -68,7 +69,7 @@ class TestPyKakasi(unittest.TestCase):
 
         h = pykakasi.K2H()
         for case, result in TESTS:
-            self.failUnlessEqual(h.convert(case), result)
+            self.assertEqual(h.convert(case), result)
 
     def test_K2a(self):
 
@@ -84,7 +85,7 @@ class TestPyKakasi(unittest.TestCase):
 
         h = pykakasi.K2a()
         for case, result in TESTS:
-            self.failUnlessEqual(h.convert(case), result)
+            self.assertEqual(h.convert(case), result)
 
     def test_H2a_kunrei(self):
 
@@ -106,7 +107,7 @@ class TestPyKakasi(unittest.TestCase):
 
         h = pykakasi.H2a(method="Kunrei")
         for case, result in TESTS:
-            self.failUnlessEqual(h.convert(case), result)
+            self.assertEqual(h.convert(case), result)
 
     def test_K2a_kunrei(self):
 
@@ -132,14 +133,15 @@ class TestPyKakasi(unittest.TestCase):
 
         h = pykakasi.K2a(method="Kunrei")
         for case, result in TESTS:
-            self.failUnlessEqual(h.convert(case), result)
+            self.assertEqual(h.convert(case), result)
 
     def test_J2K(self):
 
         TESTS = [
             ("構成",         ("コウセイ",2)),
             ("好き",         ("スキ",2)),
-            ("大きい",       ("オオキ",2)),
+            ("大きい",       ("オオキイ",3)),
+            ("日本国民は、", ("ニホンコクミン", 4))
       ]
 
         I_TEST = [
@@ -150,23 +152,24 @@ class TestPyKakasi(unittest.TestCase):
 
         j = pykakasi.J2K()
         for case, result in TESTS:
-            self.failUnlessEqual(j.convert(case), result)
+            self.assertEqual(j.convert(case), result)
         for case, result in I_TEST:
-            self.failUnlessEqual(j.itaiji_conv(case), result)
+            self.assertEqual(j.itaiji_conv(case), result)
 
     def test_kakasi(self):
 
         TESTS = [
             ("構成",         "Kousei"),
-            ("好き",          "Suki"),
-            ("大きい",       "Ooki i"),
-            ("かんたん",  "kantan"),
-            ("にゃ",          "nya"),
-            ("っき",           "kki"),
-            ("っふぁ",        "ffa"),
+            ("好き",         "Suki"),
+            ("大きい",       "Ookii"),
+            ("かんたん",     "kantan"),
+            ("にゃ",         "nya"),
+            ("っき",         "kki"),
+            ("っふぁ",       "ffa"),
             ("漢字とひらがな交じり文", "Kanji tohiragana Majiri Bun"),
             ("Alphabet 123 and 漢字", "Alphabet 123 and Kanji"),
             ("日経新聞", "Nikkeishinbun"),
+            ("日本国民は、","Nihonkokumin ha,")
         ]
 
         kakasi = pykakasi.kakasi()
@@ -174,9 +177,64 @@ class TestPyKakasi(unittest.TestCase):
         kakasi.setMode("K","a")
         kakasi.setMode("J","a")
         kakasi.setMode("r","Hepburn")
+        kakasi.setMode("C",True)
+        kakasi.setMode("s",True)
         converter  = kakasi.getConverter()
         for case, result in TESTS:
-            self.failUnlessEqual(converter.do(case), result)
+            self.assertEqual(converter.do(case), result)
+
+    def test_kakasi_kunrei(self):
+
+        TESTS = [
+            ("構成",         "Kousei"),
+            ("好き",         "Suki"),
+            ("大きい",       "Ookii"),
+            ("かんたん",     "kantan"),
+            ("にゃ",         "nya"),
+            ("っき",         "kki"),
+            ("っふぁ",       "ffa"),
+            ("漢字とひらがな交じり文", "Kanzi tohiragana Maziri Bun"),
+            ("Alphabet 123 and 漢字", "Alphabet 123 and Kanzi"),
+            ("日経新聞", "Nikkeisinbun"),
+            ("日本国民は、","Nihonkokumin ha,")
+        ]
+
+        kakasi = pykakasi.kakasi()
+        kakasi.setMode("H","a")
+        kakasi.setMode("K","a")
+        kakasi.setMode("J","a")
+        kakasi.setMode("r","Kunrei")
+        kakasi.setMode("C",True)
+        kakasi.setMode("s",True)
+        converter  = kakasi.getConverter()
+        for case, result in TESTS:
+            self.assertEqual(converter.do(case), result)
+
+    def test_kakasi_J2H(self):
+
+        TESTS = [
+            ("構成",         "こうせい"),
+            ("好き",          "すき"),
+            ("大きい",       "おおきい"),
+            ("かんたん",  "かんたん"),
+            ("にゃ",          "にゃ"),
+            ("っき",           "っき"),
+            ("っふぁ",        "っふぁ"),
+            ("漢字とひらがな交じり文", "かんじ とひらがなまじり ぶん"),
+            ("Alphabet 123 and 漢字", "Alphabet 123 and かんじ"),
+            ("日経新聞", "にっけいしんぶん"),
+            ("日本国民は、","にほんこくみん は、")
+        ]
+
+        kakasi = pykakasi.kakasi()
+        kakasi.setMode("H",None)
+        kakasi.setMode("K",None)
+        kakasi.setMode("J","H")
+        kakasi.setMode("s",True)
+        kakasi.setMode("C",True)
+        converter  = kakasi.getConverter()
+        for case, result in TESTS:
+            self.assertEqual(converter.do(case), result)
 
     def test_wakati(self):
         TESTS = [
@@ -187,4 +245,4 @@ class TestPyKakasi(unittest.TestCase):
         wakati = pykakasi.wakati()
         converter = wakati.getConverter()
         for case, result in TESTS:
-            self.failUnlessEqual(converter.do(case), result)
+            self.assertEqual(converter.do(case), result)
