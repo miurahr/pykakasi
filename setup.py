@@ -63,6 +63,7 @@ setup(name='pykakasi',
       author_email='miurahr@linux.com',
       packages = [ 'pykakasi' ],
       provides = [ 'pykakasi' ],
+      scripts = ["kakasi"],
       include_package_data = True,
       test_suite = 'nose.collector',
       cmdclass = { 'genkanwa':GenKanwa }
