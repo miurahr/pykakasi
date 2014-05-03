@@ -1,3 +1,7 @@
+Version 0.22 (3, May, 2014)
+
+- Symbols support
+
 Version 0.21 (27, April, 2014)
 
 - Wakati conversion support
