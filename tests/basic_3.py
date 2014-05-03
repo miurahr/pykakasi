@@ -156,6 +156,39 @@ class TestPyKakasi(unittest.TestCase):
         for case, result in I_TEST:
             self.assertEqual(j.itaiji_conv(case), result)
 
+    def test_a2(self):
+
+        TESTS = [
+            ("ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+             "ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ"),
+            ("abcdefghijklmnopqrstuvwxyz",
+             "ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ")
+      ]
+
+        a = pykakasi.a2()
+        for case, result in TESTS:
+            for i in range(26):
+                self.assertEqual(a.convert(case[i]), result[i])
+
+    def test_sym2(self):
+
+        TESTS = [
+            (["　","、","。","〃","〄","〆","〈","〉","《","》","「","」","『",
+            "』","【","】","〒","〓","〔","〕","〖","〗","〘","〙","〚","〛",
+            "〜","〝","〞","〟","〠","〰","〱","〲","〳","〴","〵","〶","〷",
+            "〼","〽","〾","〿"],
+             [" ",",",".",'"',"(kigou)","(sime)","<",">","<<",">>","(",")","(",")",
+            "(",")","(kigou)","(geta)","(",")","(",")","(",")","(",
+            ")","~","(kigou)","\"","(kigou)","(kigou)","-","(kurikaesi)",
+            "(kurikaesi)","(kurikaesi)","(kurikaesi)","(kurikaesi)",
+            "(kigou)","XX","(masu)","(kurikaesi)"," "," "])
+      ]
+
+        s = pykakasi.sym2()
+        for case, result in TESTS:
+            for i in range(len(case)):
+                self.assertEqual(tuple([case[i],s.convert(case[i])]), tuple([case[i],result[i]]))
+
     def test_kakasi(self):
 
         TESTS = [
@@ -179,6 +212,7 @@ class TestPyKakasi(unittest.TestCase):
         kakasi.setMode("r","Hepburn")
         kakasi.setMode("C",True)
         kakasi.setMode("s",True)
+        kakasi.setMode("E","a")
         converter  = kakasi.getConverter()
         for case, result in TESTS:
             self.assertEqual(converter.do(case), result)
@@ -206,6 +240,7 @@ class TestPyKakasi(unittest.TestCase):
         kakasi.setMode("r","Kunrei")
         kakasi.setMode("C",True)
         kakasi.setMode("s",True)
+        kakasi.setMode("E","a")
         converter  = kakasi.getConverter()
         for case, result in TESTS:
             self.assertEqual(converter.do(case), result)
@@ -232,6 +267,7 @@ class TestPyKakasi(unittest.TestCase):
         kakasi.setMode("J","H")
         kakasi.setMode("s",True)
         kakasi.setMode("C",True)
+        kakasi.setMode("E",None)
         converter  = kakasi.getConverter()
         for case, result in TESTS:
             self.assertEqual(converter.do(case), result)

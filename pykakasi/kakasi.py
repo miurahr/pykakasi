@@ -56,9 +56,9 @@ class kakasi(object):
 #mode flags
     _flag = {"p":False, "s":True, "f":False, "c":False, "C":True, "U":False,
              "u":False}
-    _mode = {"J":"a", "H":"a", "K":"a", "a":None, "r":"Hepburn"}
-    _keys = ["J","H","K","a","r"]
-    _values = ["a", "H", "K", None]
+    _mode = {"J":"a", "H":"a", "K":"a", "E":"a", "a":None, "r":"Hepburn"}
+    _keys = ["J","H","K","a","E","r"]
+    _values = ["a","E","H","K",None]
     _option = {"r":"Hepburn"}
     _optvals = {"r":["Hepburn", "Kunrei"]}
 
@@ -115,10 +115,17 @@ class kakasi(object):
         else:
             self._conv["J"] = NOP()
 
-        if self._mode["a"] == None:
-            self._conv["a"] = NOP()
+        if self._mode["a"] == "E":
+            from .a2 import a2
+            self._conv["a"] = a2()
         else:
             self._conv["a"] = NOP()
+
+        if self._mode["E"] == "a":
+            from .symbols import sym2
+            self._conv["E"] = sym2()
+        else:
+            self._conv["E"] = NOP()
 
         if self._flag["s"]:
             self._separator = ' '
@@ -211,6 +218,14 @@ class kakasi(object):
                         break
                     else:
                         pass
+
+            elif self._conv["a"].isRegion(text[i]):
+                otext = otext + self._conv["a"].convert(text[i])
+                i += 1
+
+            elif self._conv["E"].isRegion(text[i]):
+                otext = otext + self._conv["E"].convert(text[i])
+                i += 1
 
             else:
                 otext  = otext + text[i]
