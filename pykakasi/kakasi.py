@@ -151,6 +151,8 @@ class kakasi(object):
                     continue
 
                 i = i + l
+                # now i have been incremented..Clarify it by using var j
+                j = i
                 if self._flag["U"]:
                     otext = otext + t.upcase()
                 elif self._flag["C"]:
@@ -159,7 +161,7 @@ class kakasi(object):
                     otext = otext + t
 
                 # Not insert space BEFORE end marks and text end.
-                if (i < len(text)) and not (ord(text[i]) in self._endmark):
+                if (j < len(text)) and not (ord(text[j]) in self._endmark):
                     otext = otext + self._separator
 
             elif self._conv["H"].isRegion(text[i]):
@@ -173,16 +175,18 @@ class kakasi(object):
                         continue
                     tmptext = tmptext + t
                     i = i + l
-                    if i >= len(text):
+                    # now i have been incremented..Clarify it by using var j
+                    j = i
+                    if j >= len(text):
                         otext = otext + tmptext
                         break
-                    elif not self._conv["H"].isRegion(text[i]):
+                    elif not self._conv["H"].isRegion(text[j]):
                         # Found a place _conv["H"] cannot convert.
                         # this means we found word boundary.
                         otext = otext + tmptext
                         # Inserting word separator(space) to indicate word boundary.
                         # Not inserting space BEFORE comma and full stop
-                        if not ord(text[i]) in self._endmark:
+                        if not ord(text[j]) in self._endmark:
                             otext = otext + self._separator
                         break
                     else:
@@ -199,11 +203,13 @@ class kakasi(object):
                         continue
                     tmptext = tmptext + t
                     i = i + l
-                    if i >= len(text):
+                    # now i have been incremented..Clarify it by using var j
+                    j = i
+                    if j >= len(text):
                         # finished all text
                         otext = otext + tmptext
                         break
-                    elif not self._conv["K"].isRegion(text[i]):
+                    elif not self._conv["K"].isRegion(text[j]):
                         # this means we found word boundary.
                         # Inserting ' ' to indicate word boundary.
                         # except for end marks
@@ -213,7 +219,7 @@ class kakasi(object):
                             otext = otext + tmptext
                         # Inserting word separator(space) to indicate word boundary.
                         # Not inserting space BEFORE comma and full stop
-                        if not ord(text[i]) in self._endmark:
+                        if not ord(text[j]) in self._endmark:
                             otext = otext + self._separator
                         break
                     else:
@@ -226,6 +232,12 @@ class kakasi(object):
             elif self._conv["E"].isRegion(text[i]):
                 otext = otext + self._conv["E"].convert(text[i])
                 i += 1
+                if i >= len(text): # it is last char of text
+                    break
+                if text[i] == "\n": # it is last char of line
+                    break
+                if ord(text[i-1]) in self._endmark:
+                    otext = otext + self._separator
 
             else:
                 otext  = otext + text[i]
