@@ -57,10 +57,10 @@ class kakasi(object):
     _flag = {"p":False, "s":False, "f":False, "c":False, "C":False, "U":False,
              "u":False}
     _mode = {"J":None, "H":None, "K":None, "E":None, "a":None}
-    _keys = ["J","H","K","a","E","r"]
+    _keys = ["J","H","K","a","E"]
     _values = ["a","E","H","K",None]
     _option = {"r":"Hepburn"}
-    _optvals = {"r":["Hepburn", "Kunrei"]}
+    _roman_vals = ["Hepburn", "Kunrei", "Passport"]
 
 #variables
     _separator = ' '
@@ -76,14 +76,22 @@ class kakasi(object):
         if fr in self._keys:
             if to in self._values:
                 self._mode[fr] = to
+            else:
+                raise "Invalid value for mode"
         elif fr in self._flag.keys():
             if to in [True,False]:
                 self._flag[fr] = to
-        elif fr in self._option.keys():
-            if to in self._optvals[fr]:
-                self._option[fr] = to
+            else:
+                raise "Invalid flag value"
+        elif fr == "r":
+            if to in ["Hepburn","Kunrei","Passport"]:
+                self._option["r"] = to
+            else:
+                raise "Unknown roman table name"
         elif fr == "S":
             self._separator = to
+        else:
+            raise "Unhandled options"
 
     def getConverter(self):
         from .nop import NOP
@@ -114,7 +122,7 @@ class kakasi(object):
             self._conv["J"] = J2H()
         elif self._mode["J"] == "K":
             from .j2k import J2K
-            self._conv["J"] = J2K(method = self._option["r"])
+            self._conv["J"] = J2K()
         else:
             self._conv["J"] = NOP()
 
