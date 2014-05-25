@@ -54,9 +54,9 @@ class kakasi(object):
     _conv = {}
 
 #mode flags
-    _flag = {"p":False, "s":True, "f":False, "c":False, "C":True, "U":False,
+    _flag = {"p":False, "s":False, "f":False, "c":False, "C":False, "U":False,
              "u":False}
-    _mode = {"J":"a", "H":"a", "K":"a", "E":"a", "a":None, "r":"Hepburn"}
+    _mode = {"J":None, "H":None, "K":None, "E":None, "a":None}
     _keys = ["J","H","K","a","E","r"]
     _values = ["a","E","H","K",None]
     _option = {"r":"Hepburn"}
@@ -64,6 +64,7 @@ class kakasi(object):
 
 #variables
     _separator = ' '
+    _separator_string = ' '
     _endmark = [0x002c, 0x002e, 0x3001, 0x3002]
     _MAXLEN  = 32
 
@@ -75,12 +76,14 @@ class kakasi(object):
         if fr in self._keys:
             if to in self._values:
                 self._mode[fr] = to
-        if fr in self._flag.keys():
+        elif fr in self._flag.keys():
             if to in [True,False]:
                 self._flag[fr] = to
-        if fr in self._option.keys():
+        elif fr in self._option.keys():
             if to in self._optvals[fr]:
                 self._option[fr] = to
+        elif fr == "S":
+            self._separator = to
 
     def getConverter(self):
         from .nop import NOP
@@ -127,9 +130,7 @@ class kakasi(object):
         else:
             self._conv["E"] = NOP()
 
-        if self._flag["s"]:
-            self._separator = ' '
-        else:
+        if not self._flag["s"]:
             self._separator = ''
 
         return self
@@ -213,7 +214,7 @@ class kakasi(object):
                         # this means we found word boundary.
                         # Inserting ' ' to indicate word boundary.
                         # except for end marks
-                        if self._flag["c"]:
+                        if self._flag["C"]:
                             otext = otext + tmptext.capitalize()
                         else:
                             otext = otext + tmptext

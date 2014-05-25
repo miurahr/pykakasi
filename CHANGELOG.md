@@ -1,3 +1,20 @@
+Version 0.23 (25, May, 2014)
+
+- Support following options in kakasi command.
+ + same as original kakasi
+  -J{aKH} -K{aH} -H{aK} -E{a}
+  -rk -rh
+  -w -s -S -C
+ + additional options
+  -v --version -h --help
+  -O --output: output file
+  -I --input: input file
+
+- Change default behavior as almost same
+  as original kakasi
+
+- Zenkaku numbers conversion
+
 Version 0.22 (3, May, 2014)
 
 - Introduced kakasi command

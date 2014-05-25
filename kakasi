@@ -6,7 +6,7 @@ import sys
 import getopt
 import pykakasi
 
-_VERSION = '0.22'
+_VERSION = '0.23'
 
 def show_version():
     print (os.path.basename(sys.argv[0]) + " v" + _VERSION)
@@ -14,52 +14,85 @@ def show_version():
 def usage():
     print ("Python implementation of kakasi\n")
 
-def do_wakati(outfile):
-    wakati = pykakasi.wakati()
-    converter = wakati.getConverter()
-    otext = ""
-    for line in sys.stdin:
-        sys.stdout.write(converter.do(line))
 
-def do_kakasi(outfile):
+def do_wakati(mode, infile, outfile):
+    kakasi = pykakasi.wakati()
+    do_it(kakasi, mode, infile, outfile)
+
+def do_kakasi(mode, infile, outfile):
     kakasi = pykakasi.kakasi()
-    kakasi.setMode("H","a")
-    kakasi.setMode("K","a")
-    kakasi.setMode("J","a")
-    kakasi.setMode("r","Hepburn")
+    do_it(kakasi, mode, infile, outfile)
+
+def do_it(kakasi, mode, infile, outfile):
+    try:
+        for k,v in mode.iteritems():
+            kakasi.setMode(k,v)
+    except:
+        for k,v in mode.items():
+            kakasi.setMode(k,v)
     converter  = kakasi.getConverter()
-    otext = ""
-    for line in sys.stdin:
-        sys.stdout.write(converter.do(line))
+    if infile:
+        infp = open(infile,'r')
+    else:
+        infp = sys.stdin
+    if outfile:
+        outfp = open(outfile,'w')
+    else:
+        outfp = sys.stdout
+    for line in infp:
+        outfp.write(converter.do(line))
 
 def main():
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "ho:vw", ["help","output=","wakati"])
+        opts, args = getopt.getopt(sys.argv[1:],
+            "hO:I:vwH:K:J:r:sCE:S:",
+            ["help","input=","output=","separator=","space","wakati","version"])
     except getopt.GetoptError as err:
         print (err)
         usage()
         sys.exit(2)
-    output = None
+    outfile = None
+    infile  = None
     wakati = False
+    mode = {
+            'H':None, 'K':None, 'J':None, 'r':"Hepburn", 'E':None,
+            's':False, 'C':False
+           }
+    values = ["a","E","H","K",None]
+    romanvals = {"h":"Hepburn", "k":"Kunrei"}
     for o, a in opts:
-        if o == "-v": 
+        if o in ["-v","--version"]: 
             show_version()
             sys.exit()
         elif o in ("-h", "--help"):
             show_version()
             usage()
             sys.exit()
-        elif o in ("-o", "--output"):
-            output = a
+        elif o in ("-I", "--input"):
+            infile = a
+        elif o in ("-O", "--output"):
+            outfile = a
         elif o in ("-w", "--wakati"):
             wakati = True
+        elif o in ["-H","-K","-J","-E"]:
+            if a in values:
+                mode[o[-1:]] = a
+        elif o in ["-s","-C"]:
+            mode[o[-1:]] = True
+        elif o == "-r":
+            if a in romanvals.keys():
+                mode[o[-1:]] = romanvals[a]
+        elif o == "--space":
+            mode["s"] = True
+        elif o in ["-S","--separator"]:
+            mode["S"] = a
         else:
             assert False, "unhandled option"
  
     if wakati:
-        do_wakati(outfile = output)
+        do_wakati(infile, outfile)
     else:
-        do_kakasi(outfile = output)
+        do_kakasi(mode, infile, outfile)
 
 if __name__ == "__main__":
     sys.exit(main())
