@@ -135,6 +135,22 @@ class TestPyKakasi(unittest.TestCase):
         for case, result in TESTS:
             self.assertEqual(h.convert(case), result)
 
+    def test_H2a_passport(self):
+
+        TESTS = [
+            ("しつもん",("shi",1)),
+            ("ちがい", ("chi",1)),
+            ("おおの",("o",2)),
+            ("さいとう",("sa",1)),
+            ("とう",("to",2)),
+            ("なんば", ("na", 1)),
+            ("んば", ("mba", 2))
+        ]
+
+        h = pykakasi.H2a(method="Passport")
+        for case, result in TESTS:
+            self.assertEqual(h.convert(case), result)
+
     def test_J2K(self):
 
         TESTS = [
@@ -155,6 +171,49 @@ class TestPyKakasi(unittest.TestCase):
             self.assertEqual(j.convert(case), result)
         for case, result in I_TEST:
             self.assertEqual(j.itaiji_conv(case), result)
+
+    def test_J2a(self):
+
+        TESTS = [
+            ("構成",         ("kousei",2)),
+            ("好き",         ("suki",2)),
+            ("大きい",       ("ookii",3)),
+            ("日本国民は、", ("nihonkokumin", 4))
+      ]
+
+        j = pykakasi.J2a()
+        for case, result in TESTS:
+            self.assertEqual(j.convert(case), result)
+
+    def test_J2a_kunrei(self):
+
+        TESTS = [
+            ("構成",         ("kousei",2)),
+            ("好き",         ("suki",2)),
+            ("大きい",       ("ookii",3)),
+            ("日本国民は、", ("nihonkokumin", 4)),
+            ("漢字",         ("kanzi",2))
+      ]
+
+        j = pykakasi.J2a(method="Kunrei")
+        for case, result in TESTS:
+            self.assertEqual(j.convert(case), result)
+
+    def test_J2a_passport(self):
+
+        TESTS = [
+            ("構成",         ("kosei",2)),
+            ("好き",         ("suki",2)),
+            ("大きい",       ("okii",3)),
+            ("日本国民は、", ("nihonkokumin", 4)),
+            ("漢字",         ("kanji", 2)),
+            ("佐藤",         ("sato", 2)),
+            ("難波",         ("namba",2))
+      ]
+
+        j = pykakasi.J2a(method="Passport")
+        for case, result in TESTS:
+            self.assertEqual(j.convert(case), result)
 
     def test_a2(self):
 

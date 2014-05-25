@@ -34,8 +34,10 @@ class GenKanwa(Command):
             ('itaijidict.utf8', 'itaijidict2.pickle'),
             ('hepburndict.utf8', 'hepburndict2.pickle'),
             ('kunreidict.utf8', 'kunreidict2.pickle'),
+            ('passportdict.utf8', 'passportdict2.pickle'),
             ('hepburnhira.utf8', 'hepburnhira2.pickle'),
-            ('kunreihira.utf8', 'kunreihira2.pickle')
+            ('kunreihira.utf8', 'kunreihira2.pickle'),
+            ('passporthira.utf8', 'passporthira2.pickle')
         ]
         for (s,p) in DICTS:
             self.genDict(s, p)

@@ -59,7 +59,7 @@ def main():
             's':False, 'C':False
            }
     values = ["a","E","H","K",None]
-    romanvals = {"h":"Hepburn", "k":"Kunrei"}
+    romanvals = {"h":"Hepburn", "k":"Kunrei", "p":"Passport"}
     for o, a in opts:
         if o in ["-v","--version"]: 
             show_version()
@@ -81,7 +81,7 @@ def main():
             mode[o[-1:]] = True
         elif o == "-r":
             if a in romanvals.keys():
-                mode[o[-1:]] = romanvals[a]
+                mode['r'] = romanvals[a]
         elif o == "--space":
             mode["s"] = True
         elif o in ["-S","--separator"]:

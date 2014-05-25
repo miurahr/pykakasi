@@ -9,11 +9,10 @@ Version 0.23 (25, May, 2014)
   -v --version -h --help
   -O --output: output file
   -I --input: input file
-
 - Change default behavior as almost same
   as original kakasi
-
 - Zenkaku numbers conversion
+- Passport roman conversion table
 
 Version 0.22 (3, May, 2014)
 

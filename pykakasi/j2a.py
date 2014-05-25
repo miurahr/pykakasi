@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #  j2a.py
 #
-# Copyright 2011 Hiroshi Miura <miurahr@linux.com>
+# Copyright 2011,2014 Hiroshi Miura <miurahr@linux.com>
 #
 #  Original Copyright:
 # * KAKASI (Kanji Kana Simple inversion program)

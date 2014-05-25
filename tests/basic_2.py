@@ -134,6 +134,22 @@ class TestPyKakasi(unittest.TestCase):
         for case, result in TESTS:
             self.assertEqual(h.convert(case), result)
 
+    def test_H2a_passport(self):
+
+        TESTS = [
+            (u"しつもん",   ("shi",1)),
+            (u"ちがい", ("chi",1)),
+            (u"おおの",("o",2)),
+            (u"さいとう",("sa",1)),
+            (u"とう",("to",2)),
+            (u"なんば", ("na", 1)),
+            (u"んば", ("mba", 2))
+        ]
+
+        h = pykakasi.H2a(method="Passport")
+        for case, result in TESTS:
+            self.assertEqual(h.convert(case), result)
+
     def test_J2K(self):
 
         TESTS = [
@@ -154,6 +170,20 @@ class TestPyKakasi(unittest.TestCase):
             self.assertEqual(j.convert(case), result)
         for case, result in I_TEST:
             self.assertEqual(j.itaiji_conv(case), result)
+
+
+    def test_J2a(self):
+
+        TESTS = [
+            (u"構成",         ("kousei",2)),
+            (u"好き",         ("suki",2)),
+            (u"大きい",       ("ookii",3)),
+            (u"日本国民は、", ("nihonkokumin", 4))
+      ]
+
+        j = pykakasi.J2a()
+        for case, result in TESTS:
+            self.assertEqual(j.convert(case), result)
 
     def test_a2(self):
 

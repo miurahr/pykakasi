@@ -38,9 +38,13 @@ class K2a (object):
 
     def __init__(self, method="Hepburn"):
         if method == "Hepburn":
-           self._kanadict = jisyo('hepburndict2.pickle')
+            self._kanadict = jisyo('hepburndict2.pickle')
+        elif method == "Passport":
+            self._kanadict = jisyo('passportdict2.pickle')
+        elif method == "Kunrei":
+            self._kanadict = jisyo('kunreidict2.pickle')
         else:
-           self._kanadict = jisyo('kunreidict2.pickle')
+            raise "Unsupported roman rule"
 
     def isRegion(self, char):
            return  (0x30a0 < ord(char[0]) and ord(char[0]) < 0x30fd)
