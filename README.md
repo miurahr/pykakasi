@@ -1,6 +1,8 @@
 Pykakasi library
 ==================
 
+[![Join the chat at https://gitter.im/miurahr/pykakasi](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/miurahr/pykakasi?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
  [![travis-ci](https://secure.travis-ci.org/miurahr/pykakasi.png)](https://secure.travis-ci.org/miurahr/pykakasi)
  [![PyPI version](https://badge.fury.io/py/pykakasi.png)](http://badge.fury.io/py/Pykakasi)
 
