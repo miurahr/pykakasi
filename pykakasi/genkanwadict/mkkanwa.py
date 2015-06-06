@@ -10,6 +10,7 @@ try:
     import anydbm as dbm
 except:
     import dbm
+
 class mkkanwa(object):
 
     records = {}

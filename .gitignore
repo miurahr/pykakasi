@@ -7,3 +7,4 @@ pykakasi.egg-info
 .tox
 *.pickle
 *.db
+.coveralls.yml
