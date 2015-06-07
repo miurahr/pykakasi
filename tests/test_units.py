@@ -173,7 +173,8 @@ class TestUnits(unittest.TestCase):
             (u"構成",         ("kousei",2)),
             (u"好き",         ("suki",2)),
             (u"大きい",       ("ookii",3)),
-            (u"日本国民は、", ("nihonkokumin", 4))
+            (u"日本国民は、", ("nihonkokumin", 4)),
+            (u"\u31a0", ("",0))  # non japanese character
       ]
 
         j = pykakasi.J2a()
