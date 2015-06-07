@@ -303,6 +303,21 @@ class TestPyKakasi(unittest.TestCase):
         for case, result in TESTS:
             self.assertEqual(converter.do(case), result)
 
+    def test_kakasi_H2K(self):
+
+        TESTS = [
+            (u"かんたん",     u"カンタン"),
+            (u"にゃ",         u"ニャ")
+        ]
+
+        kakasi = pykakasi.kakasi()
+        kakasi.setMode("H","K")
+        kakasi.setMode("S"," ")
+        converter  = kakasi.getConverter()
+        for case, result in TESTS:
+            self.assertEqual(converter.do(case), result)
+
+ 
     def test_wakati(self):
         TESTS = [
         (u"交じり文", u"交じり 文"),
