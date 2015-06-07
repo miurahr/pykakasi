@@ -193,12 +193,14 @@ class TestPyKakasi(unittest.TestCase):
             ("ABCDEFGHIJKLMNOPQRSTUVWXYZ",
              u"ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ"),
             ("abcdefghijklmnopqrstuvwxyz",
-             u"ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ")
+             u"ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ"),
+            ("!\"#$%&'()*+,-./_ ",
+             u"！＂＃＄％＆＇（）＊＋，－．／＿　")
       ]
 
         a = pykakasi.a2()
         for case, result in TESTS:
-            for i in xrange(26):
+            for i in range(len(case)):
                 self.assertEqual(a.convert(case[i]), result[i])
 
     def test_sym2(self):
