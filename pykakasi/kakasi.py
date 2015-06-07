@@ -180,7 +180,7 @@ class kakasi(object):
                     (t, l) = self._conv["H"].convert(text[i:w])
                     if l <= 0:
                         # XXX: problem happens.
-                        i += 1
+                        i += 1 # pragma: no cover
                         continue
                     tmptext = tmptext + t
                     i = i + l

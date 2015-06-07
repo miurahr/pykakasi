@@ -246,6 +246,7 @@ class TestPyKakasi(unittest.TestCase):
         kakasi.setMode("r","Hepburn")
         kakasi.setMode("s", True)
         kakasi.setMode("E","a")
+        kakasi.setMode("a",None)
         converter  = kakasi.getConverter()
         for case, result in TESTS:
             self.assertEqual(converter.do(case), result)
@@ -272,6 +273,7 @@ class TestPyKakasi(unittest.TestCase):
         kakasi.setMode("J","a")
         kakasi.setMode("r","Kunrei")
         kakasi.setMode("E","a")
+        kakasi.setMode("a",None)
         converter  = kakasi.getConverter()
         for case, result in TESTS:
             self.assertEqual(converter.do(case), result)
@@ -299,6 +301,7 @@ class TestPyKakasi(unittest.TestCase):
         kakasi.setMode("s",False)
         kakasi.setMode("C",True)
         kakasi.setMode("E",None)
+        kakasi.setMode("a",None)
         converter  = kakasi.getConverter()
         for case, result in TESTS:
             self.assertEqual(converter.do(case), result)
@@ -338,5 +341,22 @@ class TestPyKakasi(unittest.TestCase):
         ]
         wakati = pykakasi.wakati()
         converter = wakati.getConverter()
+        for case, result in TESTS:
+            self.assertEqual(converter.do(case), result)
+
+    def test_kakasi_a2E(self):
+
+        TESTS = [
+            ("ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+             u"ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ"),
+            ("abcdefghijklmnopqrstuvwxyz",
+             u"ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ"),
+            ("!\"#$%&'()*+,-./_ {|}~",
+             u"！＂＃＄％＆＇（）＊＋，－．／＿　｛｜｝～")
+        ]
+
+        kakasi = pykakasi.kakasi()
+        kakasi.setMode("a","E")
+        converter  = kakasi.getConverter()
         for case, result in TESTS:
             self.assertEqual(converter.do(case), result)
