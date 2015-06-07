@@ -213,7 +213,7 @@ class TestPyKakasi(unittest.TestCase):
             self.assertEqual(converter.do(case), result)
 
 
-    @unittest.expectedFailure()
+    @unittest.skip("Not yet implemented properly")
     def test_kakasi_passport_specialcase(self):
 
         TESTS = [
