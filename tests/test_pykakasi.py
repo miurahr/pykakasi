@@ -87,6 +87,30 @@ class TestPyKakasi(unittest.TestCase):
         for case, result in TESTS:
             self.assertEqual(converter.do(case), result)
 
+    def test_kakasi_J2K(self):
+
+        TESTS = [
+            (u"構成",         u"コウセイ"),
+            (u"好き",         u"スキ"),
+            (u"大きい",       u"オオキイ"),
+            (u"かんたん",     u"かんたん"),
+            (u"漢字とひらがな交じり文", u"カンジとひらがなマジリブン"),
+            (u"Alphabet 123 and 漢字", u"Alphabet 123 and カンジ")
+        ]
+
+        kakasi = pykakasi.kakasi()
+        kakasi.setMode("H",None)
+        kakasi.setMode("K",None)
+        kakasi.setMode("J","K")
+        kakasi.setMode("s",False)
+        kakasi.setMode("C",True)
+        kakasi.setMode("E",None)
+        kakasi.setMode("a",None)
+        converter  = kakasi.getConverter()
+        for case, result in TESTS:
+            self.assertEqual(converter.do(case), result)
+
+
     def test_kakasi_H2K(self):
 
         TESTS = [
