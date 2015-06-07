@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 # derivered from unihandecode setup.py
 
+import os, sys
 from setuptools import Command,setup
 from setuptools.command.install import install
-from setuptools.command.egg_info import egg_info
 from distutils.command.build import build
 
-import os, sys
 import pykakasi.genkanwadict as genkanwadict
 
 def gen_dict(src_f, pkl_f):
@@ -55,30 +54,28 @@ class my_build(build):
                     msg="Running pre build task")
         build.run(self)
 
-class my_egg_info(egg_info):
-    def run(self):
-        self.execute(_pre_build, (),
-                    msg="Running pre build task")
-        egg_info.run(self)
-
 tests_require = ['nose','coverage','mock']
 if sys.version_info < (2, 7):
     tests_require.append('unittest2')
 
-
 setup(name='pykakasi',
-      version='0.23',
+      version='0.24',
       description='Python implementation of kakasi - kana kanji simple inversion library',
       url='http://github.com/miurahr/pykakasi',
       license='GPLv3',
       long_description=readme(),
       author='Hioshi Miura',
       author_email='miurahr@linux.com',
-      packages = [ 'pykakasi' ],
+      packages = [ 'pykakasi',
+                   'pykakasi.genkanwadict'
+                 ],
       provides = [ 'pykakasi' ],
       scripts = ["kakasi"],
       include_package_data = True,
+      package_data = {'pykakasi':  ['*.pickle',
+                                    'kanwadict2.*']},
       test_suite = 'nose.collector',
+      tests_require = tests_require,
       cmdclass = {
           'build':my_build
         }

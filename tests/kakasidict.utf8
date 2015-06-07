@@ -1,0 +1,122 @@
+;; KAKASI (Kanji Kana Simple inversion program)
+;; $Id: kakasidict,v 1.2 2002-10-02 06:32:28 knok Exp $
+;; Copyright (C) 1992 1993 1994
+;; Hironobu Takahashi (takahasi@tiny.or.jp),
+;; Masahiko Sato (masahiko@sato.riec.tohoku.ac.jp),
+;; Yukiyoshi Kameyama, Miki Inooka, Akihiko Sasaki, Dai Ando, Junichi Okukawa,
+;; Katsushi Sato and Nobuhiro Yamagishi
+;;
+;; This dictionary has been made from the large size dictionary of
+;; SKK system version 7 of May, 1994 and the special dictionary for
+;; KAKASI version 1 of May 1, 1992.
+;; 
+;; この辞書は SKK version 7 に附属する辞書と KAKASI 1.2 のために作成
+;; した辞書から作成し、KAKASI のために若干の変更を加えたものです。そ
+;; のため著作権者には筑波インターネットクラブの高橋 (takahasi@tiny.or.jp)
+;; および佐藤 (masahiko@sato.riec.tohoku.ac.jp) 等が含まれます。この
+;; 再配布及び改変にあたっては以下に述べる GNU General Public License 
+;; の順守が条件となります。
+;; This dictionary is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either versions 2, or (at your option)
+;; any later version.
+;; This dictionary is distributed in the hope that it will be useful
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;; You should have received a copy of the GNU General Public License
+;; along with KAKASI, see the file COPYING.  If not, write to the Free
+;; Software Foundation Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+こうじ 公治
+かいどく 買い得
+かいどく 買得
+えいいち 鋭一
+てんさいかひ 転載可否
+まわたり 馬渡
+つる 蔓
+しょく 色
+ぎょう 行は
+ぎょう 行
+ひさもり 久森
+まもる 衛
+えい 衛
+にん 人
+しょう 章
+こうの 河野
+にち 日
+がつ 月
+ひがし 東
+みぎ 右
+ひがしおおどおり 東大通り
+せい 性
+かえいし 家衛試
+かちくえいせいしけんじょう 家畜衛生試験場
+なかいわ 中岩
+めい 名
+きん 金
+げつ 月
+とうえんめい 陶淵明
+さきばしr 先走
+さきばしt 先走
+はっこういちう 八紘一宇
+りくし 陸士
+かね 金
+ひ 日
+よる 夜
+め 目
+ふゆ 冬
+はる 春
+りょうし 量子
+うえ 上
+うえに 上に
+あそかわ 麻生川
+えきひ 液肥
+てすう 手数
+あるいは 或は
+しょくしゅ 植種
+さけ 酒
+へt 減
+ようぞん 溶存
+みず 水
+ほう 法
+ぜんけい 前景
+くらい 位
+むずかしk 難し
+むずかしi 難し
+しげゆき 重幸
+ねこじた 猫舌
+み 実
+しょくの 食の
+おと 音
+そと 外
+じつに 実に
+ひとし 仁
+かいねこ 飼猫
+おおまめうだ 大豆生田
+つよし 剛
+ふくろ 袋
+もの 物
+たちかわ 太刀川
+せいごう 正剛
+さかな 魚
+やつ 奴
+のって 乗って
+なか 中
+まがt 曲が
+まがr 曲が
+きょくが 曲が
+きょく 曲
+ひろし 洋士
+つかって 使って
+まつだ 松田
+めいで 名で
+はなし 話
+かたは 方は
+こ 個
+わたし 私
+つぎ 次
+つくえ 机
+なつ 夏
+よ 世
+あしげ 足蹴
+くん 君

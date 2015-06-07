@@ -8,3 +8,4 @@ pykakasi.egg-info
 *.pickle
 *.db
 .coveralls.yml
+.coverage

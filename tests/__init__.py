@@ -7,3 +7,4 @@ else:
     from .basic_2 import *
     from .advanced_2 import *
 
+from .genkanwadict import *

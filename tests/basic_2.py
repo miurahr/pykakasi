@@ -17,7 +17,9 @@ class TestPyKakasi(unittest.TestCase):
             (u"菟", u"兎"),
             (u"菟集", u"兎集"),
             (u"熙", u"煕"),
-        ]
+            (u"壱弍",u"一二"),
+            (u"森鷗外",u"森鴎外"),
+       ]
 
         j = pykakasi.J2H()
         for case, result in TESTS:
