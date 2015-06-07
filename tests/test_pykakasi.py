@@ -7,6 +7,7 @@ class TestPyKakasi(unittest.TestCase):
     def test_kakasi_hepburn(self):
 
         TESTS = [
+            (u"",""),
             (u"構成",         "Kousei"),
             (u"好き",         "Suki"),
             (u"大きい",       "Ookii"),
@@ -35,6 +36,7 @@ class TestPyKakasi(unittest.TestCase):
     def test_kakasi_kunrei(self):
 
         TESTS = [
+            (u"", ""),
             (u"構成",         "Kousei"),
             (u"好き",          "Suki"),
             (u"大きい",       "Ookii"),
@@ -62,6 +64,7 @@ class TestPyKakasi(unittest.TestCase):
     def test_kakasi_J2H(self):
 
         TESTS = [
+            (u"",""),
             (u"構成",         u"こうせい"),
             (u"好き",         u"すき"),
             (u"大きい",       u"おおきい"),
@@ -90,6 +93,7 @@ class TestPyKakasi(unittest.TestCase):
     def test_kakasi_J2K(self):
 
         TESTS = [
+            (u"",""),
             (u"構成",         u"コウセイ"),
             (u"好き",         u"スキ"),
             (u"大きい",       u"オオキイ"),
@@ -114,6 +118,7 @@ class TestPyKakasi(unittest.TestCase):
     def test_kakasi_H2K(self):
 
         TESTS = [
+            (u"",""),
             (u"かんたん",     u"カンタン"),
             (u"にゃ",         u"ニャ")
         ]
@@ -128,6 +133,7 @@ class TestPyKakasi(unittest.TestCase):
     def test_kakasi_K2H(self):
 
         TESTS = [
+            (u"",""),
             (u"カンタン",u"かんたん"),
             (u"ニャ",    u"にゃ")
         ]
@@ -140,9 +146,10 @@ class TestPyKakasi(unittest.TestCase):
  
     def test_wakati(self):
         TESTS = [
-        (u"交じり文", u"交じり 文"),
-        (u"ひらがな交じり文", u"ひらがな 交じり 文"),
-        (u"漢字とひらがな交じり文", u"漢字 とひらがな 交じり 文")
+                (u"",u""),
+                (u"交じり文", u"交じり 文"),
+                (u"ひらがな交じり文", u"ひらがな 交じり 文"),
+                (u"漢字とひらがな交じり文", u"漢字 とひらがな 交じり 文")
         ]
         wakati = pykakasi.wakati()
         converter = wakati.getConverter()
@@ -169,6 +176,7 @@ class TestPyKakasi(unittest.TestCase):
     def test_kakasi_passport(self):
 
         TESTS = [
+            (u"",""),
             (u"構成",         "Kosei"),
             (u"大野",         "Ono"),
             (u"斎藤",         "Saito"),
