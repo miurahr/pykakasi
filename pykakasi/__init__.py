@@ -9,6 +9,7 @@ from .j2a import J2a
 from .symbols import sym2
 from .kakasi import kakasi
 from .wakati import wakati
+from .exceptions import *
 
 __all__ = ["pykakasi"]
 

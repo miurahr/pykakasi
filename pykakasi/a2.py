@@ -39,4 +39,4 @@ class a2 (object):
         elif (0x7b <= c and c < 0x7f):
             return self._table_3[(c-0x7b)]
         else:
-            return None
+            return None # pragma: no cover

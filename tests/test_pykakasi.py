@@ -165,3 +165,71 @@ class TestPyKakasi(unittest.TestCase):
         converter  = kakasi.getConverter()
         for case, result in TESTS:
             self.assertEqual(converter.do(case), result)
+
+    def test_kakasi_passport(self):
+
+        TESTS = [
+            (u"構成",         "Kosei"),
+            (u"大野",         "Ono"),
+            (u"斎藤",         "Saito"),
+            (u"菅野",         "Kanno"),
+            (u"本田",         "Honda"),
+            (u"一式",         "Isshiki"),
+            (u"別府",         "Beppu"),
+            (u"ジェ",         "jie"),
+            (u"チェ",         "chie"),
+            (u"ティ",         "tei"),
+            (u"ディ",         "dei"),
+            (u"デュ",         "deyu"),
+            (u"ファ",         "fua"),
+            (u"フィ",         "fui"),
+            (u"フェ",         "fue"),
+            (u"フォ",         "fuo"),
+            (u"ヴァ",         "bua"),
+            (u"ヴィ",         "bui"),
+            (u"ヴ",           "bu"),
+            (u"ヴェ",         "bue"),
+            (u"ヴォ",         "buo"),
+            (u"じぇ",         "jie"),
+            (u"ちぇ",         "chie"),
+            (u"てぃ",         "tei"),
+            (u"でぃ",         "dei"),
+            (u"でゅ",         "deyu"),
+            (u"ふぁ",         "fua"),
+            (u"ふぃ",         "fui"),
+            (u"ふぇ",         "fue"),
+            (u"ふぉ",         "fuo")
+         ]
+
+        kakasi = pykakasi.kakasi()
+        kakasi.setMode("H","a")
+        kakasi.setMode("K","a")
+        kakasi.setMode("J","a")
+        kakasi.setMode("r","Passport")
+        kakasi.setMode("E","a")
+        kakasi.setMode("a",None)
+        converter  = kakasi.getConverter()
+        for case, result in TESTS:
+            self.assertEqual(converter.do(case), result)
+
+
+    @unittest.expectedFailure()
+    def test_kakasi_passport_specialcase(self):
+
+        TESTS = [
+            (u"えっちゅう",   "etchu"),
+            (u"はっちょう",   "hatcho"),
+            (u"エッチュウ",   "etchu"),
+            (u"ハッチョウ",   "hatcho")
+         ]
+
+        kakasi = pykakasi.kakasi()
+        kakasi.setMode("H","a")
+        kakasi.setMode("K","a")
+        kakasi.setMode("J","a")
+        kakasi.setMode("r","Passport")
+        kakasi.setMode("E","a")
+        kakasi.setMode("a",None)
+        converter  = kakasi.getConverter()
+        for case, result in TESTS:
+            self.assertEqual(converter.do(case), result)

@@ -31,6 +31,7 @@ except:
     # Python3.x
     xrange = range
 from .jisyo import jisyo
+from .exceptions import *
 
 class K2a (object):
 
@@ -44,7 +45,7 @@ class K2a (object):
         elif method == "Kunrei":
             self._kanadict = jisyo('kunreidict2.pickle')
         else:
-            raise "Unsupported roman rule"
+            raise UnsupportedRomanRulesException("Unsupported roman rule") 
 
     def isRegion(self, char):
            return  (0x30a0 < ord(char[0]) and ord(char[0]) < 0x30fd)

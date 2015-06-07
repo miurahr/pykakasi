@@ -47,6 +47,7 @@ Flags:
 
 import re
 import sys, os
+from pykakasi.exceptions import *
 
 class kakasi(object):
 
@@ -77,21 +78,21 @@ class kakasi(object):
             if to in self._values:
                 self._mode[fr] = to
             else:
-                raise "Invalid value for mode"
+                raise InvalidModeValueException("Invalid value for mode")
         elif fr in self._flag.keys():
             if to in [True,False]:
                 self._flag[fr] = to
             else:
-                raise "Invalid flag value"
+                raise InvalidFlagValueExcetption("Invalid flag value")
         elif fr == "r":
             if to in ["Hepburn","Kunrei","Passport"]:
                 self._option["r"] = to
             else:
-                raise "Unknown roman table name"
+                raise UnsupportedRomanRulesException("Unknown roman table name")
         elif fr == "S":
             self._separator = to
         else:
-            raise "Unhandled options"
+            raise UnknownOptionsException("Unhandled options")
 
     def getConverter(self):
         from .nop import NOP
@@ -208,7 +209,7 @@ class kakasi(object):
                     (t, l) = self._conv["K"].convert(text[i:w])
                     if l <= 0:
                         # XXX: problem happens.
-                        i += 1
+                        i += 1 # pragma: no cover
                         continue
                     tmptext = tmptext + t
                     i = i + l
