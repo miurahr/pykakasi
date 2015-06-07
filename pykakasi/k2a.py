@@ -25,11 +25,6 @@
 # * 02111-1307, USA.
 # */
 
-try:
-    xrange
-except:
-    # Python3.x
-    xrange = range
 from .jisyo import jisyo
 from .exceptions import *
 
@@ -53,8 +48,8 @@ class K2a (object):
     def convert(self, text):
         Hstr = ""
         max_len = -1
-        r = min(4, len(text)+1)
-        for x in xrange(r):
+        r = min(self._kanadict.maxkeylen(), len(text))
+        for x in range(1, r+1):
             if self._kanadict.haskey(text[:x]):
                 if max_len < x:
                     max_len = x

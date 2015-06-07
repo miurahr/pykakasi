@@ -26,11 +26,13 @@
 # */
 
 from .kanwa import kanwa
+from .itaiji import itaiji
 import re
 
 class J2H (object):
 
     _kanwa = None
+    _itaiji = None
 
     _cl_table = [
 	"","aiueow", "aiueow", "aiueow", "aiueow", "aiueow", "aiueow", "aiueow",
@@ -44,6 +46,7 @@ class J2H (object):
 
     def __init__(self):
         self._kanwa = kanwa()
+        self._itaiji = itaiji()
 
     def isRegion(self, c):
         return ( 0x3400 <= ord(c[0]) and ord(c[0]) < 0xfa2e)
@@ -56,16 +59,17 @@ class J2H (object):
     def itaiji_conv(self, text):
         r = []
         for c in text:
-            if self._kanwa.haskey(c):
+            if self._itaiji.haskey(c):
                 r.append(c)
         for c in r:
-            text = re.sub(c, self._kanwa.lookup(c), text)
+            text = re.sub(c, self._itaiji.lookup(c), text)
         return text
 
     def convert(self, text):
         max_len = 0
         match_more = False
         Hstr = ""
+        text = self._itaiji.convert(text)
         table = self._kanwa.load(text[0])
         if table is None:
             return ("", 0)

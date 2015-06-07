@@ -28,9 +28,10 @@ class TestGenkanwadict(unittest.TestCase):
         self.kanwa.mkdict(src, dst)
         # load test
         with open(dst,'rb') as f:
-            mydict = pickle.load(f)
+            (mydict, maxkeylen) = pickle.load(f)
         os.unlink(dst)
         self.assertTrue(isinstance(mydict, dict))
+        self.assertEqual(maxkeylen, 3)
 
     def test_mkkanwa(self):
         if self.kanwa is None:

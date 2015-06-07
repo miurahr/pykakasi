@@ -4,6 +4,18 @@ import pykakasi
 
 class TestUnits(unittest.TestCase):
 
+    def test_itaiji(self):
+        I_TEST = [
+            (u"菟", u"兎"),
+            (u"菟集", u"兎集"),
+            (u"熙", u"煕"),
+            (u"壱弍",u"一二"),
+            (u"森鷗外",u"森鴎外"),
+        ]
+        j = pykakasi.J2H()
+        for case, result in I_TEST:
+            self.assertEqual(j.itaiji_conv(case), result)
+
     def test_J2H(self):
 
         TESTS = [
@@ -11,21 +23,11 @@ class TestUnits(unittest.TestCase):
             (u"好き",          (u"すき",2)),
             (u"大きい",       (u"おおきい",3)),
             (u"日本国民は、", (u"にほんこくみん", 4))
-      ]
-
-        I_TEST = [
-            (u"菟", u"兎"),
-            (u"菟集", u"兎集"),
-            (u"熙", u"煕"),
-            (u"壱弍",u"一二"),
-            (u"森鷗外",u"森鴎外"),
-       ]
+        ]
 
         j = pykakasi.J2H()
         for case, result in TESTS:
             self.assertEqual(j.convert(case), result)
-        for case, result in I_TEST:
-            self.assertEqual(j.itaiji_conv(case), result)
 
     def test_H2a(self):
 
@@ -161,18 +163,9 @@ class TestUnits(unittest.TestCase):
             (u"日本国民は、", (u"ニホンコクミン", 4))
       ]
 
-        I_TEST = [
-            (u"菟", u"兎"),
-            (u"菟集", u"兎集"),
-            (u"熙", u"煕"),
-        ]
-
         j = pykakasi.J2K()
         for case, result in TESTS:
             self.assertEqual(j.convert(case), result)
-        for case, result in I_TEST:
-            self.assertEqual(j.itaiji_conv(case), result)
-
 
     def test_J2a(self):
 

@@ -1,15 +1,10 @@
 # -*- coding: utf-8 -*-
 #  kanwa.py
 #
-# Copyright 2011,2013 Hiroshi Miura <miurahr@linux.com>
+# Copyright 2011-2015 Hiroshi Miura <miurahr@linux.com>
 from zlib import decompress
 from pkg_resources import resource_filename
 from marshal import loads
-
-try:
-    from cPickle import load
-except:
-    from pickle import load
 
 try:
     import anydbm as dbm
@@ -19,7 +14,6 @@ except:
 class kanwa (object):
 
     _kanwadict = None
-    _itaijidict = None
     _jisyo_table = {}
 
 # this class is Borg/Singleton
@@ -34,16 +28,6 @@ class kanwa (object):
         if self._kanwadict is None:
             dictpath = resource_filename(__name__, 'kanwadict2.db')
             self._kanwadict = dbm.open(dictpath,'r')
-        if self._itaijidict is None:
-            itaijipath = resource_filename(__name__, 'itaijidict2.pickle')
-            itaiji_pkl = open(itaijipath, 'rb')
-            self._itaijidict = load(itaiji_pkl)
-
-    def haskey(self, key):
-        return key in self._itaijidict
-
-    def lookup(self, key):
-        return self._itaijidict[key]
 
     def load(self, char):
         try:#python2
