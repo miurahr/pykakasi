@@ -98,5 +98,5 @@ class sym2 (object):
             except:
                 return chr(c - 0xff10 + ord('0'))
         else:
-            return None
+            return None # pragma: no cover
 

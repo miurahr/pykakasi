@@ -11,5 +11,5 @@ class NOP(object):
         return False
 
     def convert(self, text):
-        return ("", 0)
+        return ("", 0) # pragma: no cover
 

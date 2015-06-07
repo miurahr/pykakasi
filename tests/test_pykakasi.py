@@ -27,8 +27,9 @@ class TestPyKakasi(unittest.TestCase):
         kakasi.setMode("J","a")
         kakasi.setMode("r","Hepburn")
         kakasi.setMode("s", True)
-        kakasi.setMode("E","a")
-        kakasi.setMode("a",None)
+        kakasi.setMode("E", "a")
+        kakasi.setMode("a", None)
+        kakasi.setMode("C", True)
         converter  = kakasi.getConverter()
         for case, result in TESTS:
             self.assertEqual(converter.do(case), result)
@@ -56,7 +57,8 @@ class TestPyKakasi(unittest.TestCase):
         kakasi.setMode("J","a")
         kakasi.setMode("r","Kunrei")
         kakasi.setMode("E","a")
-        kakasi.setMode("a",None)
+        kakasi.setMode("a", None)
+        kakasi.setMode("C", True)
         converter  = kakasi.getConverter()
         for case, result in TESTS:
             self.assertEqual(converter.do(case), result)
@@ -238,6 +240,36 @@ class TestPyKakasi(unittest.TestCase):
         kakasi.setMode("r","Passport")
         kakasi.setMode("E","a")
         kakasi.setMode("a",None)
+        converter  = kakasi.getConverter()
+        for case, result in TESTS:
+            self.assertEqual(converter.do(case), result)
+
+    def test_kakasi_hepburn_nocapital(self):
+
+        TESTS = [
+            (u"",""),
+            (u"構成",         "kousei"),
+            (u"好き",         "suki"),
+            (u"大きい",       "ookii"),
+            (u"かんたん",     "kantan"),
+            (u"にゃ",         "nya"),
+            (u"っき",         "kki"),
+            (u"っふぁ",       "ffa"),
+            (u"漢字とひらがな交じり文", "kanji tohiragana majiri bun"),
+            (u"Alphabet 123 and 漢字", "Alphabet 123 and kanji"),
+            (u"日経新聞", "nikkeishinbun"),
+            (u"日本国民は、","nihonkokumin ha,")
+        ]
+
+        kakasi = pykakasi.kakasi()
+        kakasi.setMode("H","a")
+        kakasi.setMode("K","a")
+        kakasi.setMode("J","a")
+        kakasi.setMode("r","Hepburn")
+        kakasi.setMode("s", True)
+        kakasi.setMode("E","a")
+        kakasi.setMode("a", None)
+        kakasi.setMode("C", False)
         converter  = kakasi.getConverter()
         for case, result in TESTS:
             self.assertEqual(converter.do(case), result)

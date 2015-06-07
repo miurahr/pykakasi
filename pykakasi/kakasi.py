@@ -156,8 +156,8 @@ class kakasi(object):
                 w = min(i+self._MAXLEN, len(text))
                 (t, l) = self._conv["J"].convert(text[i:w])
 
-                if l <= 0:
-                    i += 1
+                if l <= 0: # fails to convert
+                    i += 1 # pragma: no cover
                     continue
 
                 i = i + l
@@ -182,7 +182,7 @@ class kakasi(object):
                     if l <= 0:
                         # XXX: problem happens.
                         i += 1 # pragma: no cover
-                        continue
+                        continue # pragma: no cover
                     tmptext = tmptext + t
                     i = i + l
                     # now i have been incremented..Clarify it by using var j
@@ -200,7 +200,7 @@ class kakasi(object):
                             otext = otext + self._separator
                         break
                     else:
-                        pass
+                        pass # pragma: no cover
 
             elif self._conv["K"].isRegion(text[i]):
                 tmptext = ''
@@ -223,10 +223,7 @@ class kakasi(object):
                         # this means we found word boundary.
                         # Inserting ' ' to indicate word boundary.
                         # except for end marks
-                        if self._flag["C"]:
-                            otext = otext + tmptext.capitalize()
-                        else:
-                            otext = otext + tmptext
+                        otext = otext + tmptext
                         # Inserting word separator(space) to indicate word boundary.
                         # Not inserting space BEFORE comma and full stop
                         if not ord(text[j]) in self._endmark:
