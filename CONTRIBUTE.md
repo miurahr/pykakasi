@@ -8,9 +8,9 @@ Resources
 --------
 
 Project Manager: Hiroshi Miura
-Mail list: none yet
-Bug tracker: github issue tracker
-Status: early alpha
+Gitter chat: https://gitter.im/miurahr/pykakasi
+Bug tracker: https://github.com/miurahr/pykakasi/issues
+Status: alpha
 
 Bug triage
 --------
