@@ -317,6 +317,18 @@ class TestPyKakasi(unittest.TestCase):
         for case, result in TESTS:
             self.assertEqual(converter.do(case), result)
 
+    def test_kakasi_K2H(self):
+
+        TESTS = [
+            (u"カンタン",u"かんたん"),
+            (u"ニャ",    u"にゃ")
+        ]
+
+        kakasi = pykakasi.kakasi()
+        kakasi.setMode("K","H")
+        converter  = kakasi.getConverter()
+        for case, result in TESTS:
+            self.assertEqual(converter.do(case), result)
  
     def test_wakati(self):
         TESTS = [
