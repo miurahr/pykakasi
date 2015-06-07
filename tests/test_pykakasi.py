@@ -220,7 +220,7 @@ class TestPyKakasi(unittest.TestCase):
 
         s = pykakasi.sym2()
         for case, result in TESTS:
-            for i in xrange(len(case)):
+            for i in range(len(case)):
                 self.assertEqual(tuple([case[i],s.convert(case[i])]), tuple([case[i],result[i]]))
 
     def test_kakasi_hepburn(self):
