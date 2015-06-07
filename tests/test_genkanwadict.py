@@ -27,10 +27,10 @@ class TestGenkanwadict(unittest.TestCase):
         dst = os.path.join('/tmp','test_kanadict.pickle')
         self.kanwa.mkdict(src, dst)
         # load test
-        with open(dst,'r') as f:
+        with open(dst,'rb') as f:
             mydict = pickle.load(f)
         os.unlink(dst)
-        self.assertEqual(type(mydict), DictType)
+        self.assertTrue(isinstance(mydict, dict))
 
     def test_mkkanwa(self):
         if self.kanwa is None:
