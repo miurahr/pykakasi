@@ -65,11 +65,11 @@ class sym2 (object):
             "(kigou)","XX",None,None,None,None,"(masu)","(kurikaesi)"," "," "]
     # U0391-03A9
     _table_3 = ["Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Zeta", "Eta", "Theta",
-            "Iota", "Kappa", "Lambda", "Mu", "Nu", "Xi", "Omicron", "Pi", "Rho",
+            "Iota", "Kappa", "Lambda", "Mu", "Nu", "Xi", "Omicron", "Pi", "Rho", None,
             "Sigma", "Tau", "Upsilon", "Phi", "Chi", "Psi", "Omega"]
     # U03B1-03C9
     _table_4 = ["alpha", "beta", "gamma", "delta", "epsilon", "zeta", "eta", "theta",
-            "iota", "kappa", "lambda", "mu", "nu", "xi", "omicron", "pi", "rho",
+            "iota", "kappa", "lambda", "mu", "nu", "xi", "omicron", "pi", "rho", "final sigma",
             "sigma", "tau", "upsilon", "phi", "chi", "psi", "omega"]
 
     def __init__(self):
@@ -78,7 +78,8 @@ class sym2 (object):
     def isRegion(self, char):
         c = ord(char[0])
         return ((0x3000 <= c and c< 0x3021) or (0x3030 <= c and c < 0x3040) or
-                 (0x0391 <= c and c < 0x03a9) or (0x03b1 <= c and c < 0x03c9) or
+                 (0x0391 <= c and c < 0x03a2) or (0x03a2 < c and c <= 0x03a9) or
+                 (0x03b1 <= c and c <= 0x03c9) or
                  (0xff10 <= c and c < 0xff20))
 
     def convert(self, text):
@@ -87,9 +88,9 @@ class sym2 (object):
             return self._table_1[c-0x3000]
         elif (0x3030 <= c and c < 0x3040):
             return self._table_2[c-0x3030]
-        elif (0x0391 <= c and c < 0x03a9):
+        elif (0x0391 <= c and c <= 0x03a9):
             return self._table_3[c-0x0391]
-        elif (0x03b1 <= c and c < 0x03c9):
+        elif (0x03b1 <= c and c <= 0x03c9):
             return self._table_4[c-0x03b1]
         elif (0xff10 <= c and c < 0xff20):
             try:

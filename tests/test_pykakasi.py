@@ -210,12 +210,12 @@ class TestPyKakasi(unittest.TestCase):
             u"」",u"『",
             u"』",u"【",u"】",u"〒",u"〓",u"〔",u"〕",u"〖",u"〗",u"〘",u"〙",u"〚",u"〛",
             u"〜",u"〝",u"〞",u"〟",u"〠",u"〰",u"〱",u"〲",u"〳",u"〴",u"〵",u"〶",u"〷",
-            u"〼",u"〽",u"〾",u"〿"],
+            u"〼",u"〽",u"〾",u"〿",u"α",u"β",u"ζ",u"ω",u"Α",u"Β",u"Ζ",u"Ω",u"\u03C2"],
              [" ",",",".",'"',"(kigou)","(sime)","<",">","<<",">>","(",")","(",")",
             "(",")","(kigou)","(geta)","(",")","(",")","(",")","(",
             ")","~","(kigou)","\"","(kigou)","(kigou)","-","(kurikaesi)",
             "(kurikaesi)","(kurikaesi)","(kurikaesi)","(kurikaesi)",
-            "(kigou)","XX","(masu)","(kurikaesi)"," "," "])
+            "(kigou)","XX","(masu)","(kurikaesi)"," "," ","alpha","beta","zeta","omega","Alpha","Beta","Zeta","Omega","final sigma"])
       ]
 
         s = pykakasi.sym2()
