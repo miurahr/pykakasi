@@ -1,3 +1,9 @@
+Version 0.24 (??, June, 2015)
+
+- Mesure test coverage and monitor on coveralls.io
+- Move dictionary data to pykakasi/data
+- Build dictionary when setup.py build
+
 Version 0.23 (25, May, 2014)
 
 - Support following options in kakasi command.

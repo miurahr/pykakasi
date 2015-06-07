@@ -5,6 +5,7 @@ Pykakasi library
 
  [![travis-ci](https://secure.travis-ci.org/miurahr/pykakasi.png)](https://secure.travis-ci.org/miurahr/pykakasi)
  [![PyPI version](https://badge.fury.io/py/pykakasi.png)](http://badge.fury.io/py/Pykakasi)
+ [![Coverage Status](https://coveralls.io/repos/miurahr/pykakasi/badge.svg?branch=master)](https://coveralls.io/r/miurahr/pykakasi?branch=master)
 
 pykakasi is re-imprelemtation of kakasi library by Python.
 
