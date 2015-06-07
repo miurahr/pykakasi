@@ -206,16 +206,23 @@ class TestPyKakasi(unittest.TestCase):
     def test_sym2(self):
 
         TESTS = [
-            ([u"　",u"、",u"。",u"〃",u"〄",u"〆",u"〈",u"〉",u"《",u"》",u"「",
-            u"」",u"『",
-            u"』",u"【",u"】",u"〒",u"〓",u"〔",u"〕",u"〖",u"〗",u"〘",u"〙",u"〚",u"〛",
-            u"〜",u"〝",u"〞",u"〟",u"〠",u"〰",u"〱",u"〲",u"〳",u"〴",u"〵",u"〶",u"〷",
-            u"〼",u"〽",u"〾",u"〿",u"α",u"β",u"ζ",u"ω",u"Α",u"Β",u"Ζ",u"Ω",u"\u03C2"],
+            ([u"\u3000",u"\u3001",u"\u3002",u"\u3003",u"\u3004",u"\u3006",u"\u3008",
+              u"\u3009",u"\u300a",u"\u300b",u"\u300c",u"\u300d",u"\u300e",u"\u300f",
+              u"\u3010",u"\u3011",u"\u3012",u"\u3013",u"\u3014",u"\u3015",u"\u3016",
+              u"\u3017",u"\u3018",u"\u3019",u"\u301a",u"\u301b",u"\u301c",u"\u301d",
+              u"\u301e",u"\u301f",u"\u3020",
+              u"\u3030",u"\u3031",u"\u3032",u"\u3033",u"\u3034",u"\u3035",u"\u3036",
+              u"\u3037",
+              u"\u303c",u"\u303d",u"\u303e",u"\u303f",
+              u"\u03b1",u"\u03b2",u"\u03b6",u"\u03c9",u"\u0391",u"\u0392",u"\u0396",
+              u"\u03a9",u"\u03c2",u"\uff10"],
              [" ",",",".",'"',"(kigou)","(sime)","<",">","<<",">>","(",")","(",")",
             "(",")","(kigou)","(geta)","(",")","(",")","(",")","(",
             ")","~","(kigou)","\"","(kigou)","(kigou)","-","(kurikaesi)",
             "(kurikaesi)","(kurikaesi)","(kurikaesi)","(kurikaesi)",
-            "(kigou)","XX","(masu)","(kurikaesi)"," "," ","alpha","beta","zeta","omega","Alpha","Beta","Zeta","Omega","final sigma"])
+            "(kigou)","XX","(masu)","(kurikaesi)"," "," ","alpha","beta","zeta","omega",
+            "Alpha","Beta","Zeta","Omega","final sigma",
+            "0"])
       ]
 
         s = pykakasi.sym2()
