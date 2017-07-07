@@ -20,8 +20,8 @@ How To Use pykakasi
     kakasi.setMode("K","a") # default: Katakana no conversion
     kakasi.setMode("J","a") # default: Japanese no conversion
     kakasi.setMode("r","Hepburn") # default: use Hepburn Roman table
-    kakasi.setMode("C", true) # add space default: no Separator
-    kakasi.setMode("c", false) # capitalize default: no Capitalize
+    kakasi.setMode("C", True) # add space default: no Separator
+    kakasi.setMode("c", False) # capitalize default: no Capitalize
     conv = kakasi.getConverter()
     result = conv.do(text)
 
