@@ -23,7 +23,11 @@ Overview
 How To Use pykakasi
 ==================
 
-Install commands::
+Install with pip::
+
+    pip install pykakasi
+
+Build and install::
 
     python setup.py build
     python setup.py install
