@@ -1,6 +1,6 @@
-=======
+========
 Pykakasi
-=======
+========
 
 
 Overview
@@ -18,10 +18,14 @@ Overview
    :target: https://coveralls.io/r/miurahr/pykakasi?branch=master
    :alt: Coverage status
 
-      pykakasi is re-implementation of kakasi library by Python.
+.. image:: https://ci.appveyor.com/api/projects/status/mhej9bbe5jomvaj4/branch/master?svg=true
+   :target: https://ci.appveyor.com/project/miurahr/pykakasi/branch/master
+   :alt: Build status
+
+pykakasi is re-implementation of kakasi library by Python.
 
 How To Use pykakasi
-==================
+===================
 
 Install with pip::
 
@@ -99,9 +103,8 @@ Now it support following options:
 | E      | Eigou convesion     | a,None     | roman or noconversion       |
 +--------+---------------------+------------+-----------------------------+
 
-Each character means character sets as follows:
+Each character means character sets as follows::
 
-::
     Character Sets
        a: ascii  j: jisroman  g: graphic  k: kana 
        (j,k     defined in jisx0201)
