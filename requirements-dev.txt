@@ -3,4 +3,3 @@ pinocchio
 tox
 coverage
 mock
-auditwheel

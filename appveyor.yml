@@ -25,7 +25,7 @@ test_script:
   - "%PYTHON%\\python.exe setup.py test"
 
 after_test:
-  - "%PYTHON%\\python.exe setup.py bdist_wheel"
+  - "%PYTHON%\\python.exe setup.py bdist_wheel --plat-name win32"
   - "%PYTHON%\\python.exe setup.py bdist_wininst"
   - "%PYTHON%\\python.exe setup.py bdist_msi"
 

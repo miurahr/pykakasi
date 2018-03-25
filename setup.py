@@ -6,15 +6,6 @@ from setuptools import Command,setup
 from setuptools.command.install import install
 from distutils.command.build import build
 
-try:
-    from wheel.bdist_wheel import bdist_wheel as _bdist_wheel
-    class bdist_wheel(_bdist_wheel):
-        def finalize_options(self):
-            _bdist_wheel.finalize_options(self)
-            self.root_is_pure = False
-except ImportError:
-    bdist_wheel = None
-
 import pykakasi.genkanwadict as genkanwadict
 
 def gen_dict(src_f, pkl_f):
@@ -86,7 +77,6 @@ setup(name='pykakasi',
       test_suite = 'nose.collector',
       tests_require = tests_require,
       cmdclass = {
-          'bdist_wheel': bdist_wheel,
           'build':my_build
         }
 )
