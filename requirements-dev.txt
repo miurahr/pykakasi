@@ -1,6 +1,5 @@
 coveralls
 pinocchio
 tox
-pylint
 coverage
 mock

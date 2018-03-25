@@ -1,0 +1,37 @@
+
+environment:
+  matrix:
+    - TOXENV: py27
+    - TOXENV: py33
+    - TOXENV: py34
+    - TOXENV: py35
+    - TOXENV: py36
+
+matrix:
+  fast_finish: true
+
+cache:
+  - '%LOCALAPPDATA%\pip\cache'
+
+install:
+  - C:\Python36\python -m pip install --user -r requirements-dev.txt -r requirements.txt
+  - C:\Python36\python -m pip install --user tox-travis
+
+build: false 
+
+test_script:
+  - C:\Python36\scripts\tox
+
+after_test:
+  - C:\Python36\python setup.py bdist_wheel
+  - C:\Python36\python setup.py bdist_wininst
+  - C:\Python36\python setup.py bdist_msi
+  - ps: "ls dist"
+
+artifacts:
+  - path: dist\*
+
+#on_success:
+#  - TODO: upload the content of dist/*.whl to a public wheelhouse
+#
+
