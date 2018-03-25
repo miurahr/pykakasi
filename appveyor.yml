@@ -14,13 +14,13 @@ cache:
   - '%LOCALAPPDATA%\pip\cache'
 
 install:
-  - C:\Python36\python -m pip install --user -r requirements-dev.txt -r requirements.txt
-  - C:\Python36\python -m pip install --user tox-travis
+  - C:\Python36\python -m pip install -U -r requirements-dev.txt -r requirements.txt
+  - C:\Python36\python -m pip install -U tox tox-travis
 
 build: false 
 
 test_script:
-  - C:\Python36\scripts\tox
+  - C:\Python36\Scripts\tox
 
 after_test:
   - C:\Python36\python setup.py bdist_wheel
