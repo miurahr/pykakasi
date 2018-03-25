@@ -22,36 +22,14 @@ Overview
    :target: https://ci.appveyor.com/project/miurahr/pykakasi/branch/master
    :alt: Build status
 
-pykakasi is re-implementation of kakasi library by Python.
+pykakasi is re-implementation of kakasi library (original is written in C) in Python.
 
 How To Use pykakasi
 ===================
 
-Install with pip::
+Build and install from source(recommended)::
 
-    pip install pykakasi
-    
-Version: 0.23 released in 2014
-
-Status: Alpha development status
-
-Build and install from source(recommend)::
-
-    git clone https://github.com/miurahr/pykakasi.git
-    cd pykakasi
-    python setup.py build
-    python setup.py install
-    python setup.py clean
-
-Run test using pyenv/tox::
-
-    pyenv install 2.7.13
-    pyenv install 3.3.7
-    pyenv install 3.4.8
-    pyenv install 3.5.5
-    pyenv install 3.6.4
-    pyenv local 2.7.13, 3.3.7, 3.4.6, 3.5.5, 3.6.4
-    tox
+    pip install git+https://github.com/miurahr/pykakasi
 
 Building library, setup script build dictionary db file and generate pickled db files.
 Without dictionary files, a library fails to run.
