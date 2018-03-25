@@ -30,7 +30,7 @@ def readme():
     with open(os.path.join(os.path.dirname(__file__),'README.rst')) as f:
         return f.read()
 
-def _pre_build():
+def pre_build():
     DICTS = [
         ('itaijidict.utf8', 'itaijidict2.pickle'),
         ('hepburndict.utf8', 'hepburndict2.pickle'),
@@ -50,7 +50,7 @@ def _pre_build():
 
 class my_build(build):
     def run(self):
-        self.execute(_pre_build, (),
+        self.execute(pre_build, (),
                     msg="Running pre build task")
         build.run(self)
 
