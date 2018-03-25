@@ -18,6 +18,7 @@ Version 0.25 (25, Mar, 2018)
 * Move dictionary data to pykakasi/data
 * Build dictionary when setup.py build
 * Recoomend installation from github source not pypi. (#17)
+* Converter configuration become per instance not class wide.
 
 **Deprecated:** None
 

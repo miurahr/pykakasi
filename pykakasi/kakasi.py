@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #  kakasi.py
 #
-# Copyright 2011,2014 Hiroshi Miura <miurahr@linux.com>
+# Copyright 2011-2018 Hiroshi Miura <miurahr@linux.com>
 #
 #  Original Copyright:
 # * KAKASI (Kanji Kana Simple inversion program)
@@ -25,7 +25,7 @@
 # * 02111-1307, USA.
 # */
 __license__ = 'GPL 3'
-__copyright__ = '2014, Hiroshi Miura <miurahr@linux.com>'
+__copyright__ = '2014-2018 Hiroshi Miura <miurahr@linux.com>'
 __docformat__ = 'restructuredtext en'
 
 '''
@@ -51,25 +51,20 @@ from pykakasi.exceptions import InvalidFlagValueException,InvalidModeValueExcept
 
 class kakasi(object):
 
-#instances
-    _conv = {}
-
-#mode flags
-    _flag = {"p":False, "s":False, "f":False, "c":False, "C":False, "U":False,
-             "u":False}
-    _mode = {"J":None, "H":None, "K":None, "E":None, "a":None}
     _keys = ["J","H","K","a","E"]
     _values = ["a","E","H","K",None]
-    _option = {"r":"Hepburn"}
     _roman_vals = ["Hepburn", "Kunrei", "Passport"]
-
-#variables
-    _separator = ' '
-    _separator_string = ' '
     _endmark = [0x002c, 0x002e, 0x3001, 0x3002]
     _MAXLEN  = 32
 
     def __init__(self):
+        self._conv = {}
+        self._mode = {"J":None, "H":None, "K":None, "E":None, "a":None}
+        self._flag = {"p":False, "s":False, "f":False, "c":False, "C":False, "U":False,
+                      "u":False}
+        self._option = {"r":"Hepburn"}
+        self._separator = ' '
+        self._separator_string = ' '
         pass
 
 #fixme: value chck
