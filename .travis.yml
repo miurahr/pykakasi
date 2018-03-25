@@ -1,20 +1,18 @@
 language: python
-python: 3.3
-env:
-  matrix:
-    - TOXENV=py27
-    - TOXENV=py33
-    - TOXENV=py34
-    - TOXENV=py35
-    - TOXENV=py36
+python:
+  - "2.7"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+  - "3.6"
 
 install:
-  - pip install tox
-  - pip install coveralls
   - pip install -r requirements.txt -r requirements-dev.txt
 
 script:
-  tox
+  - python setup.py clean
+  - python setup.py build
+  - coverage run --source=pykakasi setup.py test
 
 after_success:
   coveralls
