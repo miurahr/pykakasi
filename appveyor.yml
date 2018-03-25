@@ -22,7 +22,8 @@ install:
   - "%PYTHON%\\python.exe -m pip install -U -r requirements-dev.txt -r requirements.txt"
   - "%PYTHON%\\python.exe -m pip install -U twine"
 
-build: off 
+build_script: 
+  - "%PYTHON%\\python.exe setup.py build"
 
 test_script:
   - "%PYTHON%\\python.exe setup.py test"
