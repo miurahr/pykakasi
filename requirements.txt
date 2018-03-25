@@ -1,4 +1,2 @@
 setuptools
 nose
-coverage
-mock
