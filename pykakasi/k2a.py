@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #  k2a.py
 #
-# Copyright 2011,2014 Hiroshi Miura <miurahr@linux.com>
+# Copyright 2011-2018 Hiroshi Miura <miurahr@linux.com>
 #
 # Original copyright:
 # * KAKASI (Kanji Kana Simple inversion program)
@@ -26,7 +26,7 @@
 # */
 
 from .jisyo import jisyo
-from .exceptions import *
+from .exceptions import UnsupportedRomanRulesException
 
 class K2a (object):
 

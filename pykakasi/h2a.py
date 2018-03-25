@@ -31,7 +31,7 @@ except:
     # Python3.x
     xrange = range
 from .jisyo import jisyo
-from .exceptions import *
+from .exceptions import UnsupportedRomanRulesException
 
 class H2a (object):
 

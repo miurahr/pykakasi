@@ -47,7 +47,7 @@ Flags:
 
 import re
 import sys, os
-from pykakasi.exceptions import *
+from pykakasi.exceptions import InvalidFlagValueException,InvalidModeValueException,UnsupportedRomanRulesException,UnknownOptionsException
 
 class kakasi(object):
 
@@ -83,7 +83,7 @@ class kakasi(object):
             if to in [True,False]:
                 self._flag[fr] = to
             else:
-                raise InvalidFlagValueExcetption("Invalid flag value")
+                raise InvalidFlagValueException("Invalid flag value")
         elif fr == "r":
             if to in ["Hepburn","Kunrei","Passport"]:
                 self._option["r"] = to

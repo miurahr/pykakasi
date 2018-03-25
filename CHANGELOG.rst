@@ -22,7 +22,10 @@ v0.24
 
 **Removed:** None
 
-**Fixed:** None
+**Fixed:**:
+
+* kakasi.py: Fix exception class name typo of InvalidFlagValueException
+* kakasi.py, h2a.py, k2a.py: Do not import all exception class.
 
 **Security:** None
 
