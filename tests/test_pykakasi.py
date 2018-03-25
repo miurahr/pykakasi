@@ -57,6 +57,7 @@ class TestPyKakasi(unittest.TestCase):
         kakasi.setMode("J","a")
         kakasi.setMode("r","Kunrei")
         kakasi.setMode("E","a")
+        kakasi.setMode("s", True)
         kakasi.setMode("a", None)
         kakasi.setMode("C", True)
         converter  = kakasi.getConverter()
@@ -217,6 +218,7 @@ class TestPyKakasi(unittest.TestCase):
         kakasi.setMode("J","a")
         kakasi.setMode("r","Passport")
         kakasi.setMode("E","a")
+        kakasi.setMode("C",True)
         kakasi.setMode("a",None)
         converter  = kakasi.getConverter()
         for case, result in TESTS:
