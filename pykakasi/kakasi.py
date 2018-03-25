@@ -51,21 +51,20 @@ from pykakasi.exceptions import InvalidFlagValueException,InvalidModeValueExcept
 
 class kakasi(object):
 
-#mode flags
-    _flag = {"p":False, "s":False, "f":False, "c":False, "C":False, "U":False,
-             "u":False}
+    _conv = {}
     _keys = ["J","H","K","a","E"]
     _values = ["a","E","H","K",None]
     _roman_vals = ["Hepburn", "Kunrei", "Passport"]
+    _endmark = [0x002c, 0x002e, 0x3001, 0x3002]
+    _MAXLEN  = 32
 
     def __init__(self):
-        self._conv = {}
         self._mode = {"J":None, "H":None, "K":None, "E":None, "a":None}
+        self._flag = {"p":False, "s":False, "f":False, "c":False, "C":False, "U":False,
+                      "u":False}
         self._option = {"r":"Hepburn"}
         self._separator = ' '
         self._separator_string = ' '
-        self._endmark = [0x002c, 0x002e, 0x3001, 0x3002]
-        self._MAXLEN  = 32
         pass
 
 #fixme: value chck
