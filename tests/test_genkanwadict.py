@@ -20,7 +20,7 @@ class TestGenkanwadict(unittest.TestCase):
         self.tmpdir = tempfile.mkdtemp()
 
     def tearDown(self):
-        os.removedirs(self.tmpdir)
+        shutil.rmtree(self.tmpdir, ignore_errors=True)
 
     def constructor(self):
         self.kanwa = genkanwadict.mkkanwa()
@@ -37,7 +37,6 @@ class TestGenkanwadict(unittest.TestCase):
         with open(dst,'rb') as f:
             (mydict, maxkeylen) = pickle.load(f)
             f.close()
-        os.remove(dst)
         self.assertTrue(isinstance(mydict, dict))
         self.assertEqual(maxkeylen, 3)
 
@@ -48,4 +47,3 @@ class TestGenkanwadict(unittest.TestCase):
         src = os.path.join('tests','kakasidict.utf8')
         dst = os.path.join(self.tmpdir,'test_kanwadict2.db')
         self.kanwa.run(src, dst)
-        os.remove(dst)
