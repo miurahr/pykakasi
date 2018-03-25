@@ -17,6 +17,7 @@ v0.24
 
 * Move dictionary data to pykakasi/data
 * Build dictionary when setup.py build
+* Recoomend installation from github source not pypi. (#17)
 
 **Deprecated:** None
 
@@ -26,6 +27,8 @@ v0.24
 
 * kakasi.py: Fix exception class name typo of InvalidFlagValueException
 * kakasi.py, h2a.py, k2a.py: Do not import all exception class.
+* test_genkanwadict.py: Multi platform support for temp directory(#27). 
+* setup.py: change _pre_build() to pre_build() (#17).
 
 **Security:** None
 

@@ -16,8 +16,10 @@ class mkkanwa(object):
     records = {}
 
     def run(self, src, dst):
-        for line in open(src, "rb"):
-            self.parsekdict(line.decode("utf-8"))
+        with open(src, 'rb') as f:
+            for line in f:
+                self.parsekdict(line.decode("utf-8"))
+            f.close()
         self.kanwaout(dst)
 
 # for itaiji and kana dict
