@@ -8,10 +8,6 @@ environment:
     - PYTHON: "C:\\Python33"
     - PYTHON: "C:\\Python34"
     - PYTHON: "C:\\Python35"
-    - PYTHON: "C:\\Python27-x64"
-    - PYTHON: "C:\\Python33-x64"
-    - PYTHON: "C:\\Python34-x64"
-    - PYTHON: "C:\\Python35-x64"
     - PYTHON: "C:\\Python36-x64"
 
 cache:
@@ -29,7 +25,7 @@ test_script:
   - "%PYTHON%\\python.exe setup.py test"
 
 after_test:
-  - "%PYTHON%\\python.exe setup.py sdist bdist_wheel"
+  - "%PYTHON%\\python.exe setup.py bdist_wheel"
   - "%PYTHON%\\python.exe setup.py bdist_wininst"
   - "%PYTHON%\\python.exe setup.py bdist_msi"
 
