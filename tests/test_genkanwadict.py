@@ -16,6 +16,12 @@ import pykakasi.genkanwadict as genkanwadict
 
 class TestGenkanwadict(unittest.TestCase):
     kanwa = None
+    def setUp(self):
+        self.tmpdir = tempfile.mkdtemp()
+
+    def tearDown(self):
+        os.removedirs(self.tmpdir)
+
     def constructor(self):
         self.kanwa = genkanwadict.mkkanwa()
         self.assertEqual(self.kanwa, object)
@@ -25,12 +31,13 @@ class TestGenkanwadict(unittest.TestCase):
             self.kanwa = genkanwadict.mkkanwa()
 
         src = os.path.join('tests','kanadict.utf8')
-        dstdir = tempfile.gettempdir()
-        dst = os.path.join(dstdir,'test_kanadict.pickle')
+        dst = os.path.join(self.tmpdir,'test_kanadict.pickle')
         self.kanwa.mkdict(src, dst)
         # load test
         with open(dst,'rb') as f:
             (mydict, maxkeylen) = pickle.load(f)
+            f.close()
+        os.remove(dst)
         self.assertTrue(isinstance(mydict, dict))
         self.assertEqual(maxkeylen, 3)
 
@@ -39,6 +46,6 @@ class TestGenkanwadict(unittest.TestCase):
             self.kanwa = genkanwadict.mkkanwa()
 
         src = os.path.join('tests','kakasidict.utf8')
-        dstdir = tempfile.gettempdir()
-        dst = os.path.join(dstdir,'test_kanwadict2.db')
+        dst = os.path.join(self.tmpdir,'test_kanwadict2.db')
         self.kanwa.run(src, dst)
+        os.remove(dst)
