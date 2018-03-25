@@ -17,6 +17,7 @@ script:
 after_success:
   - coveralls
   - python setup.py sdist bdist_wheel
+  - auditwheel repair dist/*.whl
 
 deploy:
   - provider: releases
