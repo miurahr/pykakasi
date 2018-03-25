@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
 #  jisyo.py
 #
-# Copyright 2011,2014 Hiroshi Miura <miurahr@linux.com>
+# Copyright 2011-2018 Hiroshi Miura <miurahr@linux.com>
 from pkg_resources import resource_filename
-try: #python2
-    from cPickle import load
-except: #python3
-    from pickle import load
+from six.moves.cPickle import load
 
 class jisyo (object):
     _dict = None

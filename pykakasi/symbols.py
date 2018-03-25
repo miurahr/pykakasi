@@ -51,6 +51,8 @@ Greek convertion table
 ----------------------------------------------------------
 '''
 
+import six
+
 class sym2 (object):
     # U3000 - 301F
     # \u3000、。〃〄〆〈〉《》「」『』【】〒〓〔〕〖〗〘〙
@@ -93,10 +95,7 @@ class sym2 (object):
         elif (0x03b1 <= c and c <= 0x03c9):
             return self._table_4[c-0x03b1]
         elif (0xff10 <= c and c < 0xff20):
-            try:
-                return unichr(c - 0xff10 + ord('0'))
-            except:
-                return chr(c - 0xff10 + ord('0'))
+            return six.unichr(c - 0xff10 + ord('0'))
         else:
             return None # pragma: no cover
 

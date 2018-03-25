@@ -25,12 +25,8 @@
 # * 02111-1307, USA.
 # */
 
-try:
-    xrange
-except:
-    # Python3.x
-    xrange = range
-    unichr = chr
+from six import unichr
+from six.moves import range
 
 class K2H (object):
 
@@ -46,11 +42,10 @@ class K2H (object):
         Hstr = ""
         max_len = 0
         r = len(text)
-        for x in xrange(r):
+        for x in range(r):
             if self.isRegion(text[x]):
                 Hstr = Hstr + unichr(ord(text[x]) - self._diff)
                 max_len = max_len + 1
             else:
                 break
         return (Hstr, max_len)
-

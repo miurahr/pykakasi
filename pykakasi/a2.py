@@ -4,10 +4,7 @@
 # Copyright 2014 Hiroshi Miura <miurahr@linux.com>
 #
 
-try:
-    unicode
-except: #Python3
-    unichr = chr
+from six import unichr
 
 class a2 (object):
     _table_1 = [ u"\u3000",u"\uff01",u"\uff02",u"\uff03",u"\uff04",u"\uff05",u"\uff06",
