@@ -20,6 +20,13 @@ Unreleaased
 **Security:** None
 
 
+Version 0.27 (26, Mar., 2018)
+=============================
+
+**Fixed:**
+
+* Generate multilinux1 architecture for pypi publishing.
+
 Version 0.26 (26, Mar., 2018)
 =============================
 
