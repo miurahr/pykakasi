@@ -4,16 +4,14 @@ PyKakasi ChangeLog
 
 .. current developments
 
-Unreleased
-==========
+Unreleaased
+===========
 
 **Added:** None
 
 **Changed:** None
 
-**Fixed:**
-
-* Build wheel with platform name.
+**Fixed:** None
 
 **Deprecated:** None
 
@@ -21,7 +19,19 @@ Unreleased
 
 **Security:** None
 
-Version 0.25 (25, Mar, 2018)
+
+Version 0.26 (26, Mar., 2018)
+=============================
+
+**Changed:**
+
+* Use six for python 2 and 3 compatility code.
+
+**Fixed:**
+
+* Build wheel with platform names.
+
+Version 0.25 (25, Mar., 2018)
 ============================
 
 **Added:** 
