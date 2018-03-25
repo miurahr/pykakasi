@@ -4,7 +4,7 @@ PyKakasi ChangeLog
 
 .. current developments
 
-Version 0.24 (25, Mar, 2018)
+Version 0.25 (25, Mar, 2018)
 ============================
 
 **Added**: 
