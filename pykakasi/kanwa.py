@@ -31,7 +31,10 @@ class kanwa (object):
             self._kanwadict = dbm.open(dictpath,'r')
 
     def load(self, char):
-        key = "%04x"%ord(six.u(char))
+        if six.PY2:
+            key = "%04x"%ord(unicode(char))
+        else:
+            key = "%04x"%ord(char)
         try: #already exist?
             table = self._jisyo_table[key]
         except:
