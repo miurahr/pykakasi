@@ -51,7 +51,6 @@ from pykakasi.exceptions import InvalidFlagValueException,InvalidModeValueExcept
 
 class kakasi(object):
 
-    _conv = {}
     _keys = ["J","H","K","a","E"]
     _values = ["a","E","H","K",None]
     _roman_vals = ["Hepburn", "Kunrei", "Passport"]
@@ -59,6 +58,7 @@ class kakasi(object):
     _MAXLEN  = 32
 
     def __init__(self):
+        self._conv = {}
         self._mode = {"J":None, "H":None, "K":None, "E":None, "a":None}
         self._flag = {"p":False, "s":False, "f":False, "c":False, "C":False, "U":False,
                       "u":False}

@@ -13,6 +13,7 @@ class TestPyKakasiAdvanced(unittest.TestCase):
         kakasi.setMode("H","a")
         kakasi.setMode("K","a")
         kakasi.setMode("J","a")
+        kakasi.setMode("E","a")
         kakasi.setMode("r","Hepburn")
         kakasi.setMode("C", True)
         kakasi.setMode("s", True)
