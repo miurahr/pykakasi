@@ -9,3 +9,7 @@ pykakasi.egg-info
 *.db
 .coveralls.yml
 .coverage
+.venv
+.idea
+.vscode
+.python-version

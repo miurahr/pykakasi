@@ -1,6 +1,5 @@
-nose
-coverage
 coveralls
-mock
 pinocchio
 tox
+coverage
+mock
