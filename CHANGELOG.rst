@@ -4,34 +4,45 @@ PyKakasi ChangeLog
 
 .. current developments
 
+Unreleased
+==========
+
+**Added:** None
+
+**Changed:** None
+
+**Fixed:**
+
+* Build wheel with platform name.
+
+**Deprecated:** None
+
+**Removed:** None
+
+**Security:** None
+
 Version 0.25 (25, Mar, 2018)
 ============================
 
-**Added**: 
+**Added:** 
 
 * Test on Python 3.5 and Python 3.6
 * Test on Windows using AppVeyor
 * Mesure test coverage and monitor on coveralls.io
 
-**Changed:**:
+**Changed:**
 
 * Move dictionary data to pykakasi/data
 * Build dictionary when setup.py build
 * Recoomend installation from github source not pypi. (#17)
 * Converter configuration become per instance not class wide.
 
-**Deprecated:** None
-
-**Removed:** None
-
-**Fixed:**:
+**Fixed:**
 
 * kakasi.py: Fix exception class name typo of InvalidFlagValueException
 * kakasi.py, h2a.py, k2a.py: Do not import all exception class.
 * test_genkanwadict.py: Multi platform support for temp directory(#27). 
 * setup.py: change _pre_build() to pre_build() (#17).
-
-**Security:** None
 
 Version 0.23 (25, May, 2014)
 =============================
