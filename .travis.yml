@@ -1,27 +1,32 @@
 language: python
 python:
-  - '2.7'
-  - '3.3'
-  - '3.4'
-  - '3.5'
-  - '3.6'
-
+- '2.7'
+- '3.3'
+- '3.4'
+- '3.5'
+- '3.6'
 install:
-  - pip install -r requirements.txt -r requirements-dev.txt
-
+- pip install -r requirements.txt -r requirements-dev.txt
 script:
-  - python setup.py clean
-  - python setup.py build
-  - coverage run --source=pykakasi setup.py test
-
+- python setup.py clean
+- python setup.py build
+- coverage run --source=pykakasi setup.py test
 after_success: coveralls
-
 deploy:
-  provider: releases
-  api_key:
-    secure: pgQdeIHvJBwChVUd829V5787o1pah9T5zn0y5SrJKvA22gk3hATqrPdftPXzac3xw+fiWmMp5G9cZsAYL8398Jp10iFC615FmOFLHeX1Lfi45aGWZ64/8hzhkduycosj1kntPliA5CNxBYYnFxcMig/1iQ7KCXm7FQrpzuFzTZo=
-  file: dist/*
-  skip_cleanup: false
-  on:
-    repo: miurahr/pykakasi
-    tags: true
+  - provider: releases
+    api_key:
+      secure: pgQdeIHvJBwChVUd829V5787o1pah9T5zn0y5SrJKvA22gk3hATqrPdftPXzac3xw+fiWmMp5G9cZsAYL8398Jp10iFC615FmOFLHeX1Lfi45aGWZ64/8hzhkduycosj1kntPliA5CNxBYYnFxcMig/1iQ7KCXm7FQrpzuFzTZo=
+    file: dist/*
+    skip_cleanup: true
+    on:
+      repo: miurahr/pykakasi
+      tags: true
+  - provider: pypi
+    user: miurahr
+    password:
+      secure: CUY3E7DJMMyC9ARkkC5plAWTAnwmp+wyS+GbRgjOPDL8H4AwzCSCD03D4z/5BHHpGFilF+sAsaNte/9dDjtzEXtvmMCfJwovShnr9GdAm+PU4+TyhEWqVYbeYHiJMiSnLPcsyJMkYZ8JtNMXyp0onPQr6P28OsEq+ohG6Ha9P1Y=
+    skip_cleanup: true
+    distributions: sdist bdist_wheel
+    on:
+      repo: miurahr/pykakasi
+      rags: true
