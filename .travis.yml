@@ -1,10 +1,10 @@
 language: python
 python:
-  - "2.7"
-  - "3.3"
-  - "3.4"
-  - "3.5"
-  - "3.6"
+  - '2.7'
+  - '3.3'
+  - '3.4'
+  - '3.5'
+  - '3.6'
 
 install:
   - pip install -r requirements.txt -r requirements-dev.txt
@@ -14,5 +14,14 @@ script:
   - python setup.py build
   - coverage run --source=pykakasi setup.py test
 
-after_success:
-  coveralls
+after_success: coveralls
+
+deploy:
+  provider: releases
+  api_key:
+    secure: pgQdeIHvJBwChVUd829V5787o1pah9T5zn0y5SrJKvA22gk3hATqrPdftPXzac3xw+fiWmMp5G9cZsAYL8398Jp10iFC615FmOFLHeX1Lfi45aGWZ64/8hzhkduycosj1kntPliA5CNxBYYnFxcMig/1iQ7KCXm7FQrpzuFzTZo=
+  file: dist/*
+  skip_cleanup: false
+  on:
+    repo: miurahr/pykakasi
+    tags: true
