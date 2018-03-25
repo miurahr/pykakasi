@@ -1,3 +1,4 @@
 setuptools
 wheel
 nose
+six

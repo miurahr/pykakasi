@@ -25,11 +25,7 @@
 # * 02111-1307, USA.
 # */
 
-try:
-    xrange
-except:
-    # Python3.x
-    xrange = range
+from six.moves import xrange
 from .jisyo import jisyo
 from .exceptions import UnsupportedRomanRulesException
 

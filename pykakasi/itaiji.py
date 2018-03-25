@@ -5,11 +5,7 @@
 #
 import re
 from pkg_resources import resource_filename
-
-try: # pragma: no cover
-    import cPickle as pickle
-except: # pragma: no cover
-    import pickle
+from six.moves.cPickle import load
 
 class itaiji (object):
 
@@ -28,7 +24,7 @@ class itaiji (object):
         if self._itaijidict is None:
             itaijipath = resource_filename(__name__, 'itaijidict2.pickle')
             itaiji_pkl = open(itaijipath, 'rb')
-            (self._itaijidict, self._itaijidict_len) = pickle.load(itaiji_pkl)
+            (self._itaijidict, self._itaijidict_len) = load(itaiji_pkl)
 
     def haskey(self, key):
         return key in self._itaijidict

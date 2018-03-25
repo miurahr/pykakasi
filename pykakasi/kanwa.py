@@ -5,6 +5,7 @@
 from zlib import decompress
 from pkg_resources import resource_filename
 from marshal import loads
+import six
 
 try:
     import anydbm as dbm
@@ -30,11 +31,7 @@ class kanwa (object):
             self._kanwadict = dbm.open(dictpath,'r')
 
     def load(self, char):
-        try:#python2
-            key = "%04x"%ord(unicode(char))
-        except:#python3
-            key = "%04x"%ord(char)
-
+        key = "%04x"%ord(six.u(char))
         try: #already exist?
             table = self._jisyo_table[key]
         except:

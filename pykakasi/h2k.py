@@ -25,12 +25,8 @@
 # * 02111-1307, USA.
 # */
 
-try:
-    xrange
-except:
-    # Python3.x
-    xrange = range
-    unichr = chr
+from six import unichr
+from six.moves import xrange
 
 class H2K (object):
 
