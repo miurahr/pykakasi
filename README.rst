@@ -26,11 +26,28 @@ How To Use pykakasi
 Install with pip::
 
     pip install pykakasi
+    
+Version: 0.23 released in 2014
 
-Build and install::
+Status: Alpha development status
 
+Build and install from source(recommend)::
+
+    git clone https://github.com/miurahr/pykakasi.git
+    cd pykakasi
     python setup.py build
     python setup.py install
+    python setup.py clean
+
+Run test using pyenv/tox::
+
+    pyenv install 2.7.13
+    pyenv install 3.3.7
+    pyenv install 3.4.8
+    pyenv install 3.5.5
+    pyenv install 3.6.4
+    pyenv local 2.7.13, 3.3.7, 3.4.6, 3.5.5, 3.6.4
+    tox
 
 Building library, setup script build dictionary db file and generate pickled db files.
 Without dictionary files, a library fails to run.
