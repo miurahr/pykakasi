@@ -37,7 +37,7 @@ deploy:
     distributions: sdist bdist_wheel
     on:
       repo: miurahr/pykakasi
-      tags: true
+#      tags: true
 
 notifications:
   webhooks:
