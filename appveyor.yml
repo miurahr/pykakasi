@@ -47,7 +47,8 @@ deploy_script:
   - echo [pypi]                   >> %USERPROFILE%\\.pypirc
   - echo username=miurahr         >> %USERPROFILE%\\.pypirc
   - echo password=%pypi_password% >> %USERPROFILE%\\.pypirc
-  - ps: If ($env:APPVEYOR_REPO_TAG -eq "true" ) { Invoke-Expression "twine upload -r testpypi --skip-existing dist/*" 2>$null } Else { write-output "Not on a tag, won't deploy to pypi"}
+#  - ps: If ($env:APPVEYOR_REPO_TAG -eq "true" ) { Invoke-Expression "twine upload -r testpypi --skip-existing dist/*" 2>$null } Else { write-output "Not on a tag, won't deploy to pypi"}
+  - ps: Invoke-Expression "twine upload -r testpypi --skip-existing dist/*" 2>$null
 
 notifications:
   - provider: Webhook
