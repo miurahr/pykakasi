@@ -17,21 +17,20 @@ script:
 after_success:
   - coveralls
   - python setup.py sdist
-  - python setup.py bdist_wheel --plat-name manylinux1
+  - python setup.py bdist_wheel --plat-name manylinux1_i686
+  - python setup.py bdist_wheel --plat-name manylinux1_x86_64
 
 deploy:
   - provider: pypi
-    server: https://test.pypi.org/legacy/
     user: miurahr
     password:
       secure: CUY3E7DJMMyC9ARkkC5plAWTAnwmp+wyS+GbRgjOPDL8H4AwzCSCD03D4z/5BHHpGFilF+sAsaNte/9dDjtzEXtvmMCfJwovShnr9GdAm+PU4+TyhEWqVYbeYHiJMiSnLPcsyJMkYZ8JtNMXyp0onPQr6P28OsEq+ohG6Ha9P1Y=
-    skip_cleanup: true
     distributions: sdist bdist_wheel
     skip_existing: true
     on:
       repo: miurahr/pykakasi
       python: '3.6'
-#      tags: true
+      tags: true
 
 notifications:
   webhooks:
