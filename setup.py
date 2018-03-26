@@ -76,6 +76,9 @@ setup(name='pykakasi',
                                     'kanwadict2.*']},
       test_suite = 'nose.collector',
       tests_require = tests_require,
+      install_requires=[
+        "six"
+      ],
       cmdclass = {
           'build':my_build
         }
