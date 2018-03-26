@@ -13,6 +13,8 @@ Unreleaased
 
 **Fixed:** None
 
+* wheel tag for linux now manylinux1
+
 **Deprecated:** None
 
 **Removed:** None
