@@ -17,7 +17,7 @@ script:
 after_success:
   - coveralls
   - python setup.py sdist
-  - python setup.py bdist_wheel --plat-name multilinux1
+  - python setup.py bdist_wheel --plat-name manylinux1
 
 deploy:
   - provider: releases
