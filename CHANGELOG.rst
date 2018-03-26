@@ -13,8 +13,6 @@ Unreleaased
 
 **Fixed:** None
 
-* wheel tag for linux now manylinux1
-
 **Deprecated:** None
 
 **Removed:** None
@@ -22,12 +20,12 @@ Unreleaased
 **Security:** None
 
 
-Version 0.27 (26, Mar., 2018)
+Version 0.28 (26, Mar., 2018)
 =============================
 
 **Fixed:**
 
-* Generate multilinux1 architecture for pypi publishing.
+* wheel platform tag for linux is now manylinux1_i686 or _x86_64
 
 Version 0.26 (26, Mar., 2018)
 =============================
