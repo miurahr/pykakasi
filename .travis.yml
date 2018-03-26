@@ -20,14 +20,6 @@ after_success:
   - python setup.py bdist_wheel --plat-name manylinux1
 
 deploy:
-  - provider: releases
-    api_key:
-      secure: pgQdeIHvJBwChVUd829V5787o1pah9T5zn0y5SrJKvA22gk3hATqrPdftPXzac3xw+fiWmMp5G9cZsAYL8398Jp10iFC615FmOFLHeX1Lfi45aGWZ64/8hzhkduycosj1kntPliA5CNxBYYnFxcMig/1iQ7KCXm7FQrpzuFzTZo=
-    file: dist/*
-    skip_cleanup: true
-    on:
-      repo: miurahr/pykakasi
-      tags: true
   - provider: pypi
     server: https://test.pypi.org/legacy/
     user: miurahr
@@ -38,6 +30,7 @@ deploy:
     skip_existing: true
     on:
       repo: miurahr/pykakasi
+      python: '3.6'
 #      tags: true
 
 notifications:
