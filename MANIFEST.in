@@ -1,6 +1,6 @@
-include *.md
 include README.rst
-include GPL-3
-recursive-include pykakasi/data *.txt *.utf8
-recursive-include pykakasi *.pickle *.db
+include COPYING
+recursive-include pykakasi/data *.utf8
+recursive-include pykakasi *.pickle
+recursive-include pykakasi/kanwadict*.db *
 recursive-include tests *.py
