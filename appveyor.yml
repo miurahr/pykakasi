@@ -1,48 +1,17 @@
-
 environment:
   matrix:
     - PYTHON: "C:\\Python27"
-    - PYTHON: "C:\\Python33"
-    - PYTHON: "C:\\Python34"
-    - PYTHON: "C:\\Python35"
-    - PYTHON: "C:\\Python36-x64"
-      TWINE_USERNAME: miurahr
-      TWINE_PASSWORD:
-        secure: ibyxU09f3mAdoh5Hv4T27Q==
-
-cache:
-  - '%LOCALAPPDATA%\pip\cache'
+    - PYTHON: "C:\\Python36"
 
 install:
   - "%PYTHON%\\python.exe -m pip install wheel"
   - "%PYTHON%\\python.exe -m pip install -U -r requirements-dev.txt -r requirements.txt"
-  - "%PYTHON%\\python.exe -m pip install -U twine"
 
 build_script: 
   - "%PYTHON%\\python.exe setup.py build"
 
 test_script:
   - "%PYTHON%\\python.exe setup.py test"
-
-after_test:
-  - "%PYTHON%\\python.exe setup.py bdist_wheel --plat-name win32"
-  - "%PYTHON%\\python.exe setup.py bdist_wheel --plat-name win_amd64"
-  - "%PYTHON%\\python.exe setup.py bdist_wininst"
-  - "%PYTHON%\\python.exe setup.py bdist_msi"
-
-artifacts:
-  - path: dist\*
-
-deploy_script:
-  - ps: |
-      If ($env:APPVEYOR_REPO_TAG -eq "true" -and $env:PYTHON -eq "C:\\PYTHON3.6-x64")
-      {
-         Invoke-Expression "twine upload --skip-existing dist/*" 2>$null
-      }
-      Else
-      {
-         write-output "Not on a tag, won't deploy to pypi"
-      }
 
 notifications:
   - provider: Webhook
