@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 import pykakasi
-from pykakasi.exceptions import *
+from pykakasi.exceptions import UnsupportedRomanRulesException
 
 class TestPyKakasiExceptions(unittest.TestCase):
 
