@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # itaiji.py
 #
-# Copyright 2015 Hiroshi Miura <miurahr@linux.com>
+# Copyright 2015-2018 Hiroshi Miura <miurahr@linux.com>
 #
 import re
 from pkg_resources import resource_filename
@@ -23,8 +23,8 @@ class itaiji (object):
     def __init__(self):
         if self._itaijidict is None:
             itaijipath = resource_filename(__name__, 'itaijidict2.pickle')
-            itaiji_pkl = open(itaijipath, 'rb')
-            (self._itaijidict, self._itaijidict_len) = load(itaiji_pkl)
+            with open(itaijipath, 'rb') as itaiji_pkl:
+                (self._itaijidict, self._itaijidict_len) = load(itaiji_pkl)
 
     def haskey(self, key):
         return key in self._itaijidict

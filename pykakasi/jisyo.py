@@ -10,8 +10,8 @@ class jisyo (object):
     _len = 4
 
     def __init__(self, pklname):
-        dict_pkl = open(resource_filename(__name__, pklname), 'rb')
-        (self._dict, self._len) = load(dict_pkl)
+        with  open(resource_filename(__name__, pklname), 'rb') as dict_pkl:
+            (self._dict, self._len) = load(dict_pkl)
 
     def haskey(self, key):
         return key in self._dict
