@@ -2,14 +2,9 @@
 from zlib import compress
 import re
 from marshal import dumps
-try:
-    from cPickle import dump
-except:
-    from pickle import dump
-try:
-    import anydbm as dbm
-except:
-    import dbm
+from six.moves.cPickle import dump
+import six
+import semidbm as dbm
 
 class mkkanwa(object):
 
@@ -27,20 +22,22 @@ class mkkanwa(object):
     def mkdict(self, src, dst):
         max_key_len = 0
         dic = {}
-        for line in open(src, "rb"):
-            line = line.decode("utf-8").strip()
-            if line.startswith(';;'): # skip comment
-                continue
-            if re.match(r"^$",line):
-                continue
-            try:
-                (v, k) = (re.sub(r'\\u([0-9a-fA-F]{4})',
-                          lambda x:unichr(int(x.group(1),16)), line)).split(' ')
-                dic[k] = v
-                max_key_len = max(max_key_len, len(k))
-            except:
-                raise Exception("Cannot process dictionary line: ", line)
-        dump((dic, max_key_len), open(dst, 'wb'), protocol=2)
+        with open(src, "rb") as f:
+            for line in f:
+                line = line.decode("utf-8").strip()
+                if line.startswith(';;'): # skip comment
+                    continue
+                if re.match(r"^$",line):
+                    continue
+                try:
+                    (v, k) = (re.sub(r'\\u([0-9a-fA-F]{4})',
+                            lambda x:six.unichr(int(x.group(1),16)), line)).split(' ')
+                    dic[k] = v
+                    max_key_len = max(max_key_len, len(k))
+                except:
+                    raise Exception("Cannot process dictionary line: ", line)
+        with open(dst, 'wb') as d:
+            dump((dic, max_key_len), d, protocol=2)
 
 # for kanwadict
 

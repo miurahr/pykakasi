@@ -2,66 +2,83 @@
 PyKakasi ChangeLog
 ====================
 
-.. current developments
+All notable changes to this project will be documented in this file.
 
-Unreleaased
-===========
+`Unreleased`_
+=============
 
-**Added:** None
+Added
+-----
 
-**Changed:** None
+Changed
+-------
 
-**Fixed:** None
+* Replace anydbm with semidbm that is a pure dbm implementation with performance.
 
-**Deprecated:** None
+Fixed
+-----
 
-**Removed:** None
+* Reduce test warnings.
+* No platform dependency now.
 
-**Security:** None
+Deprecated
+----------
 
+Removed
+-------
 
-Version 0.28 (26, Mar., 2018)
-=============================
+Security
+--------
 
-**Fixed:**
+`v0.28`_  (26, Mar., 2018)
+===========================
+
+Fixed
+-----
 
 * wheel platform tag for linux is now manylinux1_i686 or _x86_64
 
-Version 0.26 (26, Mar., 2018)
+`v0.26`_ (26, Mar., 2018)
 =============================
 
-**Changed:**
+Changed
+-------
 
 * Use six for python 2 and 3 compatility code.
 
-**Fixed:**
+Fixed
+-----
 
 * Build wheel with platform names.
 
-Version 0.25 (25, Mar., 2018)
-============================
+`v0.25`_ (25, Mar., 2018)
+=============================
 
-**Added:** 
+
+Added
+-----
 
 * Test on Python 3.5 and Python 3.6
 * Test on Windows using AppVeyor
 * Mesure test coverage and monitor on coveralls.io
 
-**Changed:**
+Changed
+-------
 
 * Move dictionary data to pykakasi/data
 * Build dictionary when setup.py build
 * Recoomend installation from github source not pypi. (#17)
 * Converter configuration become per instance not class wide.
 
-**Fixed:**
+Fixed
+-----
 
 * kakasi.py: Fix exception class name typo of InvalidFlagValueException
 * kakasi.py, h2a.py, k2a.py: Do not import all exception class.
 * test_genkanwadict.py: Multi platform support for temp directory(#27). 
 * setup.py: change _pre_build() to pre_build() (#17).
 
-Version 0.23 (25, May, 2014)
+`v0.23`_ (25, May., 2014)
 =============================
 
 * Support following options in kakasi command.
@@ -83,19 +100,20 @@ Version 0.23 (25, May, 2014)
 * Zenkaku numbers conversion
 * Passport roman conversion table
 
-Version 0.22 (3, May, 2014)
-==============================
+
+`v0.22`_ (3, May., 2014)
+=============================
 
 * Introduced kakasi command
 * Symbols support
 
-Version 0.21 (27, April, 2014)
-==============================
+`v0.21`_ (27, April., 2014)
+=============================
 
 * Wakati conversion support
 
-Version 0.20 (27, April, 2014)
-==============================
+`v0.20`_ (27, April., 2014)
+=============================
 
 * Pickled roman tables
 
@@ -105,3 +123,10 @@ Version 0.10 (25, April, 2014)
 * Work on python 2.6, 2.7, 3.3, 3.4
   (Thanks @FGtatsuro)
 * Kunrei and Hepburn roman table
+
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v0.28...HEAD
+.. _v0.25: https://github.com/miurahr/pykakasi/compare/v0.23...v0.25
+.. _v0.23: https://github.com/miurahr/pykakasi/compare/v0.22...v0.23
+.. _v0.22: https://github.com/miurahr/pykakasi/compare/v0.21...v0.22
+.. _v0.21: https://github.com/miurahr/pykakasi/compare/v0.20...v0.21
+.. _v0.20: https://github.com/miurahr/pykakasi/compare/v0.10...v0.20

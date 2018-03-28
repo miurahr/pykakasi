@@ -45,7 +45,7 @@ def pre_build():
 
     # build kakasi dict
     src = os.path.join('pykakasi','data','kakasidict.utf8')
-    dst = os.path.join('pykakasi','kanwadict2.db')
+    dst = os.path.join('pykakasi','kanwadict3.db')
     gen_kanwa(src, dst)
 
 class my_build(build):
@@ -72,13 +72,11 @@ setup(name='pykakasi',
       provides = [ 'pykakasi' ],
       scripts = ["kakasi"],
       include_package_data = True,
-      package_data = {'pykakasi':  ['*.pickle',
-                                    'kanwadict2.*']},
+      package_data = {'pykakasi':  ['*.pickle'],
+                      'pykakasi/kanwadict3.db': ['data']},
       test_suite = 'nose.collector',
       tests_require = tests_require,
-      install_requires=[
-        "six"
-      ],
+      install_requires=['six','semidbm'],
       cmdclass = {
           'build':my_build
         }

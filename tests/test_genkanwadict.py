@@ -1,14 +1,7 @@
 # -*- coding: utf-8 -*-
 import os,sys,bz2
-from types import *
-if sys.version_info < (2, 7):
-    import unittest2 as unittest
-else:
-    import unittest
-try: #python2
-    import cPickle as pickle
-except: #python3
-    import pickle
+import unittest
+from six.moves import cPickle as pickle
 
 import shutil
 import tempfile
@@ -45,5 +38,5 @@ class TestGenkanwadict(unittest.TestCase):
             self.kanwa = genkanwadict.mkkanwa()
 
         src = os.path.join('tests','kakasidict.utf8')
-        dst = os.path.join(self.tmpdir,'test_kanwadict2.db')
+        dst = os.path.join(self.tmpdir,'test_kanwadict3.db') # FIXME:  no hardcoded filename
         self.kanwa.run(src, dst)
