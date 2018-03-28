@@ -37,12 +37,12 @@ class kanwa (object):
             key = "%04x"%ord(unicode(char))
         else:
             key = "%04x"%ord(char)
-        try: #already exist?
-            table = self._jisyo_table[key]
-        except:
+        if key in self._jisyo_table:
+            return self._jisyo_table[key]
+        else:
             try:
-                table = self._jisyo_table[key]  = loads(decompress(self._kanwadict[key]))
+                self._jisyo_table[key]  = loads(decompress(self._kanwadict[key]))
+                return self._jisyo_table[key]
             except:
                 return None
-        return table
 
