@@ -27,12 +27,17 @@ pykakasi is re-implementation of kakasi library (original is written in C) in Py
 How To Use pykakasi
 ===================
 
-Build and install from source(recommended)::
+How to Install::
 
-    pip install git+https://github.com/miurahr/pykakasi
+    pip install six semidbm
+    pip install pykakasi
 
 Building library, setup script build dictionary db file and generate pickled db files.
 Without dictionary files, a library fails to run.
+
+Dependencies::
+
+    six and semidbm
 
 Sample source code::
 
@@ -88,5 +93,4 @@ Each character means character sets as follows::
        (j,k     defined in jisx0201)
        E: kigou  K: katakana  H: hiragana J: kanji
        (E,K,H,J defined in jisx0208)
-
 

@@ -18,9 +18,6 @@ Changed
 Fixed
 -----
 
-* Reduce test warnings.
-* No platform dependency now.
-
 Deprecated
 ----------
 
@@ -29,6 +26,36 @@ Removed
 
 Security
 --------
+
+`v0.80`_ (28, Mar., 2018)
+=========================
+
+Here is a release candicate for v1.0
+
+Added
+-----
+
+* Readme: add dependency description.
+
+Changed
+-------
+
+* Bump up version number.
+* Readme: recommend `pip install pykakasi`
+* Replace anydbm with semidbm that is a pure dbm implementation with performance.
+
+Fixed
+-----
+
+* Reduce test warnings.
+* No platform dependency now.
+* Fix dependency in wheel package that depend on gdbm in previous release.
+
+Removed
+-------
+
+* Binary release for windows and linux.
+
 
 `v0.28`_  (26, Mar., 2018)
 ===========================
@@ -124,7 +151,8 @@ Version 0.10 (25, April, 2014)
   (Thanks @FGtatsuro)
 * Kunrei and Hepburn roman table
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v0.28...HEAD
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v0.80...HEAD
+.. _v0.80: https://github.com/miurahr/pykakasi/compare/v0.28...v0.80
 .. _v0.28: https://github.com/miurahr/pykakasi/compare/v0.26...v0.28
 .. _v0.26: https://github.com/miurahr/pykakasi/compare/v0.25...v0.26
 .. _v0.25: https://github.com/miurahr/pykakasi/compare/v0.23...v0.25
