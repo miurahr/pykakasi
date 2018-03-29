@@ -22,6 +22,7 @@ Fixed
 -----
 
 * MANIFEST: update to specify kanwadict3.db explicitly.
+* setup.py: allow reading README.rst written in UTF-8. 
 
 Deprecated
 ----------
