@@ -2,20 +2,19 @@ environment:
   PYPI_USERNAME: miurahr
   PYPI_PASSWORD:
     secure: ibyxU09f3mAdoh5Hv4T27Q==
-  PYTHON: "C:\\Python36"
 
 install:
-  - "%PYTHON%\\python.exe -m pip install twine wheel"
-  - "%PYTHON%\\python.exe -m pip install -U -r requirements-dev.txt -r requirements.txt"
+  - "python.exe -m pip install twine wheel"
+  - "python.exe -m pip install -U -r requirements-dev.txt -r requirements.txt"
 
 build_script: 
-  - "%PYTHON%\\python.exe setup.py build"
+  - "python.exe setup.py build"
 
 test_script:
-  - "%PYTHON%\\python.exe setup.py test"
+  - "python.exe setup.py test"
 
 after_test:
-  - "%PYTHON%\\python.exe setup.py bdist_wheel"
+  - "python.exe setup.py bdist_wheel"
 
 artifacts:
   - path: dist\*
@@ -31,7 +30,7 @@ deploy_script:
       If ($env:APPVEYOR_REPO_TAG -eq "true")
       {
         $artifacts = Get-ChildItem -Path dist -Include '*.whl' -Recurse -Name | %{"$_"}
-        exec { ${env:PYTHON}\python.exe -m twine upload -u ${env:PYPI_USERNAME} --skip-existing $artifacts }
+        exec { python.exe -m twine upload -u ${env:PYPI_USERNAME} --skip-existing $artifacts }
       }
       else
       {
