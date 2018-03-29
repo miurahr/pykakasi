@@ -1,6 +1,6 @@
 include README.rst
 include COPYING
+include pykakasi/kanwadict3.db/data
 recursive-include pykakasi/data *.utf8
 recursive-include pykakasi *.pickle
-recursive-include pykakasi/kanwadict*.db *
 recursive-include tests *.py

@@ -21,6 +21,8 @@ Changed
 Fixed
 -----
 
+* MANIFEST: update to specify kanwadict3.db explicitly.
+
 Deprecated
 ----------
 
