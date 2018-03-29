@@ -16,6 +16,8 @@ Changed
 Fixed
 -----
 
+* Appveyor: update deployment script.
+
 Deprecated
 ----------
 
