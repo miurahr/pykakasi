@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # derivered from unihandecode setup.py
 
-import os, sys
+import os, sys, io
 from setuptools import Command,setup
 from setuptools.command.install import install
 from distutils.command.build import build
@@ -27,7 +27,7 @@ def gen_kanwa(src, dst):
     kanwa.run(src, dst)
 
 def readme():
-    with open(os.path.join(os.path.dirname(__file__),'README.rst')) as f:
+    with io.open(os.path.join(os.path.dirname(__file__),'README.rst'), mode="r", encoding="UTF-8") as f:
         return f.read()
 
 def pre_build():

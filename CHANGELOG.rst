@@ -21,6 +21,8 @@ Changed
 Fixed
 -----
 
+* setup.py: allow reading README.rst written in UTF-8. 
+
 Deprecated
 ----------
 
