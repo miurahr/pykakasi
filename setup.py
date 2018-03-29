@@ -53,7 +53,7 @@ if sys.version_info < (2, 7):
     tests_require.append('unittest2')
 
 setup(name='pykakasi',
-      version='0.82',
+      version='0.90',
       description='Python implementation of kakasi - kana kanji simple inversion library',
       url='http://github.com/miurahr/pykakasi',
       license='GPLv3',

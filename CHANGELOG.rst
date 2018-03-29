@@ -16,9 +16,6 @@ Changed
 Fixed
 -----
 
-* Appveyor: fix twine not found error in deploy script 
-* setup: clean old dictionary when building
-
 Deprecated
 ----------
 
@@ -27,6 +24,17 @@ Removed
 
 Security
 --------
+
+
+
+`v0.83`_ (29, Mar., 2018)
+=========================
+
+Fixed
+-----
+
+* Appveyor: fix twine not found error in deploy script 
+* setup: clean old dictionary when building
 
 
 `v0.82`_ (29, Mar., 2018)
@@ -174,7 +182,9 @@ Version 0.10 (25, April, 2014)
   (Thanks @FGtatsuro)
 * Kunrei and Hepburn roman table
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v0.80...HEAD
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v0.83...HEAD
+.. _v0.83: https://github.com/miurahr/pykakasi/compare/v0.82...v0.83
+.. _v0.82: https://github.com/miurahr/pykakasi/compare/v0.80...v0.82
 .. _v0.80: https://github.com/miurahr/pykakasi/compare/v0.28...v0.80
 .. _v0.28: https://github.com/miurahr/pykakasi/compare/v0.26...v0.28
 .. _v0.26: https://github.com/miurahr/pykakasi/compare/v0.25...v0.26
