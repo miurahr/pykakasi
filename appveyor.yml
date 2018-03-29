@@ -1,6 +1,5 @@
 environment:
   matrix:
-    - PYTHON: "C:\\Python27"
     - PYTHON: "C:\\Python36"
 
 install:
@@ -12,6 +11,12 @@ build_script:
 
 test_script:
   - "%PYTHON%\\python.exe setup.py test"
+
+after_test:
+  - "%PYTHON%\\python.exe setup.py bdist_wheel"
+
+artifacts:
+  - path: dist\*
 
 notifications:
   - provider: Webhook
