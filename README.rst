@@ -43,19 +43,22 @@ Sample source code::
 
     from pykakasi import kakasi,wakati
     
+    text = u"かな漢字交じり文"
     kakasi = kakasi()
-    kakasi.setMode("H","a") # default: Hiragana no conversion
-    kakasi.setMode("K","a") # default: Katakana no conversion
-    kakasi.setMode("J","a") # default: Japanese no conversion
+    kakasi.setMode("H","a") # Hiragana to ascii, default: no conversion
+    kakasi.setMode("K","a") # Katakana to ascii, default: no conversion
+    kakasi.setMode("J","a") # Japanese to ascii, default: no conversion
     kakasi.setMode("r","Hepburn") # default: use Hepburn Roman table
-    kakasi.setMode("s", True) # add space default: no Separator
-    kakasi.setMode("C", True) # capitalize default: no Capitalize
+    kakasi.setMode("s", True) # add space, default: no separator
+    kakasi.setMode("C", True) # capitalize, default: no capitalize
     conv = kakasi.getConverter()
     result = conv.do(text)
+    print(result)
     
     wakati = wakati()
-    conv = kawati.getConverter()
+    conv = wakati.getConverter()
     result = conv.do(text)
+    print(result)
 
 You can use output `Mode` values from "H", "K", "a" which is each means
 "Hiragana", "Katakana" and "Alphabet".
@@ -74,17 +77,19 @@ Options
 These switch alphabets are derived from original Kakasi.
 Now it support following options:
 
-+--------+---------------------+------------+-----------------------------+
-| Option | Description         | Values     | Note                        |
-+========+=====================+============+=============================+
-| K      | Katakana convertion | a,H,None   | roman or noconversion       |
-+--------+---------------------+------------+-----------------------------+
-| H      | Hiragana convertion | a,K,None   | roman or noconversion       |
-+--------+---------------------+------------+-----------------------------+
-| J      | Kanji conversion    | a,H,K,None | roman or Hiragana, Katakana |
-+--------+---------------------+------------+-----------------------------+
-| E      | Eigou convesion     | a,None     | roman or noconversion       |
-+--------+---------------------+------------+-----------------------------+
++--------+---------------------+------------+---------------------------------------+
+| Option | Description         | Values     | Note                                  |
++========+=====================+============+=======================================+
+| K      | Katakana convertion | a,H,None   | roman, Hiragana or noconversion       |
++--------+---------------------+------------+---------------------------------------+
+| H      | Hiragana convertion | a,K,None   | roman, Katakana or noconversion       |
++--------+---------------------+------------+---------------------------------------+
+| J      | Kanji conversion    | a,H,K,None | roman or Hiragana, Katakana or noconv |
++--------+---------------------+------------+---------------------------------------+
+| a      | Roman conversion    | E,None     | JIS ROMAN or noconversion             |
++--------+---------------------+------------+---------------------------------------+
+| E      | JIS ROMAN conversion| a,None     | ascii roman or noconversion           |
++--------+---------------------+------------+---------------------------------------+
 
 Each character means character sets as follows::
 
