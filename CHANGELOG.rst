@@ -26,6 +26,15 @@ Security
 --------
 
 
+`v0.90`_ (29, Mar., 2018)
+=========================
+
+Changed
+-------
+
+* Update release script
+* Update version number for kakasi script
+
 
 `v0.83`_ (29, Mar., 2018)
 =========================
@@ -183,6 +192,7 @@ Version 0.10 (25, April, 2014)
 * Kunrei and Hepburn roman table
 
 .. _Unreleased: https://github.com/miurahr/pykakasi/compare/v0.83...HEAD
+.. _v0.90: https://github.com/miurahr/pykakasi/compare/v0.83...v0.90
 .. _v0.83: https://github.com/miurahr/pykakasi/compare/v0.82...v0.83
 .. _v0.82: https://github.com/miurahr/pykakasi/compare/v0.80...v0.82
 .. _v0.80: https://github.com/miurahr/pykakasi/compare/v0.28...v0.80
