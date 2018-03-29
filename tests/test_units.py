@@ -209,14 +209,16 @@ class TestUnits(unittest.TestCase):
               u"\u3037",
               u"\u303c",u"\u303d",u"\u303e",u"\u303f",
               u"\u03b1",u"\u03b2",u"\u03b6",u"\u03c9",u"\u0391",u"\u0392",u"\u0396",
-              u"\u03a9",u"\u03c2",u"\uff10"],
+              u"\u03a9",u"\u03c2",u"\uff10",
+              u"\u0430",u"\u044f",u"\u0451",u"\u0401"],
              [" ",",",".",'"',"(kigou)","(sime)","<",">","<<",">>","(",")","(",")",
             "(",")","(kigou)","(geta)","(",")","(",")","(",")","(",
             ")","~","(kigou)","\"","(kigou)","(kigou)","-","(kurikaesi)",
             "(kurikaesi)","(kurikaesi)","(kurikaesi)","(kurikaesi)",
             "(kigou)","XX","(masu)","(kurikaesi)"," "," ","alpha","beta","zeta","omega",
             "Alpha","Beta","Zeta","Omega","final sigma",
-            "0"])
+            "0",
+            "a","ya","e","E"])
       ]
 
         s = pykakasi.sym2()

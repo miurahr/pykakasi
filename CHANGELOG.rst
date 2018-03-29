@@ -10,10 +10,10 @@ All notable changes to this project will be documented in this file.
 Added
 -----
 
+* Russian characters defined in JIS X0208(#13)
+
 Changed
 -------
-
-* Replace anydbm with semidbm that is a pure dbm implementation with performance.
 
 Fixed
 -----
