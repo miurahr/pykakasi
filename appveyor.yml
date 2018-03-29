@@ -21,7 +21,18 @@ artifacts:
   - path: dist\*
 
 deploy_script:
-  - ps: If ($env:APPVEYOR_REPO_TAG -eq "true") {Invoke-Expression "twine upload --skip-existing dist/*" 2>$null}
+  - ps: |
+      function exec
+      {
+        param ( [ScriptBlock] $ScriptBlock )
+        & $ScriptBlock 2>&1 | ForEach-Object -Process { "$_" }
+        if ($LastExitCode -ne 0) { exit $LastExitCode }
+      }
+      If ($env:APPVEYOR_REPO_TAG -eq "true")
+      {
+        $artifacts = Get-ChildItem -Path dist -Include '*.whl' -Recurse -Name | %{"$_"}
+        exec { twine upload -u ${env:PYPI_USERNAME} --skip-existing $artifacts }
+      }
 
 notifications:
   - provider: Webhook
