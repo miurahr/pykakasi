@@ -16,6 +16,8 @@ Changed
 Fixed
 -----
 
+* Appveyor: fix twine not found error in deploy script 
+
 Deprecated
 ----------
 

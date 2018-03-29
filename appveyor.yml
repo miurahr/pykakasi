@@ -31,7 +31,11 @@ deploy_script:
       If ($env:APPVEYOR_REPO_TAG -eq "true")
       {
         $artifacts = Get-ChildItem -Path dist -Include '*.whl' -Recurse -Name | %{"$_"}
-        exec { twine upload -u ${env:PYPI_USERNAME} --skip-existing $artifacts }
+        exec { %PYTHON%\\python.exe -m twine upload -u ${env:PYPI_USERNAME} --skip-existing $artifacts }
+      }
+      else
+      {
+        Write-Host "Skip uploading artifacts to PyPi when non tag commit"
       }
 
 notifications:
