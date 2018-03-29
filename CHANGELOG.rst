@@ -13,7 +13,7 @@ Added
 Changed
 -------
 
-* Replace anydbm with semidbm that is a pure dbm implementation with performance.
+* README: fix typo and add description for Kigou conversion.
 
 Fixed
 -----
