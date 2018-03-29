@@ -43,6 +43,7 @@ Sample source code::
 
     from pykakasi import kakasi,wakati
     
+    text = u"かな漢字交じり文"
     kakasi = kakasi()
     kakasi.setMode("H","a") # Hiragana to ascii, default: no conversion
     kakasi.setMode("K","a") # Katakana to ascii, default: no conversion
@@ -52,10 +53,12 @@ Sample source code::
     kakasi.setMode("C", True) # capitalize, default: no capitalize
     conv = kakasi.getConverter()
     result = conv.do(text)
+    print(result)
     
     wakati = wakati()
-    conv = kawati.getConverter()
+    conv = wakati.getConverter()
     result = conv.do(text)
+    print(result)
 
 You can use output `Mode` values from "H", "K", "a" which is each means
 "Hiragana", "Katakana" and "Alphabet".
