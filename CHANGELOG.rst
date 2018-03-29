@@ -10,6 +10,28 @@ All notable changes to this project will be documented in this file.
 Added
 -----
 
+Changed
+-------
+
+Fixed
+-----
+
+Deprecated
+----------
+
+Removed
+-------
+
+Security
+--------
+
+
+`v0.81`_ (29, Mar., 2018)
+=============
+
+Added
+-----
+
 * Russian characters defined in JIS X0208(#13)
 
 Changed
@@ -24,15 +46,6 @@ Fixed
 
 * MANIFEST: update to specify kanwadict3.db explicitly.
 * setup.py: allow reading README.rst written in UTF-8. 
-
-Deprecated
-----------
-
-Removed
--------
-
-Security
---------
 
 `v0.80`_ (28, Mar., 2018)
 =========================
