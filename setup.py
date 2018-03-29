@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # derivered from unihandecode setup.py
 
-import os, sys, io
+import os, sys, io, shutil
 from setuptools import Command,setup
 from setuptools.command.install import install
 from distutils.command.build import build
@@ -12,17 +12,13 @@ def gen_dict(src_f, pkl_f):
     kanwa = genkanwadict.mkkanwa()
     src = os.path.join('pykakasi', 'data', src_f)
     dst = os.path.join('pykakasi', pkl_f)
-    try:
+    if (os.path.exists(dst)):
         os.unlink(dst)
-    except:
-        pass
     kanwa.mkdict(src, dst)
 
 def gen_kanwa(src, dst):
-    try:
-        os.unlink(dst+'.db')
-    except:
-        pass
+    if (os.path.exists(dst)):
+        shutil.rmtree(dst)
     kanwa = genkanwadict.mkkanwa()
     kanwa.run(src, dst)
 
@@ -42,8 +38,6 @@ def pre_build():
     ]
     for (s,p) in DICTS:
         gen_dict(s, p)
-
-    # build kakasi dict
     src = os.path.join('pykakasi','data','kakasidict.utf8')
     dst = os.path.join('pykakasi','kanwadict3.db')
     gen_kanwa(src, dst)

@@ -17,6 +17,7 @@ Fixed
 -----
 
 * Appveyor: fix twine not found error in deploy script 
+* setup: clean old dictionary when building
 
 Deprecated
 ----------
