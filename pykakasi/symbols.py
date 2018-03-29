@@ -73,6 +73,32 @@ class sym2 (object):
     _table_4 = ["alpha", "beta", "gamma", "delta", "epsilon", "zeta", "eta", "theta",
             "iota", "kappa", "lambda", "mu", "nu", "xi", "omicron", "pi", "rho", "final sigma",
             "sigma", "tau", "upsilon", "phi", "chi", "psi", "omega"]
+    # cyriilic
+    cyrillicTable = {
+            # basic cyrillic characters
+            u'\u0410': u'A',u'\u0411': u'B',u'\u0412': u'V',#АБВ
+            u'\u0413': u'G',u'\u0414': u'D',u'\u0415': u'E',#ГДЕ
+            u'\u0401': u'E',u'\u0416': u'Zh',u'\u0417': u'Z',#ЁЖЗ
+            u'\u0418': u'I',u'\u0419': u'Y',u'\u041a': u'K',#ИЙК
+            u'\u041b': u'L',u'\u041c': u'M',u'\u041d': u'N',#ЛМН
+            u'\u041e': u'O',u'\u041f': u'P',u'\u0420': u'R',#ОПР
+            u'\u0421': u'S',u'\u0422': u'T',u'\u0423': u'U',#СТУ
+            u'\u0424': u'F',u'\u0425': u'H',u'\u0426': u'Ts',#ФХЦ
+            u'\u0427': u'Ch',u'\u0428': u'Sh',u'\u0429': u'Sch',#ЧШЩ
+            u'\u042a': u'' ,u'\u042b': u'Y',u'\u042c': u'',#ЪЫЬ
+            u'\u042d': u'E',u'\u042e': u'Yu',u'\u042f': u'Ya',#ЭЮЯ
+            u'\u0430': u'a',u'\u0431': u'b', u'\u0432': u'v',#абв
+            u'\u0433': u'g',u'\u0434': u'd',u'\u0435': u'e',#где
+            u'\u0451': u'e',u'\u0436': u'zh',u'\u0437': u'z',#ёжз
+            u'\u0438': u'i',u'\u0439': u'y',u'\u043a': u'k',#ийк
+            u'\u043b': u'l',u'\u043c': u'm',u'\u043d': u'n',#лмн
+            u'\u043e': u'o',u'\u043f': u'p',u'\u0440': u'r',#опр
+            u'\u0441': u's',u'\u0442': u't',u'\u0443': u'u',#сту
+            u'\u0444': u'f',u'\u0445': u'h',u'\u0446': u'ts',#фхц
+            u'\u0447': u'ch',u'\u0448': u'sh',u'\u0449': u'sch',#чшщ
+            u'\u044a': u'',u'\u044b': u'y',u'\u044c': u'',#ъыь
+            u'\u044d': u'e',u'\u044e': u'yu',u'\u044f': u'ya'#эюя
+            }
 
     def __init__(self):
         pass
@@ -82,7 +108,9 @@ class sym2 (object):
         return ((0x3000 <= c and c< 0x3021) or (0x3030 <= c and c < 0x3040) or
                  (0x0391 <= c and c < 0x03a2) or (0x03a2 < c and c <= 0x03a9) or
                  (0x03b1 <= c and c <= 0x03c9) or
-                 (0xff10 <= c and c < 0xff20))
+                 (0xff10 <= c and c < 0xff20) or
+                 (0x0410 <= c and c <= 0x044f) or
+                 c == 0x0451 or c == 0x0401)
 
     def convert(self, text):
         c = ord(text[0])
@@ -96,6 +124,8 @@ class sym2 (object):
             return self._table_4[c-0x03b1]
         elif (0xff10 <= c and c < 0xff20):
             return six.unichr(c - 0xff10 + ord('0'))
+        elif (0x0410 <= c and c <= 0x044f) or c == 0x0451 or c == 0x0401:
+            return self.cyrillicTable[text[0]]
         else:
             return None # pragma: no cover
 
