@@ -1,9 +1,11 @@
 environment:
-  matrix:
-    - PYTHON: "C:\\Python36"
+  PYPI_USERNAME: miurahr
+  PYPI_PASSWORD:
+    secure: ibyxU09f3mAdoh5Hv4T27Q==
+  PYTHON: "C:\\Python36"
 
 install:
-  - "%PYTHON%\\python.exe -m pip install wheel"
+  - "%PYTHON%\\python.exe -m pip install twine wheel"
   - "%PYTHON%\\python.exe -m pip install -U -r requirements-dev.txt -r requirements.txt"
 
 build_script: 
@@ -17,6 +19,9 @@ after_test:
 
 artifacts:
   - path: dist\*
+
+deploy_script:
+  - ps: If ($env:APPVEYOR_REPO_TAG -eq "true") {Invoke-Expression "twine upload --skip-existing dist/*" 2>$null}
 
 notifications:
   - provider: Webhook
