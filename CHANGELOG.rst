@@ -17,6 +17,7 @@ Changed
 
 * README: fix typo and add description for Kigou conversion.
 * README: update sample code to working one.
+* Appveyor: generate wheel artifacts 
 
 Fixed
 -----
