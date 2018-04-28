@@ -126,12 +126,12 @@ class sym2 (object):
             return self._table_3[c-0x0391]
         elif (0x03b1 <= c and c <= 0x03c9):
             return self._table_4[c-0x03b1]
+        elif (0x0410 <= c and c <= 0x044f) or c == 0x0451 or c == 0x0401:
+            return self.cyrillicTable[text[0]]
         elif (0xff01 <= c and c <= 0xff0f):
             return self._table_5[c-0xff01]
         elif (0xff10 <= c and c < 0xff1a):
             return six.unichr(c - 0xff10 + ord('0'))
-        elif (0x0410 <= c and c <= 0x044f) or c == 0x0451 or c == 0x0401:
-            return self.cyrillicTable[text[0]]
         elif (0xff20 <= c and c <= 0xff40):
             return six.unichr(0x0041+c-0xff21)# u\ff21Ａ => u\0041:@A..Z[\]^_`
         elif (0xff41 <= c and c < 0xff5f):

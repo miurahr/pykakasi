@@ -160,7 +160,7 @@ class TestPyKakasi(unittest.TestCase):
             self.assertEqual(converter.do(case), result)
 
     def test_kakasi_a2E(self):
- 
+
         TESTS = [
             ("ABCDEFGHIJKLMNOPQRSTUVWXYZ",
              u"ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ"),
