@@ -10,7 +10,8 @@ All notable changes to this project will be documented in this file.
 Added
 -----
 
-* Test case convert from Zenkaku Alphabet to Hankaku (E2a).
+* Test case convert from Full-width Alphabet/symbols to Half-width (E2a).
+* Convert logic from Full-width alphabet/symbols to Half-width (E2a).
 
 Changed
 -------
