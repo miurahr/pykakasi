@@ -160,7 +160,7 @@ class TestPyKakasi(unittest.TestCase):
             self.assertEqual(converter.do(case), result)
 
     def test_kakasi_a2E(self):
-
+ 
         TESTS = [
             ("ABCDEFGHIJKLMNOPQRSTUVWXYZ",
              u"ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ"),
@@ -172,6 +172,39 @@ class TestPyKakasi(unittest.TestCase):
 
         kakasi = pykakasi.kakasi()
         kakasi.setMode("a","E")
+        converter  = kakasi.getConverter()
+        for case, result in TESTS:
+            self.assertEqual(converter.do(case), result)
+
+    def test_kakasi_E2a(self):
+
+        TESTS = [
+            (u"ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ",
+              "ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
+            (u"ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ",
+              "abcdefghijklmnopqrstuvwxyz"),
+            (u"！＂＃＄％＆＇（）＊＋，－．／＿　｛｜｝～",
+             "!\"#$%&'()*+,-./_ {|}~")
+        ]
+
+        kakasi = pykakasi.kakasi()
+        kakasi.setMode("E","a")
+        converter  = kakasi.getConverter()
+        for case, result in TESTS:
+            self.assertEqual(converter.do(case), result)
+
+    def test_kakasi_numbers(self):
+
+        TESTS = [
+            (u"１２３４５６７８９０",
+              "1234567890"),
+            (u"一 二 三 四 五 六 七 八 九 〇",
+              "ichi ni san shi go roku shichi hachi kyuu (maru)")
+        ]
+
+        kakasi = pykakasi.kakasi()
+        kakasi.setMode("E","a")
+        kakasi.setMode("J","a")
         converter  = kakasi.getConverter()
         for case, result in TESTS:
             self.assertEqual(converter.do(case), result)

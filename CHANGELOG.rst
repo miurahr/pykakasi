@@ -10,6 +10,8 @@ All notable changes to this project will be documented in this file.
 Added
 -----
 
+* Test case convert from Zenkaku Alphabet to Hankaku (E2a).
+
 Changed
 -------
 
