@@ -4,6 +4,7 @@
 build
 dist
 pykakasi.egg-info
+.eggs
 .tox
 *.pickle
 *.db
