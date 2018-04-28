@@ -10,12 +10,16 @@ All notable changes to this project will be documented in this file.
 Added
 -----
 
+* Test case convert from Full-width Alphabet/symbols to Half-width (E2a).
+* Convert logic from Full-width alphabet/symbols to Half-width (E2a).
+
 Changed
 -------
 
 Fixed
 -----
 
+* Conversion from ○々 become 'TypeError: must be str, not NoneType' (#46)
 * Appveyor: update deployment script.
 
 Deprecated

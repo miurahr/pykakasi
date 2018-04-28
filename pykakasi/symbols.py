@@ -55,9 +55,9 @@ import six
 
 class sym2 (object):
     # U3000 - 301F
-    # \u3000、。〃〄〆〈〉《》「」『』【】〒〓〔〕〖〗〘〙
+    # \u3000、。〃〄〇〆々〈〉《》「」『』【】〒〓〔〕〖〗〘〙
     # 〚〛〜〝〞〟〠
-    _table_1 = [" ",",",".",'"',"(kigou)",None,"(sime)",None,"<",">","<<",">>","(",")","(",")",
+    _table_1 = [" ",",",".",'"',"(kigou)","(kurikaesi)","(sime)","(maru)","<",">","<<",">>","(",")","(",")",
             "(",")","(kigou)","(geta)","(",")","(",")","(",")","(",
             ")","~","(kigou)","\"","(kigou)","(kigou)"]
     # U3030 - 3040
@@ -73,6 +73,9 @@ class sym2 (object):
     _table_4 = ["alpha", "beta", "gamma", "delta", "epsilon", "zeta", "eta", "theta",
             "iota", "kappa", "lambda", "mu", "nu", "xi", "omicron", "pi", "rho", "final sigma",
             "sigma", "tau", "upsilon", "phi", "chi", "psi", "omega"]
+    # UFF01-FF0F
+    _table_5 = ["!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+",
+                ",", "-", ".", "/"]
     # cyriilic
     cyrillicTable = {
             # basic cyrillic characters
@@ -108,8 +111,9 @@ class sym2 (object):
         return ((0x3000 <= c and c< 0x3021) or (0x3030 <= c and c < 0x3040) or
                  (0x0391 <= c and c < 0x03a2) or (0x03a2 < c and c <= 0x03a9) or
                  (0x03b1 <= c and c <= 0x03c9) or
-                 (0xff10 <= c and c < 0xff20) or
                  (0x0410 <= c and c <= 0x044f) or
+                 (0xff01 <= c and c <= 0xff1a) or
+                 (0xff20 <= c and c <= 0xff5e) or
                  c == 0x0451 or c == 0x0401)
 
     def convert(self, text):
@@ -122,10 +126,16 @@ class sym2 (object):
             return self._table_3[c-0x0391]
         elif (0x03b1 <= c and c <= 0x03c9):
             return self._table_4[c-0x03b1]
-        elif (0xff10 <= c and c < 0xff20):
-            return six.unichr(c - 0xff10 + ord('0'))
         elif (0x0410 <= c and c <= 0x044f) or c == 0x0451 or c == 0x0401:
             return self.cyrillicTable[text[0]]
+        elif (0xff01 <= c and c <= 0xff0f):
+            return self._table_5[c-0xff01]
+        elif (0xff10 <= c and c < 0xff1a):
+            return six.unichr(c - 0xff10 + ord('0'))
+        elif (0xff20 <= c and c <= 0xff40):
+            return six.unichr(0x0041+c-0xff21)# u\ff21Ａ => u\0041:@A..Z[\]^_`
+        elif (0xff41 <= c and c < 0xff5f):
+            return six.unichr(0x0061+c-0xff41)# u\ff41ａ => u\0061:a..z{|}
         else:
             return None # pragma: no cover
 
