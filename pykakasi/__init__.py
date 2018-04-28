@@ -11,5 +11,4 @@ from .kakasi import kakasi
 from .wakati import wakati
 from .exceptions import *
 
-__all__ = ["pykakasi"]
-
+__all__ = ["kakasi"]
