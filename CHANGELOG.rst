@@ -10,17 +10,11 @@ All notable changes to this project will be documented in this file.
 Added
 -----
 
-* Test case convert from Full-width Alphabet/symbols to Half-width (E2a).
-* Convert logic from Full-width alphabet/symbols to Half-width (E2a).
-
 Changed
 -------
 
 Fixed
 -----
-
-* Conversion from ○々 become 'TypeError: must be str, not NoneType' (#46)
-* Appveyor: update deployment script.
 
 Deprecated
 ----------
@@ -30,6 +24,23 @@ Removed
 
 Security
 --------
+
+
+
+`v0.91`_ (29, Apr., 2018)
+=========================
+
+Added
+-----
+
+* Test case convert from Full-width Alphabet/symbols to Half-width (E2a).
+* Convert logic from Full-width alphabet/symbols to Half-width (E2a).
+
+Fixed
+-----
+
+* Conversion from ○々 become 'TypeError: must be str, not NoneType' (#46)
+* Appveyor: update deployment script.
 
 
 `v0.90`_ (29, Mar., 2018)
@@ -197,7 +208,8 @@ Version 0.10 (25, April, 2014)
   (Thanks @FGtatsuro)
 * Kunrei and Hepburn roman table
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v0.83...HEAD
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v0.91...HEAD
+.. _v0.91: https://github.com/miurahr/pykakasi/compare/v0.90...v0.91
 .. _v0.90: https://github.com/miurahr/pykakasi/compare/v0.83...v0.90
 .. _v0.83: https://github.com/miurahr/pykakasi/compare/v0.82...v0.83
 .. _v0.82: https://github.com/miurahr/pykakasi/compare/v0.80...v0.82
