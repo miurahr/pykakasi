@@ -18,6 +18,7 @@ Changed
 Fixed
 -----
 
+* Conversion from ○々 become 'TypeError: must be str, not NoneType' (#46)
 * Appveyor: update deployment script.
 
 Deprecated
