@@ -35,6 +35,7 @@ Added
 
 * Test case convert from Full-width Alphabet/symbols to Half-width (E2a).
 * Convert logic from Full-width alphabet/symbols to Half-width (E2a).
+* Add more words with repeat mark from SKK-JISYO.L (#46)
 
 Changed
 -------
