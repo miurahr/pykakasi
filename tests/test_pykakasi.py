@@ -78,7 +78,8 @@ class TestPyKakasi(unittest.TestCase):
             (u"漢字とひらがな交じり文", u"かんじとひらがなまじりぶん"),
             (u"Alphabet 123 and 漢字", u"Alphabet 123 and かんじ"),
             (u"日経新聞",     u"にっけいしんぶん"),
-            (u"日本国民は、", u"にほんこくみんは、")
+            (u"日本国民は、", u"にほんこくみんは、"),
+            (u"苦々しい",         u"にがにがしい")
         ]
 
         kakasi = pykakasi.kakasi()
