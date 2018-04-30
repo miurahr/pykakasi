@@ -13,8 +13,6 @@ Added
 Changed
 -------
 
-* Release wheel binary packages for each python versions.
-
 Fixed
 -----
 
@@ -27,6 +25,14 @@ Removed
 Security
 --------
 
+
+`v0.92`_ (30, Apr., 2018)
+=========================
+
+Changed
+-------
+
+* Release wheel binary packages for each python versions.(#50)
 
 
 `v0.91`_ (29, Apr., 2018)
@@ -216,7 +222,8 @@ Version 0.10 (25, April, 2014)
   (Thanks @FGtatsuro)
 * Kunrei and Hepburn roman table
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v0.91...HEAD
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v0.92...HEAD
+.. _v0.92: https://github.com/miurahr/pykakasi/compare/v0.91...v0.92
 .. _v0.91: https://github.com/miurahr/pykakasi/compare/v0.90...v0.91
 .. _v0.90: https://github.com/miurahr/pykakasi/compare/v0.83...v0.90
 .. _v0.83: https://github.com/miurahr/pykakasi/compare/v0.82...v0.83
