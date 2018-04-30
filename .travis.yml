@@ -20,10 +20,8 @@ script:
   - python setup.py build
   - coverage run --source=pykakasi setup.py test
   - python setup.py bdist_wheel --python-tag=${PYTHON_TAG}
-  - if [[ $TRAVIS_PYTHON_VERSION == '3.6' ]]; then python setup.py sdist; fi
 
 after_success:
-  - ls dist/
   - coveralls
 
 deploy:
@@ -34,7 +32,6 @@ deploy:
     file_glob: true
     file:
       - dist/*.whl
-      - dist/*.tar.gz
     skip_cleanup: true
     skip_existing: true
     on:

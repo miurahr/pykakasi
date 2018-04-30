@@ -14,7 +14,7 @@ test_script:
   - "python.exe setup.py test"
 
 after_test:
-  - "python.exe setup.py bdist_wheel"
+  - "python.exe setup.py sdist"
 
 artifacts:
   - path: dist\*
@@ -29,7 +29,7 @@ deploy_script:
       }
       If ($env:APPVEYOR_REPO_TAG -eq "true")
       {
-        $artifacts = Get-ChildItem -Path dist -Include '*.whl' -Recurse -Name | %{"$_"}
+        $artifacts = Get-ChildItem -Path dist -Include '*.tar.gz' -Recurse -Name | %{"$_"}
         cd dist
         exec { python.exe -m twine upload -u ${env:PYPI_USERNAME} --skip-existing $artifacts }
       }

@@ -13,6 +13,8 @@ Added
 Changed
 -------
 
+* Release source distribution from appveyor.
+
 Fixed
 -----
 
@@ -44,6 +46,11 @@ Added
 * Test case convert from Full-width Alphabet/symbols to Half-width (E2a).
 * Convert logic from Full-width alphabet/symbols to Half-width (E2a).
 * Add more words with repeat mark from SKK-JISYO.L (#46)
+
+Changed
+--------
+
+* Not distribute binary wheel package, because of dictionary data depends on python version.
 
 Fixed
 -----
