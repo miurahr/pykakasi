@@ -13,6 +13,9 @@ Added
 Changed
 -------
 
+* Release source distribution from appveyor.
+* Refactoring how to import six
+
 Fixed
 -----
 
@@ -46,7 +49,7 @@ Added
 * Add more words with repeat mark from SKK-JISYO.L (#46)
 
 Changed
--------
+--------
 
 * Not distribute binary wheel package, because of dictionary data depends on python version.
 
