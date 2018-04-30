@@ -23,6 +23,7 @@ script:
   - if [[ $TRAVIS_PYTHON_VERSION == '3.6' ]]; then python setup.py sdist; fi
 
 after_success:
+  - ls dist/
   - coveralls
 
 deploy:
