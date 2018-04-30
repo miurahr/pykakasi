@@ -13,6 +13,8 @@ Added
 Changed
 -------
 
+* Release wheel binary packages for each python versions.
+
 Fixed
 -----
 
