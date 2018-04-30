@@ -1,4 +1,10 @@
+environment:
+  PYPI_USERNAME: miurahr
+  PYPI_PASSWORD:
+    secure: ibyxU09f3mAdoh5Hv4T27Q==
+
 install:
+  - "python.exe -m pip install twine wheel"
   - "python.exe -m pip install -U -r requirements-dev.txt -r requirements.txt"
 
 build_script: 
@@ -6,6 +12,31 @@ build_script:
 
 test_script:
   - "python.exe setup.py test"
+
+after_test:
+  - "python.exe setup.py bdist_wheel"
+
+artifacts:
+  - path: dist\*
+
+deploy_script:
+  - ps: |
+      function exec
+      {
+        param ( [ScriptBlock] $ScriptBlock )
+        & $ScriptBlock 2>&1 | ForEach-Object -Process { "$_" }
+        if ($LastExitCode -ne 0) { exit $LastExitCode }
+      }
+      If ($env:APPVEYOR_REPO_TAG -eq "true")
+      {
+        $artifacts = Get-ChildItem -Path dist -Include '*.whl' -Recurse -Name | %{"$_"}
+        cd dist
+        exec { python.exe -m twine upload -u ${env:PYPI_USERNAME} --skip-existing $artifacts }
+      }
+      else
+      {
+        Write-Host "Skip uploading artifacts to PyPi when non tag commit"
+      }
 
 notifications:
   - provider: Webhook
