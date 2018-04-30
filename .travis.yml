@@ -1,10 +1,16 @@
 language: python
-python:
-  - '2.7'
-  - '3.3'
-  - '3.4'
-  - '3.5'
-  - '3.6'
+matrix:
+  include:
+    - python: 2.7
+      env: PYTHON_TAG=py2
+    - python: 3.3
+      env: PYTHON_TAG=py33
+    - python: 3.4
+      env: PYTHON_TAG=py34
+    - python: 3.5
+      env: PYTHON_TAG=py35
+    - python: 3.6
+      env: PYTHON_TAG=py3
 
 install:
   - pip install -r requirements.txt -r requirements-dev.txt
@@ -13,8 +19,11 @@ script:
   - python setup.py clean
   - python setup.py build
   - coverage run --source=pykakasi setup.py test
+  - python setup.py bdist_wheel --python-tag=${PYTHON_TAG}
+  - if [[ $TRAVIS_PYTHON_VERSION == '3.6' ]]; then python setup.py sdist; fi
 
 after_success:
+  - ls dist/
   - coveralls
 
 deploy:
@@ -22,11 +31,14 @@ deploy:
     user: miurahr
     password:
       secure: CUY3E7DJMMyC9ARkkC5plAWTAnwmp+wyS+GbRgjOPDL8H4AwzCSCD03D4z/5BHHpGFilF+sAsaNte/9dDjtzEXtvmMCfJwovShnr9GdAm+PU4+TyhEWqVYbeYHiJMiSnLPcsyJMkYZ8JtNMXyp0onPQr6P28OsEq+ohG6Ha9P1Y=
-    distributions: sdist
+    file_glob: true
+    file:
+      - dist/*.whl
+      - dist/*.tar.gz
+    skip_cleanup: true
     skip_existing: true
     on:
       repo: miurahr/pykakasi
-      python: '3.6'
       tags: true
 
 notifications:
