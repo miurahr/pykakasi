@@ -5,7 +5,6 @@
 from zlib import decompress
 from pkg_resources import resource_filename
 from marshal import loads
-import six
 import semidbm as dbm
 
 class kanwa (object):
@@ -33,10 +32,7 @@ class kanwa (object):
             self._kanwadict = dbm.open(dictpath,'r')
 
     def load(self, char):
-        if six.PY2:
-            key = "%04x"%ord(unicode(char))
-        else:
-            key = "%04x"%ord(char)
+        key = "%04x"%ord(char)
         if key in self._jisyo_table:
             return self._jisyo_table[key]
         else:

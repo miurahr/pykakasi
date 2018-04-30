@@ -4,18 +4,19 @@
 # Copyright 2014 Hiroshi Miura <miurahr@linux.com>
 #
 
+from __future__ import unicode_literals
 from six import unichr
 
 class a2 (object):
-    _table_1 = [ u"\u3000",u"\uff01",u"\uff02",u"\uff03",u"\uff04",u"\uff05",u"\uff06",
-               u"\uff07",u"\uff08",u"\uff09",u"\uff0a",u"\uff0b",u"\uff0c",u"\uff0d",
-               u"\uff0e",u"\uff0f",#！＂＃＄％＆＇（）＊＋，－．／
-               u"\uff10",u"\uff11",u"\uff12",u"\uff13",u"\uff14",u"\uff15",u"\uff16",
-               u"\uff17",u"\uff18",u"\uff19"# ０...９
-               u"\uff1a",u"\uff1b",u"\uff1c",u"\uff1d",
-               u"\uff1e",u"\uff1f",u"\uff20"]#：；＜＝＞？＠
-    _table_2 = [u"\uff3b",u"\uff3c",u"\uff3d",u"\uff3e",u"\uff3f",u"\uff40"]#［＼］＾＿｀
-    _table_3 = [u"\uff5b",u"\uff5c",u"\uff5d",u"\uff5e"]#｛｜｝～
+    _table_1 = [ "\u3000", "\uff01", "\uff02", "\uff03", "\uff04", "\uff05", "\uff06",
+                 "\uff07", "\uff08", "\uff09", "\uff0a", "\uff0b", "\uff0c", "\uff0d",
+                 "\uff0e", "\uff0f",#！＂＃＄％＆＇（）＊＋，－．／
+                 "\uff10", "\uff11", "\uff12", "\uff13", "\uff14", "\uff15", "\uff16",
+                 "\uff17", "\uff18", "\uff19"# ０...９
+                 "\uff1a", "\uff1b", "\uff1c", "\uff1d",
+                 "\uff1e", "\uff1f", "\uff20"]#：；＜＝＞？＠
+    _table_2 = [ "\uff3b", "\uff3c", "\uff3d", "\uff3e", "\uff3f", "\uff40"]#［＼］＾＿｀
+    _table_3 = [ "\uff5b", "\uff5c", "\uff5d", "\uff5e"]#｛｜｝～
 
     def __init__(self):
         pass

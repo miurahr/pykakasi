@@ -47,6 +47,7 @@ Flags:
 
 import re
 import sys, os
+from six import PY2
 from pykakasi.exceptions import InvalidFlagValueException,InvalidModeValueException,UnsupportedRomanRulesException,UnknownOptionsException
 
 class kakasi(object):
@@ -139,8 +140,12 @@ class kakasi(object):
 
         return self
 
-    def do(self, text):
-
+    def do(self, itext):
+        # Guard for python2
+        if PY2:
+            text = unicode(itext)
+        else:
+            text = itext
         otext =  ''
         i = 0
         while True:

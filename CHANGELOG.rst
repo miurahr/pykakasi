@@ -14,6 +14,7 @@ Changed
 -------
 
 * Release source distribution from appveyor.
+* Refactoring how to import six
 
 Fixed
 -----

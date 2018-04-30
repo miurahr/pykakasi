@@ -2,8 +2,8 @@
 from zlib import compress
 import re
 from marshal import dumps
-from six.moves.cPickle import dump
-import six
+from six.moves import cPickle
+from six import unichr
 import semidbm as dbm
 
 class mkkanwa(object):
@@ -31,13 +31,13 @@ class mkkanwa(object):
                     continue
                 try:
                     (v, k) = (re.sub(r'\\u([0-9a-fA-F]{4})',
-                            lambda x:six.unichr(int(x.group(1),16)), line)).split(' ')
+                            lambda x:unichr(int(x.group(1),16)), line)).split(' ')
                     dic[k] = v
                     max_key_len = max(max_key_len, len(k))
                 except:
                     raise Exception("Cannot process dictionary line: ", line)
         with open(dst, 'wb') as d:
-            dump((dic, max_key_len), d, protocol=2)
+            cPickle.dump((dic, max_key_len), d, protocol=2)
 
 # for kanwadict
 

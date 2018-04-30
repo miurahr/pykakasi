@@ -5,7 +5,7 @@
 #
 import re
 from pkg_resources import resource_filename
-from six.moves.cPickle import load
+from six.moves import cPickle
 
 class itaiji (object):
 
@@ -24,7 +24,7 @@ class itaiji (object):
         if self._itaijidict is None:
             itaijipath = resource_filename(__name__, 'itaijidict2.pickle')
             with open(itaijipath, 'rb') as itaiji_pkl:
-                (self._itaijidict, self._itaijidict_len) = load(itaiji_pkl)
+                (self._itaijidict, self._itaijidict_len) = cPickle.load(itaiji_pkl)
 
     def haskey(self, key):
         return key in self._itaijidict
