@@ -10,6 +10,28 @@ All notable changes to this project will be documented in this file.
 Added
 -----
 
+
+Changed
+-------
+
+Fixed
+-----
+
+Deprecated
+----------
+
+Removed
+-------
+
+Security
+--------
+
+`v0.93`_ (3, May, 2018)
+=========================
+
+Added
+-----
+
 * Add test for two type of exceptions
 * Add test for Upper case flags
 * Add Upper case flag with E2a mode.
@@ -26,16 +48,10 @@ Fixed
 * Exception when converting Fullwidth collon \uFF1A (#51)
 * Fixed unworking Upper case flag ("U") which causes exception
 
-Deprecated
-----------
-
 Removed
 -------
 
 * Drop canConvert method from itaiji.
-
-Security
---------
 
 
 `v0.92`_ (30, Apr., 2018)
@@ -234,7 +250,8 @@ Version 0.10 (25, April, 2014)
   (Thanks @FGtatsuro)
 * Kunrei and Hepburn roman table
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v0.92...HEAD
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v0.93...HEAD
+.. _v0.93: https://github.com/miurahr/pykakasi/compare/v0.92...v0.93
 .. _v0.92: https://github.com/miurahr/pykakasi/compare/v0.91...v0.92
 .. _v0.91: https://github.com/miurahr/pykakasi/compare/v0.90...v0.91
 .. _v0.90: https://github.com/miurahr/pykakasi/compare/v0.83...v0.90
