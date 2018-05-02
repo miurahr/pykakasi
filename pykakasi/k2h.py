@@ -46,6 +46,6 @@ class K2H (object):
             if self.isRegion(text[x]):
                 Hstr = Hstr + unichr(ord(text[x]) - self._diff)
                 max_len = max_len + 1
-            else:
+            else: # pragma: no cover
                 break
         return (Hstr, max_len)
