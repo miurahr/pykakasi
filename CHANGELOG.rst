@@ -10,6 +10,10 @@ All notable changes to this project will be documented in this file.
 Added
 -----
 
+* Add test for two type of exceptions
+* Add test for Upper case flags
+* Add Upper case flag with E2a mode.
+
 Changed
 -------
 
@@ -20,6 +24,7 @@ Fixed
 -----
 
 * Exception when converting Fullwidth collon \uFF1A (#51)
+* Fixed unworking Upper case flag ("U") which causes exception
 
 Deprecated
 ----------
