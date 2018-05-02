@@ -32,6 +32,8 @@ Deprecated
 Removed
 -------
 
+* Drop canConvert method from itaiji.
+
 Security
 --------
 
