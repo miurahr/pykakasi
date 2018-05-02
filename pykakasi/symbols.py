@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 #  symbols.py
 #
-# Copyright 2014 Hiroshi Miura <miurahr@linux.com>
+# Copyright 2014,2018 Hiroshi Miura <miurahr@linux.com>
 #
 from __future__ import unicode_literals
 __license__ = 'GPL 3'
-__copyright__ = '2014, Hiroshi Miura <miurahr@linux.com>'
+__copyright__ = '2014,2018, Hiroshi Miura <miurahr@linux.com>'
 __docformat__ = 'restructuredtext en'
 
 '''
@@ -131,7 +131,7 @@ class sym2 (object):
             return self.cyrillicTable[text[0]]
         elif (0xff01 <= c and c <= 0xff0f):
             return self._table_5[c-0xff01]
-        elif (0xff10 <= c and c < 0xff1a):
+        elif (0xff10 <= c and c <= 0xff1a):
             return six.unichr(c - 0xff10 + ord('0'))
         elif (0xff20 <= c and c <= 0xff40):
             return six.unichr(0x0041+c-0xff21)# u\ff21Ａ => u\0041:@A..Z[\]^_`

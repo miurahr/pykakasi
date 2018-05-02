@@ -19,6 +19,8 @@ Changed
 Fixed
 -----
 
+* Exception when converting Fullwidth collon \uFF1A (#51)
+
 Deprecated
 ----------
 

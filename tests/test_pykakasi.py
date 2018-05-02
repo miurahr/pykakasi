@@ -184,8 +184,8 @@ class TestPyKakasi(unittest.TestCase):
               "ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
             (u"ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ",
               "abcdefghijklmnopqrstuvwxyz"),
-            (u"！＂＃＄％＆＇（）＊＋，－．／＿　｛｜｝～",
-             "!\"#$%&'()*+,-./_ {|}~")
+            (u"！＂＃＄％＆＇（）＊＋，－．／＿　｛｜｝～\uFF1A",
+             "!\"#$%&'()*+,-./_ {|}~:")
         ]
 
         kakasi = pykakasi.kakasi()
