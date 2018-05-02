@@ -164,7 +164,7 @@ class kakasi(object):
                 # now i have been incremented..Clarify it by using var j
                 j = i
                 if self._flag["U"]:
-                    otext = otext + t.upcase()
+                    otext = otext + t.upper()
                 elif self._flag["C"]:
                     otext = otext + t.capitalize()
                 else:
@@ -237,7 +237,11 @@ class kakasi(object):
                 i += 1
 
             elif self._conv["E"].isRegion(text[i]):
-                otext = otext + self._conv["E"].convert(text[i])
+                t = self._conv["E"].convert(text[i])
+                if self._flag["U"]:
+                    otext = otext + t.upper()
+                else:
+                    otext = otext + t
                 i += 1
                 if i >= len(text): # it is last char of text
                     break
