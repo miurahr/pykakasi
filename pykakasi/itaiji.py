@@ -32,9 +32,6 @@ class itaiji (object):
     def lookup(self, key):
         return self._itaijidict[key]
 
-    def canConvert(self, c):
-        return ( 0x3400 <= ord(c[0]) and ord(c[0]) < 0xfa2e)
-
     def convert(self, text):
         r = []
         for c in text:
