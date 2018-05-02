@@ -40,5 +40,5 @@ class kanwa (object):
                 self._jisyo_table[key]  = loads(decompress(self._kanwadict[key]))
                 return self._jisyo_table[key]
             except:
-                return None
+                return None # pragma: no cover
 
