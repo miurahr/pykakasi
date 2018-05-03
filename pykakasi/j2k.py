@@ -45,7 +45,7 @@ class J2K (object):
         return self._jconv.itaiji_conv(text)
 
     def convert(self, text):
-        if not self._jconv.isRegion(text[0]):
+        if not self._jconv.isRegion(text[0]): # pragma: no cover
             return ("", 0)
             
         (t, l) = self._jconv.convert(text)
