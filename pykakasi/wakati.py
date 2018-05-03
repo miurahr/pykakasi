@@ -49,7 +49,7 @@ class wakati(kakasi):
 
             if self._jconv.isRegion(text[i]):
                 _, l = self._jconv.convert(text[i:])
-                if l <= 0:
+                if l <= 0: # pragma: no cover
                     otext = otext + text[i]
                     i += 1
                     self._state = False
@@ -63,7 +63,7 @@ class wakati(kakasi):
                 else:
                     if self._state:
                         otext = otext + text[i:i+l]
-                    else:
+                    else: # pragma: no cover
                         otext = otext + self._separator + text[i:i+l]
                     break
 
