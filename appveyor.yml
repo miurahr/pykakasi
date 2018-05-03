@@ -1,7 +1,17 @@
 environment:
-  PYPI_USERNAME: miurahr
-  PYPI_PASSWORD:
+  TWINE_REPOSITORY_URL: https://upload.pypi.org/legacy/
+  TWINE_USERNAME: miurahr
+  TWINE_PASSWORD:
     secure: ibyxU09f3mAdoh5Hv4T27Q==
+
+init:
+  - ps: |
+      function exec
+      {
+        param ( [ScriptBlock] $ScriptBlock )
+        & $ScriptBlock 2>&1 | ForEach-Object -Process { "$_" }
+        if ($LastExitCode -ne 0) { exit $LastExitCode }
+      }
 
 install:
   - "python.exe -m pip install twine wheel"
@@ -21,17 +31,11 @@ artifacts:
 
 deploy_script:
   - ps: |
-      function exec
-      {
-        param ( [ScriptBlock] $ScriptBlock )
-        & $ScriptBlock 2>&1 | ForEach-Object -Process { "$_" }
-        if ($LastExitCode -ne 0) { exit $LastExitCode }
-      }
       If ($env:APPVEYOR_REPO_TAG -eq "true")
       {
         $artifacts = Get-ChildItem -Path dist -Include '*.tar.gz' -Recurse -Name | %{"$_"}
         cd dist
-        exec { python.exe -m twine upload -u ${env:PYPI_USERNAME} --skip-existing $artifacts }
+        exec { python.exe -m twine upload --skip-existing $artifacts }
       }
       else
       {

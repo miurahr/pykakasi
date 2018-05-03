@@ -17,6 +17,9 @@ Changed
 Fixed
 -----
 
+* Appveyor: twine upload credential environment variable name.
+
+
 Deprecated
 ----------
 
