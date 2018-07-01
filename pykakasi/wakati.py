@@ -73,4 +73,3 @@ class wakati(kakasi):
                 i += 1
 
         return otext
-

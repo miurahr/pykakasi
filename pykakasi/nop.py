@@ -12,4 +12,3 @@ class NOP(object):
 
     def convert(self, text):
         return ("", 0) # pragma: no cover
-

@@ -21,7 +21,7 @@ class a2 (object):
     def __init__(self):
         pass
 
-    def isRegion(self, char): 
+    def isRegion(self, char):
         return (0x20 <= ord(char[0]) and ord(char[0]) < 0x7f)
 
     def convert(self, text):

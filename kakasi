@@ -56,12 +56,12 @@ def main():
     wakati = False
     mode = {
             'H':None, 'K':None, 'J':None, 'r':"Hepburn", 'E':None,
-            's':False, 'C':False
+            'f':False, 's':False, 'C':False
            }
     values = ["a","E","H","K",None]
     romanvals = {"h":"Hepburn", "k":"Kunrei", "p":"Passport"}
     for o, a in opts:
-        if o in ["-v","--version"]: 
+        if o in ["-v","--version"]:
             show_version()
             sys.exit()
         elif o in ("-h", "--help"):
@@ -79,18 +79,18 @@ def main():
                 mode[o[-1:]] = a
         elif o in ["-s","-C"]:
             mode[o[-1:]] = True
+        elif o == "--space":
+            mode["s"] = True
         elif o == "-r":
             if a in romanvals.keys():
                 mode['r'] = romanvals[a]
-        elif o == "--space":
-            mode["s"] = True
         elif o in ["-S","--separator"]:
             mode["S"] = a
         else:
             assert False, "unhandled option"
- 
+
     if wakati:
-        do_wakati(infile, outfile)
+        do_wakati(mode, infile, outfile)
     else:
         do_kakasi(mode, infile, outfile)
 

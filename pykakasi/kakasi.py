@@ -29,7 +29,7 @@ __copyright__ = '2014-2018 Hiroshi Miura <miurahr@linux.com>'
 __docformat__ = 'restructuredtext en'
 
 '''
-Flags: 
+Flags:
   These flags are as same as KAKASI.
 
   p: List all possible readings. If there exist two or more
@@ -52,10 +52,10 @@ from pykakasi.exceptions import InvalidFlagValueException,InvalidModeValueExcept
 
 class kakasi(object):
 
-    _keys = ["J","H","K","a","E"]
-    _values = ["a","E","H","K",None]
+    _keys = ["J","H","K","E","a"]
+    _values = ["a","E","H","K"]
     _roman_vals = ["Hepburn", "Kunrei", "Passport"]
-    _endmark = [0x002c, 0x002e, 0x3001, 0x3002]
+    _endmark = [ord(a) for a in [ ",", "." ]] + [0x3001, 0x3002]
     _MAXLEN  = 32
 
     def __init__(self):
@@ -71,7 +71,7 @@ class kakasi(object):
 #fixme: value chck
     def setMode(self, fr, to):
         if fr in self._keys:
-            if to in self._values:
+            if to == None or to in self._values:
                 self._mode[fr] = to
             else:
                 raise InvalidModeValueException("Invalid value for mode")
@@ -255,4 +255,3 @@ class kakasi(object):
                 i += 1
 
         return otext
-
