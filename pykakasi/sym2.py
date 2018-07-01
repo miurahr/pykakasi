@@ -104,8 +104,11 @@ class sym2 (object):
             '\u044d': 'e', '\u044e': 'yu','\u044f': 'ya'#эюя
             }
 
-    def __init__(self):
-        pass
+    def __init__(self, mode):
+        if mode == "a":
+            self.convert = self.convert_a
+        else:
+            self.convert = self.convert_noop
 
     def isRegion(self, char):
         c = ord(char[0])
@@ -117,7 +120,7 @@ class sym2 (object):
                  (0xff20 <= c and c <= 0xff5e) or
                  c == 0x0451 or c == 0x0401)
 
-    def convert(self, text):
+    def _convert(self, text):
         c = ord(text[0])
         if   (0x3000<= c and c < 0x3021):
             return self._table_1[c-0x3000]
@@ -138,5 +141,14 @@ class sym2 (object):
         elif (0xff41 <= c and c < 0xff5f):
             return six.unichr(0x0061+c-0xff41)# u\ff41ａ => u\0061:a..z{|}
         else:
-            return None # pragma: no cover
+            return "" # pragma: no cover
 
+    def convert_a(self, text):
+        t = self._convert(text)
+        if len(t):
+            return (t, 1)
+        else:
+            return ("", 0)
+
+    def convert_noop(self, text):
+        return (text[0], 1)

@@ -91,49 +91,20 @@ class kakasi(object):
             raise UnknownOptionsException("Unhandled options")
 
     def getConverter(self):
-        from .nop import NOP
+        from .j2 import J2
+        self._conv["J"] = J2(self._mode["J"], method = self._option["r"])
 
-        if self._mode["H"] == "a":
-            from .h2a import H2a
-            self._conv["H"] = H2a(method = self._option["r"])
-        elif self._mode["H"] == "K":
-            from .h2k import H2K
-            self._conv["H"] = H2K()
-        else:
-            self._conv["H"] = NOP()
+        from .h2 import H2
+        self._conv["H"] = H2(self._mode["H"], method = self._option["r"])
 
-        if self._mode["K"] == "a":
-            from .k2a import K2a
-            self._conv["K"] = K2a(method = self._option["r"])
-        elif self._mode["K"] == "H":
-            from .k2h import K2H
-            self._conv["K"] = K2H()
-        else:
-            self._conv["K"] = NOP()
+        from .k2 import K2
+        self._conv["K"] = K2(self._mode["K"], method = self._option["r"])
 
-        if self._mode["J"] == "a":
-            from .j2a import J2a
-            self._conv["J"] = J2a(method = self._option["r"])
-        elif self._mode["J"] == "H":
-            from .j2h import J2H
-            self._conv["J"] = J2H()
-        elif self._mode["J"] == "K":
-            from .j2k import J2K
-            self._conv["J"] = J2K()
-        else:
-            self._conv["J"] = NOP()
+        from .sym2 import sym2
+        self._conv["E"] = sym2(self._mode["E"])
 
-        if self._mode["a"] == "E":
-            from .a2 import a2
-            self._conv["a"] = a2()
-        else:
-            self._conv["a"] = NOP()
-
-        if self._mode["E"] == "a":
-            from .symbols import sym2
-            self._conv["E"] = sym2()
-        else:
-            self._conv["E"] = NOP()
+        from .a2 import a2
+        self._conv["a"] = a2(self._mode["a"])
 
         if not self._flag["s"]:
             self._separator = ''
@@ -233,11 +204,11 @@ class kakasi(object):
                         pass
 
             elif self._conv["a"].isRegion(text[i]):
-                otext = otext + self._conv["a"].convert(text[i])
+                otext = otext + self._conv["a"].convert(text[i])[0]
                 i += 1
 
             elif self._conv["E"].isRegion(text[i]):
-                t = self._conv["E"].convert(text[i])
+                t = self._conv["E"].convert(text[i])[0]
                 if self._flag["U"]:
                     otext = otext + t.upper()
                 else:

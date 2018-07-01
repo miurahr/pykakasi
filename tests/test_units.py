@@ -12,7 +12,7 @@ class TestUnits(unittest.TestCase):
             (u"壱弍",u"一二"),
             (u"森鷗外",u"森鴎外"),
         ]
-        j = pykakasi.J2H()
+        j = pykakasi.J2("H")
         for case, result in I_TEST:
             self.assertEqual(j.itaiji_conv(case), result)
 
@@ -25,7 +25,7 @@ class TestUnits(unittest.TestCase):
             (u"日本国民は、", (u"にほんこくみん", 4))
         ]
 
-        j = pykakasi.J2H()
+        j = pykakasi.J2("H")
         for case, result in TESTS:
             self.assertEqual(j.convert(case), result)
 
@@ -40,7 +40,7 @@ class TestUnits(unittest.TestCase):
             (u"ちがい", ("chi",1)),
         ]
 
-        h = pykakasi.H2a()
+        h = pykakasi.H2("a")
         for case, result in TESTS:
             self.assertEqual(h.convert(case), result)
 
@@ -55,7 +55,7 @@ class TestUnits(unittest.TestCase):
             (u"ちがい",     (u"チガイ",3)),
         ]
 
-        h = pykakasi.H2K()
+        h = pykakasi.H2("K")
         for case, result in TESTS:
             self.assertEqual(h.convert(case), result)
 
@@ -70,7 +70,7 @@ class TestUnits(unittest.TestCase):
             (u"チガイ",     (u"ちがい",3)),
         ]
 
-        h = pykakasi.K2H()
+        h = pykakasi.K2("H")
         for case, result in TESTS:
             self.assertEqual(h.convert(case), result)
 
@@ -86,7 +86,7 @@ class TestUnits(unittest.TestCase):
             (u"ジ", ("ji",1)),
         ]
 
-        h = pykakasi.K2a()
+        h = pykakasi.K2("a")
         for case, result in TESTS:
             self.assertEqual(h.convert(case), result)
 
@@ -108,7 +108,7 @@ class TestUnits(unittest.TestCase):
             (u"て", ("te", 1)), (u"と", ("to", 1))
         ]
 
-        h = pykakasi.H2a(method="Kunrei")
+        h = pykakasi.H2("a", method="Kunrei")
         for case, result in TESTS:
             self.assertEqual(h.convert(case), result)
 
@@ -134,7 +134,7 @@ class TestUnits(unittest.TestCase):
             (u"テ", ("te", 1)), (u"ト", ("to", 1))
         ]
 
-        h = pykakasi.K2a(method="Kunrei")
+        h = pykakasi.K2("a", method="Kunrei")
         for case, result in TESTS:
             self.assertEqual(h.convert(case), result)
 
@@ -150,7 +150,7 @@ class TestUnits(unittest.TestCase):
             (u"んば", ("mba", 2))
         ]
 
-        h = pykakasi.H2a(method="Passport")
+        h = pykakasi.H2("a", method="Passport")
         for case, result in TESTS:
             self.assertEqual(h.convert(case), result)
 
@@ -163,7 +163,7 @@ class TestUnits(unittest.TestCase):
             (u"日本国民は、", (u"ニホンコクミン", 4))
       ]
 
-        j = pykakasi.J2K()
+        j = pykakasi.J2("K")
         for case, result in TESTS:
             self.assertEqual(j.convert(case), result)
 
@@ -177,11 +177,11 @@ class TestUnits(unittest.TestCase):
             (u"\u31a0", ("",0))  # non japanese character
       ]
 
-        j = pykakasi.J2a()
+        j = pykakasi.J2("a")
         for case, result in TESTS:
             self.assertEqual(j.convert(case), result)
 
-    def test_a2(self):
+    def test_a2E(self):
 
         TESTS = [
             ("ABCDEFGHIJKLMNOPQRSTUVWXYZ",
@@ -192,12 +192,12 @@ class TestUnits(unittest.TestCase):
              u"！＂＃＄％＆＇（）＊＋，－．／＿　｛｜｝～")
       ]
 
-        a = pykakasi.a2()
+        a = pykakasi.a2("E")
         for case, result in TESTS:
             for i in range(len(case)):
-                self.assertEqual(a.convert(case[i]), result[i])
+                self.assertEqual(a.convert(case[i]), (result[i], 1))
 
-    def test_sym2(self):
+    def test_sym2a(self):
 
         TESTS = [
             ([u"\u3000",u"\u3001",u"\u3002",u"\u3003",u"\u3004",u"\u3006",u"\u3008",
@@ -221,7 +221,7 @@ class TestUnits(unittest.TestCase):
             "a","ya","e","E"])
       ]
 
-        s = pykakasi.sym2()
+        s = pykakasi.sym2("a")
         for case, result in TESTS:
             for i in range(len(case)):
-                self.assertEqual(tuple([case[i],s.convert(case[i])]), tuple([case[i],result[i]]))
+                self.assertEqual(tuple([case[i],s.convert(case[i])]), tuple([case[i],(result[i], 1)]))

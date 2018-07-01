@@ -18,13 +18,16 @@ class a2 (object):
     _table_2 = [ "\uff3b", "\uff3c", "\uff3d", "\uff3e", "\uff3f", "\uff40"]#［＼］＾＿｀
     _table_3 = [ "\uff5b", "\uff5c", "\uff5d", "\uff5e"]#｛｜｝～
 
-    def __init__(self):
-        pass
+    def __init__(self, mode):
+        if mode == "E":
+            self.convert = self.convert_E
+        else:
+            self.convert = self.convert_noop
 
     def isRegion(self, char):
         return (0x20 <= ord(char[0]) and ord(char[0]) < 0x7f)
 
-    def convert(self, text):
+    def _convert(self, text):
         c = ord(text[0])
         if   (0x20 <= c and c < 0x41):
             return self._table_1[(c-0x20)]
@@ -37,4 +40,14 @@ class a2 (object):
         elif (0x7b <= c and c < 0x7f):
             return self._table_3[(c-0x7b)]
         else:
-            return None # pragma: no cover
+            return "" # pragma: no cover
+
+    def convert_E(self, text):
+        t = self._convert(text)
+        if len(t):
+            return (t, 1)
+        else:
+            return ("", 0)
+
+    def convert_noop(self, text):
+        return (text[0], 1)

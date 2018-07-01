@@ -30,8 +30,8 @@ class wakati(kakasi):
     _state = True
 
     def __init__(self):
-        from .j2h import J2H
-        self._jconv = J2H()
+        from .j2 import J2
+        self._jconv = J2("H")
 
     def getConverter(self):
         return self
