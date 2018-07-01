@@ -55,12 +55,13 @@ class kakasi(object):
     _keys = ["J","H","K","E","a"]
     _values = ["a","E","H","K"]
     _roman_vals = ["Hepburn", "Kunrei", "Passport"]
-    _endmark = [ord(a) for a in [ ",", "." ]] + [0x3001, 0x3002]
+    _endmark = [ord(a) for a in [ ")", "]", "!", ",", "." ]] + [0x3001, 0x3002]
     _MAXLEN  = 32
 
     def __init__(self):
         self._conv = {}
         self._mode = {"J":None, "H":None, "K":None, "E":None, "a":None}
+        self._furi = {"J":False, "H":False, "K":False, "E":False, "a":False}
         self._flag = {"p":False, "s":False, "f":False, "c":False, "C":False, "U":False,
                       "u":False}
         self._option = {"r":"Hepburn"}
@@ -71,8 +72,12 @@ class kakasi(object):
 #fixme: value chck
     def setMode(self, fr, to):
         if fr in self._keys:
-            if to == None or to in self._values:
+            if to == None:
                 self._mode[fr] = to
+            elif to[0] in self._values:
+                self._mode[fr] = to[0]
+                if len(to) > 1:
+                    self._furi[fr] = True
             else:
                 raise InvalidModeValueException("Invalid value for mode")
         elif fr in self._flag.keys():
@@ -81,7 +86,7 @@ class kakasi(object):
             else:
                 raise InvalidFlagValueException("Invalid flag value")
         elif fr == "r":
-            if to in ["Hepburn","Kunrei","Passport"]:
+            if to in self._roman_vals:
                 self._option["r"] = to
             else:
                 raise UnsupportedRomanRulesException("Unknown roman table name")
@@ -106,9 +111,6 @@ class kakasi(object):
         from .a2 import a2
         self._conv["a"] = a2(self._mode["a"])
 
-        if not self._flag["s"]:
-            self._separator = ''
-
         return self
 
     def do(self, itext):
@@ -117,112 +119,82 @@ class kakasi(object):
             text = unicode(itext)
         else:
             text = itext
-        otext =  ''
+
+        mode = None
+        otext = ""
+        orig = ""
+        chunk = ""
         i = 0
         while True:
             if i >= len(text):
                 break
 
             if self._conv["J"].isRegion(text[i]):
+                mode = "J"
+            elif self._conv["H"].isRegion(text[i]):
+                mode = "H"
+            elif self._conv["K"].isRegion(text[i]):
+                mode = "K"
+            elif self._conv["E"].isRegion(text[i]):
+                mode = "E"
+            elif self._conv["a"].isRegion(text[i]):
+                mode = "a"
+            else:
+                mode = "o"
+
+            if mode in ("J", "E"):
                 w = min(i+self._MAXLEN, len(text))
-                (t, l) = self._conv["J"].convert(text[i:w])
+                (t, l) = self._conv[mode].convert(text[i:w])
 
                 if l <= 0: # fails to convert
-                    i += 1 # pragma: no cover
-                    continue
-
-                i = i + l
-                # now i have been incremented..Clarify it by using var j
-                j = i
-                if self._flag["U"]:
-                    otext = otext + t.upper()
-                elif self._flag["C"]:
-                    otext = otext + t.capitalize()
+                    orig = text[i:i+1]
+                    chunk = "???"
+                    i += 1
                 else:
-                    otext = otext + t
+                    orig = text[i:i+l]
+                    chunk = t
+                    i = i + l
 
-                # Not insert space BEFORE end marks and text end.
-                if (j < len(text)) and not (ord(text[j]) in self._endmark):
-                    otext = otext + self._separator
-
-            elif self._conv["H"].isRegion(text[i]):
-                tmptext = ''
+            elif mode in ("H", "K", "a"):
+                orig = ''
+                chunk = ''
                 while True: # eat mode
                     w = min(i+self._MAXLEN, len(text))
-                    (t, l) = self._conv["H"].convert(text[i:w])
-                    if l <= 0:
-                        # XXX: problem happens.
-                        i += 1 # pragma: no cover
-                        continue # pragma: no cover
-                    tmptext = tmptext + t
-                    i = i + l
-                    # now i have been incremented..Clarify it by using var j
-                    j = i
-                    if j >= len(text):
-                        otext = otext + tmptext
-                        break
-                    elif not self._conv["H"].isRegion(text[j]):
-                        # Found a place _conv["H"] cannot convert.
-                        # this means we found word boundary.
-                        otext = otext + tmptext
-                        # Inserting word separator(space) to indicate word boundary.
-                        # Not inserting space BEFORE comma and full stop
-                        if not ord(text[j]) in self._endmark:
-                            otext = otext + self._separator
-                        break
+                    (t, l) = self._conv[mode].convert(text[i:w])
+                    if l <= 0: # fails to convert
+                        if orig != '':
+                            break # print what we already have
+
+                        orig = text[i:i+1]
+                        chunk = "???"
+                        i += 1
+                        break # skip one char
                     else:
-                        pass # pragma: no cover
+                        orig += text[i:i+l]
+                        chunk += t
+                        i = i + l
 
-            elif self._conv["K"].isRegion(text[i]):
-                tmptext = ''
-                while True: # eat mode
-                    w = min(i+self._MAXLEN, len(text))
-                    (t, l) = self._conv["K"].convert(text[i:w])
-                    if l <= 0:
-                        # XXX: problem happens.
-                        i += 1 # pragma: no cover
-                        continue
-                    tmptext = tmptext + t
-                    i = i + l
-                    # now i have been incremented..Clarify it by using var j
-                    j = i
-                    if j >= len(text):
-                        # finished all text
-                        otext = otext + tmptext
+                    if i >= len(text) or not self._conv[mode].isRegion(text[i]):
                         break
-                    elif not self._conv["K"].isRegion(text[j]):
-                        # this means we found word boundary.
-                        # Inserting ' ' to indicate word boundary.
-                        # except for end marks
-                        otext = otext + tmptext
-                        # Inserting word separator(space) to indicate word boundary.
-                        # Not inserting space BEFORE comma and full stop
-                        if not ord(text[j]) in self._endmark:
-                            otext = otext + self._separator
-                        break
-                    else:
-                        pass
-
-            elif self._conv["a"].isRegion(text[i]):
-                otext = otext + self._conv["a"].convert(text[i])[0]
-                i += 1
-
-            elif self._conv["E"].isRegion(text[i]):
-                t = self._conv["E"].convert(text[i])[0]
-                if self._flag["U"]:
-                    otext = otext + t.upper()
-                else:
-                    otext = otext + t
-                i += 1
-                if i >= len(text): # it is last char of text
-                    break
-                if text[i] == "\n": # it is last char of line
-                    break
-                if ord(text[i-1]) in self._endmark:
-                    otext = otext + self._separator
 
             else:
-                otext  = otext + text[i]
+                otext += text[i]
                 i += 1
+                continue
+
+            if mode in ("J", "E"):
+                if self._flag["U"]:
+                    chunk = chunk.upper()
+                elif self._flag["C"]:
+                    chunk = chunk.capitalize()
+
+            if mode in self._keys and self._furi[mode]:
+                otext += orig + "[" + chunk + "]"
+            else:
+                otext += chunk
+
+            if self._flag["s"] and otext[-len(self._separator):] != self._separator \
+                               and i < len(text) and not (ord(text[i]) in self._endmark):
+                otext += self._separator
 
         return otext
