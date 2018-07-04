@@ -47,6 +47,8 @@ def main():
     infile  = None
     wakati = False
     mode = {}
+    values = ("J","H","K","E","a")
+    romanvals = {"h":"Hepburn", "k":"Kunrei", "p":"Passport"}
 
     try:
         opts, args = getopt.getopt(sys.argv[1:],
@@ -75,8 +77,12 @@ def main():
             mode["s"] = True
         elif o in ["-S","--separator"]:
             mode["S"] = a
-        elif o in ("-r","-J","-H","-K","-E","-a"):
-            mode[o[1:]] = a
+        elif o == "-r":
+            if a in romanvals.keys():
+                mode['r'] = romanvals[a]
+        elif o in ("-J","-H","-K","-E","-a"):
+            if a in values:
+                mode[o[1:]] = a
         elif o in ("-f","-C","-U"):
             mode[o[1:]] = True
         else:
