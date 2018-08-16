@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#  h2a.py
+# h2.py
 #
 # Copyright 2011,2014 Hiroshi Miura <miurahr@linux.com>
 #
@@ -25,28 +25,38 @@
 # * 02111-1307, USA.
 # */
 
+from six import unichr
 from six.moves import xrange
 from .jisyo import jisyo
 from .exceptions import UnsupportedRomanRulesException
 
-class H2a (object):
+class H2 (object):
 
     _kanadict = None
 
-    def __init__(self, method="Hepburn"):
-        if method == "Hepburn":
-            self._kanadict = jisyo('hepburnhira2.pickle')
-        elif method == "Passport":
-            self._kanadict = jisyo('passporthira2.pickle')
-        elif method == "Kunrei":
-            self._kanadict = jisyo('kunreihira2.pickle')
+    _diff = 0x30a1 - 0x3041 # KATAKANA LETTER A - HIRAGANA A
+
+    def __init__(self, mode, method="Hepburn"):
+        if mode == "a":
+            if method == "Hepburn":
+                self._kanadict = jisyo('hepburnhira2.pickle')
+            elif method == "Passport":
+                self._kanadict = jisyo('passporthira2.pickle')
+            elif method == "Kunrei":
+                self._kanadict = jisyo('kunreihira2.pickle')
+            else:
+                raise UnsupportedRomanRulesException("Unsupported roman rule")
+
+            self.convert = self.convert_a
+        elif mode == "K":
+            self.convert = self.convert_K
         else:
-            raise UnsupportedRomanRulesException("Unsupported roman rule") 
+            self.convert = self.convert_noop
 
     def isRegion(self, char):
         return (0x3040 < ord(char[0]) and ord(char[0]) < 0x3097)
 
-    def convert(self, text):
+    def convert_a(self, text):
         Hstr = ""
         max_len = -1
         r = min(4, len(text)+1)
@@ -57,3 +67,17 @@ class H2a (object):
                     Hstr = self._kanadict.lookup(text[:x])
         return (Hstr, max_len)
 
+    def convert_K(self, text):
+        Hstr = ""
+        max_len = 0
+        r = len(text)
+        for x in xrange(r):
+            if self.isRegion(text[x]):
+                Hstr = Hstr + unichr(ord(text[x]) + self._diff)
+                max_len = max_len + 1
+            else:
+                break
+        return (Hstr, max_len)
+
+    def convert_noop(self, text):
+        return (text[0], 1)
