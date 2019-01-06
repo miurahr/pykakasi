@@ -92,7 +92,7 @@ class kakasi(object):
         elif fr == "S":
             self._separator = to
         else:
-            raise UnknownOptionsException("Unhandled options")
+            raise UnknownOptionsException("Unhandled options")  # pragma: no cover
 
     def getConverter(self):
         from .j2 import J2
@@ -115,9 +115,9 @@ class kakasi(object):
     def do(self, itext):
         # Guard for python2
         if PY2:
-            text = unicode(itext)
+            text = unicode(itext)  # pragma: no cover
         else:
-            text = itext
+            text = itext  # pragma: no cover
 
         mode = None
         otext = ""
