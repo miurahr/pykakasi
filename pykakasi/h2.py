@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # h2.py
 #
-# Copyright 2011,2014 Hiroshi Miura <miurahr@linux.com>
+# Copyright 2011-2019 Hiroshi Miura <miurahr@linux.com>
 #
 # Original copyright:
 # * KAKASI (Kanji Kana Simple inversion program)
@@ -30,11 +30,12 @@ from six.moves import xrange
 from .jisyo import jisyo
 from .exceptions import UnsupportedRomanRulesException
 
+
 class H2 (object):
 
     _kanadict = None
 
-    _diff = 0x30a1 - 0x3041 # KATAKANA LETTER A - HIRAGANA A
+    _diff = 0x30a1 - 0x3041  # KATAKANA LETTER A - HIRAGANA A
 
     def __init__(self, mode, method="Hepburn"):
         if mode == "a":
@@ -59,7 +60,7 @@ class H2 (object):
     def convert_a(self, text):
         Hstr = ""
         max_len = -1
-        r = min(4, len(text)+1)
+        r = min(4, len(text) + 1)
         for x in xrange(r):
             if self._kanadict.haskey(text[:x]):
                 if max_len < x:

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # j2.py
 #
-# Copyright 2011,2014 Hiroshi Miura <miurahr@linux.com>
+# Copyright 2011-2019 Hiroshi Miura <miurahr@linux.com>
 #
 #  Original Copyright:
 # * KAKASI (Kanji Kana Simple inversion program)
@@ -30,20 +30,19 @@ import re
 from .kanwa import kanwa
 from .itaiji import itaiji
 
-class J2 (object):
 
+class J2(object):
     _kanwa = None
     _itaiji = None
 
-    _cl_table = [
-	"","aiueow", "aiueow", "aiueow", "aiueow", "aiueow", "aiueow", "aiueow",
-	"aiueow", "aiueow", "aiueow", "k", "g", "k", "g", "k", "g", "k", "g", "k",
-	"g", "s", "zj", "s", "zj", "s", "zj", "s", "zj", "s", "zj", "t", "d", "tc",
-	"d", "aiueokstchgzjfdbpw", "t", "d", "t", "d", "t", "d", "n", "n", "n", "n",
-	"n", "h", "b", "p", "h", "b", "p", "hf", "b", "p", "h", "b", "p", "h", "b",
-	"p", "m", "m", "m", "m", "m", "y", "y", "y", "y", "y", "y", "rl", "rl",
-	"rl", "rl", "rl", "wiueo", "wiueo", "wiueo", "wiueo", "w", "n", "v", "k",
-	"k", "", "", "", "", "", "", "", "", ""]
+    _cl_table = ["", "aiueow", "aiueow", "aiueow", "aiueow", "aiueow", "aiueow", "aiueow",
+                 "aiueow", "aiueow", "aiueow", "k", "g", "k", "g", "k", "g", "k", "g", "k",
+                 "g", "s", "zj", "s", "zj", "s", "zj", "s", "zj", "s", "zj", "t", "d", "tc",
+                 "d", "aiueokstchgzjfdbpw", "t", "d", "t", "d", "t", "d", "n", "n", "n", "n",
+                 "n", "h", "b", "p", "h", "b", "p", "hf", "b", "p", "h", "b", "p", "h", "b",
+                 "p", "m", "m", "m", "m", "m", "y", "y", "y", "y", "y", "y", "rl", "rl",
+                 "rl", "rl", "rl", "wiueo", "wiueo", "wiueo", "wiueo", "w", "n", "v", "k",
+                 "k", "", "", "", "", "", "", "", "", ""]
 
     def __init__(self, mode, method="Hepburn"):
         self._kanwa = kanwa()
@@ -58,10 +57,10 @@ class J2 (object):
             self.convert = self.convert_noop
 
     def isRegion(self, c):
-        return (0x3400 <= ord(c[0]) and ord(c[0]) < 0xfa2e)
+        return 0x3400 <= ord(c[0]) < 0xfa2e
 
     def isCletter(self, l, c):
-        if (0x3041 <= ord(c) and  ord(c) <= 0x309f) and (l in self._cl_table[ord(c) - 0x3040]): # ぁ:= u\3041
+        if (0x3041 <= ord(c) <= 0x309f) and (l in self._cl_table[ord(c) - 0x3040]):  # ぁ:= u\3041
             return True
         return False
 
@@ -76,33 +75,33 @@ class J2 (object):
 
     def convert_H(self, text):
         max_len = 0
-        match_more = False
         Hstr = ""
         text = self._itaiji.convert(text)
         table = self._kanwa.load(text[0])
         if table is None:
-            return ("", 0)
-        for (k,v) in table.items():
+            return "", 0
+        for (k, v) in table.items():
             length = len(k)
             if len(text) >= length:
                 if text.startswith(k):
-                    for  (yomi, tail) in v:
+                    for (yomi, tail) in v:
                         if tail is '':
                             if max_len < length:
                                 Hstr = yomi
                                 max_len = length
-                        elif max_len < length+1 and len(text) > length and self.isCletter(tail, text[length]):
-                            Hstr=''.join([yomi,text[length]])
-                            max_len = length+1
+                        elif max_len < length + 1 and len(text) > length \
+                                and self.isCletter(tail, text[length]):
+                            Hstr = ''.join([yomi, text[length]])
+                            max_len = length + 1
         return (Hstr, max_len)
 
     def convert_nonH(self, text):
         if not self.isRegion(text[0]):
-            return ("", 0)
+            return "", 0
 
-        (t, l) = self.convert_H(text)
-        if l <= 0: # pragma: no cover
-            return ("", 0)
+        (t, l1) = self.convert_H(text)
+        if l1 <= 0:  # pragma: no cover
+            return "", 0
 
         m = 0
         otext = ""
@@ -111,13 +110,13 @@ class J2 (object):
             if m >= len(t):
                 break
             (s, n) = self._hconv.convert(t[m:])
-            if n <= 0: # pragma: no cover
+            if n <= 0:  # pragma: no cover
                 m = m + 1
             else:
                 m = m + n
-                otext = otext+s
+                otext = otext + s
 
-        return (otext, l)
+        return otext, l1
 
     def convert_noop(self, text):
-        return (text[0], 1)
+        return text[0], 1
