@@ -30,7 +30,7 @@ class TestPyKakasi(unittest.TestCase):
         kakasi.setMode("E", "a")
         kakasi.setMode("a", None)
         kakasi.setMode("C", True)
-        converter  = kakasi.getConverter()
+        converter = kakasi.getConverter()
         for case, result in TESTS:
             self.assertEqual(converter.do(case), result)
 
@@ -60,7 +60,7 @@ class TestPyKakasi(unittest.TestCase):
         kakasi.setMode("s", True)
         kakasi.setMode("a", None)
         kakasi.setMode("C", True)
-        converter  = kakasi.getConverter()
+        converter = kakasi.getConverter()
         for case, result in TESTS:
             self.assertEqual(converter.do(case), result)
 
@@ -90,7 +90,7 @@ class TestPyKakasi(unittest.TestCase):
         kakasi.setMode("C",True)
         kakasi.setMode("E",None)
         kakasi.setMode("a",None)
-        converter  = kakasi.getConverter()
+        converter = kakasi.getConverter()
         for case, result in TESTS:
             self.assertEqual(converter.do(case), result)
 
@@ -114,7 +114,7 @@ class TestPyKakasi(unittest.TestCase):
         kakasi.setMode("C",True)
         kakasi.setMode("E",None)
         kakasi.setMode("a",None)
-        converter  = kakasi.getConverter()
+        converter = kakasi.getConverter()
         for case, result in TESTS:
             self.assertEqual(converter.do(case), result)
 
@@ -130,7 +130,7 @@ class TestPyKakasi(unittest.TestCase):
         kakasi = pykakasi.kakasi()
         kakasi.setMode("H","K")
         kakasi.setMode("S"," ")
-        converter  = kakasi.getConverter()
+        converter = kakasi.getConverter()
         for case, result in TESTS:
             self.assertEqual(converter.do(case), result)
 
@@ -157,6 +157,50 @@ class TestPyKakasi(unittest.TestCase):
         ]
         wakati = pykakasi.wakati()
         converter = wakati.getConverter()
+        for case, result in TESTS:
+            self.assertEqual(converter.do(case), result)
+
+    def test_katakana_furiagana(self):
+        TESTS = [
+            (u"変換前の漢字の脇に", u"変換前[ヘンカンマエ]の漢字[カンジ]の脇[ワキ]に")
+        ]
+        kakasi = pykakasi.kakasi()
+        kakasi.setMode("H",None)
+        kakasi.setMode("K",None)
+        kakasi.setMode("J","KF")
+        kakasi.setMode("f",True)
+        kakasi.setMode("s",False)
+        kakasi.setMode("E",None)
+        kakasi.setMode("a",None)
+        converter = kakasi.getConverter()
+        for case, result in TESTS:
+            self.assertEqual(converter.do(case), result)
+
+    def test_hiragana_furiagana(self):
+        TESTS = [
+            (u"変換前の漢字の脇に", u"変換前[へんかんまえ]の漢字[かんじ]の脇[わき]に")
+        ]
+        kakasi = pykakasi.kakasi()
+        kakasi.setMode("H",None)
+        kakasi.setMode("K",None)
+        kakasi.setMode("J","HF")
+        kakasi.setMode("f",True)
+        kakasi.setMode("s",False)
+        kakasi.setMode("E",None)
+        kakasi.setMode("a",None)
+        converter = kakasi.getConverter()
+        for case, result in TESTS:
+            self.assertEqual(converter.do(case), result)
+
+    # TODO Not implemented yet furigana mode for wakati
+    @unittest.expectedFailure
+    def test_wakati_furiagana(self):
+        TESTS = [
+            (u"変換前の漢字の脇に", u"変換前[へんかんまえ] の 漢字[かんじ] の 脇[わき] に")
+        ]
+        kakasi = pykakasi.wakati()
+        kakasi.setMode("f",True)
+        converter = kakasi.getConverter()
         for case, result in TESTS:
             self.assertEqual(converter.do(case), result)
 
