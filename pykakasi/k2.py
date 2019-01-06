@@ -77,6 +77,9 @@ class K2 (object):
             if self.isRegion(text[x]) and ord(text[x]) < 0x30f7:
                 Hstr = Hstr + unichr(ord(text[x]) - self._diff)
                 max_len = max_len + 1
+            elif self.isRegion(text[x]):
+                Hstr = Hstr + text[x]
+                max_len = max_len + 1
             else: # pragma: no cover
                 break
         return (Hstr, max_len)
