@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+
 import unittest
 import pykakasi
+
 
 class TestPyKakasiAdvanced(unittest.TestCase):
 
@@ -10,14 +12,14 @@ class TestPyKakasiAdvanced(unittest.TestCase):
         result = "Nihonkokumin ha, Seitou ni Senkyo sareta Kokkai niokeru Daihyousha wo Tsuuji te Koudou shi, wareratowarerano Shison notameni, Shokokumin tono Kyouwa niyoru Seika to, waga Kuni Zendo niwatatsute Jiyuu nomotarasu Keitaku wo Kakuho shi, Seifu no Koui niyotsute Futatabi Sensou no Sanka ga Okoru kotononaiyaunisurukotowo Ketsui shi, kokoni Shuken ga Kokumin ni Sonsu rukotowo Sengen shi, kono Kenpou wo Kakuteisu ru. somosomo Kokusei ha, Kokumin no Genshuku na Shintaku niyorumonodeatsute, sono Ken'i ha Kokumin ni Yurai shi, sono Kenryoku ha Kokumin no Daihyousha gakorewo Koushi shi, sono Fukuri ha Kokumin gakorewo Kyouju suru. koreha Jinruifuhen no Genri deari, kono Kenpou ha, kakaru Genri ni Motozuku monodearu. wareraha, koreni Hansu ru Issai no Kenpou, Hourei Oyobi Shouchoku wo Haijo suru."
 
         kakasi = pykakasi.kakasi()
-        kakasi.setMode("H","a")
-        kakasi.setMode("K","a")
-        kakasi.setMode("J","a")
-        kakasi.setMode("E","a")
-        kakasi.setMode("r","Hepburn")
+        kakasi.setMode("H", "a")
+        kakasi.setMode("K", "a")
+        kakasi.setMode("J", "a")
+        kakasi.setMode("E", "a")
+        kakasi.setMode("r", "Hepburn")
         kakasi.setMode("C", True)
         kakasi.setMode("s", True)
-        converter  = kakasi.getConverter()
+        converter = kakasi.getConverter()
         self.maxDiff = None
         self.assertEqual(converter.do(original_text), result)
 
