@@ -69,14 +69,13 @@ class kakasi(object):
         self._separator_string = ' '
         pass
 
-#fixme: value chck
     def setMode(self, fr, to):
         if fr in self._keys:
             if to == None:
                 self._mode[fr] = to
             elif to[0] in self._values:
                 self._mode[fr] = to[0]
-                if len(to) > 1:
+                if len(to) == 2 and to[1] == "F":
                     self._furi[fr] = True
             else:
                 raise InvalidModeValueException("Invalid value for mode")

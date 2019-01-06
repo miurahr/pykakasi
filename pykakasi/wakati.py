@@ -21,7 +21,9 @@
 
 import re
 import sys, os
+
 from .kakasi import kakasi
+from pykakasi.exceptions import InvalidFlagValueException,UnknownOptionsException
 
 class wakati(kakasi):
 
@@ -32,9 +34,18 @@ class wakati(kakasi):
     def __init__(self):
         from .j2 import J2
         self._jconv = J2("H")
+        self._flag = {"f": False}
 
     def getConverter(self):
         return self
+
+    def setMode(self, fr, to):
+        if fr in self._flag.keys():
+            if to in [True,False]:
+                self._flag[fr] = to
+            else:
+                raise InvalidFlagValueException("Invalid flag value")
+            raise UnknownOptionsException("Unhandled options")
 
     def do(self, text):
 
