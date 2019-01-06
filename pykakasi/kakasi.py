@@ -45,33 +45,33 @@ Flags:
 
 '''
 
-import re
-import sys, os
 from six import PY2
-from pykakasi.exceptions import InvalidFlagValueException,InvalidModeValueException,UnsupportedRomanRulesException,UnknownOptionsException
+from pykakasi.exceptions import InvalidFlagValueException, InvalidModeValueException, UnsupportedRomanRulesException, \
+    UnknownOptionsException
+
 
 class kakasi(object):
 
-    _keys = ["J","H","K","E","a"]
-    _values = ["a","E","H","K"]
+    _keys = ["J", "H", "K", "E", "a"]
+    _values = ["a", "E", "H", "K"]
     _roman_vals = ["Hepburn", "Kunrei", "Passport"]
-    _endmark = [ord(a) for a in [ ")", "]", "!", ",", "." ]] + [0x3001, 0x3002]
-    _MAXLEN  = 32
+    _endmark = [ord(a) for a in [")", "]", "!", ",", "."]] + [0x3001, 0x3002]
+    _MAXLEN = 32
 
     def __init__(self):
         self._conv = {}
-        self._mode = {"J":None, "H":None, "K":None, "E":None, "a":None}
-        self._furi = {"J":False, "H":False, "K":False, "E":False, "a":False}
-        self._flag = {"p":False, "s":False, "f":False, "c":False, "C":False, "U":False,
-                      "u":False}
-        self._option = {"r":"Hepburn"}
+        self._mode = {"J": None, "H": None, "K": None, "E": None, "a": None}
+        self._furi = {"J": False, "H": False, "K": False, "E": False, "a": False}
+        self._flag = {"p": False, "s": False, "f": False, "c": False, "C": False, "U": False,
+                      "u": False}
+        self._option = {"r": "Hepburn"}
         self._separator = ' '
         self._separator_string = ' '
         pass
 
     def setMode(self, fr, to):
         if fr in self._keys:
-            if to == None:
+            if to is None:
                 self._mode[fr] = to
             elif to[0] in self._values:
                 self._mode[fr] = to[0]
@@ -80,7 +80,7 @@ class kakasi(object):
             else:
                 raise InvalidModeValueException("Invalid value for mode")
         elif fr in self._flag.keys():
-            if to in [True,False]:
+            if to in [True, False]:
                 self._flag[fr] = to
             else:
                 raise InvalidFlagValueException("Invalid flag value")
@@ -96,13 +96,13 @@ class kakasi(object):
 
     def getConverter(self):
         from .j2 import J2
-        self._conv["J"] = J2(self._mode["J"], method = self._option["r"])
+        self._conv["J"] = J2(self._mode["J"], method=self._option["r"])
 
         from .h2 import H2
-        self._conv["H"] = H2(self._mode["H"], method = self._option["r"])
+        self._conv["H"] = H2(self._mode["H"], method=self._option["r"])
 
         from .k2 import K2
-        self._conv["K"] = K2(self._mode["K"], method = self._option["r"])
+        self._conv["K"] = K2(self._mode["K"], method=self._option["r"])
 
         from .sym2 import sym2
         self._conv["E"] = sym2(self._mode["E"])
@@ -142,36 +142,36 @@ class kakasi(object):
                 mode = "o"
 
             if mode in ("J", "E"):
-                w = min(i+self._MAXLEN, len(text))
-                (t, l) = self._conv[mode].convert(text[i:w])
+                w = min(i + self._MAXLEN, len(text))
+                (t, l1) = self._conv[mode].convert(text[i:w])
 
-                if l <= 0: # fails to convert
-                    orig = text[i:i+1]
+                if l1 <= 0:  # fails to convert
+                    orig = text[i:i + 1]
                     chunk = "???"
                     i += 1
                 else:
-                    orig = text[i:i+l]
+                    orig = text[i:i + l1]
                     chunk = t
-                    i = i + l
+                    i = i + l1
 
             elif mode in ("H", "K", "a"):
                 orig = ''
                 chunk = ''
-                while True: # eat mode
-                    w = min(i+self._MAXLEN, len(text))
-                    (t, l) = self._conv[mode].convert(text[i:w])
-                    if l <= 0: # fails to convert
+                while True:  # eat mode
+                    w = min(i + self._MAXLEN, len(text))
+                    (t, l1) = self._conv[mode].convert(text[i:w])
+                    if l1 <= 0:  # fails to convert
                         if orig != '':
-                            break # print what we already have
+                            break  # print what we already have
 
-                        orig = text[i:i+1]
+                        orig = text[i:i + 1]
                         chunk = "???"
                         i += 1
-                        break # skip one char
+                        break  # skip one char
                     else:
-                        orig += text[i:i+l]
+                        orig += text[i:i + l1]
                         chunk += t
-                        i = i + l
+                        i = i + l1
 
                     if i >= len(text) or not self._conv[mode].isRegion(text[i]):
                         break
@@ -193,7 +193,7 @@ class kakasi(object):
                 otext += chunk
 
             if self._flag["s"] and otext[-len(self._separator):] != self._separator \
-                               and i < len(text) and not (ord(text[i]) in self._endmark):
+                    and i < len(text) and not (ord(text[i]) in self._endmark):
                 otext += self._separator
 
         return otext

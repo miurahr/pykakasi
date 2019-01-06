@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # k2.py
 #
-# Copyright 2011-2018 Hiroshi Miura <miurahr@linux.com>
+# Copyright 2011-2019 Hiroshi Miura <miurahr@linux.com>
 #
 # Original copyright:
 # * KAKASI (Kanji Kana Simple inversion program)
@@ -30,11 +30,12 @@ from six.moves import range
 from .jisyo import jisyo
 from .exceptions import UnsupportedRomanRulesException
 
+
 class K2 (object):
 
     _kanadict = None
 
-    _diff = 0x30a1 - 0x3041 # KATAKANA LETTER A - HIRAGANA A
+    _diff = 0x30a1 - 0x3041  # KATAKANA LETTER A - HIRAGANA A
 
     def __init__(self, mode, method="Hepburn"):
         if mode == "a":
@@ -54,20 +55,20 @@ class K2 (object):
             self.convert = self.convert_noop
 
     def isRegion(self, char):
-        return (0x30a0 < ord(char[0]) and ord(char[0]) < 0x30fd)
+        return 0x30a0 < ord(char[0]) < 0x30fd
 
     def convert_a(self, text):
         Hstr = ""
         max_len = -1
         r = min(self._kanadict.maxkeylen(), len(text))
-        for x in range(1, r+1):
+        for x in range(1, r + 1):
             if self._kanadict.haskey(text[:x]):
                 if max_len < x:
                     max_len = x
                     Hstr = self._kanadict.lookup(text[:x])
-            else: # pragma: no cover
+            else:  # pragma: no cover
                 break
-        return (Hstr, max_len)
+        return Hstr, max_len
 
     def convert_H(self, text):
         Hstr = ""
@@ -80,9 +81,9 @@ class K2 (object):
             elif self.isRegion(text[x]):
                 Hstr = Hstr + text[x]
                 max_len = max_len + 1
-            else: # pragma: no cover
+            else:  # pragma: no cover
                 break
         return (Hstr, max_len)
 
     def convert_noop(self, text):
-        return (text[0], 1)
+        return text[0], 1

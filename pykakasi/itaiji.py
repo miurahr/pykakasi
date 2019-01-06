@@ -1,18 +1,20 @@
 # -*- coding: utf-8 -*-
 # itaiji.py
 #
-# Copyright 2015-2018 Hiroshi Miura <miurahr@linux.com>
+# Copyright 2015-2019 Hiroshi Miura <miurahr@linux.com>
 #
+
 import re
 from pkg_resources import resource_filename
 from six.moves import cPickle
+
 
 class itaiji (object):
 
     _itaijidict = None
     _itaijidict_len = 0
 
- # this class is Borg/Singleton
+    # this class is Borg/Singleton
     _shared_state = {}
 
     def __new__(cls, *p, **k):

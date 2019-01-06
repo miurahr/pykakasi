@@ -19,11 +19,10 @@
 # * 02111-1307, USA.
 # */
 
-import re
-import sys, os
 
+from pykakasi.exceptions import InvalidFlagValueException, UnknownOptionsException
 from .kakasi import kakasi
-from pykakasi.exceptions import InvalidFlagValueException,UnknownOptionsException
+
 
 class wakati(kakasi):
 
@@ -41,7 +40,7 @@ class wakati(kakasi):
 
     def setMode(self, fr, to):
         if fr in self._flag.keys():
-            if to in [True,False]:
+            if to in [True, False]:
                 self._flag[fr] = to
             else:
                 raise InvalidFlagValueException("Invalid flag value")
@@ -52,35 +51,35 @@ class wakati(kakasi):
         if len(text) == 0:
             return ""
 
-        otext =  ''
+        otext = ''
         i = 0
         while True:
             if i >= len(text):
                 break
 
             if self._jconv.isRegion(text[i]):
-                _, l = self._jconv.convert(text[i:])
-                if l <= 0: # pragma: no cover
+                _, ln = self._jconv.convert(text[i:])
+                if ln <= 0:  # pragma: no cover
                     otext = otext + text[i]
                     i += 1
                     self._state = False
-                elif (i+l) < len(text):
+                elif (i + ln) < len(text):
                     if self._state:
-                        otext = otext + text[i:i+l] + self._separator
+                        otext = otext + text[i:i + ln] + self._separator
                     else:
-                        otext = otext + self._separator + text[i:i+l] + self._separator
+                        otext = otext + self._separator + text[i:i + ln] + self._separator
                         self._state = True
-                    i = i + l
+                    i = i + ln
                 else:
                     if self._state:
-                        otext = otext + text[i:i+l]
-                    else: # pragma: no cover
-                        otext = otext + self._separator + text[i:i+l]
+                        otext = otext + text[i:i + ln]
+                    else:  # pragma: no cover
+                        otext = otext + self._separator + text[i:i + ln]
                     break
 
             else:
                 self._state = False
-                otext  = otext + text[i]
+                otext = otext + text[i]
                 i += 1
 
         return otext
