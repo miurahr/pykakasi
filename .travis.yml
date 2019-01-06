@@ -19,6 +19,7 @@ script:
   - python setup.py clean
   - python setup.py build
   - coverage run --source=pykakasi setup.py test
+  - pycodestyle pykakasi
   - python setup.py bdist_wheel --python-tag=${PYTHON_TAG}
 
 after_success:
