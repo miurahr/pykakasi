@@ -8,6 +8,7 @@ class TestPyKakasiIssues(unittest.TestCase):
 
         TESTS = [
             (59, u"じゃーん", u"じゃーん"),
+            (59, u"ヷヸヹヺ", u"ヷヸヹヺ"),
             (60, u"市立", u"しりつ")
         ]
 
