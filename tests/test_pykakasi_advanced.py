@@ -32,4 +32,3 @@ class TestPyKakasiAdvanced(unittest.TestCase):
         converter = wakati.getConverter()
         self.maxDiff = None
         self.assertEqual(converter.do(original_text), result)
-
