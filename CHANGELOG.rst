@@ -18,6 +18,7 @@ Fixed
 -----
 
 * Kanwadict: remove entry for 市立 as ichiritsu
+* Issue #59: fix 0x30f7-30fc katakana convertion to be as same as in Hiragana.
 * Appveyor: twine upload credential environment variable name.
 
 
