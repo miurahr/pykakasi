@@ -17,6 +17,7 @@ Changed
 Fixed
 -----
 
+* Kanwadict: remove entry for 市立 as ichiritsu
 * Appveyor: twine upload credential environment variable name.
 
 
