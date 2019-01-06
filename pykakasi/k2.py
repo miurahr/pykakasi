@@ -46,7 +46,7 @@ class K2 (object):
             elif method == "Kunrei":
                 self._kanadict = jisyo('kunreidict2.pickle')
             else:
-                raise UnsupportedRomanRulesException("Unsupported roman rule")
+                raise UnsupportedRomanRulesException("Unsupported roman rule")  # pragma: no cover
 
             self.convert = self.convert_a
         elif mode == "H":
