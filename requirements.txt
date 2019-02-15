@@ -1,5 +1,2 @@
-setuptools
-wheel
-nose
 six
 semidbm

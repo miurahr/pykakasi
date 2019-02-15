@@ -11,6 +11,8 @@ pykakasi.egg-info
 .coveralls.yml
 .coverage
 .venv
+venv
+venv2
 .idea
 .vscode
 .python-version

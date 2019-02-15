@@ -14,6 +14,8 @@ Added
 Changed
 -------
 
+* Improve setup.py build script generating pickled files when build bdist.
+
 Fixed
 -----
 
@@ -24,6 +26,8 @@ Fixed
 
 Deprecated
 ----------
+
+* Drop python2.6 from test target.
 
 Removed
 -------
