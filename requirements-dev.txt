@@ -1,10 +1,11 @@
 coveralls
 pinocchio
 tox
-coverage
 mock
 pycodestyle
 pytest
 pytest-cov
+coverage
+sphinx-intl
 setuptools
 wheel
