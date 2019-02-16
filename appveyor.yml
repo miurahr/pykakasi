@@ -3,6 +3,11 @@ environment:
   TWINE_USERNAME: miurahr
   TWINE_PASSWORD:
     secure: ibyxU09f3mAdoh5Hv4T27Q==
+  matrix:
+    - TOXENV: py27
+    - TOXENV: py34
+    - TOXENV: py35
+    - TOXENV: py36
 
 init:
   - ps: |
@@ -21,7 +26,7 @@ build_script:
   - "python.exe setup.py build"
 
 test_script:
-  - "python.exe setup.py test"
+  - tox
 
 after_test:
   - "python.exe setup.py sdist"
