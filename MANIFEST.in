@@ -2,7 +2,5 @@ include README.rst
 include COPYING
 exclude appveyor.yml
 exclude .travis.yml
-include pykakasi/kanwadict3.db/data
-recursive-include pykakasi *.pickle
-recursive-include pykakasi/data *.utf8
+recursive-include src/pykakasi/data *.utf8
 recursive-exclude tests *.py
