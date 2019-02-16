@@ -29,7 +29,6 @@ How To Use pykakasi
 
 How to Install::
 
-    pip install six semidbm
     pip install pykakasi
 
 Building library, setup script build dictionary db file and generate pickled db files.
@@ -70,6 +69,13 @@ Also "s" used for separator switch, "C" for capitalize switch.
 "S" for separator storing option.
 
 `wakati` is an implementation of kakasi's wakati gaki option.
+
+Supported python versions
+=========================
+
+Pykakasi supports python 2.7, python 3.5, 3.6 and PyPy.
+
+It may work with python 2.6, 3.3, 3.4 and pypy3 but these are not tested now.
 
 Options
 =======
