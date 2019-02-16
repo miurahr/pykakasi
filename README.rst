@@ -6,6 +6,10 @@ Pykakasi
 Overview
 ========
 
+.. image:: https://readthedocs.org/projects/pykakasi/badge/?version=latest
+   :target: https://pykakasi.readthedocs.io/en/latest/?badge=latest
+   :alt: Documentation Status
+
 .. image:: https://travis-ci.org/miurahr/pykakasi.svg?branch=master
    :target: https://travis-ci.org/miurahr/pykakasi
    :alt: Travis-CI
@@ -69,6 +73,14 @@ Also "s" used for separator switch, "C" for capitalize switch.
 "S" for separator storing option.
 
 `wakati` is an implementation of kakasi's wakati gaki option.
+
+Documentation
+=============
+
+Manual is placed on `readthedocs`_.
+
+.. _`readthedocs`: https://pykakasi.readthedocs.io/en/latest/?badge=latest
+
 
 Supported python versions
 =========================
