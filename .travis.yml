@@ -3,8 +3,6 @@ matrix:
   include:
     - python: 2.7
       env: PYTHON_TAG=py2
-    - python: 3.3
-      env: PYTHON_TAG=py33
     - python: 3.4
       env: PYTHON_TAG=py34
     - python: 3.5
@@ -14,14 +12,12 @@ matrix:
 
 install:
   - pip install -r requirements.txt -r requirements-dev.txt
+  - pip install tox-travis
 
-script:
-  - python setup.py clean
-  - python setup.py build
-  - coverage run --source=pykakasi setup.py test
-  - python setup.py bdist_wheel --python-tag=${PYTHON_TAG}
+script: tox
 
 after_success:
+  - python setup.py bdist_wheel --python-tag=${PYTHON_TAG}
   - coveralls
 
 deploy:

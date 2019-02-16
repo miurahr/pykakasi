@@ -3,7 +3,7 @@ pinocchio
 tox
 coverage
 mock
-nose
 pycodestyle
+pytest
 setuptools
 wheel
