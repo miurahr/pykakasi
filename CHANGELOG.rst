@@ -34,6 +34,11 @@ Security
 `v0.94`_ (16, Feb, 2019)
 =============
 
+Add
+---
+
+* Implement word split feature by @oxij (#58).
+
 Changed
 -------
 
