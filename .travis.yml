@@ -18,6 +18,8 @@ script: tox
 
 after_success:
   - python setup.py bdist_wheel --python-tag=${PYTHON_TAG}
+  # Hack for coveralls to find sources
+  - sed -ie 's|\.tox/py[0-9][0-9]/lib/python[2-3]\.[0-9]/site-packages/|src/|g' .coverage
   - coveralls
 
 deploy:
