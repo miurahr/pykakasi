@@ -1,0 +1,55 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018, Hiroshi Miura
+# This file is distributed under the same license as the pykakasi package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pykakasi\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-16 15:04+0900\n"
+"PO-Revision-Date: 2019-02-16 15:27+0900\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+"Last-Translator: Hiroshi Miura <miurahr@osmf.jp>\n"
+"Language-Team: \n"
+"Language: ja\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: ../../index.rst:7
+msgid "Welcome to pykakasi's documentation"
+msgstr "pykakasi のドキュメントへようこそ"
+
+#: ../../index.rst:9
+msgid ""
+"pykakasi is a library and utility implemented `KAKASI` utility in "
+"Python. KAKASI was originaly built to convert Japanese text to roman "
+"form."
+msgstr ""
+"pyakakasiは、`KAKASI`ユーティリティの機能を実装したライブラリとツールで"
+"す。KAKASIは、当初、日本語のテキストをローマ字に変換するために開発されま"
+"した。"
+
+#: ../../index.rst:12
+msgid "pykakasi is a free software, and available on `GitHub`_."
+msgstr "pyakakasiはフリーソフトウエアで、`GitHub`_で入手できます。"
+
+#: ../../index.rst:16
+msgid ""
+"The main documentation for the site is organized into a couple of "
+"sections:"
+msgstr "このサイトの主たる文書はいくつかの章にわかれています："
+
+#: ../../index.rst:18
+msgid ":ref:`user-docs`"
+msgstr ""
+
+#: ../../index.rst:19
+msgid ":ref:`dev-docs`"
+msgstr ""
+
+#: ../../index.rst:20
+msgid ":ref:`about-docs`"
+msgstr ""
