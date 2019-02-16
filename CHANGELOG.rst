@@ -3,6 +3,7 @@ PyKakasi ChangeLog
 ====================
 
 All notable changes to this project will be documented in this file.
+
 `Unreleased`_
 =============
 
@@ -13,20 +14,11 @@ Added
 Changed
 -------
 
-* Improve setup.py build script generating pickled files when build bdist.
-
 Fixed
 -----
 
-* Kanwadict: remove entry for 市立 as ichiritsu
-* Issue #59: fix 0x30f7-30fc katakana convertion to be as same as in Hiragana.
-* Appveyor: twine upload credential environment variable name.
-
-
 Deprecated
 ----------
-
-* Drop python2.6 from test target.
 
 Removed
 -------
@@ -41,6 +33,8 @@ Changed
 -------
 
 * Improve setup.py build script generating pickled files when build bdist.
+* Use pytest and pytest-cov for unittest.
+* Use tox for CI/CD in travis-CI and appveyor.
 
 Fixed
 -----
