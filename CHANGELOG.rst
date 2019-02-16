@@ -3,7 +3,6 @@ PyKakasi ChangeLog
 ====================
 
 All notable changes to this project will be documented in this file.
-
 `Unreleased`_
 =============
 
@@ -34,6 +33,26 @@ Removed
 
 Security
 --------
+
+`v0.94`_ (16, Feb, 2019)
+=============
+
+Changed
+-------
+
+* Improve setup.py build script generating pickled files when build bdist.
+
+Fixed
+-----
+
+* Kanwadict: remove entry for 市立 as ichiritsu
+* Issue #59: fix 0x30f7-30fc katakana convertion to be as same as in Hiragana.
+* Appveyor: twine upload credential environment variable name.
+
+Deprecated
+----------
+
+* Drop python2.6 and python 3.3 from test target.
 
 `v0.93`_ (3, May, 2018)
 =========================
@@ -259,7 +278,8 @@ Version 0.10 (25, April, 2014)
   (Thanks @FGtatsuro)
 * Kunrei and Hepburn roman table
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v0.93...HEAD
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v0.94...HEAD
+.. _v0.94: https://github.com/miurahr/pykakasi/compare/v0.93...v0.94
 .. _v0.93: https://github.com/miurahr/pykakasi/compare/v0.92...v0.93
 .. _v0.92: https://github.com/miurahr/pykakasi/compare/v0.91...v0.92
 .. _v0.91: https://github.com/miurahr/pykakasi/compare/v0.90...v0.91
