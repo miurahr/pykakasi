@@ -4,7 +4,4 @@
 
 .. _changes:
 
-Changes in Pykakasi
-*******************
-
 .. include:: ../CHANGELOG.rst

@@ -20,7 +20,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'pykakasi'
-copyright = '2018, Hiroshi Miura'
+copyright = '2011-2019, Hiroshi Miura'
 author = 'Hiroshi Miura'
 
 # The short X.Y version
