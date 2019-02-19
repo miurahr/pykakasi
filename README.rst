@@ -28,19 +28,12 @@ Overview
 
 pykakasi is re-implementation of kakasi library (original is written in C) in Python.
 
-How To Use pykakasi
-===================
+pykakasi at glance
+==================
 
-How to Install::
+Install::
 
     pip install pykakasi
-
-Building library, setup script build dictionary db file and generate pickled db files.
-Without dictionary files, a library fails to run.
-
-Dependencies::
-
-    six and semidbm
 
 Sample source code::
 
@@ -80,40 +73,4 @@ Documentation
 Manual is placed on `readthedocs`_.
 
 .. _`readthedocs`: https://pykakasi.readthedocs.io/en/latest/?badge=latest
-
-
-Supported python versions
-=========================
-
-Pykakasi supports python 2.7, python 3.5, 3.6 and PyPy.
-
-It may work with python 2.6, 3.3, 3.4 and pypy3 but these are not tested now.
-
-Options
-=======
-
-These switch alphabets are derived from original Kakasi.
-Now it support following options:
-
-+--------+---------------------+------------+---------------------------------------+
-| Option | Description         | Values     | Note                                  |
-+========+=====================+============+=======================================+
-| K      | Katakana convertion | a,H,None   | roman, Hiragana or noconversion       |
-+--------+---------------------+------------+---------------------------------------+
-| H      | Hiragana convertion | a,K,None   | roman, Katakana or noconversion       |
-+--------+---------------------+------------+---------------------------------------+
-| J      | Kanji conversion    | a,H,K,None | roman or Hiragana, Katakana or noconv |
-+--------+---------------------+------------+---------------------------------------+
-| a      | Roman conversion    | E,None     | JIS ROMAN or noconversion             |
-+--------+---------------------+------------+---------------------------------------+
-| E      | JIS ROMAN conversion| a,None     | ascii roman or noconversion           |
-+--------+---------------------+------------+---------------------------------------+
-
-Each character means character sets as follows::
-
-    Character Sets
-       a: ascii  j: jisroman  g: graphic  k: kana 
-       (j,k     defined in jisx0201)
-       E: kigou  K: katakana  H: hiragana J: kanji
-       (E,K,H,J defined in jisx0208)
 
