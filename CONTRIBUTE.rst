@@ -1,19 +1,19 @@
-===========================
-pykakasi contribution guide
-===========================
+==================
+Contribution guide
+==================
 
-This is CONTRIBUTE.rst for pykakasi project. Have a look at README.rst
-for general project information.
+This is contribution guide for pykakasi project.
 You are welcome to send a Pull-Request, reporting bugs and ask questions.
 
 Resources
 =========
 
-Project owner: Hiroshi Miura
-Gitter chat: https://gitter.im/miurahr/pykakasi
-Bug tracker: https://github.com/miurahr/pykakasi/issues
-Status: alpha
-Activity: very low
+- Project owner: Hiroshi Miura
+- Slack chat: https://pykakasi.slack.com/
+- join slack chat: https://join.slack.com/t/pykakasi/shared_invite/enQtNTU0MjAyNzY2MTE5LTk2YWU5ZGIwZjAxMTZlMzhmMmM2NjQ5YTZlM2QyMDg1MTdjMGVkZTU1N2ZjYWE5N2QzMTNkM2FlZGI2YzRiMTY
+- Bug tracker: https://github.com/miurahr/pykakasi/issues
+- Status: alpha
+- Activity: low
 
 Bug triage
 ==========
@@ -54,9 +54,7 @@ or::
 You can also run test using pyenv/tox with versions::
 
     pyenv install 2.7.13
-    pyenv install 3.3.7
-    pyenv install 3.4.8
     pyenv install 3.5.5
     pyenv install 3.6.4
-    pyenv local 2.7.13, 3.3.7, 3.4.6, 3.5.5, 3.6.4
+    pyenv local 2.7.13, 3.5.5, 3.6.4
     tox

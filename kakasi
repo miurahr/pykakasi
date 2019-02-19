@@ -6,7 +6,7 @@ import sys
 import getopt
 import pykakasi
 
-_VERSION = '0.94'
+_VERSION = '0.95-dev'
 
 def show_version():
     print (os.path.basename(sys.argv[0]) + " v" + _VERSION)

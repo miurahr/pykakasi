@@ -117,7 +117,7 @@ def readme():
         return f.read()
 
 setup(name='pykakasi',
-      version='0.94',
+      version='0.95-dev',
       description='Python implementation of kakasi - kana kanji simple inversion library',
       url='http://github.com/miurahr/pykakasi',
       license='GPLv3',
