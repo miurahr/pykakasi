@@ -72,7 +72,7 @@ Documentation
 
 Manual is placed on `readthedocs`_.
 
-.. _`readthedocs`: https://pykakasi.readthedocs.io/en/latest/?badge=latest
+.. _`readthedocs`: https://pykakasi.readthedocs.io/en/latest/contents.html
 
 
 Copyright and License
