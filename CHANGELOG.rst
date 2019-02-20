@@ -1,5 +1,6 @@
+==================
 PyKakasi ChangeLog
-******************
+==================
 
 All notable changes to this project will be documented in this file.
 
@@ -32,7 +33,7 @@ Security
 --------
 
 `v0.94`_ (16, Feb, 2019)
-=============
+========================
 
 Add
 ---
@@ -138,7 +139,7 @@ Fixed
 
 
 `v0.82`_ (29, Mar., 2018)
-=============
+=========================
 
 Added
 -----
@@ -189,7 +190,7 @@ Removed
 
 
 `v0.28`_  (26, Mar., 2018)
-===========================
+==========================
 
 Fixed
 -----
@@ -197,7 +198,7 @@ Fixed
 * wheel platform tag for linux is now manylinux1_i686 or _x86_64
 
 `v0.26`_ (26, Mar., 2018)
-=============================
+=========================
 
 Changed
 -------
@@ -210,7 +211,7 @@ Fixed
 * Build wheel with platform names.
 
 `v0.25`_ (25, Mar., 2018)
-=============================
+=========================
 
 
 Added
@@ -237,7 +238,7 @@ Fixed
 * setup.py: change _pre_build() to pre_build() (#17).
 
 `v0.23`_ (25, May., 2014)
-=============================
+=========================
 
 * Support following options in kakasi command.
 
@@ -260,18 +261,18 @@ Fixed
 
 
 `v0.22`_ (3, May., 2014)
-=============================
+========================
 
 * Introduced kakasi command
 * Symbols support
 
 `v0.21`_ (27, April., 2014)
-=============================
+===========================
 
 * Wakati conversion support
 
 `v0.20`_ (27, April., 2014)
-=============================
+===========================
 
 * Pickled roman tables
 

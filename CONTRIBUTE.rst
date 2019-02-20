@@ -9,11 +9,13 @@ Resources
 =========
 
 - Project owner: Hiroshi Miura
-- Slack chat: https://pykakasi.slack.com/
-- join slack chat: https://join.slack.com/t/pykakasi/shared_invite/enQtNTU0MjAyNzY2MTE5LTk2YWU5ZGIwZjAxMTZlMzhmMmM2NjQ5YTZlM2QyMDg1MTdjMGVkZTU1N2ZjYWE5N2QzMTNkM2FlZGI2YzRiMTY
-- Bug tracker: https://github.com/miurahr/pykakasi/issues
+- Slack chat: `Join`_ to  https://pykakasi.slack.com/
+- Bug Tracker:  Github issue `Tracker`_
 - Status: alpha
 - Activity: low
+
+.. _`Join`: https://join.slack.com/t/pykakasi/shared_invite/enQtNTU0MjAyNzY2MTE5LTk2YWU5ZGIwZjAxMTZlMzhmMmM2NjQ5YTZlM2QyMDg1MTdjMGVkZTU1N2ZjYWE5N2QzMTNkM2FlZGI2YzRiMTY
+.. _`Tracker`: https://github.com/miurahr/pykakasi/issues
 
 Bug triage
 ==========

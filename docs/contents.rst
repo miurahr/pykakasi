@@ -1,5 +1,6 @@
 .. _contents:
 
+===============================
 Pykakasi documentation contents
 ===============================
 
@@ -7,11 +8,14 @@ Pykakasi documentation contents
    :maxdepth: 2
 
    intro
+   api
+   cli
+   authors
    devguide
    changes
-   authors
 
 
+==================
 Indices and tables
 ==================
 
