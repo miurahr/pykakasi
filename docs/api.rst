@@ -1,13 +1,6 @@
-==============
-API interfaces
-==============
-
-Abstract
-========
-
-
-
-
+=====================
+Programming Interface
+=====================
 
 
 Conversion Options
@@ -19,15 +12,15 @@ Now it support following options:
 +--------+---------------------+------------+---------------------------------------+
 | Option | Description         | Values     | Note                                  |
 +========+=====================+============+=======================================+
-| K      | Katakana convertion | a,H,None   | roman, Hiragana or noconversion       |
+| K      | Katakana conversion | a,H,None   | roman, Hiragana or non conversion     |
 +--------+---------------------+------------+---------------------------------------+
-| H      | Hiragana convertion | a,K,None   | roman, Katakana or noconversion       |
+| H      | Hiragana conversion | a,K,None   | roman, Katakana or non conversion     |
 +--------+---------------------+------------+---------------------------------------+
 | J      | Kanji conversion    | a,H,K,None | roman or Hiragana, Katakana or noconv |
 +--------+---------------------+------------+---------------------------------------+
-| a      | Roman conversion    | E,None     | JIS ROMAN or noconversion             |
+| a      | Roman conversion    | E,None     | JIS ROMAN or non conversion           |
 +--------+---------------------+------------+---------------------------------------+
-| E      | JIS ROMAN conversion| a,None     | ascii roman or noconversion           |
+| E      | JIS ROMAN conversion| a,None     | ascii roman or non conversion         |
 +--------+---------------------+------------+---------------------------------------+
 
 Each character means character sets as follows::
@@ -37,9 +30,6 @@ Each character means character sets as follows::
        (j,k     defined in jisx0201)
        E: kigou  K: katakana  H: hiragana J: kanji
        (E,K,H,J defined in jisx0208)
-
-Other options
-=============
 
 
 
