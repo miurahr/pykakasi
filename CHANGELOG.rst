@@ -4,6 +4,10 @@ PyKakasi ChangeLog
 
 All notable changes to this project will be documented in this file.
 
+***************
+Current changes
+***************
+
 `Unreleased`_
 =============
 
@@ -58,6 +62,10 @@ Deprecated
 ----------
 
 * Drop python2.6 and python 3.3 from test target.
+
+****************
+Previous changes
+****************
 
 `v0.93`_ (3, May, 2018)
 =========================

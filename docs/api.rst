@@ -1,3 +1,5 @@
+.. _api-documents-ref:
+
 =====================
 Programming Interface
 =====================

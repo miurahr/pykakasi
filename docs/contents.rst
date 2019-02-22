@@ -1,13 +1,12 @@
 .. _contents:
 
-===============================
-Pykakasi documentation contents
-===============================
+=================
+Table of contents
+=================
 
 .. toctree::
    :maxdepth: 2
 
-   intro
    api
    cli
    authors
