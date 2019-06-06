@@ -36,3 +36,15 @@ def test_issues59():
     converter = kakasi.getConverter()
     for case, result in TESTS:
         assert converter.do(case) == result
+
+
+def test_kakasi_issues68():
+    TESTS = [
+        (u"", u""),
+        (u"埇", u"よう")
+    ]
+    kks = pykakasi.kakasi()
+    kks.setMode("J", "H")
+    convert = kks.getConverter()
+    for case, result in TESTS:
+        assert convert.do(case) == result
