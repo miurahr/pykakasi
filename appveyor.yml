@@ -1,52 +1,14 @@
 environment:
-  TWINE_REPOSITORY_URL: https://upload.pypi.org/legacy/
-  TWINE_USERNAME: miurahr
-  TWINE_PASSWORD:
-    secure: ibyxU09f3mAdoh5Hv4T27Q==
   matrix:
-    - TOXENV: py27
-    - TOXENV: py35
-    - TOXENV: py36
+  - TOXENV: py27
+  - TOXENV: py35
+  - TOXENV: py36
+  - TOXENV: py37
 
-init:
-  - ps: |
-      function exec
-      {
-        param ( [ScriptBlock] $ScriptBlock )
-        & $ScriptBlock 2>&1 | ForEach-Object -Process { "$_" }
-        if ($LastExitCode -ne 0) { exit $LastExitCode }
-      }
+build: off
 
 install:
-  - "python.exe -m pip install twine wheel"
-  - "python.exe -m pip install -U -r requirements-dev.txt -r requirements.txt"
-
-build_script: 
-  - "python.exe setup.py build"
+- pip install tox six semidbm
 
 test_script:
-  - tox
-
-after_test:
-  - "python.exe setup.py sdist"
-
-artifacts:
-  - path: dist\*
-
-deploy_script:
-  - ps: |
-      If ($env:APPVEYOR_REPO_TAG -eq "true")
-      {
-        $artifacts = Get-ChildItem -Path dist -Include '*.tar.gz' -Recurse -Name | %{"$_"}
-        cd dist
-        exec { python.exe -m twine upload --skip-existing $artifacts }
-      }
-      else
-      {
-        Write-Host "Skip uploading artifacts to PyPi when non tag commit"
-      }
-
-notifications:
-  - provider: Webhook
-    url: https://webhooks.gitter.im/e/527beafbc6f6f66bf889
-    method: POST
+- tox

@@ -11,15 +11,16 @@ matrix:
       env: PYTHON_TAG=pypy
 
 install:
-  - pip install -r requirements.txt -r requirements-dev.txt
+  - pip install -r requirements.txt
   - pip install tox-travis
 
 script: tox
 
 after_success:
   - python setup.py bdist_wheel --python-tag=${PYTHON_TAG}
+  - python setup.py sdist --python-tag=${PYTHON_TAG}
   # Hack for coveralls to find sources
-  - sed -ie 's/\.tox\/(pypy|pypy3|py27|py34|py35|py36|py37)\/lib\/python[2-3]\.[0-9]\/site-packages/src/g' .coverage
+  - sed -ie 's/\.tox\/(pypy|pypy3|py27|py34|py35|py36|py37|py38)\/lib\/python[2-3]\.[0-9]\/site-packages/src/g' .coverage
   - coveralls
 
 deploy:
@@ -30,16 +31,9 @@ deploy:
     file_glob: true
     file:
       - dist/*.whl
+      - dist/*.gz
     skip_cleanup: true
     skip_existing: true
     on:
       repo: miurahr/pykakasi
       tags: true
-
-notifications:
-  webhooks:
-    urls:
-      - https://webhooks.gitter.im/e/f32fb3bc2d3933f7926f
-    on_success: change
-    on_failure: always
-    on_start: never

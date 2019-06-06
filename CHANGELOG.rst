@@ -21,6 +21,7 @@ Changed
 
 * Drop support for python 3.4 that is end-of-line in March, 2019.
 * Add suppot for pypy and tested on Travis-CI.
+* Use 'tox' and 'pytest' for test runner instead of 'unittest'.
 
 Fixed
 -----

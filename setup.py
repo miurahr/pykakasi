@@ -117,7 +117,7 @@ def readme():
         return f.read()
 
 setup(name='pykakasi',
-      version='0.95-dev',
+      version='0.95-dev1',
       description='Python implementation of kakasi - kana kanji simple inversion library',
       url='http://github.com/miurahr/pykakasi',
       license='GPLv3',
@@ -130,8 +130,8 @@ setup(name='pykakasi',
       scripts = ["kakasi"],
       include_package_data = True,
       package_data = {'src/pykakasi/data':  ['*.utf8']},
-      test_suite = 'nose.collector',
-      tests_require = ['nose','coverage','mock'],
+      tests_require = ['pytest','coverage'],
+      setup_requires=['six','semidbm'],
       install_requires=['six','semidbm'],
       cmdclass={'build_py': MyBuild}
 )

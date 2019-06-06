@@ -1,2 +1,14 @@
 six
 semidbm
+coveralls
+flake8
+pinocchio
+mock
+pytest
+pytest-cov
+coverage
+sphinx-intl
+setuptools
+tox
+twine
+wheel
