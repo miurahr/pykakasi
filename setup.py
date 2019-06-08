@@ -98,7 +98,7 @@ class MyBuild(build_py):
             ('passporthira.utf8', 'passporthira2.pickle')
         ]
         kanwa = genkanwadict()
-        for (src_f,pkl_f) in DICTS:
+        for (src_f, pkl_f) in DICTS:
             src = os.path.join('src', 'pykakasi', 'data', src_f)
             dst = os.path.join(self.build_lib, 'pykakasi', pkl_f)
             if (os.path.exists(dst)):
@@ -115,8 +115,9 @@ class MyBuild(build_py):
         if not self.dry_run:
             self.generate_dictionaries()
 
+
 def readme():
-    with io.open(os.path.join(os.path.dirname(__file__),'README.rst'), mode="r", encoding="UTF-8") as f:
+    with io.open(os.path.join(os.path.dirname(__file__), 'README.rst'), mode="r", encoding="UTF-8") as f:
         return f.read()
 
 
@@ -143,19 +144,30 @@ setup(name=package_name,
       long_description=readme(),
       author=author,
       author_email=author_email,
-      package_dir = {'pykakasi':'src/pykakasi'},
-      packages = [package_name],
-      provides = [package_name],
-      scripts = ["kakasi"],
-      include_package_data = True,
-      package_data = {'src/pykakasi/data':  ['*.utf8']},
-      tests_require = ['pytest','coverage'],
-      setup_requires=['six','semidbm'],
-      install_requires=['six','semidbm'],
-      extras_require={
-        'dev': [
-            'pytest'
-        ]
-      },
-      cmdclass={'build_py': MyBuild}
-)
+      package_dir={'pykakasi': 'src/pykakasi'},
+      packages=[package_name],
+      provides=[package_name],
+      scripts=["bin/kakasi"],
+      include_package_data=True,
+      package_data={'src/pykakasi/data': ['*.utf8']},
+      tests_require=['pytest', 'coverage'],
+      setup_requires=['six', 'semidbm'],
+      install_requires=['six', 'semidbm'],
+      extras_require={'dev': ['pytest']},
+      cmdclass={'build_py': MyBuild},
+      classifiers=[
+          'Development Status :: 4 - Beta',
+          'Environment :: Console',
+          'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
+          'Operating System :: MacOS :: MacOS X',
+          'Operating System :: Microsoft :: Windows',
+          'Operating System :: POSIX',
+          'Operating System :: POSIX :: Linux',
+          'Programming Language :: Python',
+          'Programming Language :: Python :: 2.7',
+          'Programming Language :: Python :: 3',
+          'Programming Language :: Python :: 3.5',
+          'Programming Language :: Python :: 3.6',
+          'Programming Language :: Python :: 3.7',
+          'Topic :: Software Development :: Libraries :: Python Modules']
+      )

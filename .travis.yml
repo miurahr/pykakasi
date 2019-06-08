@@ -14,7 +14,9 @@ install:
   - pip install -r requirements.txt
   - pip install tox-travis
 
-script: tox
+script:
+  - flake8 bin src tests
+  - tox
 
 after_success:
   - python setup.py bdist_wheel --python-tag=${PYTHON_TAG}
