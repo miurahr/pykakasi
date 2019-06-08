@@ -14,6 +14,8 @@ Current changes
 Added
 -----
 
+* Add few words(#66).
+
 Changed
 -------
 
