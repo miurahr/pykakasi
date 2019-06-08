@@ -57,7 +57,7 @@ class J2(object):
             self.convert = self.convert_noop
 
     def isRegion(self, c):
-        return 0x3400 <= ord(c[0]) < 0xe000 or  0xf900 <= ord(c[0]) < 0xfa2e
+        return 0x3400 <= ord(c[0]) < 0xe000 or 0xf900 <= ord(c[0]) < 0xfa2e
 
     def isCletter(self, l, c):
         if (0x3041 <= ord(c) <= 0x309f) and (l in self._cl_table[ord(c) - 0x3040]):  # ぁ:= u\3041
