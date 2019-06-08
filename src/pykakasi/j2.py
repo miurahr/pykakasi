@@ -27,8 +27,8 @@
 
 import re
 
-from .kanwa import kanwa
 from .itaiji import itaiji
+from .kanwa import kanwa
 
 
 class J2(object):

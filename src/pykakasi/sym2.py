@@ -4,6 +4,9 @@
 # Copyright 2014,2018 Hiroshi Miura <miurahr@linux.com>
 #
 from __future__ import unicode_literals
+
+import six
+
 __license__ = 'GPL 3'
 __copyright__ = '2014,2018, Hiroshi Miura <miurahr@linux.com>'
 __docformat__ = 'restructuredtext en'
@@ -51,8 +54,6 @@ Greek convertion table
    "sigma", "tau", "upsilon", "phi", "chi", "psi", "omega"
 ----------------------------------------------------------
 '''
-
-import six
 
 
 class sym2 (object):

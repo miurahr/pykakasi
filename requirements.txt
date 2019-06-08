@@ -1,14 +1,12 @@
 six
 semidbm
+coverage
 coveralls
 flake8
-pinocchio
-mock
 pytest
 pytest-cov
-coverage
-sphinx-intl
 setuptools
+sphinx-intl
 tox
 twine
 wheel

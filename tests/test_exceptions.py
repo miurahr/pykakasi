@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import pytest
+
 import pykakasi
-from pykakasi.exceptions import UnsupportedRomanRulesException, InvalidModeValueException, InvalidFlagValueException
+from pykakasi.exceptions import (InvalidFlagValueException,
+                                 InvalidModeValueException,
+                                 UnsupportedRomanRulesException)
 
 
 def test_kakasi_unknown_rule():

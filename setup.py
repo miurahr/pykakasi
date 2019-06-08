@@ -4,16 +4,14 @@ import io
 import os
 import re
 import shutil
-
-from zlib import compress
 from marshal import dumps
-from six.moves import cPickle
-from six import unichr
-import semidbm as dbm
+from zlib import compress
 
+import semidbm as dbm
 from setuptools import setup
 from setuptools.command.build_py import build_py
-
+from six import unichr
+from six.moves import cPickle
 
 package_name = "pykakasi"
 root_dir = os.path.abspath(os.path.dirname(__file__))

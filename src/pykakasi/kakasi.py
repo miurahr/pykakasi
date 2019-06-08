@@ -46,8 +46,11 @@ Flags:
 '''
 
 from six import PY2
-from pykakasi.exceptions import InvalidFlagValueException, InvalidModeValueException, UnsupportedRomanRulesException, \
-    UnknownOptionsException
+
+from pykakasi.exceptions import (InvalidFlagValueException,
+                                 InvalidModeValueException,
+                                 UnknownOptionsException,
+                                 UnsupportedRomanRulesException)
 
 
 class kakasi(object):
