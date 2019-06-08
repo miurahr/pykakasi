@@ -26,6 +26,7 @@ Changed
 Fixed
 -----
 
+* Fix keyerror for some characters(#68).
 * Fix coveralls source code reference.
 
 Deprecated
