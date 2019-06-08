@@ -22,8 +22,8 @@ Overview
    :target: https://coveralls.io/r/miurahr/pykakasi?branch=master
    :alt: Coverage status
 
-.. imagei:: https://dev.azure.com/miurahr/github/_apis/build/status/miurahr.pykakasi?branchName=master
-   :target: https://dev.azure.com/miurahr/github/_build/results
+.. image:: https://dev.azure.com/miurahr/github/_apis/build/status/miurahr.pykakasi?branchName=master
+   :target: https://dev.azure.com/miurahr/github/_build?definitionId=13&branchName=master
    :alt: Azure-Pipelines
 
 
