@@ -14,20 +14,11 @@ Current changes
 Added
 -----
 
-* Add manual document holder.
-
 Changed
 -------
 
-* Drop support for python 3.4 that is end-of-line in March, 2019.
-* Add suppot for pypy and tested on Travis-CI.
-* Use 'tox' and 'pytest' for test runner instead of 'unittest'.
-
 Fixed
 -----
-
-* Fix keyerror for some characters(#68).
-* Fix coveralls source code reference.
 
 Deprecated
 ----------
@@ -37,6 +28,37 @@ Removed
 
 Security
 --------
+
+
+`v0.95`_ (8, June, 2019)
+========================
+
+Added
+-----
+
+* Add manual document holder.
+* Test on Azure-Pipelines.
+* Tox has a check test pipeline
+* Add classifier to setup.py
+
+Changed
+-------
+
+* Drop support for python 3.4 that is end-of-line in March, 2019.
+* Add suppot for pypy and tested on Travis-CI.
+* Version information on __init__.py
+* Use 'tox' and 'pytest' for test runner instead of 'unittest'.
+
+Fixed
+-----
+
+* Fix keyerror for some characters(#68).
+* Fix coveralls source code reference.
+
+Removed
+----------
+
+* Test on AppVeyor
 
 `v0.94`_ (16, Feb, 2019)
 ========================
@@ -293,7 +315,8 @@ Version 0.10 (25, April, 2014)
   (Thanks @FGtatsuro)
 * Kunrei and Hepburn roman table
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v0.94...HEAD
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v0.95...HEAD
+.. _v0.95: https://github.com/miurahr/pykakasi/compare/v0.94...v0.95
 .. _v0.94: https://github.com/miurahr/pykakasi/compare/v0.93...v0.94
 .. _v0.93: https://github.com/miurahr/pykakasi/compare/v0.92...v0.93
 .. _v0.92: https://github.com/miurahr/pykakasi/compare/v0.91...v0.92
