@@ -45,7 +45,7 @@ Flags:
 
 '''
 
-from six import PY2
+import six
 
 from pykakasi.exceptions import (InvalidFlagValueException,
                                  InvalidModeValueException,
@@ -116,11 +116,7 @@ class kakasi(object):
         return self
 
     def do(self, itext):
-        # Guard for python2
-        if PY2:
-            text = unicode(itext)  # pragma: no cover
-        else:
-            text = itext  # pragma: no cover
+        text = six.text_type(itext)
 
         mode = None
         otext = ""
