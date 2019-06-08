@@ -1,6 +1,15 @@
-include README.rst
-include COPYING
 exclude appveyor.yml
 exclude .travis.yml
 recursive-include src/pykakasi/data *.utf8
-recursive-exclude tests *.py
+recursive-include tests *.py
+include *.rst
+include *.txt
+include AUTHORS
+include COPYING
+include tox.ini
+recursive-include docs *.po
+recursive-include docs *.py
+recursive-include docs *.rst
+recursive-include docs *.site
+recursive-include docs *.yml
+recursive-include docs Makefile

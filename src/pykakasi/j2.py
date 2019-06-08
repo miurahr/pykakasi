@@ -27,8 +27,8 @@
 
 import re
 
-from .kanwa import kanwa
 from .itaiji import itaiji
+from .kanwa import kanwa
 
 
 class J2(object):
@@ -85,7 +85,7 @@ class J2(object):
             if len(text) >= length:
                 if text.startswith(k):
                     for (yomi, tail) in v:
-                        if tail is '':
+                        if tail == '':
                             if max_len < length:
                                 Hstr = yomi
                                 max_len = length

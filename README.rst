@@ -22,9 +22,10 @@ Overview
    :target: https://coveralls.io/r/miurahr/pykakasi?branch=master
    :alt: Coverage status
 
-.. image:: https://ci.appveyor.com/api/projects/status/mhej9bbe5jomvaj4/branch/master?svg=true
-   :target: https://ci.appveyor.com/project/miurahr/pykakasi/branch/master
-   :alt: Build status
+.. imagei:: https://dev.azure.com/miurahr/github/_apis/build/status/miurahr.pykakasi?branchName=master
+   :target: https://dev.azure.com/miurahr/github/_build/results
+   :alt: Azure-Pipelines
+
 
 pykakasi is re-implementation of kakasi library (original is written in C) in Python.
 

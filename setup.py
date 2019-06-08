@@ -4,15 +4,17 @@ import io
 import os
 import re
 import shutil
-
-from zlib import compress
 from marshal import dumps
-from six.moves import cPickle
-from six import unichr
-import semidbm as dbm
+from zlib import compress
 
+import semidbm as dbm
 from setuptools import setup
 from setuptools.command.build_py import build_py
+from six import unichr
+from six.moves import cPickle
+
+package_name = "pykakasi"
+root_dir = os.path.abspath(os.path.dirname(__file__))
 
 
 class genkanwadict(object):
@@ -94,7 +96,7 @@ class MyBuild(build_py):
             ('passporthira.utf8', 'passporthira2.pickle')
         ]
         kanwa = genkanwadict()
-        for (src_f,pkl_f) in DICTS:
+        for (src_f, pkl_f) in DICTS:
             src = os.path.join('src', 'pykakasi', 'data', src_f)
             dst = os.path.join(self.build_lib, 'pykakasi', pkl_f)
             if (os.path.exists(dst)):
@@ -113,25 +115,57 @@ class MyBuild(build_py):
 
 
 def readme():
-    with io.open(os.path.join(os.path.dirname(__file__),'README.rst'), mode="r", encoding="UTF-8") as f:
+    with io.open(os.path.join(os.path.dirname(__file__), 'README.rst'), mode="r", encoding="UTF-8") as f:
         return f.read()
 
-setup(name='pykakasi',
-      version='0.95-dev',
+
+with open(os.path.join(root_dir, 'src', package_name, '__init__.py')) as f:
+    init_text = f.read()
+    version = re.search(r'__version__\s*=\s*[\'\"](.+?)[\'\"]', init_text).group(1)
+    license = re.search(r'__license__\s*=\s*[\'\"](.+?)[\'\"]', init_text).group(1)
+    author = re.search(r'__author__\s*=\s*[\'\"](.+?)[\'\"]', init_text).group(1)
+    author_email = re.search(r'__author_email__\s*=\s*[\'\"](.+?)[\'\"]', init_text).group(1)
+    url = re.search(r'__url__\s*=\s*[\'\"](.+?)[\'\"]', init_text).group(1)
+
+assert version
+assert license
+assert author
+assert author_email
+assert url
+
+
+setup(name=package_name,
+      version=version,
       description='Python implementation of kakasi - kana kanji simple inversion library',
-      url='http://github.com/miurahr/pykakasi',
-      license='GPLv3',
+      url=url,
+      license=license,
       long_description=readme(),
-      author='Hioshi Miura',
-      author_email='miurahr@linux.com',
-      package_dir = {'pykakasi':'src/pykakasi'},
-      packages = ['pykakasi'],
-      provides = ['pykakasi'],
-      scripts = ["kakasi"],
-      include_package_data = True,
-      package_data = {'src/pykakasi/data':  ['*.utf8']},
-      test_suite = 'nose.collector',
-      tests_require = ['nose','coverage','mock'],
-      install_requires=['six','semidbm'],
-      cmdclass={'build_py': MyBuild}
-)
+      author=author,
+      author_email=author_email,
+      package_dir={'pykakasi': 'src/pykakasi'},
+      packages=[package_name],
+      provides=[package_name],
+      scripts=["bin/kakasi"],
+      include_package_data=True,
+      package_data={'src/pykakasi/data': ['*.utf8']},
+      tests_require=['pytest', 'coverage'],
+      setup_requires=['six', 'semidbm'],
+      install_requires=['six', 'semidbm'],
+      extras_require={'dev': ['pytest']},
+      cmdclass={'build_py': MyBuild},
+      classifiers=[
+          'Development Status :: 4 - Beta',
+          'Environment :: Console',
+          'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
+          'Operating System :: MacOS :: MacOS X',
+          'Operating System :: Microsoft :: Windows',
+          'Operating System :: POSIX',
+          'Operating System :: POSIX :: Linux',
+          'Programming Language :: Python',
+          'Programming Language :: Python :: 2.7',
+          'Programming Language :: Python :: 3',
+          'Programming Language :: Python :: 3.5',
+          'Programming Language :: Python :: 3.6',
+          'Programming Language :: Python :: 3.7',
+          'Topic :: Software Development :: Libraries :: Python Modules']
+      )

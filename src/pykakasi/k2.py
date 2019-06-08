@@ -27,8 +27,9 @@
 
 from six import unichr
 from six.moves import range
-from .jisyo import jisyo
+
 from .exceptions import UnsupportedRomanRulesException
+from .jisyo import jisyo
 
 
 class K2 (object):

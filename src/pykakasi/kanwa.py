@@ -3,10 +3,11 @@
 #
 # Copyright 2011-2019 Hiroshi Miura <miurahr@linux.com>
 
-from zlib import decompress
-from pkg_resources import resource_filename
 from marshal import loads
+from zlib import decompress
+
 import semidbm as dbm
+from pkg_resources import resource_filename
 
 
 # This class is Borg/Singleton

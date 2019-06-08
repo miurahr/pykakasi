@@ -19,8 +19,9 @@
 # * 02111-1307, USA.
 # */
 
+from pykakasi.exceptions import (InvalidFlagValueException,
+                                 UnknownOptionsException)
 
-from pykakasi.exceptions import InvalidFlagValueException, UnknownOptionsException
 from .kakasi import kakasi
 
 
