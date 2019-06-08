@@ -38,7 +38,24 @@ def test_issues59():
         assert converter.do(case) == result
 
 
-def test_kakasi_issues68():
+def test_issue66():
+    TESTS = [
+        (u"月々", "tukizuki"),
+        (u"毎月々", "maitukizuki"),
+        (u"佐々木", "sasaki"),
+        (u"中佐々木", "nakasasaki"),
+        (u"代々木", "yoyogi"),
+        (u"次代々木", "tugiyoyogi")
+    ]
+    kakasi = pykakasi.kakasi()
+    kakasi.setMode("J", "a")
+    kakasi.setMode("r", "Kunrei")
+    conv = kakasi.getConverter()
+    for case, result in TESTS:
+        assert conv.do(case) == result
+
+
+def test_issues68():
     TESTS = [
         (u"", u""),
         (u"埇", u"よう")

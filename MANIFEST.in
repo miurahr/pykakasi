@@ -1,9 +1,8 @@
-exclude appveyor.yml
-exclude .travis.yml
 recursive-include src/pykakasi/data *.utf8
 recursive-include tests *.py
 include *.rst
 include *.txt
+include *.yml
 include AUTHORS
 include COPYING
 include tox.ini
