@@ -25,7 +25,7 @@
 # * 02111-1307, USA.
 # */
 __license__ = 'GPL 3'
-__copyright__ = '2014-2018 Hiroshi Miura <miurahr@linux.com>'
+__copyright__ = '2014-2019 Hiroshi Miura <miurahr@linux.com>'
 __docformat__ = 'restructuredtext en'
 
 '''
