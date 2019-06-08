@@ -7,7 +7,7 @@ from .sym2 import sym2
 from .wakati import wakati
 
 __copyright__ = 'Copyright (C) 2010-2019 Hiroshi Miura'
-__version__ = '0.95-dev1'
+__version__ = '0.95'
 __license__ = 'GPLv3'
 __author__ = 'Hiroshi Miura'
 __author_email__ = 'miurahr@linux.com'
