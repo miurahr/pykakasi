@@ -76,3 +76,14 @@ def test_issue68_2():
         assert convert.do(six.unichr(case)) is not None
     for i in range(0xf900, 0xfa2e):
         assert convert.do(six.unichr(case)) is not None
+
+
+def test_issue72():
+    TESTS = [
+        (u"㐂", u"き")
+    ]
+    kks = pykakasi.kakasi()
+    kks.setMode("J", "H")
+    convert = kks.getConverter()
+    for case, result in TESTS:
+        assert convert.do(case) == result
