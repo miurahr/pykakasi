@@ -22,6 +22,8 @@ Changed
 Fixed
 -----
 
+* KeyError when input unknown kanji.(#68)
+
 Deprecated
 ----------
 
