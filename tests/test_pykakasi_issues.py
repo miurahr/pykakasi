@@ -68,6 +68,16 @@ def test_issues68():
         assert convert.do(case) == result
 
 
+def test_issue68_2():
+    kks = pykakasi.kakasi()
+    kks.setMode("J", "H")
+    convert = kks.getConverter()
+    for case in range(0x3400, 0xdfff):
+        assert convert.do(six.unichr(case)) is not None
+    for i in range(0xf900, 0xfa2e):
+        assert convert.do(six.unichr(case)) is not None
+
+
 def test_issue72():
     TESTS = [
         (u"㐂", u"き")
