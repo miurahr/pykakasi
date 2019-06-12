@@ -20,6 +20,8 @@ Changed
 Fixed
 -----
 
+* Fix test case issue68_2 for missing characters
+
 Deprecated
 ----------
 
