@@ -14,15 +14,11 @@ Current changes
 Added
 -----
 
-* Add few words(#66).
-
 Changed
 -------
 
 Fixed
 -----
-
-* KeyError when input unknown kanji.(#68)
 
 Deprecated
 ----------
@@ -33,6 +29,21 @@ Removed
 Security
 --------
 
+`v0.96`_ (8, June, 2019)
+========================
+
+Added
+-----
+
+* Add few words(#66).
+Fixed
+-----
+
+* KeyError when input unknown kanji.(#68)
+
+****************
+Previous changes
+****************
 
 `v0.95`_ (8, June, 2019)
 ========================
@@ -90,10 +101,6 @@ Deprecated
 ----------
 
 * Drop python2.6 and python 3.3 from test target.
-
-****************
-Previous changes
-****************
 
 `v0.93`_ (3, May, 2018)
 =========================
@@ -319,7 +326,8 @@ Version 0.10 (25, April, 2014)
   (Thanks @FGtatsuro)
 * Kunrei and Hepburn roman table
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v0.95...HEAD
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v0.96...HEAD
+.. _v0.96: https://github.com/miurahr/pykakasi/compare/v0.95...v0.96
 .. _v0.95: https://github.com/miurahr/pykakasi/compare/v0.94...v0.95
 .. _v0.94: https://github.com/miurahr/pykakasi/compare/v0.93...v0.94
 .. _v0.93: https://github.com/miurahr/pykakasi/compare/v0.92...v0.93
