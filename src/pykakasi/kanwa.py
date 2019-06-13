@@ -3,9 +3,10 @@
 #
 # Copyright 2011-2019 Hiroshi Miura <miurahr@linux.com>
 
-from marshal import loads
 import threading
+from marshal import loads
 from zlib import decompress
+
 import semidbm as dbm
 from pkg_resources import resource_filename
 

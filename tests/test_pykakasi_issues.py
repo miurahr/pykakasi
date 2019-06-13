@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import pykakasi
 import six
+
+import pykakasi
 
 
 def test_issues60():
