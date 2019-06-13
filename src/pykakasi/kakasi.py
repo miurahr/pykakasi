@@ -118,10 +118,7 @@ class kakasi(object):
     def do(self, itext):
         text = six.text_type(itext)
 
-        mode = None
         otext = ""
-        orig = ""
-        chunk = ""
         i = 0
         while True:
             if i >= len(text):

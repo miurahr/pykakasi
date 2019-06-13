@@ -17,6 +17,8 @@ Added
 Changed
 -------
 
+* Refactoring itaiji and kanwa class as a thread-safe borg class.
+
 Fixed
 -----
 

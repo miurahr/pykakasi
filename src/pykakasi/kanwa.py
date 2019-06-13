@@ -4,8 +4,8 @@
 # Copyright 2011-2019 Hiroshi Miura <miurahr@linux.com>
 
 from marshal import loads
+import threading
 from zlib import decompress
-
 import semidbm as dbm
 from pkg_resources import resource_filename
 
@@ -14,13 +14,16 @@ from pkg_resources import resource_filename
 # It provides same results becase lookup from a static dictionary.
 # There is no state rather dictionary dbm.
 class kanwa (object):
-    _shared_state = {}
-    _kanwadict = None
-    _jisyo_table = {}
+    _shared_state = {
+        '_kanwadict': None,
+        '_lock': threading.Lock(),
+        '_jisyo_table': {}
+    }
 
-    # FIXME: there is no invalidate mechanism for _jisyo_table data.
-    #        It can lead a large memory consumption in long live process.
-    #        but max size are limited to a size of a dictionary.
+    # Note: there is no invalidate mechanism for _jisyo_table data.
+    #       It can lead a large memory consumption in long live process.
+    #       maximum memory consumption will be several megabytes which is
+    #       a size of a dictionary.
 
     def __new__(cls, *p, **k):
         self = object.__new__(cls, *p, **k)
@@ -29,16 +32,19 @@ class kanwa (object):
 
     def __init__(self):
         if self._kanwadict is None:
-            dictpath = resource_filename(__name__, 'kanwadict3.db')  # FIXME: no hardcoded filename
-            self._kanwadict = dbm.open(dictpath, 'r')
+            with self._lock:
+                if self._kanwadict is None:
+                    dictpath = resource_filename(__name__, 'kanwadict3.db')  # FIXME: no hardcoded filename
+                    self._kanwadict = dbm.open(dictpath, 'r')  # readonly mode
 
     def load(self, char):
         key = "%04x" % ord(char)
-        if key in self._jisyo_table:
-            return self._jisyo_table[key]
-        else:
-            try:
-                self._jisyo_table[key] = loads(decompress(self._kanwadict[key]))
-                return self._jisyo_table[key]
-            except KeyError:
-                return None  # pragma: no cover
+        if key not in self._jisyo_table:
+            with self._lock:
+                if key not in self._jisyo_table:
+                    try:
+                        val = loads(decompress(self._kanwadict[key]))
+                    except KeyError:
+                        val = None
+                    self._jisyo_table[key] = val
+        return self._jisyo_table.get(key, None)

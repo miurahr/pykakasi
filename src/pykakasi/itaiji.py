@@ -5,6 +5,7 @@
 #
 
 import re
+import threading
 
 from pkg_resources import resource_filename
 from six.moves import cPickle
@@ -12,11 +13,12 @@ from six.moves import cPickle
 
 class itaiji (object):
 
-    _itaijidict = None
-    _itaijidict_len = 0
-
     # this class is Borg/Singleton
-    _shared_state = {}
+    _shared_state = {
+        '_itaijidict': None,
+        '_itaijidict_len': 0,
+        '_lock': threading.Lock()
+    }
 
     def __new__(cls, *p, **k):
         self = object.__new__(cls, *p, **k)
@@ -25,9 +27,11 @@ class itaiji (object):
 
     def __init__(self):
         if self._itaijidict is None:
-            itaijipath = resource_filename(__name__, 'itaijidict2.pickle')
-            with open(itaijipath, 'rb') as itaiji_pkl:
-                (self._itaijidict, self._itaijidict_len) = cPickle.load(itaiji_pkl)
+            with self._lock:
+                if self._itaijidict is None:
+                    itaijipath = resource_filename(__name__, 'itaijidict2.pickle')
+                    with open(itaijipath, 'rb') as itaiji_pkl:
+                        (self._itaijidict, self._itaijidict_len) = cPickle.load(itaiji_pkl)
 
     def haskey(self, key):
         return key in self._itaijidict

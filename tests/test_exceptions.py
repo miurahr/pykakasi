@@ -2,7 +2,6 @@
 
 import pykakasi
 import pytest
-
 from pykakasi.exceptions import (InvalidFlagValueException,
                                  InvalidModeValueException,
                                  UnsupportedRomanRulesException)
