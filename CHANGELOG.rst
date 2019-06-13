@@ -15,6 +15,7 @@ Added
 -----
 
 * Threading test.
+* Test with unkown characters such as Chinese kanji.
 
 Changed
 -------

@@ -375,3 +375,21 @@ def test_kakasi_hepburn_nocapital():
     converter = kakasi.getConverter()
     for case, result in TESTS:
         assert converter.do(case) == result
+
+
+def test_kakasi_unkown_characters():
+    TESTS = [
+        (u"您好", '??? kou')
+    ]
+    kakasi = pykakasi.kakasi()
+    kakasi.setMode("H", "a")
+    kakasi.setMode("K", "a")
+    kakasi.setMode("J", "a")
+    kakasi.setMode("r", "Hepburn")
+    kakasi.setMode("s", True)
+    kakasi.setMode("E", "a")
+    kakasi.setMode("a", None)
+    kakasi.setMode("C", False)
+    converter = kakasi.getConverter()
+    for case, result in TESTS:
+        assert converter.do(case) == result
