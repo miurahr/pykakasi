@@ -22,7 +22,7 @@ after_success:
   - python setup.py bdist_wheel --python-tag=${PYTHON_TAG}
   - python setup.py sdist --python-tag=${PYTHON_TAG}
   # Hack for coveralls to find sources
-  - sed -ie 's/.tox.py(27|35|36|py).(lib.python[2-3].[0-9].)?site-packages/src/g' .coverage
+  - sed -E -ie 's/.tox.py(27|35|36|py).(lib.python[2-3].[0-9].)?site-packages/src/g' .coverage
   - coveralls
 
 deploy:
