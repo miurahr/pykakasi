@@ -27,7 +27,9 @@ Overview
    :alt: Azure-Pipelines
 
 
-pykakasi is re-implementation of kakasi library (original is written in C) in Python.
+pykakasi is Natural Language Proseccing(NLP) library to convert Kana-Kanji Japanese clauses into 
+Roman-Kana with separator in python.
+This is improved kakasi library (original is written in C) in Python.
 
 pykakasi at glance
 ==================

@@ -14,6 +14,8 @@ Current changes
 Added
 -----
 
+* Threading test.
+
 Changed
 -------
 
