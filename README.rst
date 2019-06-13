@@ -10,21 +10,21 @@ Overview
    :target: https://pykakasi.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
 
-.. image:: https://travis-ci.org/miurahr/pykakasi.svg?branch=master
-   :target: https://travis-ci.org/miurahr/pykakasi
-   :alt: Travis-CI
-
 .. image:: https://badge.fury.io/py/pykakasi.png
    :target: http://badge.fury.io/py/Pykakasi
    :alt: PyPI version
 
-.. image:: https://coveralls.io/repos/miurahr/pykakasi/badge.svg?branch=master
-   :target: https://coveralls.io/r/miurahr/pykakasi?branch=master
-   :alt: Coverage status
+.. image:: https://travis-ci.org/miurahr/pykakasi.svg?branch=master
+   :target: https://travis-ci.org/miurahr/pykakasi
+   :alt: Travis-CI
 
 .. image:: https://dev.azure.com/miurahr/github/_apis/build/status/miurahr.pykakasi?branchName=master
    :target: https://dev.azure.com/miurahr/github/_build?definitionId=13&branchName=master
    :alt: Azure-Pipelines
+
+.. image:: https://coveralls.io/repos/miurahr/pykakasi/badge.svg?branch=master
+   :target: https://coveralls.io/r/miurahr/pykakasi?branch=master
+   :alt: Coverage status
 
 
 pykakasi is Natural Language Proseccing(NLP) library to convert Kana-Kanji Japanese clauses into 
