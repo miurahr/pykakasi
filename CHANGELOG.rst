@@ -17,6 +17,7 @@ Added
 * Threading test.
 * Test with Chinese kanji.
 * Test with extended kana which is out of Unicode BSC.
+* t flag to specify not to change unkouwn characters to ???.
 
 Changed
 -------

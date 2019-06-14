@@ -66,7 +66,7 @@ class kakasi(object):
         self._mode = {"J": None, "H": None, "K": None, "E": None, "a": None}
         self._furi = {"J": False, "H": False, "K": False, "E": False, "a": False}
         self._flag = {"p": False, "s": False, "f": False, "c": False, "C": False, "U": False,
-                      "u": False}
+                      "u": False, "t": True}
         self._option = {"r": "Hepburn"}
         self._separator = ' '
         self._separator_string = ' '
@@ -141,14 +141,17 @@ class kakasi(object):
                 w = min(i + self._MAXLEN, len(text))
                 (t, l1) = self._conv[mode].convert(text[i:w])
 
-                if l1 <= 0:  # fails to convert
-                    orig = text[i:i + 1]
-                    chunk = "???"
-                    i += 1
-                else:
+                if l1 > 0:
                     orig = text[i:i + l1]
                     chunk = t
                     i = i + l1
+                else:
+                    orig = text[i:i + 1]
+                    if self._flag["t"]:
+                        chunk = orig
+                    else:
+                        chunk = "???"
+                    i += 1
 
             elif mode in ("H", "K", "a"):
                 orig = ''
@@ -156,18 +159,20 @@ class kakasi(object):
                 while True:  # eat mode
                     w = min(i + self._MAXLEN, len(text))
                     (t, l1) = self._conv[mode].convert(text[i:w])
-                    if l1 <= 0:  # fails to convert
-                        if orig != '':
-                            break  # print what we already have
-
-                        orig = text[i:i + 1]
-                        chunk = "???"
-                        i += 1
-                        break  # skip one char
-                    else:
+                    if l1 > 0:  # fails to convert
                         orig += text[i:i + l1]
                         chunk += t
                         i = i + l1
+                    elif orig != '':
+                        break
+                    else:
+                        orig = text[i:i + 1]
+                        if self._flag["t"]:
+                            chunk = orig
+                        else:
+                            chunk = "???"
+                        i += 1
+                        break
 
                     if i >= len(text) or not self._conv[mode].isRegion(text[i]):
                         break

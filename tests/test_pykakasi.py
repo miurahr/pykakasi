@@ -196,8 +196,7 @@ def test_hiragana_furiagana():
         assert converter.do(case) == result
 
 
-# TODO Not implemented yet furigana mode for wakati
-@pytest.mark.xfail
+@pytest.mark.xfail(reason="Not implemented yet furigana mode for wakati")
 def test_wakati_furiagana():
     TESTS = [
         (u"変換前の漢字の脇に", u"変換前[へんかんまえ] の 漢字[かんじ] の 脇[わき] に")
@@ -210,7 +209,6 @@ def test_wakati_furiagana():
 
 
 def test_kakasi_a2E():
-
     TESTS = [
         ("ABCDEFGHIJKLMNOPQRSTUVWXYZ", u"ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ"),
         ("abcdefghijklmnopqrstuvwxyz", u"ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ"),
@@ -377,11 +375,11 @@ def test_kakasi_hepburn_nocapital():
         assert converter.do(case) == result
 
 
-@pytest.mark.xfail(reason="Known Issue about inconsistent behavior")
+@pytest.mark.xfail(reason="Cannot handle small kana extension")
 def test_kakasi_extended_kana():
     TESTS = [
-        (u"\U0001b150", '???'),
-        (u"\U0001b151", '???')
+        (u"\U0001b150", "wi"),
+        (u"\U0001b151", "we")
     ]
     kakasi = pykakasi.kakasi()
     kakasi.setMode("H", "a")
@@ -399,7 +397,7 @@ def test_kakasi_extended_kana():
 
 def test_kakasi_chinese_kanji():
     TESTS = [
-        (u"您好", '??? kou')
+        (u"您好", u'您 kou')
     ]
     kakasi = pykakasi.kakasi()
     kakasi.setMode("H", "a")
@@ -409,6 +407,24 @@ def test_kakasi_chinese_kanji():
     kakasi.setMode("E", "a")
     kakasi.setMode("a", None)
     kakasi.setMode("C", False)
+    converter = kakasi.getConverter()
+    for case, result in TESTS:
+        assert converter.do(case) == result
+
+
+def test_kakasi_chinese_kanji_replace():
+    TESTS = [
+        (u"您好", u'??? kou')
+    ]
+    kakasi = pykakasi.kakasi()
+    kakasi.setMode("H", "a")
+    kakasi.setMode("K", "a")
+    kakasi.setMode("J", "a")
+    kakasi.setMode("s", True)
+    kakasi.setMode("E", "a")
+    kakasi.setMode("a", None)
+    kakasi.setMode("C", False)
+    kakasi.setMode("t", False)
     converter = kakasi.getConverter()
     for case, result in TESTS:
         assert converter.do(case) == result
