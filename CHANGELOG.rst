@@ -15,7 +15,8 @@ Added
 -----
 
 * Threading test.
-* Test with unkown characters such as Chinese kanji.
+* Test with Chinese kanji.
+* Test with extended kana which is out of Unicode BSC.
 
 Changed
 -------

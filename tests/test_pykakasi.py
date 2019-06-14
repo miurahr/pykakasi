@@ -377,7 +377,27 @@ def test_kakasi_hepburn_nocapital():
         assert converter.do(case) == result
 
 
-def test_kakasi_unkown_characters():
+@pytest.mark.xfail(reason="Known Issue about inconsistent behavior")
+def test_kakasi_extended_kana():
+    TESTS = [
+        (u"\U0001b150", '???'),
+        (u"\U0001b151", '???')
+    ]
+    kakasi = pykakasi.kakasi()
+    kakasi.setMode("H", "a")
+    kakasi.setMode("K", "a")
+    kakasi.setMode("J", "a")
+    kakasi.setMode("r", "Hepburn")
+    kakasi.setMode("s", True)
+    kakasi.setMode("E", "a")
+    kakasi.setMode("a", None)
+    kakasi.setMode("C", False)
+    converter = kakasi.getConverter()
+    for case, result in TESTS:
+        assert converter.do(case) == result
+
+
+def test_kakasi_chinese_kanji():
     TESTS = [
         (u"您好", '??? kou')
     ]
@@ -385,7 +405,6 @@ def test_kakasi_unkown_characters():
     kakasi.setMode("H", "a")
     kakasi.setMode("K", "a")
     kakasi.setMode("J", "a")
-    kakasi.setMode("r", "Hepburn")
     kakasi.setMode("s", True)
     kakasi.setMode("E", "a")
     kakasi.setMode("a", None)
