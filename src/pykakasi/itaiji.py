@@ -7,8 +7,8 @@
 import re
 import threading
 
+from klepto.archives import file_archive
 from pkg_resources import resource_filename
-from six.moves import cPickle
 
 
 class itaiji (object):
@@ -29,9 +29,10 @@ class itaiji (object):
         if self._itaijidict is None:
             with self._lock:
                 if self._itaijidict is None:
-                    itaijipath = resource_filename(__name__, 'itaijidict2.pickle')
-                    with open(itaijipath, 'rb') as itaiji_pkl:
-                        (self._itaijidict, self._itaijidict_len) = cPickle.load(itaiji_pkl)
+                    itaijipath = resource_filename(__name__, 'itaijidict3.db')
+                    self._itaijidict = file_archive(itaijipath, {}, serialized=True)
+                    self._itaijidict.load()
+                    self._itaijidict_len = self._itaijidict['_max_key_len_']
 
     def haskey(self, key):
         return key in self._itaijidict

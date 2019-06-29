@@ -3,17 +3,16 @@
 #
 # Copyright 2011-2019 Hiroshi Miura <miurahr@linux.com>
 
+from klepto.archives import file_archive
 from pkg_resources import resource_filename
-from six.moves import cPickle
 
 
 class jisyo (object):
     _dict = None
-    _len = 4
 
-    def __init__(self, pklname):
-        with open(resource_filename(__name__, pklname), 'rb') as dict_pkl:
-            (self._dict, self._len) = cPickle.load(dict_pkl)
+    def __init__(self, dictname):
+        self._dict = file_archive(resource_filename(__name__, dictname), {}, serialized=True )
+        self._dict.load()
 
     def haskey(self, key):
         return key in self._dict
@@ -22,4 +21,4 @@ class jisyo (object):
         return self._dict[key]
 
     def maxkeylen(self):
-        return self._len
+        return self._dict['_max_key_len_']

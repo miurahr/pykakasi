@@ -1,5 +1,5 @@
 six
-semidbm
+klepto
 coverage
 coveralls
 flake8

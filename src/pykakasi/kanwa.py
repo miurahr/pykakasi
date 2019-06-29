@@ -4,10 +4,8 @@
 # Copyright 2011-2019 Hiroshi Miura <miurahr@linux.com>
 
 import threading
-from marshal import loads
-from zlib import decompress
 
-import semidbm as dbm
+from klepto.archives import file_archive
 from pkg_resources import resource_filename
 
 
@@ -16,9 +14,8 @@ from pkg_resources import resource_filename
 # There is no state rather dictionary dbm.
 class kanwa (object):
     _shared_state = {
-        '_kanwadict': None,
         '_lock': threading.Lock(),
-        '_jisyo_table': {}
+        '_jisyo_table': None
     }
 
     # Note: there is no invalidate mechanism for _jisyo_table data.
@@ -32,20 +29,13 @@ class kanwa (object):
         return self
 
     def __init__(self):
-        if self._kanwadict is None:
+        if self._jisyo_table is None:
             with self._lock:
-                if self._kanwadict is None:
-                    dictpath = resource_filename(__name__, 'kanwadict3.db')  # FIXME: no hardcoded filename
-                    self._kanwadict = dbm.open(dictpath, 'r')  # readonly mode
+                if self._jisyo_table is None:
+                    dictpath = resource_filename(__name__, 'kanwadict4.db')  # FIXME: no hardcoded filename
+                    self._jisyo_table = file_archive(dictpath, {}, serialized=True)
+                    self._jisyo_table.load()
 
     def load(self, char):
         key = "%04x" % ord(char)
-        if key not in self._jisyo_table:
-            with self._lock:
-                if key not in self._jisyo_table:
-                    try:
-                        val = loads(decompress(self._kanwadict[key]))
-                    except KeyError:
-                        val = None
-                    self._jisyo_table[key] = val
         return self._jisyo_table.get(key, None)
