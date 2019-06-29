@@ -348,7 +348,9 @@ Version 0.10 (25, April, 2014)
   (Thanks @FGtatsuro)
 * Kunrei and Hepburn roman table
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v0.96...HEAD
+
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v1.0-rc1...HEAD
+.. _v1.0-rc1: https://github.com/miurahr/pykakasi/compare/v0.96...v1.0-rc1
 .. _v0.96: https://github.com/miurahr/pykakasi/compare/v0.95...v0.96
 .. _v0.95: https://github.com/miurahr/pykakasi/compare/v0.94...v0.95
 .. _v0.94: https://github.com/miurahr/pykakasi/compare/v0.93...v0.94
