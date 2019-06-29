@@ -47,7 +47,6 @@ class genkanwadict(object):
         d['_max_key_len_'] = max_key_len
         d.dump()
 
-
     # for kanwadict
 
     def parsekdict(self, line):

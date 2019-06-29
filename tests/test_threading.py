@@ -3,7 +3,7 @@
 import threading
 
 import pykakasi
-import pykakasi.kanwa
+import pykakasi.kanji
 
 I_TEST = [
     (u"菟", u"兎"),
