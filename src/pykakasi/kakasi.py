@@ -52,6 +52,10 @@ from pykakasi.exceptions import (InvalidFlagValueException,
                                  UnknownOptionsException,
                                  UnsupportedRomanRulesException)
 
+from .kana import H2, K2
+from .kanji import J2
+from .roman import a2, sym2
+
 
 class kakasi(object):
 
@@ -98,21 +102,11 @@ class kakasi(object):
             raise UnknownOptionsException("Unhandled options")  # pragma: no cover
 
     def getConverter(self):
-        from .j2 import J2
         self._conv["J"] = J2(self._mode["J"], method=self._option["r"])
-
-        from .h2 import H2
         self._conv["H"] = H2(self._mode["H"], method=self._option["r"])
-
-        from .k2 import K2
         self._conv["K"] = K2(self._mode["K"], method=self._option["r"])
-
-        from .sym2 import sym2
         self._conv["E"] = sym2(self._mode["E"])
-
-        from .a2 import a2
         self._conv["a"] = a2(self._mode["a"])
-
         return self
 
     def do(self, itext):
@@ -196,5 +190,65 @@ class kakasi(object):
             if self._flag["s"] and otext[-len(self._separator):] != self._separator \
                     and i < len(text) and not (ord(text[i]) in self._endmark):
                 otext += self._separator
+
+        return otext
+
+
+class wakati(kakasi):
+
+    _jconv = None
+    _separator = " "
+    _state = True
+
+    def __init__(self):
+        self._jconv = J2("H")
+        self._flag = {"f": False}
+
+    def getConverter(self):
+        return self
+
+    def setMode(self, fr, to):
+        if fr in self._flag.keys():
+            if to in [True, False]:
+                self._flag[fr] = to
+            else:
+                raise InvalidFlagValueException("Invalid flag value")
+            raise UnknownOptionsException("Unhandled options")
+
+    def do(self, text):
+
+        if len(text) == 0:
+            return ""
+
+        otext = ''
+        i = 0
+        while True:
+            if i >= len(text):
+                break
+
+            if self._jconv.isRegion(text[i]):
+                _, ln = self._jconv.convert(text[i:])
+                if ln <= 0:  # pragma: no cover
+                    otext = otext + text[i]
+                    i += 1
+                    self._state = False
+                elif (i + ln) < len(text):
+                    if self._state:
+                        otext = otext + text[i:i + ln] + self._separator
+                    else:
+                        otext = otext + self._separator + text[i:i + ln] + self._separator
+                        self._state = True
+                    i = i + ln
+                else:
+                    if self._state:
+                        otext = otext + text[i:i + ln]
+                    else:  # pragma: no cover
+                        otext = otext + self._separator + text[i:i + ln]
+                    break
+
+            else:
+                self._state = False
+                otext = otext + text[i]
+                i += 1
 
         return otext

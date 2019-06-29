@@ -4,14 +4,11 @@ import io
 import os
 import re
 import shutil
-from marshal import dumps
-from zlib import compress
 
-import semidbm as dbm
+from klepto.archives import file_archive
 from setuptools import setup
 from setuptools.command.build_py import build_py
 from six import unichr
-from six.moves import cPickle
 
 package_name = "pykakasi"
 root_dir = os.path.abspath(os.path.dirname(__file__))
@@ -46,8 +43,9 @@ class genkanwadict(object):
                     max_key_len = max(max_key_len, len(k))
                 except ValueError:
                     raise Exception("Cannot process dictionary line: ", line)
-        with open(dst, 'wb') as d:
-            cPickle.dump((dic, max_key_len), d, protocol=2)
+        d = file_archive(dst, dic, serialized=True)
+        d['_max_key_len_'] = max_key_len
+        d.dump()
 
     # for kanwadict
 
@@ -77,23 +75,21 @@ class genkanwadict(object):
             self.records[key][kanji] = [(yomi, tail)]
 
     def kanwaout(self, out):
-        dic = dbm.open(out, 'c')
-        for (k, v) in self.records.items():
-            dic[k] = compress(dumps(v))
-        dic.close()
+        dic = file_archive(out, self.records, serialized=True)
+        dic.dump()
 
 
 class MyBuild(build_py):
 
     def generate_dictionaries(self):
         DICTS = [
-            ('itaijidict.utf8', 'itaijidict2.pickle'),
-            ('hepburndict.utf8', 'hepburndict2.pickle'),
-            ('kunreidict.utf8', 'kunreidict2.pickle'),
-            ('passportdict.utf8', 'passportdict2.pickle'),
-            ('hepburnhira.utf8', 'hepburnhira2.pickle'),
-            ('kunreihira.utf8', 'kunreihira2.pickle'),
-            ('passporthira.utf8', 'passporthira2.pickle')
+            ('itaijidict.utf8', 'itaijidict3.db'),
+            ('hepburndict.utf8', 'hepburndict3.db'),
+            ('kunreidict.utf8', 'kunreidict3.db'),
+            ('passportdict.utf8', 'passportdict3.db'),
+            ('hepburnhira.utf8', 'hepburnhira3.db'),
+            ('kunreihira.utf8', 'kunreihira3.db'),
+            ('passporthira.utf8', 'passporthira3.db')
         ]
         kanwa = genkanwadict()
         for (src_f, pkl_f) in DICTS:
@@ -103,7 +99,7 @@ class MyBuild(build_py):
                 os.unlink(dst)
             kanwa.mkdict(src, dst)
         src = os.path.join('src', 'pykakasi', 'data', 'kakasidict.utf8')
-        dst = os.path.join(self.build_lib, 'pykakasi', 'kanwadict3.db')
+        dst = os.path.join(self.build_lib, 'pykakasi', 'kanwadict4.db')
         if (os.path.exists(dst)):
             shutil.rmtree(dst)
         kanwa.run(src, dst)
@@ -149,8 +145,8 @@ setup(name=package_name,
       include_package_data=True,
       package_data={'src/pykakasi/data': ['*.utf8']},
       tests_require=['pytest', 'coverage'],
-      setup_requires=['six', 'semidbm'],
-      install_requires=['six', 'semidbm'],
+      setup_requires=['six', 'klepto'],
+      install_requires=['six', 'klepto'],
       extras_require={'dev': ['pytest']},
       cmdclass={'build_py': MyBuild},
       classifiers=[

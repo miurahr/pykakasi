@@ -18,7 +18,7 @@ steps:
   inputs:
     versionSpec: '$(python.version)'
 
-- script: pip install tox semidbm six
+- script: pip install tox klepto six
   displayName: 'Install Tox'
 
 - script: tox -e py
