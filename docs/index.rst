@@ -31,9 +31,15 @@ pykakasi is a free software, and available on `GitHub`_ project.
 Supported python versions
 =========================
 
-Pykakasi supports python 2.7, python 3.5, 3.6 and PyPy.
+Pykakasi supports python 2.7, python 3.5, 3.6, 3.7, 3.8 and PyPy.
 
 It may work with python 2.6, 3.3, 3.4 and pypy3 but these are not tested now.
+
+
+Dependency
+==========
+
+It depends on `klepto`_ for providing a mapping database.
 
 
 About KAKASI
@@ -67,8 +73,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-.. _GitHub: https://github.com/miurahr/pykakasi
+.. _klepto: https://github.com/uqfoundation/klepto
 .. _`KAKASI`: http://kakasi.namazu.org/
+.. _GitHub: https://github.com/miurahr/pykakasi
+
 
 .. include:: contents.rst
 
