@@ -14,6 +14,27 @@ Current changes
 Added
 -----
 
+Changed
+-------
+
+Fixed
+-----
+
+Deprecated
+----------
+
+Removed
+-------
+
+Security
+--------
+
+`v1.0-rc1`_ (29, June, 2019)
+============================
+
+Added
+-----
+
 * Threading test.
 * Test with Chinese kanji.
 * Test with extended kana which is out of Unicode BSC.
@@ -29,14 +50,6 @@ Fixed
 
 * Fix test case issue68_2 for missing characters
 
-Deprecated
-----------
-
-Removed
--------
-
-Security
---------
 
 `v0.96`_ (12, June, 2019)
 ========================
