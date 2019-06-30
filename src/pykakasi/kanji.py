@@ -48,14 +48,14 @@ class J2(object):
                  "rl", "rl", "rl", "wiueo", "wiueo", "wiueo", "wiueo", "w", "n", "v", "k",
                  "k", "", "", "", "", "", "", "", "", ""]
 
-    def __init__(self, mode, method="Hepburn"):
+    def __init__(self, mode="H", method="Hepburn"):
         self._kanwa = kanwa()
         self._itaiji = itaiji()
         if mode == "H":
-            self.convert = self.convert_H
+            self.convert = self.convert_h
         elif mode in ("a", "K"):
             self._hconv = H2(mode, method)
-            self.convert = self.convert_nonH
+            self.convert = self.convert_nonh
         else:
             self.convert = self.convert_noop
 
@@ -76,7 +76,7 @@ class J2(object):
             text = re.sub(c, self._itaiji.lookup(c), text)
         return text
 
-    def convert_H(self, text):
+    def convert_h(self, text):
         max_len = 0
         Hstr = ""
         text = self._itaiji.convert(text)
@@ -98,11 +98,11 @@ class J2(object):
                             max_len = length + 1
         return (Hstr, max_len)
 
-    def convert_nonH(self, text):
+    def convert_nonh(self, text):
         if not self.isRegion(text[0]):
             return "", 0
 
-        (t, l1) = self.convert_H(text)
+        (t, l1) = self.convert_h(text)
         if l1 <= 0:  # pragma: no cover
             return "", 0
 
