@@ -110,8 +110,22 @@ class kakasi():
     def _iconv(self, otext, hira):
         tmp = {'orig': otext, 'hira': hira}
         tmp['kana'] = self._h2k(hira)
-        tmp['hepburn'] = self._h2a(hira)
+        tmp['hepburn'] = self._s2a(self._h2a(hira))
         return tmp
+
+    def _s2a(self, text):
+        result = ''
+        i = 0
+        while(i < len(text)):
+            w = min(i + self._MAXLEN, len(text))
+            (t, l1) = self._saconv.convert(text[i:w])
+            if l1 > 0:
+                result += t
+                i += l1
+            else:
+                result += text[i:i + 1]
+                i += 1
+        return result
 
     def _h2k(self, text):
         result = ''
