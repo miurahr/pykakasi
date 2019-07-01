@@ -63,12 +63,14 @@ class H2 (object):
     def convert_a(self, text):
         Hstr = ""
         max_len = -1
-        r = min(4, len(text) + 1)
-        for x in xrange(r):
+        r = min(self._kanadict.maxkeylen(), len(text))
+        for x in xrange(1, r + 1):
             if self._kanadict.haskey(text[:x]):
                 if max_len < x:
                     max_len = x
                     Hstr = self._kanadict.lookup(text[:x])
+                else:
+                    break
         return (Hstr, max_len)
 
     def convert_K(self, text):
@@ -117,7 +119,7 @@ class K2 (object):
         Hstr = ""
         max_len = -1
         r = min(self._kanadict.maxkeylen(), len(text))
-        for x in range(1, r + 1):
+        for x in xrange(1, r + 1):
             if self._kanadict.haskey(text[:x]):
                 if max_len < x:
                     max_len = x
@@ -130,7 +132,7 @@ class K2 (object):
         Hstr = ""
         max_len = 0
         r = len(text)
-        for x in range(r):
+        for x in xrange(r):
             if self.isRegion(text[x]) and ord(text[x]) < 0x30f7:
                 Hstr = Hstr + unichr(ord(text[x]) - self._diff)
                 max_len = max_len + 1
