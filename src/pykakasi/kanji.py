@@ -49,8 +49,8 @@ class J2(object):
                  "k", "", "", "", "", "", "", "", "", ""]
 
     def __init__(self, mode, method="Hepburn"):
-        self._kanwa = kanwa()
-        self._itaiji = itaiji()
+        self._kanwa = Kanwa()
+        self._itaiji = Itaiji()
         if mode == "H":
             self.convert = self.convert_H
         elif mode in ("a", "K"):
@@ -125,7 +125,7 @@ class J2(object):
         return text[0], 1
 
 
-class itaiji (object):
+class Itaiji(object):
 
     # this class is Borg/Singleton
     _shared_state = {
@@ -167,7 +167,7 @@ class itaiji (object):
 # This class is Borg/Singleton
 # It provides same results becase lookup from a static dictionary.
 # There is no state rather dictionary dbm.
-class kanwa (object):
+class Kanwa(object):
     _shared_state = {
         '_lock': threading.Lock(),
         '_jisyo_table': None

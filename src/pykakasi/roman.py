@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-#  symbols.py
+#  roman.py
 #
-# Copyright 2014,2018 Hiroshi Miura <miurahr@linux.com>
+# Copyright 2014-2019 Hiroshi Miura <miurahr@linux.com>
 #
 from __future__ import unicode_literals
 
@@ -9,7 +9,7 @@ import six
 from six import unichr
 
 __license__ = 'GPL 3'
-__copyright__ = '2014,2018, Hiroshi Miura <miurahr@linux.com>'
+__copyright__ = '2014-2019, Hiroshi Miura <miurahr@linux.com>'
 __docformat__ = 'restructuredtext en'
 
 '''
@@ -57,7 +57,7 @@ Greek convertion table
 '''
 
 
-class sym2 (object):
+class Sym2:
     # U3000 - 301F
     # \u3000、。〃〄〇〆々〈〉《》「」『』【】〒〓〔〕〖〗〘〙
     # 〚〛〜〝〞〟〠
@@ -155,7 +155,7 @@ class sym2 (object):
         return text[0], 1
 
 
-class a2 (object):
+class A2:
     _table_1 = ["\u3000", "\uff01", "\uff02", "\uff03", "\uff04", "\uff05", "\uff06",
                 "\uff07", "\uff08", "\uff09", "\uff0a", "\uff0b", "\uff0c", "\uff0d",
                 "\uff0e", "\uff0f",  # ！＂＃＄％＆＇（）＊＋，－．／

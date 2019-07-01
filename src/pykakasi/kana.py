@@ -43,11 +43,11 @@ class H2 (object):
     def __init__(self, mode, method="Hepburn"):
         if mode == "a":
             if method == "Hepburn":
-                self._kanadict = jisyo(Configurations.jisyo_hepburn_hira)
+                self._kanadict = Jisyo(Configurations.jisyo_hepburn_hira)
             elif method == "Passport":
-                self._kanadict = jisyo(Configurations.jisyo_passport_hira)
+                self._kanadict = Jisyo(Configurations.jisyo_passport_hira)
             elif method == "Kunrei":
-                self._kanadict = jisyo(Configurations.jisyo_kunrei_hira)
+                self._kanadict = Jisyo(Configurations.jisyo_kunrei_hira)
             else:
                 raise UnsupportedRomanRulesException("Unsupported roman rule")
 
@@ -69,8 +69,6 @@ class H2 (object):
                 if max_len < x:
                     max_len = x
                     Hstr = self._kanadict.lookup(text[:x])
-                else:
-                    break
         return (Hstr, max_len)
 
     def convert_K(self, text):
@@ -80,8 +78,8 @@ class H2 (object):
         for x in xrange(r):
             if self.isRegion(text[x]):
                 Hstr = Hstr + unichr(ord(text[x]) + self._diff)
-                max_len = max_len + 1
-            else:
+                max_len += 1
+            else:  # pragma: no cover
                 break
         return (Hstr, max_len)
 
@@ -98,17 +96,17 @@ class K2 (object):
     def __init__(self, mode, method="Hepburn"):
         if mode == "a":
             if method == "Hepburn":
-                self._kanadict = jisyo(Configurations.jisyo_hepburn)
+                self._kanadict = Jisyo(Configurations.jisyo_hepburn)
             elif method == "Passport":
-                self._kanadict = jisyo(Configurations.jisyo_passport)
+                self._kanadict = Jisyo(Configurations.jisyo_passport)
             elif method == "Kunrei":
-                self._kanadict = jisyo(Configurations.jisyo_kunrei)
+                self._kanadict = Jisyo(Configurations.jisyo_kunrei)
             else:
                 raise UnsupportedRomanRulesException("Unsupported roman rule")  # pragma: no cover
 
             self.convert = self.convert_a
         elif mode == "H":
-            self.convert = self.convert_H
+            self.convert = self.convert_h
         else:
             self.convert = self.convert_noop
 
@@ -124,21 +122,19 @@ class K2 (object):
                 if max_len < x:
                     max_len = x
                     Hstr = self._kanadict.lookup(text[:x])
-            else:  # pragma: no cover
-                break
         return Hstr, max_len
 
-    def convert_H(self, text):
+    def convert_h(self, text):
         Hstr = ""
         max_len = 0
         r = len(text)
         for x in xrange(r):
             if self.isRegion(text[x]) and ord(text[x]) < 0x30f7:
                 Hstr = Hstr + unichr(ord(text[x]) - self._diff)
-                max_len = max_len + 1
+                max_len += 1
             elif self.isRegion(text[x]):
                 Hstr = Hstr + text[x]
-                max_len = max_len + 1
+                max_len += 1
             else:  # pragma: no cover
                 break
         return (Hstr, max_len)
@@ -147,7 +143,7 @@ class K2 (object):
         return text[0], 1
 
 
-class jisyo (object):
+class Jisyo:
     _dict = None
 
     def __init__(self, dictname):
