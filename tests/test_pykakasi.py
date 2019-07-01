@@ -324,7 +324,6 @@ def test_kakasi_passport():
         assert converter.do(case) == result
 
 
-@pytest.mark.xfail(reason="Not yet implemented properly")
 def test_kakasi_passport_specialcase():
 
     TESTS = [
