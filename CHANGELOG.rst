@@ -29,6 +29,15 @@ Removed
 Security
 --------
 
+`v1.0-rc2`_ (1, July, 2019)
+============================
+
+Fixed
+-----
+
+* Fix roman conversion from Hira/Kana in Passport rule.
+
+
 `v1.0-rc1`_ (29, June, 2019)
 ============================
 
