@@ -26,7 +26,7 @@
 # */
 
 from six import unichr
-from six.moves import range
+from six.moves import xrange
 
 from .exceptions import UnsupportedRomanRulesException
 from .jisyo import jisyo
@@ -62,7 +62,7 @@ class K2 (object):
         Hstr = ""
         max_len = -1
         r = min(self._kanadict.maxkeylen(), len(text))
-        for x in range(1, r + 1):
+        for x in xrange(1, r + 1):
             if self._kanadict.haskey(text[:x]):
                 if max_len < x:
                     max_len = x
@@ -75,7 +75,7 @@ class K2 (object):
         Hstr = ""
         max_len = 0
         r = len(text)
-        for x in range(r):
+        for x in xrange(r):
             if self.isRegion(text[x]) and ord(text[x]) < 0x30f7:
                 Hstr = Hstr + unichr(ord(text[x]) - self._diff)
                 max_len = max_len + 1

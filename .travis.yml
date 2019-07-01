@@ -15,7 +15,6 @@ install:
   - pip install tox-travis
 
 script:
-  - flake8 bin src tests
   - tox
 
 after_success:
