@@ -2,7 +2,6 @@
 #  exceptions.py
 #
 # Copyright 2015-2019 Hiroshi Miura <miurahr@linux.com>
-#
 
 
 class PyKakasiException(Exception):
