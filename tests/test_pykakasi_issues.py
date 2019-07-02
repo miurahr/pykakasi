@@ -88,3 +88,12 @@ def test_issue72():
     convert = kks.getConverter()
     for case, result in TESTS:
         assert convert.do(case) == result
+
+
+def test_issuexx():
+    TESTS = [(u"由来し、この", u"ゆらいし、 この")]
+    kks = pykakasi.kakasi()
+    kks.setMode("J", "H")
+    convert = kks.getConverter()
+    for case, result in TESTS:
+        assert convert.do(case) == result
