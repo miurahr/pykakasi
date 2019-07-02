@@ -5,6 +5,8 @@
 
 from __future__ import unicode_literals
 
+from pkg_resources import resource_filename
+
 
 class Configurations:
     jisyo_hepburn_hira = 'hepburnhira3.db'
@@ -15,6 +17,10 @@ class Configurations:
     jisyo_hepburn = 'hepburndict3.db'
     jisyo_passport = 'passportdict3.db'
     jisyo_kunrei = 'kunreidict3.db'
+
+    @classmethod
+    def dictpath(cls, dbfile):
+        return resource_filename(__name__, dbfile)
 
 
 class Ch:

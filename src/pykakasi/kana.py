@@ -4,7 +4,6 @@
 # Copyright 2011-2019 Hiroshi Miura <miurahr@linux.com>
 
 from klepto.archives import file_archive
-from pkg_resources import resource_filename
 from six import unichr
 from six.moves import xrange
 
@@ -125,7 +124,7 @@ class Jisyo:
     _dict = None
 
     def __init__(self, dictname):
-        self._dict = file_archive(resource_filename(__name__, dictname), {}, serialized=True)
+        self._dict = file_archive(Configurations.dictpath(dictname), {}, serialized=True)
         self._dict.load()
 
     def haskey(self, key):

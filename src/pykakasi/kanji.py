@@ -7,7 +7,6 @@ import re
 import threading
 
 from klepto.archives import file_archive
-from pkg_resources import resource_filename
 
 from .kana import H2
 from .properties import Configurations
@@ -121,7 +120,7 @@ class Itaiji(object):
         if self._itaijidict is None:
             with self._lock:
                 if self._itaijidict is None:
-                    itaijipath = resource_filename(__name__, Configurations.jisyo_itaiji)
+                    itaijipath = Configurations.dictpath(Configurations.jisyo_itaiji)
                     self._itaijidict = file_archive(itaijipath, {}, serialized=True)
                     self._itaijidict.load()
                     self._itaijidict_len = self._itaijidict['_max_key_len_']
@@ -160,7 +159,7 @@ class Kanwa(object):
         if self._jisyo_table is None:
             with self._lock:
                 if self._jisyo_table is None:
-                    dictpath = resource_filename(__name__, Configurations.jisyo_kanwa)
+                    dictpath = Configurations.dictpath(Configurations.jisyo_kanwa)
                     self._jisyo_table = file_archive(dictpath, {}, serialized=True)
                     self._jisyo_table.load()
 
