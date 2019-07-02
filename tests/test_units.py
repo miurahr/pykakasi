@@ -41,7 +41,7 @@ def test_H2a():
         (u"しつもん", ("shi", 1)),
         (u"ちがい", ("chi", 1)),
     ]
-    h = pykakasi.kana.H2("a")
+    h = pykakasi.scripts.H2("a")
     for case, result in TESTS:
         assert h.convert(case) == result
 
@@ -55,7 +55,7 @@ def test_H2K():
         (u"しつもん", (u"シツモン", 4)),
         (u"ちがい", (u"チガイ", 3)),
     ]
-    h = pykakasi.kana.H2("K")
+    h = pykakasi.scripts.H2("K")
     for case, result in TESTS:
         assert h.convert(case) == result
 
@@ -69,7 +69,7 @@ def test_K2H():
         (u"シツモン", (u"しつもん", 4)),
         (u"チガイ", (u"ちがい", 3)),
     ]
-    h = pykakasi.kana.K2("H")
+    h = pykakasi.scripts.K2("H")
     for case, result in TESTS:
         assert h.convert(case) == result
 
@@ -84,7 +84,7 @@ def test_K2a():
         (u"チガイ", ("chi", 1)),
         (u"ジ", ("ji", 1)),
     ]
-    h = pykakasi.kana.K2("a")
+    h = pykakasi.scripts.K2("a")
     for case, result in TESTS:
         assert h.convert(case) == result
 
@@ -105,7 +105,7 @@ def test_H2a_kunrei():
         (u"た", ("ta", 1)), (u"ち", ("ti", 1)), (u"つ", ("tu", 1)),
         (u"て", ("te", 1)), (u"と", ("to", 1))
     ]
-    h = pykakasi.kana.H2("a", method="Kunrei")
+    h = pykakasi.scripts.H2("a", method="Kunrei")
     for case, result in TESTS:
         assert h.convert(case) == result
 
@@ -130,7 +130,7 @@ def test_K2a_kunrei():
         (u"タ", ("ta", 1)), (u"チ", ("ti", 1)), (u"ツ", ("tu", 1)),
         (u"テ", ("te", 1)), (u"ト", ("to", 1))
     ]
-    h = pykakasi.kana.K2("a", method="Kunrei")
+    h = pykakasi.scripts.K2("a", method="Kunrei")
     for case, result in TESTS:
         assert h.convert(case) == result
 
@@ -145,7 +145,7 @@ def test_H2a_passport():
         (u"なんば", ("na", 1)),
         (u"んば", ("mba", 2))
     ]
-    h = pykakasi.kana.H2("a", method="Passport")
+    h = pykakasi.scripts.H2("a", method="Passport")
     for case, result in TESTS:
         assert h.convert(case) == result
 
@@ -181,7 +181,7 @@ def test_a2E():
         ("abcdefghijklmnopqrstuvwxyz", u"ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ"),
         ("!\"#$%&'()*+,-./_ {|}~", u"！＂＃＄％＆＇（）＊＋，－．／＿　｛｜｝～")
     ]
-    a = pykakasi.roman.A2("E")
+    a = pykakasi.scripts.A2("E")
     for case, result in TESTS:
         for i in range(len(case)):
             assert a.convert(case[i]) == (result[i], 1)
@@ -209,7 +209,7 @@ def test_sym2a():
           "0",
           "a", "ya", "e", "E"])
     ]
-    s = pykakasi.roman.Sym2("a")
+    s = pykakasi.scripts.Sym2("a")
     for case, result in TESTS:
         for i in range(len(case)):
             assert tuple([case[i] == s.convert(case[i])]), tuple([case[i], (result[i], 1)])

@@ -5,7 +5,11 @@
 
 from __future__ import unicode_literals
 
-from pkg_resources import resource_filename
+import os
+
+import pkg_resources
+
+DATA_PATH = pkg_resources.resource_filename(__name__, 'data/')
 
 
 class Configurations:
@@ -20,7 +24,7 @@ class Configurations:
 
     @classmethod
     def dictpath(cls, dbfile):
-        return resource_filename(__name__, dbfile)
+        return os.path.join(DATA_PATH, dbfile)
 
 
 class Ch:

@@ -3,7 +3,6 @@
 import io
 import os
 import re
-import shutil
 
 from klepto.archives import file_archive
 from setuptools import setup
@@ -94,14 +93,14 @@ class MyBuild(build_py):
         kanwa = genkanwadict()
         for (src_f, pkl_f) in DICTS:
             src = os.path.join('src', 'data', src_f)
-            dst = os.path.join(self.build_lib, 'pykakasi', pkl_f)
+            dst = os.path.join(self.build_lib, 'pykakasi', 'data', pkl_f)
             if (os.path.exists(dst)):
                 os.unlink(dst)
             kanwa.mkdict(src, dst)
         src = os.path.join('src', 'data', 'kakasidict.utf8')
-        dst = os.path.join(self.build_lib, 'pykakasi', 'kanwadict4.db')
+        dst = os.path.join(self.build_lib, 'pykakasi', 'data', 'kanwadict4.db')
         if (os.path.exists(dst)):
-            shutil.rmtree(dst)
+            os.unlink(dst)
         kanwa.run(src, dst)
 
     def run(self):

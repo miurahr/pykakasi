@@ -8,7 +8,7 @@ import threading
 
 from klepto.archives import file_archive
 
-from .kana import H2
+from .scripts import H2
 from .properties import Configurations
 
 
