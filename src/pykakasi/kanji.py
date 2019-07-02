@@ -2,36 +2,13 @@
 # j2.py
 #
 # Copyright 2011-2019 Hiroshi Miura <miurahr@linux.com>
-#
-#  Original Copyright:
-# * KAKASI (Kanji Kana Simple inversion program)
-# * $Id: jj2.c,v 1.7 2001-04-12 05:57:34 rug Exp $
-# * Copyright (C) 1992
-# * Hironobu Takahashi (takahasi@tiny.or.jp)
-# *
-# * This program is free software; you can redistribute it and/or modify
-# * it under the terms of the GNU General Public License as published by
-# * the Free Software Foundation; either versions 2, or (at your option)
-# * any later version.
-# *
-# * This program is distributed in the hope that it will be useful
-# * but WITHOUT ANY WARRANTY; without even the implied warranty of
-# * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# * GNU General Public License for more details.
-# *
-# * You should have received a copy of the GNU General Public License
-# * along with KAKASI, see the file COPYING.  If not, write to the Free
-# * Software Foundation Inc., 59 Temple Place - Suite 330, Boston, MA
-# * 02111-1307, USA.
-# */
 
 import re
 import threading
 
 from klepto.archives import file_archive
-from pkg_resources import resource_filename
 
-from .kana import H2
+from .scripts import H2
 from .properties import Configurations
 
 
@@ -49,8 +26,8 @@ class J2(object):
                  "k", "", "", "", "", "", "", "", "", ""]
 
     def __init__(self, mode="H", method="Hepburn"):
-        self._kanwa = kanwa()
-        self._itaiji = itaiji()
+        self._kanwa = Kanwa()
+        self._itaiji = Itaiji()
         if mode == "H":
             self.convert = self.convert_h
         elif mode in ("a", "K"):
@@ -125,7 +102,7 @@ class J2(object):
         return text[0], 1
 
 
-class itaiji (object):
+class Itaiji(object):
 
     # this class is Borg/Singleton
     _shared_state = {
@@ -143,7 +120,7 @@ class itaiji (object):
         if self._itaijidict is None:
             with self._lock:
                 if self._itaijidict is None:
-                    itaijipath = resource_filename(__name__, Configurations.jisyo_itaiji)
+                    itaijipath = Configurations.dictpath(Configurations.jisyo_itaiji)
                     self._itaijidict = file_archive(itaijipath, {}, serialized=True)
                     self._itaijidict.load()
                     self._itaijidict_len = self._itaijidict['_max_key_len_']
@@ -167,16 +144,11 @@ class itaiji (object):
 # This class is Borg/Singleton
 # It provides same results becase lookup from a static dictionary.
 # There is no state rather dictionary dbm.
-class kanwa (object):
+class Kanwa(object):
     _shared_state = {
         '_lock': threading.Lock(),
         '_jisyo_table': None
     }
-
-    # Note: there is no invalidate mechanism for _jisyo_table data.
-    #       It can lead a large memory consumption in long live process.
-    #       maximum memory consumption will be several megabytes which is
-    #       a size of a dictionary.
 
     def __new__(cls, *p, **k):
         self = object.__new__(cls, *p, **k)
@@ -187,7 +159,7 @@ class kanwa (object):
         if self._jisyo_table is None:
             with self._lock:
                 if self._jisyo_table is None:
-                    dictpath = resource_filename(__name__, Configurations.jisyo_kanwa)
+                    dictpath = Configurations.dictpath(Configurations.jisyo_kanwa)
                     self._jisyo_table = file_archive(dictpath, {}, serialized=True)
                     self._jisyo_table.load()
 
