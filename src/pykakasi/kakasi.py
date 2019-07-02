@@ -30,8 +30,8 @@ import six
 from .exceptions import (InvalidFlagValueException, InvalidModeValueException,
                          UnknownOptionsException,
                          UnsupportedRomanRulesException)
-from .scripts import A2, H2, K2, Sym2
 from .kanji import J2
+from .scripts import A2, H2, K2, Sym2
 
 
 class kakasi:

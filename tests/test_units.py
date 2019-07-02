@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import pykakasi
-import pykakasi.kana
 import pykakasi.kanji
-import pykakasi.roman
+import pykakasi.scripts
 
 
 def test_itaiji():

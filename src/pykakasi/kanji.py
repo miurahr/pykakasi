@@ -8,8 +8,8 @@ import threading
 
 from klepto.archives import file_archive
 
-from .scripts import H2
 from .properties import Configurations
+from .scripts import H2
 
 
 class J2(object):
