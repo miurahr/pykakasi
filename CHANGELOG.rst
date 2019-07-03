@@ -29,13 +29,14 @@ Removed
 Security
 --------
 
-`v1.0-rc2`_ (1, July, 2019)
+`v1.0c2`_ (3, July, 2019)
 ============================
 
 Fixed
 -----
 
 * Fix roman conversion from Hira/Kana in Passport rule.
+* Fix version convension on PEP386
 
 
 `v1.0-rc1`_ (29, June, 2019)
@@ -358,8 +359,8 @@ Version 0.10 (25, April, 2014)
 * Kunrei and Hepburn roman table
 
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v1.0-rc1...HEAD
-.. _v1.0-rc1: https://github.com/miurahr/pykakasi/compare/v0.96...v1.0-rc1
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v1.0c2...HEAD
+.. _v1.0c2: https://github.com/miurahr/pykakasi/compare/v0.96...v1.0c2
 .. _v0.96: https://github.com/miurahr/pykakasi/compare/v0.95...v0.96
 .. _v0.95: https://github.com/miurahr/pykakasi/compare/v0.94...v0.95
 .. _v0.94: https://github.com/miurahr/pykakasi/compare/v0.93...v0.94
