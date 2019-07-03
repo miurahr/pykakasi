@@ -91,6 +91,9 @@ class MyBuild(build_py):
             ('passporthira.utf8', 'passporthira3.db')
         ]
         kanwa = genkanwadict()
+        dstdir = os.path.join(self.build_lib, 'pykakasi', 'data')
+        if not os.path.exists(dstdir):
+            os.mkdir(dstdir)
         for (src_f, pkl_f) in DICTS:
             src = os.path.join('src', 'data', src_f)
             dst = os.path.join(self.build_lib, 'pykakasi', 'data', pkl_f)
@@ -142,7 +145,7 @@ setup(name=package_name,
       provides=[package_name],
       scripts=["bin/kakasi"],
       include_package_data=True,
-      package_data={'src/pykakasi/data': ['*.utf8']},
+      package_data={'src/data': ['*.utf8']},
       tests_require=['pytest', 'coverage'],
       setup_requires=['six', 'klepto'],
       install_requires=['six', 'klepto'],
