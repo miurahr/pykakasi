@@ -31,4 +31,4 @@ Security
 
 
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v1.0-rc1...HEAD
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v1.0c2...HEAD
