@@ -127,15 +127,14 @@ class kakasi:
             elif mode in ("H", "K", "a"):
                 orig = ''
                 chunk = ''
-                while True:  # eat mode
+
+                while i < len(text) and self._conv[mode].isRegion(text[i]):
                     w = min(i + self._MAXLEN, len(text))
                     (t, l1) = self._conv[mode].convert(text[i:w])
                     if l1 > 0:
                         orig += text[i:i + l1]
                         chunk += t
                         i += l1
-                    elif orig != '':
-                        break
                     else:
                         orig = text[i:i + 1]
                         if self._flag["t"]:
@@ -143,8 +142,6 @@ class kakasi:
                         else:
                             chunk = "???"
                         i += 1
-                        break
-                    if i >= len(text) or not self._conv[mode].isRegion(text[i]):
                         break
 
             else:
