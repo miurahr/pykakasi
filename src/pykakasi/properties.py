@@ -66,6 +66,7 @@ class Ch:
     zenkaku_number_nine = 0xff1a
     zenkaku_A = 0xff21
     zenkaku_a = 0xff41
+    endmark = [ord(a) for a in [")", "]", "!", ",", ".", u'\u3001', u'\u3002']]
 
 
 class Convert_Tables():
