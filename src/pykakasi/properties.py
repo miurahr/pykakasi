@@ -9,10 +9,13 @@ import os
 
 import pkg_resources
 
-DATA_PATH = pkg_resources.resource_filename(__name__, 'data/')
 
+# This class is Borg
+class Configurations(object):
 
-class Configurations:
+    _shared_state = {}
+
+    data_path = pkg_resources.resource_filename(__name__, 'data/')
     jisyo_hepburn_hira = 'hepburnhira3.db'
     jisyo_passport_hira = 'passporthira3.db'
     jisyo_kunrei_hira = 'kunreihira3.db'
@@ -22,9 +25,13 @@ class Configurations:
     jisyo_passport = 'passportdict3.db'
     jisyo_kunrei = 'kunreidict3.db'
 
-    @classmethod
-    def dictpath(cls, dbfile):
-        return os.path.join(DATA_PATH, dbfile)
+    def __new__(cls, *p, **k):
+        self = object.__new__(cls, *p, **k)
+        self.__dict__ = cls._shared_state
+        return self
+
+    def dictpath(self, dbfile):
+        return os.path.join(self.data_path, dbfile)
 
 
 class Ch:
@@ -59,6 +66,7 @@ class Ch:
     zenkaku_number_nine = 0xff1a
     zenkaku_A = 0xff21
     zenkaku_a = 0xff41
+    endmark = [ord(a) for a in [")", "]", "!", ",", ".", u'\u3001', u'\u3002']]
 
 
 class Convert_Tables():

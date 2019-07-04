@@ -31,6 +31,7 @@ from .exceptions import (InvalidFlagValueException, InvalidModeValueException,
                          UnknownOptionsException,
                          UnsupportedRomanRulesException)
 from .kanji import J2
+from .properties import Ch
 from .scripts import A2, H2, K2, Sym2
 
 
@@ -39,7 +40,6 @@ class kakasi:
     _keys = ["J", "H", "K", "E", "a"]
     _values = ["a", "E", "H", "K"]
     _roman_vals = ["Hepburn", "Kunrei", "Passport"]
-    _endmark = [ord(a) for a in [")", "]", "!", ",", ".", u'\u3001', u'\u3002']]
     _MAXLEN = 32
 
     def __init__(self):
@@ -50,8 +50,6 @@ class kakasi:
                       "u": False, "t": True}
         self._option = {"r": "Hepburn"}
         self._separator = ' '
-        self._separator_string = ' '
-        pass
 
     def setMode(self, fr, to):
         if fr in self._keys:
@@ -162,7 +160,7 @@ class kakasi:
 
             # insert separator when option specified and it is not a last character and not an end mark
             if self._flag["s"] and otext[-len(self._separator):] != self._separator \
-                    and i < len(text) and not (ord(text[i]) in self._endmark):
+                    and i < len(text) and not (ord(text[i]) in Ch.endmark):
                 otext += self._separator
 
         return otext

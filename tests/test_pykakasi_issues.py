@@ -91,7 +91,11 @@ def test_issue72():
 
 
 def test_issue78():
-    TESTS = [(u"由来し、この", u"ゆらい し、 この")]
+    TESTS = [
+        (u"由来し、この", u"ゆらい し、 この"),
+        (u"これは人類普遍であり、かかる原理に",
+         u"これは じんるいふへん であり、 かかる げんり に")
+    ]
     kks = pykakasi.kakasi()
     kks.setMode("J", "H")
     kks.setMode("s", True)

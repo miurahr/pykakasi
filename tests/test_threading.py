@@ -4,6 +4,7 @@ import threading
 
 import pykakasi
 import pykakasi.kanji
+import pytest
 
 I_TEST = [
     (u"菟", u"兎"),
@@ -14,6 +15,7 @@ I_TEST = [
 ]
 
 
+@pytest.mark.thread
 def test_thread_itaiji():
     for i in range(10):
         t = threading.Thread(target=worker_itaiji)
@@ -30,6 +32,7 @@ def worker_itaiji():
         assert j.itaiji_conv(case) == result
 
 
+@pytest.mark.thread
 def test_thread_kanwa():
     for i in range(10):
         t = threading.Thread(target=worker_kanwa)

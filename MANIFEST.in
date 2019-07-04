@@ -1,10 +1,12 @@
 recursive-include src/data *.utf8
 recursive-include tests *.py
+include *.py
 include *.rst
 include *.txt
 include *.yml
 include AUTHORS
 include COPYING
+include pytest.ini
 include tox.ini
 recursive-include docs *.po
 recursive-include docs *.py
