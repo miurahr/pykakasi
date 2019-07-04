@@ -29,6 +29,11 @@ Removed
 Security
 --------
 
+`v1.0`_ (8, July, 2019)
+============================
+
+* Same as v1.0c2
+
 `v1.0c2`_ (3, July, 2019)
 ============================
 
@@ -359,7 +364,8 @@ Version 0.10 (25, April, 2014)
 * Kunrei and Hepburn roman table
 
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v1.0c2...HEAD
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v1.0...HEAD
+.. _v1.0: https://github.com/miurahr/pykakasi/compare/v0.96...v1.0
 .. _v1.0c2: https://github.com/miurahr/pykakasi/compare/v0.96...v1.0c2
 .. _v0.96: https://github.com/miurahr/pykakasi/compare/v0.95...v0.96
 .. _v0.95: https://github.com/miurahr/pykakasi/compare/v0.94...v0.95
