@@ -17,8 +17,17 @@ Added
 Changed
 -------
 
+* pytest: now run on project root without tox, by generating
+  dictionary as a test fixture.
+* Optimize kana conversion function.
+
+
 Fixed
 -----
+
+* Version naming follows PEP386.
+* Sometimes fails to insert space after punctuation(#79).
+* Special case in kana-roman passport conversion such as 'etchu' etc.
 
 Deprecated
 ----------
