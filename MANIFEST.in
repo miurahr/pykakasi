@@ -3,6 +3,7 @@ recursive-include tests *.py
 include *.rst
 include *.txt
 include *.yml
+include kakasidict.py
 include AUTHORS
 include COPYING
 include tox.ini
