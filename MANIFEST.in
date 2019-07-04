@@ -1,5 +1,5 @@
 recursive-include src/data *.utf8
-recursive-include src *.py
+recursive-include tests *.py
 include *.py
 include *.rst
 include *.txt
