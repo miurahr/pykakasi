@@ -17,8 +17,6 @@ Added
 Changed
 -------
 
-* Move kakasidict.py to src and conftest.py to tests
-
 Fixed
 -----
 
@@ -42,6 +40,7 @@ Changed
 * tox: run tox test with installed dictionary instead of
   a generated fixture.
 * Optimize kana conversion function.
+* Move kakasidict.py to src and conftest.py to tests
 
 Fixed
 -----
