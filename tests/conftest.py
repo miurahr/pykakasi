@@ -3,8 +3,6 @@ import sys
 
 import pytest
 
-import kakasidict
-
 
 def pytest_addoption(parser):
     parser.addoption('--runenv', action='store', default="pytest", help='Specify tox or pytest')
@@ -17,9 +15,10 @@ def runenv(request):
 
 @pytest.fixture(scope="session", autouse=True)
 def dictionary_setup_fixture(runenv):
-    root_dir = os.path.dirname(__file__)
+    root_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
     if runenv == 'pytest':
         sys.path.insert(1, os.path.join(root_dir, 'src'))
+        import kakasidict
         from pykakasi.properties import Configurations
         dpath = os.path.join(root_dir, 'build', 'lib', 'pykakasi', 'data')
         print("Generating kanwa dictionary in %s\n" % dpath)

@@ -1,33 +1,12 @@
-==================
-PyKakasi ChangeLog
-==================
+==========================
+PyKakasi ChangeLog in v0.x
+==========================
 
 All notable changes to this project will be documented in this file.
 
-***************
-Current changes
-***************
-
-`Unreleased`_
-=============
-
-Added
------
-
-Changed
--------
-
-Fixed
------
-
-Deprecated
-----------
-
-Removed
--------
-
-Security
---------
+****************
+Previous changes
+****************
 
 `v1.0-rc1`_ (29, June, 2019)
 ============================
@@ -62,10 +41,6 @@ Fixed
 -----
 
 * KeyError when input unknown kanji.(#68)
-
-****************
-Previous changes
-****************
 
 `v0.95`_ (8, June, 2019)
 ========================

@@ -7,7 +7,7 @@ import re
 from setuptools import setup
 from setuptools.command.build_py import build_py
 
-from kakasidict import Genkanwadict
+from src.kakasidict import Genkanwadict
 
 package_name = "pykakasi"
 root_dir = os.path.abspath(os.path.dirname(__file__))

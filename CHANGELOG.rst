@@ -17,6 +17,8 @@ Added
 Changed
 -------
 
+* Move kakasidict.py to src and conftest.py to tests
+
 Fixed
 -----
 

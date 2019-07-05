@@ -4,7 +4,7 @@ import re
 from klepto.archives import file_archive
 from six import unichr
 
-root_dir = os.path.abspath(os.path.dirname(__file__))
+root_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
 
 class Genkanwadict(object):
