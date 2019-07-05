@@ -19,6 +19,8 @@ Changed
 
 * pytest: now run on project root without tox, by generating
   dictionary as a test fixture.
+* tox: run tox test with installed dictionary instead of
+  a generated fixture.
 * Optimize kana conversion function.
 
 
