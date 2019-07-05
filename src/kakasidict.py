@@ -95,4 +95,3 @@ class Genkanwadict(object):
         if (os.path.exists(dst)):
             os.unlink(dst)
         self.run(src, dst)
-
