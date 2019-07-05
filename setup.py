@@ -3,11 +3,10 @@
 import io
 import os
 import re
+import sys
 
 from setuptools import setup
 from setuptools.command.build_py import build_py
-
-from src.kakasidict import Genkanwadict
 
 package_name = "pykakasi"
 root_dir = os.path.abspath(os.path.dirname(__file__))
@@ -17,6 +16,8 @@ class MyBuild(build_py):
 
     def run(self):
         build_py.run(self)
+        sys.path.insert(1, os.path.join(root_dir, 'src'))
+        from kakasidict import Genkanwadict
         if not self.dry_run:
             kanwa = Genkanwadict()
             dstdir = os.path.join(self.build_lib, 'pykakasi', 'data')
