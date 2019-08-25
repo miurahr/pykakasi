@@ -27,20 +27,25 @@ Overview
    :alt: Coverage status
 
 
-pykakasi is Natural Language Proseccing(NLP) library to convert Kana-Kanji Japanese clauses into 
-Roman-Kana with separator in python.
-This is improved kakasi library (original is written in C) in Python.
+``pykakasi`` is a Python Natural Language Processing (NLP) library to transliterate *hiragana*, *katakana* and *kanji* (Japanese text) into *rōmaji* (Latin/Roman alphabet).
 
-pykakasi at glance
-==================
+It is based on the `kakasi`_ library, which is written in C.
 
-Install::
+* Install (from `PyPI`_): ``pip install pykakasi``
+* `Documentation available on readthedocs`_
 
-    pip install pykakasi
+.. _`PyPI`: https://pypi.org/project/pykakasi/
+.. _`kakasi`: http://kakasi.namazu.org/
+.. _`Documentation available on readthedocs`: https://pykakasi.readthedocs.io/en/latest/index.html
 
-Sample source code::
 
-    $ python
+Examples
+========
+
+Transliterate Japanese text to rōmaji:
+
+.. code-block:: pycon
+
     >>> import pykakasi
     >>>
     >>> text = u"かな漢字交じり文"
@@ -55,14 +60,21 @@ Sample source code::
     >>> result = conv.do(text)
     >>> print(result)
     kana Kanji Majiri Bun
-    >>>
-    >>>
+
+Tokenize Japanese text (split by word boundaries), equivalent to ``kakasi``'s wakati gaki option:
+
+.. code-block:: pycon
+
     >>> wakati = pykakasi.wakati()
     >>> conv = wakati.getConverter()
     >>> result = conv.do(text)
     >>> print(result)
     かな 漢字 交じり 文
-    >>>
+
+Add `furigana`_ (pronounciation aid) in rōmaji to text:
+
+.. code-block:: pycon
+
     >>> kakasi = pykakasi.kakasi()
     >>> kakasi.setMode("J","aF") # Japanese to furigana
     >>> kakasi.setMode("H","aF") # Japanese to furigana
@@ -70,27 +82,20 @@ Sample source code::
     >>> result = conv.do(text)
     >>> print(result)
     かな[kana] 漢字[Kanji] 交じり[Majiri] 文[Bun]
-    >>>
 
+Input mode values: "J" (Japanese: kanji, hiragana and katakana), "H" (hiragana), "K" (katakana).
 
-You can use output `Mode` values from "H", "K", "a" which is each means
-"Hiragana", "Katakana" and "Alphabet".
-For input, you can use "J" that means "Japanese" that is
-mixture of Kanji, Katakana and Hiragana.
-Also there is values of "H", "K" that means "Hiragana", and "Katakana".
-You can use  "Hepburn" , "Kunrei" or "Passport" as mode "r", Roman table switch.
-Also "s" used for separator switch, "C" for capitalize switch.
-"S" for separator storing option.
+Output mode values: "H" (hiragana), "K" (katakana), "a" (alphabet / rōmaji), "aF" (furigana in rōmaji).
 
-`wakati` is an implementation of kakasi's wakati gaki option.
+There are other ``setMode`` switches which control output:
 
-Documentation
-=============
+* "r": Romanisation table: `Hepburn`_ (default), `Kunrei`_ or ``Passport``
+* "s": Separator: ``False`` adds no spaces between words (default), ``True`` adds spaces between words
+* "C": Capitalize: ``False`` adds no capital letters (default), ``True`` makes each word start with a capital letter
 
-Manual is placed on `readthedocs`_.
-
-.. _`readthedocs`: https://pykakasi.readthedocs.io/en/latest/index.html
-
+.. _`furigana`: https://en.wikipedia.org/wiki/Furigana
+.. _`Hepburn`: https://en.wikipedia.org/wiki/Hepburn_romanization
+.. _`Kunrei`: https://en.wikipedia.org/wiki/Kunrei-shiki_romanization
 
 Copyright and License
 =====================
