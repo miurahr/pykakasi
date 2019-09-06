@@ -29,6 +29,18 @@ Removed
 Security
 --------
 
+
+`v1.1b1`_ (6, Sep, 2019)
+========================
+
+Added
+-----
+* Add conversions: kya, kyu, kyo
+
+Changed
+-------
+* Rewording README document
+
 `v1.1a1`_ (8, Jul, 2019)
 ========================
 

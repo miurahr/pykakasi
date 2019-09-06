@@ -64,7 +64,7 @@ setup(name=package_name,
       extras_require={'dev': ['pytest']},
       cmdclass={'build_py': MyBuild},
       classifiers=[
-          'Development Status :: 3 - Alpha',
+          'Development Status :: 4 - Beta',
           'Environment :: Console',
           'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
           'Operating System :: MacOS :: MacOS X',

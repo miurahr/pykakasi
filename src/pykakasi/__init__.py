@@ -4,7 +4,7 @@ from .properties import Configurations
 from .scripts import A2, H2, K2, Sym2
 
 __copyright__ = 'Copyright (C) 2010-2019 Hiroshi Miura'
-__version__ = '1.1a1'
+__version__ = '1.1b1'
 __license__ = 'GPLv3'
 __author__ = 'Hiroshi Miura'
 __author_email__ = 'miurahr@linux.com'
