@@ -5,3 +5,5 @@
 .. _changes:
 
 .. include:: ../CHANGELOG.rst
+
+.. include:: ../CHANGELOG_0.rst

@@ -18,13 +18,14 @@ class H2 (object):
     _diff = 0x30a1 - 0x3041  # KATAKANA LETTER A - HIRAGANA A
 
     def __init__(self, mode, method="Hepburn"):
+        conf = Configurations()
         if mode == "a":
             if method == "Hepburn":
-                self._kanadict = Jisyo(Configurations.jisyo_hepburn_hira)
+                self._kanadict = Jisyo(conf.jisyo_hepburn_hira)
             elif method == "Passport":
-                self._kanadict = Jisyo(Configurations.jisyo_passport_hira)
+                self._kanadict = Jisyo(conf.jisyo_passport_hira)
             elif method == "Kunrei":
-                self._kanadict = Jisyo(Configurations.jisyo_kunrei_hira)
+                self._kanadict = Jisyo(conf.jisyo_kunrei_hira)
             else:
                 raise UnsupportedRomanRulesException("Unsupported roman rule")
 
@@ -71,13 +72,14 @@ class K2 (object):
     _diff = 0x30a1 - 0x3041  # KATAKANA LETTER A - HIRAGANA A
 
     def __init__(self, mode, method="Hepburn"):
+        conf = Configurations()
         if mode == "a":
             if method == "Hepburn":
-                self._kanadict = Jisyo(Configurations.jisyo_hepburn)
+                self._kanadict = Jisyo(conf.jisyo_hepburn)
             elif method == "Passport":
-                self._kanadict = Jisyo(Configurations.jisyo_passport)
+                self._kanadict = Jisyo(conf.jisyo_passport)
             elif method == "Kunrei":
-                self._kanadict = Jisyo(Configurations.jisyo_kunrei)
+                self._kanadict = Jisyo(conf.jisyo_kunrei)
             else:
                 raise UnsupportedRomanRulesException("Unsupported roman rule")  # pragma: no cover
 
@@ -124,7 +126,7 @@ class Jisyo:
     _dict = None
 
     def __init__(self, dictname):
-        self._dict = file_archive(Configurations.dictpath(dictname), {}, serialized=True)
+        self._dict = file_archive(Configurations().dictpath(dictname), {}, serialized=True)
         self._dict.load()
 
     def haskey(self, key):

@@ -5,6 +5,9 @@ include *.txt
 include *.yml
 include AUTHORS
 include COPYING
+include pytest.ini
+include setup.py
+include src/kakasidict.py
 include tox.ini
 recursive-include docs *.po
 recursive-include docs *.py
