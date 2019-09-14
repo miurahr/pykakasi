@@ -42,15 +42,15 @@ class kakasi:
     _roman_vals = ["Hepburn", "Kunrei", "Passport"]
     _MAXLEN = 32
     _LONG_SYMBOL = [
-        # 0x002D, # -
-        0x30FC, # ー
-        # 0x2010, # ‐
-        # 0x2011, # ‑
-        # 0x2013, # –
-        # 0x2014, # —
-        0x2015, # ―
-        0x2212, # −
-        0xFF70 # ｰ
+        # 0x002D,  # -
+        0x30FC,  # ー
+        # 0x2010,  # ‐
+        # 0x2011,  # ‑
+        # 0x2013,  # –
+        # 0x2014,  # —
+        0x2015,  # ―
+        0x2212,  # −
+        0xFF70  # ｰ
     ]
 
     def __init__(self):
