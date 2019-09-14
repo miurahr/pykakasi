@@ -11,18 +11,6 @@ from .exceptions import UnsupportedRomanRulesException
 from .properties import Ch, Configurations, Convert_Tables
 
 
-# long_symbol = [
-#     0x002D,
-#     0x30FC,
-#     0x2010,
-#     0x2011,
-#     0x2013,
-#     0x2014,
-#     0x2015,
-#     0x2212,
-#     0xFF70
-# ]
-
 class H2 (object):
 
     _kanadict = None
