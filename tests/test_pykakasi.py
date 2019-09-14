@@ -504,3 +504,19 @@ def test_kakasi_long_symbol_mixed_JHK():
     for case, result in TESTS:
         print(converter.do(case))
         assert converter.do(case) == result
+
+
+@pytest.skip
+def test_kakasi_long_symbol_with_no_HK():
+    TESTS = [
+        (u'順ーデデーン', u'jun-dedeen'),
+        (u'デッデーン順ー', u'deddeenjun-')
+    ]
+    kakasi = pykakasi.kakasi()
+    kakasi.setMode('K', 'a')
+    kakasi.setMode('H', 'a')
+    kakasi.setMode('J', 'a')
+    converter = kakasi.getConverter()
+    for case, result in TESTS:
+        print(converter.do(case))
+        assert converter.do(case) == result
