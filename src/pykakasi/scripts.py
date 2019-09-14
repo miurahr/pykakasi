@@ -36,7 +36,7 @@ class H2 (object):
             self.convert = self.convert_noop
 
     def isRegion(self, char):
-        return (0x3040 < ord(char[0]) and ord(char[0]) < 0x3097)
+        return ((0x3040 < ord(char[0]) and ord(char[0]) < 0x3097))
 
     def convert_a(self, text):
         Hstr = ""

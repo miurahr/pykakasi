@@ -433,3 +433,90 @@ def test_kakasi_chinese_kanji_replace():
     converter = kakasi.getConverter()
     for case, result in TESTS:
         assert converter.do(case) == result
+
+
+def test_kakasi_long_symbol_H():
+    TESTS = [
+        (u'やったー', u'yattaa'),
+        (u'でっでー', u'deddee'),
+        (u'てんさーふろー', u'tensaafuroo'),
+        (u'がっがーん', u'gaggaan'),
+        (u'どーん', u'doon')
+    ]
+
+    kakasi = pykakasi.kakasi()
+    kakasi.setMode('H', 'a')
+    converter = kakasi.getConverter()
+    for case, result in TESTS:
+        print(converter.do(case))
+        assert converter.do(case) == result
+
+
+def test_kakasi_long_symbol_K():
+    TESTS = [
+        (u'ヤッター', u'yattaa'),
+        (u'デッデー', u'deddee'),
+        (u'テンサーフロー', u'tensaafuroo'),
+        (u'ガッガーン', u'gaggaan'),
+        (u'ドーン', u'doon')
+    ]
+
+    kakasi = pykakasi.kakasi()
+    kakasi.setMode('K', 'a')
+    converter = kakasi.getConverter()
+    for case, result in TESTS:
+        print(converter.do(case))
+        assert converter.do(case) == result
+
+
+def test_kakasi_long_symbol_mixed_HK():
+    TESTS = [
+        (u'じゃーんデデーン', u'jaandedeen'),
+        (u'デッデーンじゃーん', u'deddeenjaan'),
+        (u'テンサーふろー', u'tensaafuroo'),
+        (u'ガッガーン', u'gaggaan'),
+        (u'ドーン', u'doon')
+    ]
+
+    kakasi = pykakasi.kakasi()
+    kakasi.setMode('K', 'a')
+    kakasi.setMode('H', 'a')
+    converter = kakasi.getConverter()
+    for case, result in TESTS:
+        print(converter.do(case))
+        assert converter.do(case) == result
+
+
+def test_kakasi_long_symbol_mixed_JHK():
+    TESTS = [
+        (u'順じゃーんデデーン', u'junjaandedeen'),
+        (u'デッデーン順じゃーん', u'deddeenjunjaan'),
+        (u'テンサーふろー風呂', u'tensaafuroofuro'),
+        (u'ガッガーン癌', u'gaggaangan'),
+        (u'ドーン', u'doon')
+    ]
+
+    kakasi = pykakasi.kakasi()
+    kakasi.setMode('K', 'a')
+    kakasi.setMode('H', 'a')
+    kakasi.setMode('J', 'a')
+    converter = kakasi.getConverter()
+    for case, result in TESTS:
+        print(converter.do(case))
+        assert converter.do(case) == result
+
+
+@pytest.mark.skip
+def test_kakasi_long_symbol_with_no_HK():
+    TESTS = [
+        (u'順ーデデーン', u'jun-dedeen'),
+        (u'デッデーン順ー', u'deddeenjun-')
+    ]
+    kakasi = pykakasi.kakasi()
+    kakasi.setMode('K', 'a')
+    kakasi.setMode('H', 'a')
+    kakasi.setMode('J', 'a')
+    converter = kakasi.getConverter()
+    for case, result in TESTS:
+        print(converter.do(case))
+        assert converter.do(case) == result
