@@ -3,3 +3,7 @@ Pykakasi is written and maintained by Hiroshi Miura <miurahr@linux.com>
 Contributors, listed alphabetically, are:
 
 * Jan Malakhovski -- word split and furigana mode
+* Michael Farrell -- README document
+* @Northernbird -- Implement function to handle long symbols
+* Takuya Iwasa -- Same as above
+* @mohno007 -- Add conversions: kya, kyu, kyo
