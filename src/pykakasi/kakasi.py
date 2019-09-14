@@ -42,15 +42,15 @@ class kakasi:
     _roman_vals = ["Hepburn", "Kunrei", "Passport"]
     _MAXLEN = 32
     _LONG_SYMBOL = [
-        0x002D,
-        0x30FC,
-        0x2010,
-        0x2011,
-        0x2013,
-        0x2014,
-        0x2015,
-        0x2212,
-        0xFF70
+        # 0x002D, # -
+        0x30FC, # ー
+        # 0x2010, # ‐
+        # 0x2011, # ‑
+        # 0x2013, # –
+        # 0x2014, # —
+        0x2015, # ―
+        0x2212, # −
+        0xFF70 # ｰ
     ]
 
     def __init__(self):
@@ -138,13 +138,19 @@ class kakasi:
                 chunk = ''
 
                 while i < len(text):
-                        # and self._conv[mode].isRegion(text[i]) or (ord(text[i]) in self._LONG_SYMBOL):
 
                     # 長音記号の場合は、直前の文字とreplaceする
                     if ord(text[i]) in self._LONG_SYMBOL:
-                        orig += text[i]
-                        chunk = chunk + chunk[-1]
-                        i += 1
+
+                        if self._mode[mode] is not None:
+                            orig += text[i]
+                            chunk = chunk + chunk[-1]
+                            i += 1
+                        else:
+                            orig += text[i]
+                            chunk += text[i]
+                            i += 1
+                            break
 
                     elif self._conv[mode].isRegion(text[i]):
                         w = min(i + self._MAXLEN, len(text))
