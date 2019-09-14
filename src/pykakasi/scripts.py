@@ -11,6 +11,18 @@ from .exceptions import UnsupportedRomanRulesException
 from .properties import Ch, Configurations, Convert_Tables
 
 
+# long_symbol = [
+#     0x002D,
+#     0x30FC,
+#     0x2010,
+#     0x2011,
+#     0x2013,
+#     0x2014,
+#     0x2015,
+#     0x2212,
+#     0xFF70
+# ]
+
 class H2 (object):
 
     _kanadict = None
@@ -36,7 +48,7 @@ class H2 (object):
             self.convert = self.convert_noop
 
     def isRegion(self, char):
-        return (0x3040 < ord(char[0]) and ord(char[0]) < 0x3097)
+        return ((0x3040 < ord(char[0]) and ord(char[0]) < 0x3097))
 
     def convert_a(self, text):
         Hstr = ""

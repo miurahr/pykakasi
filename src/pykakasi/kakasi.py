@@ -41,6 +41,17 @@ class kakasi:
     _values = ["a", "E", "H", "K"]
     _roman_vals = ["Hepburn", "Kunrei", "Passport"]
     _MAXLEN = 32
+    _LONG_SYMBOL = [
+        0x002D,
+        0x30FC,
+        0x2010,
+        0x2011,
+        0x2013,
+        0x2014,
+        0x2015,
+        0x2212,
+        0xFF70
+    ]
 
     def __init__(self):
         self._conv = {}
@@ -126,20 +137,33 @@ class kakasi:
                 orig = ''
                 chunk = ''
 
-                while i < len(text) and self._conv[mode].isRegion(text[i]):
-                    w = min(i + self._MAXLEN, len(text))
-                    (t, l1) = self._conv[mode].convert(text[i:w])
-                    if l1 > 0:
-                        orig += text[i:i + l1]
-                        chunk += t
-                        i += l1
-                    else:
-                        orig = text[i:i + 1]
-                        if self._flag["t"]:
-                            chunk = orig
-                        else:
-                            chunk = "???"
+                while i < len(text):
+                        # and self._conv[mode].isRegion(text[i]) or (ord(text[i]) in self._LONG_SYMBOL):
+
+                    # 長音記号の場合は、直前の文字とreplaceする
+                    if ord(text[i]) in self._LONG_SYMBOL:
+                        orig += text[i]
+                        chunk = chunk + chunk[-1]
                         i += 1
+
+                    elif self._conv[mode].isRegion(text[i]):
+                        w = min(i + self._MAXLEN, len(text))
+                        (t, l1) = self._conv[mode].convert(text[i:w])
+                        if l1 > 0:
+                            orig += text[i:i + l1]
+                            chunk += t
+                            i += l1
+                        else:
+                            orig = text[i:i + 1]
+                            if self._flag["t"]:
+                                chunk = orig
+                            else:
+                                chunk = "???"
+                            i += 1
+                            break
+
+                    else:
+                        # i += 1
                         break
 
             else:
