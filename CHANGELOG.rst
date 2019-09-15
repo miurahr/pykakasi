@@ -29,6 +29,9 @@ Removed
 Security
 --------
 
+`v1.1`_ (16, Sep, 2019)
+========================
+
 `v1.1b2`_ (14, Sep, 2019)
 ========================
 
@@ -71,7 +74,8 @@ Fixed
 
 
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v1.1b2...HEAD
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v1.1...HEAD
+.. _v1.1: https://github.com/miurahr/pykakasi/compare/v1.0b2...v1.1
 .. _v1.1b2: https://github.com/miurahr/pykakasi/compare/v1.0b1...v1.1b2
 .. _v1.1b1: https://github.com/miurahr/pykakasi/compare/v1.0a1...v1.1b1
 .. _v1.1a1: https://github.com/miurahr/pykakasi/compare/v1.0c2...v1.1a1
