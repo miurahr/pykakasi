@@ -20,6 +20,8 @@ Changed
 Fixed
 -----
 
+* Fix out-of-index error when kana-dash is placed on first of same character group.(#85)
+
 Deprecated
 ----------
 

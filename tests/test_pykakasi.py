@@ -506,7 +506,6 @@ def test_kakasi_long_symbol_mixed_JHK():
         assert converter.do(case) == result
 
 
-@pytest.mark.skip
 def test_kakasi_long_symbol_with_no_HK():
     TESTS = [
         (u'順ーデデーン', u'jun-dedeen'),

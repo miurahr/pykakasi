@@ -139,13 +139,19 @@ class kakasi:
 
                 while i < len(text):
 
-                    # 長音記号の場合は、直前の文字とreplaceする
                     if ord(text[i]) in self._LONG_SYMBOL:
 
-                        if self._mode[mode] is not None:
+                        # FIXME: q&d workaround when hiragana/katanaka dash is first char.
+                        if self._mode[mode] is not None and len(chunk) > 0:
+                            # use previous char as a transiliteration for kana-dash
                             orig += text[i]
                             chunk = chunk + chunk[-1]
                             i += 1
+                        elif len(chunk) == 0:
+                            orig += text[i]
+                            chunk += '-'
+                            i += 1
+                            break
                         else:
                             orig += text[i]
                             chunk += text[i]
