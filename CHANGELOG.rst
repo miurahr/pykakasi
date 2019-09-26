@@ -20,8 +20,6 @@ Changed
 Fixed
 -----
 
-* Fix out-of-index error when kana-dash is placed on first of same character group.(#85)
-
 Deprecated
 ----------
 
@@ -30,6 +28,14 @@ Removed
 
 Security
 --------
+
+`v1.2`_ (26, Sep, 2019)
+========================
+
+Fixed
+-----
+
+* Fix out-of-index error when kana-dash is placed on first of same character group.(#85)
 
 `v1.1`_ (16, Sep, 2019)
 ========================
@@ -76,7 +82,8 @@ Fixed
 
 
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v1.1...HEAD
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v1.2...HEAD
+.. _v1.2: https://github.com/miurahr/pykakasi/compare/v1.1...v1.2
 .. _v1.1: https://github.com/miurahr/pykakasi/compare/v1.0b2...v1.1
 .. _v1.1b2: https://github.com/miurahr/pykakasi/compare/v1.0b1...v1.1b2
 .. _v1.1b1: https://github.com/miurahr/pykakasi/compare/v1.0a1...v1.1b1
