@@ -24,6 +24,17 @@ class kakasi:
     _values = ["a", "E", "H", "K"]
     _roman_vals = ["Hepburn", "Kunrei", "Passport"]
     _MAXLEN = 32
+    _LONG_SYMBOL = [
+        # 0x002D,  # -
+        0x30FC,  # ー
+        # 0x2010,  # ‐
+        # 0x2011,  # ‑
+        # 0x2013,  # –
+        # 0x2014,  # —
+        0x2015,  # ―
+        0x2212,  # −
+        0xFF70  # ｰ
+    ]
 
     def __init__(self):
         self._conv = {}
@@ -209,20 +220,45 @@ class kakasi:
                 orig = ''
                 chunk = ''
 
-                while i < len(text) and self._conv[mode].isRegion(text[i]):
-                    w = min(i + self._MAXLEN, len(text))
-                    (t, l1) = self._conv[mode].convert(text[i:w])
-                    if l1 > 0:
-                        orig += text[i:i + l1]
-                        chunk += t
-                        i += l1
-                    else:
-                        orig = text[i:i + 1]
-                        if self._flag["t"]:
-                            chunk = orig
+                while i < len(text):
+
+                    if ord(text[i]) in self._LONG_SYMBOL:
+
+                        # FIXME: q&d workaround when hiragana/katanaka dash is first char.
+                        if self._mode[mode] is not None and len(chunk) > 0:
+                            # use previous char as a transiliteration for kana-dash
+                            orig += text[i]
+                            chunk = chunk + chunk[-1]
+                            i += 1
+                        elif len(chunk) == 0:
+                            orig += text[i]
+                            chunk += '-'
+                            i += 1
+                            break
                         else:
-                            chunk = "???"
-                        i += 1
+                            orig += text[i]
+                            chunk += text[i]
+                            i += 1
+                            break
+
+                    elif self._conv[mode].isRegion(text[i]):
+                        w = min(i + self._MAXLEN, len(text))
+                        (t, l1) = self._conv[mode].convert(text[i:w])
+                        if l1 > 0:
+                            orig += text[i:i + l1]
+                            chunk += t
+                            i += l1
+                        else:
+                            orig = text[i:i + 1]
+                            if self._flag["t"]:
+                                chunk = orig
+                            else:
+                                chunk = "???"
+                            i += 1
+                            break
+
+                    else:
+                        # i += 1
                         break
 
             else:
