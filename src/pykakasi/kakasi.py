@@ -8,23 +8,6 @@ __license__ = 'GPL 3'
 __copyright__ = '2014-2019 Hiroshi Miura <miurahr@linux.com>'
 __docformat__ = 'restructuredtext en'
 
-'''
-Flags:
-  These flags are as same as KAKASI.
-
-  p: List all possible readings. If there exist two or more
-     possible readings, KAKASI shows them in braces {aaa,bbb}.(not implemented yet)
-  s: Insert a separate character between words.
-  f: Furigana mode. Shows the original kanji word with reading.
-  c: Skip characters within word. ( default TAB CR LF BLANK )(not implemented yet)
-  C: Capitalize Romaji word (with -Ja or -Jj option)
-  U: Upcase romaji word (with -Ja or -Jj option)
-  u: Unbufferd mode.(not implemented yet)
-  w: wakatigaki mode. 'wakatigaki' is word segmentation for
-     Japanese sentences.(implemented as wakati class)
-
-'''
-
 import six
 
 from .exceptions import (InvalidFlagValueException, InvalidModeValueException,
@@ -61,6 +44,106 @@ class kakasi:
                       "u": False, "t": True}
         self._option = {"r": "Hepburn"}
         self._separator = ' '
+        self._separator_string = ' '
+        self._jconv = J2()
+        self._haconv = H2("a")
+        self._hkconv = H2("K")
+        self._khconv = K2("H")
+        self._kaconv = K2("a")
+        self._aeconv = A2("E")
+        self._saconv = Sym2("a")
+
+    def convert(self, text):
+        _state = True
+
+        if len(text) == 0:
+            return ""
+
+        otext = ''
+        _result = []
+        i = 0
+        while True:
+            if i >= len(text):
+                break
+
+            if self._jconv.isRegion(text[i]):
+                t, ln = self._jconv.convert(text[i:])
+                if ln <= 0:  # pragma: no cover
+                    otext = otext + text[i]
+                    i += 1
+                    _state = False
+                elif (i + ln) < len(text):
+                    if _state:
+                        _result.append(self._iconv(otext + text[i:i + ln], t))
+                        otext = ''
+                    else:
+                        _result.append(self._iconv(otext, otext))
+                        _result.append(self._iconv(text[i:i + ln], t))
+                        otext = ''
+                        _state = True
+                    i = i + ln
+                else:
+                    if _state:
+                        _result.append(self._iconv(otext + text[i:i + ln], t))
+                    else:  # pragma: no cover
+                        _result.append(self._iconv(otext, otext))
+                        _result.append(self._iconv(text[i:i + ln], t))
+                    break
+
+            else:
+                _state = False
+                otext = otext + text[i]
+                i += 1
+
+        return _result
+
+    def _iconv(self, otext, hira):
+        tmp = {'orig': otext, 'hira': hira}
+        tmp['kana'] = self._h2k(hira)
+        tmp['hepburn'] = self._s2a(self._h2a(hira))
+        return tmp
+
+    def _s2a(self, text):
+        result = ''
+        i = 0
+        while(i < len(text)):
+            w = min(i + self._MAXLEN, len(text))
+            (t, l1) = self._saconv.convert(text[i:w])
+            if l1 > 0:
+                result += t
+                i += l1
+            else:
+                result += text[i:i + 1]
+                i += 1
+        return result
+
+    def _h2k(self, text):
+        result = ''
+        i = 0
+        while(i < len(text)):
+            w = min(i + self._MAXLEN, len(text))
+            (t, l1) = self._hkconv.convert(text[i:w])
+            if l1 > 0:
+                result += t
+                i += l1
+            else:
+                result += text[i:i + 1]
+                i += 1
+        return result
+
+    def _h2a(self, text):
+        result = ''
+        i = 0
+        while(i < len(text)):
+            w = min(i + self._MAXLEN, len(text))
+            (t, l1) = self._haconv.convert(text[i:w])
+            if l1 > 0:
+                result += t
+                i += l1
+            else:
+                result += text[i:i + 1]
+                i += 1
+        return result
 
     def setMode(self, fr, to):
         if fr in self._keys:
