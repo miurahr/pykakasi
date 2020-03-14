@@ -5,10 +5,8 @@
 #
 
 __license__ = 'GPL 3'
-__copyright__ = '2014-2019 Hiroshi Miura <miurahr@linux.com>'
+__copyright__ = '2014-2020 Hiroshi Miura <miurahr@linux.com>'
 __docformat__ = 'restructuredtext en'
-
-import six
 
 from .exceptions import (InvalidFlagValueException, InvalidModeValueException,
                          UnknownOptionsException,
@@ -178,9 +176,7 @@ class kakasi:
         self._conv["a"] = A2(self._mode["a"])
         return self
 
-    def do(self, itext):
-        text = six.text_type(itext)
-
+    def do(self, text):
         otext = ""
         i = 0
         while True:

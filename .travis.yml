@@ -4,10 +4,12 @@ sudo: false
 cache: pip
 matrix:
   include:
-    - python: 3.5
-      env: TOXENV=py35
+    - python: 3.6
+      env: TOXENV=py36
     - python: 3.7
       env: TOXENV=py37
+    - python: 3.8
+      env: TOXENV=py38
     - python: 3.7
       env: TOXENV=check
     - python: 3.7

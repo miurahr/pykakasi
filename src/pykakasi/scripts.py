@@ -4,8 +4,6 @@
 # Copyright 2011-2019 Hiroshi Miura <miurahr@linux.com>
 
 from klepto.archives import file_archive  # type: ignore # noqa
-from six import unichr
-from six.moves import xrange
 
 from .exceptions import UnsupportedRomanRulesException
 from .properties import Ch, Configurations, Convert_Tables
@@ -42,7 +40,7 @@ class H2 (object):
         Hstr = ""
         max_len = -1
         r = min(self._kanadict.maxkeylen(), len(text))
-        for x in xrange(1, r + 1):
+        for x in range(1, r + 1):
             if self._kanadict.haskey(text[:x]):
                 if max_len < x:
                     max_len = x
@@ -53,9 +51,9 @@ class H2 (object):
         Hstr = ""
         max_len = 0
         r = len(text)
-        for x in xrange(r):
+        for x in range(r):
             if self.isRegion(text[x]):
-                Hstr = Hstr + unichr(ord(text[x]) + self._diff)
+                Hstr = Hstr + chr(ord(text[x]) + self._diff)
                 max_len += 1
             else:  # pragma: no cover
                 break
@@ -96,7 +94,7 @@ class K2 (object):
         Hstr = ""
         max_len = -1
         r = min(self._kanadict.maxkeylen(), len(text))
-        for x in xrange(1, r + 1):
+        for x in range(1, r + 1):
             if self._kanadict.haskey(text[:x]):
                 if max_len < x:
                     max_len = x
@@ -107,9 +105,9 @@ class K2 (object):
         Hstr = ""
         max_len = 0
         r = len(text)
-        for x in xrange(r):
+        for x in range(r):
             if self.isRegion(text[x]) and ord(text[x]) < 0x30f7:
-                Hstr = Hstr + unichr(ord(text[x]) - self._diff)
+                Hstr = Hstr + chr(ord(text[x]) - self._diff)
                 max_len += 1
             elif self.isRegion(text[x]):
                 Hstr = Hstr + text[x]
@@ -174,11 +172,11 @@ class Sym2:
         elif Ch.zenkaku_exc_mark <= c <= Ch.zenkaku_slash_mark:
             return Convert_Tables.symbol_table_5[c - Ch.zenkaku_exc_mark]
         elif Ch.zenkaku_number_zero <= c <= Ch.zenkaku_number_nine:
-            return unichr(c - Ch.zenkaku_number_zero + ord('0'))
+            return chr(c - Ch.zenkaku_number_zero + ord('0'))
         elif 0xff20 <= c <= 0xff40:
-            return unichr(0x0041 + c - 0xff21)  # u\ff21Ａ => u\0041:@A..Z[\]^_`
+            return chr(0x0041 + c - 0xff21)  # u\ff21Ａ => u\0041:@A..Z[\]^_`
         elif 0xff41 <= c < 0xff5f:
-            return unichr(0x0061 + c - 0xff41)  # u\ff41ａ => u\0061:a..z{|}
+            return chr(0x0061 + c - 0xff41)  # u\ff41ａ => u\0061:a..z{|}
         else:
             return ""  # pragma: no cover
 
@@ -209,11 +207,11 @@ class A2:
         if Ch.space <= c <= Ch.at_mark:
             return Convert_Tables.alpha_table_1[(c - Ch.space)]
         elif Ch.alphabet_A <= c <= Ch.alphabet_Z:
-            return unichr(Ch.zenkaku_A + c - Ch.alphabet_A)  # u\0041A => u\ff21Ａ
+            return chr(Ch.zenkaku_A + c - Ch.alphabet_A)  # u\0041A => u\ff21Ａ
         elif Ch.square_bra <= c <= Ch.back_quote:
             return Convert_Tables.alpha_table_2[(c - Ch.square_bra)]
         elif Ch.alphabet_a <= c <= Ch.alphabet_z:
-            return unichr(Ch.zenkaku_a + c - Ch.alphabet_a)  # u\0061a => u\ff41ａ
+            return chr(Ch.zenkaku_a + c - Ch.alphabet_a)  # u\0061a => u\ff41ａ
         elif Ch.bracket_bra <= c <= Ch.tilda:
             return Convert_Tables.alpha_table_3[(c - Ch.bracket_bra)]
         else:
