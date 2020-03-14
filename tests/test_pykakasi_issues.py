@@ -105,9 +105,9 @@ def test_issue78():
 
 
 def test_issue90():
-    TESTS = {(u'私がこの子を助けなきゃいけないってことだよね',
-              u'ワタシガコノコヲタスケナキャイケナイッテコトダヨネ')
-    }
+    TESTS = [
+        (u'私がこの子を助けなきゃいけないってことだよね', u'ワタシガコノコヲタスケナキャイケナイッテコトダヨネ')
+    ]
     kks = pykakasi.kakasi()
     kks.setMode("J", "K")
     kks.setMode("H", "K")
