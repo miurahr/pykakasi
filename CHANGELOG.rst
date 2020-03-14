@@ -47,6 +47,12 @@ Fixed
 
 * fix data kakasidict.utf8: “本蓮沼”
 
+Deprecated
+----------
+
+* Drop python 2.7 support.
+
+
 `v1.2`_ (26, Sep, 2019)
 ========================
 
