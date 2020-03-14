@@ -4,6 +4,8 @@ sudo: false
 cache: pip
 matrix:
   include:
+    - python: 3.5
+      env: TOXENV=py35
     - python: 3.7
       env: TOXENV=py37
     - python: 3.7
@@ -25,13 +27,13 @@ after_success:
   - sed -E -ie 's/.tox.py(27|35|36|37|38|py3).(lib.python[2-3].[0-9].)?site-packages/src/g' .coverage
   - coveralls
 
-deploy:
-  - provider: pypi
-    user: miurahr
-    password:
-      secure: CUY3E7DJMMyC9ARkkC5plAWTAnwmp+wyS+GbRgjOPDL8H4AwzCSCD03D4z/5BHHpGFilF+sAsaNte/9dDjtzEXtvmMCfJwovShnr9GdAm+PU4+TyhEWqVYbeYHiJMiSnLPcsyJMkYZ8JtNMXyp0onPQr6P28OsEq+ohG6Ha9P1Y=
-    distributions: "sdist bdist_wheel"
-    skip_existing: true
-    on:
-      repo: miurahr/pykakasi
-      tags: true
+# deploy:
+#  - provider: pypi
+#    user: miurahr
+#    password:
+#      secure: CUY3E7DJMMyC9ARkkC5plAWTAnwmp+wyS+GbRgjOPDL8H4AwzCSCD03D4z/5BHHpGFilF+sAsaNte/9dDjtzEXtvmMCfJwovShnr9GdAm+PU4+TyhEWqVYbeYHiJMiSnLPcsyJMkYZ8JtNMXyp0onPQr6P28OsEq+ohG6Ha9P1Y=
+#    distributions: "sdist bdist_wheel"
+#    skip_existing: true
+#    on:
+#      repo: miurahr/pykakasi
+#      tags: true
