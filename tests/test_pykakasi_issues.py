@@ -102,3 +102,15 @@ def test_issue78():
     convert = kks.getConverter()
     for case, result in TESTS:
         assert convert.do(case) == result
+
+
+def test_issue90():
+    TESTS = {(u'私がこの子を助けなきゃいけないってことだよね',
+              u'ワタシガコノコヲタスケナキャイケナイッテコトダヨネ')
+    }
+    kks = pykakasi.kakasi()
+    kks.setMode("J", "K")
+    kks.setMode("H", "K")
+    convert = kks.getConverter()
+    for case, result in TESTS:
+        assert convert.do(case) == result
