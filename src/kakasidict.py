@@ -1,14 +1,15 @@
 import os
 import re
+from typing import Dict, Tuple
 
-from klepto.archives import file_archive
+from klepto.archives import file_archive  # type: ignore # noqa
 from six import unichr
 
 root_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
 
 class Genkanwadict(object):
-    records = {}
+    records = {}  # type: Dict[str, Tuple[str, str]]
 
     def run(self, src, dst):
         with open(src, 'rb') as f:

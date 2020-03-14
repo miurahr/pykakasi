@@ -3,7 +3,7 @@
 #
 # Copyright 2011-2019 Hiroshi Miura <miurahr@linux.com>
 
-from klepto.archives import file_archive
+from klepto.archives import file_archive  # type: ignore # noqa
 from six import unichr
 from six.moves import xrange
 

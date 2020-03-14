@@ -6,6 +6,7 @@
 from __future__ import unicode_literals
 
 import os
+from typing import Dict
 
 import pkg_resources
 
@@ -13,7 +14,7 @@ import pkg_resources
 # This class is Borg
 class Configurations(object):
 
-    _shared_state = {}
+    _shared_state = {}  # type: Dict[str, object]
 
     data_path = pkg_resources.resource_filename(__name__, 'data')
     jisyo_hepburn_hira = 'hepburnhira3.db'

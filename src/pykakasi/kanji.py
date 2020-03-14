@@ -6,7 +6,7 @@
 import re
 import threading
 
-from klepto.archives import file_archive
+from klepto.archives import file_archive  # type: ignore # noqa
 
 from .properties import Configurations
 from .scripts import H2
