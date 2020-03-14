@@ -1,12 +1,15 @@
 language: python
+dist: bionic
+sudo: false
+cache: pip
 matrix:
   include:
     - python: 3.7
       env: TOXENV=py37
-    - python: pypy
-      env: TOXENV=pypy
     - python: 3.7
       env: TOXENV=check
+    - python: pypy3.6-7.3.0
+      env: TOXENV=pypy3
 
 install:
   - pip install -r requirements.txt
@@ -17,7 +20,7 @@ script:
 
 after_success:
   # Hack for coveralls to find sources
-  - sed -E -ie 's/.tox.py(27|36|37|py).(lib.python[2-3].[0-9].)?site-packages/src/g' .coverage
+  - sed -E -ie 's/.tox.py(27|35|36|37|38|py3).(lib.python[2-3].[0-9].)?site-packages/src/g' .coverage
   - coveralls
 
 deploy:
