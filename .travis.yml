@@ -8,6 +8,8 @@ matrix:
       env: TOXENV=py37
     - python: 3.7
       env: TOXENV=check
+    - python: 3.7
+      env: TOXENV=mypy
     - python: pypy3.6-7.3.0
       env: TOXENV=pypy3
 
