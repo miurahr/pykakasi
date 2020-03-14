@@ -1,5 +1,5 @@
 language: python
-dist: bionic
+dist: xenial
 sudo: false
 cache: pip
 matrix:
@@ -10,7 +10,7 @@ matrix:
       env: TOXENV=check
     - python: 3.7
       env: TOXENV=mypy
-    - python: pypy3.5-6.0
+    - python: pypy3.6-7.1.1
       env: TOXENV=pypy3
 
 install:
