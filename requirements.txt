@@ -3,6 +3,7 @@ klepto
 coverage
 coveralls
 flake8
+pep517
 pytest
 pytest-cov
 setuptools

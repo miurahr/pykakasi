@@ -4,8 +4,6 @@ sudo: false
 cache: pip
 matrix:
   include:
-    - python: 3.6
-      env: TOXENV=py36
     - python: 3.7
       env: TOXENV=py37
     - python: 3.8
