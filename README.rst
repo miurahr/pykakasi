@@ -39,6 +39,13 @@ It is based on the `kakasi`_ library, which is written in C.
 .. _`Documentation available on readthedocs`: https://pykakasi.readthedocs.io/en/latest/index.html
 
 
+Supported python versions
+=========================
+
+* pykakasi 1.2 supports python 2.7, python 3.5, 3.6, 3.7
+
+* pykakasi 2.0 supports python 3.6, 3.7, 3.8, pypy3.6-7.1.1
+
 Examples
 ========
 
@@ -100,7 +107,7 @@ There are other ``setMode`` switches which control output:
 Copyright and License
 =====================
 
-Copyright 2010-2019 Hiroshi Miura <miurahr@linux.com>
+Copyright 2010-2020 Hiroshi Miura <miurahr@linux.com>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
