@@ -4,3 +4,9 @@ build-backend = "setuptools.build_meta"
 
 [tools.setuptools_scm]
 local_scheme = "no-local-version"
+
+[gh-actions]
+python =
+    3.6: py36
+    3.7: py37
+    3.8: py38, mypy
