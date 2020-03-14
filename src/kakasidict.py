@@ -3,7 +3,6 @@ import re
 from typing import Dict, Tuple
 
 from klepto.archives import file_archive  # type: ignore # noqa
-from six import unichr
 
 root_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
@@ -32,7 +31,7 @@ class Genkanwadict(object):
                     continue
                 try:
                     (v, k) = (re.sub(r'\\u([0-9a-fA-F]{4})',
-                                     lambda x: unichr(int(x.group(1), 16)), line)).split(' ')
+                                     lambda x: chr(int(x.group(1), 16)), line)).split(' ')
                     dic[k] = v
                     max_key_len = max(max_key_len, len(k))
                 except ValueError:
