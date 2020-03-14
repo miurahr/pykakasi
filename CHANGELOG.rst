@@ -29,6 +29,24 @@ Removed
 Security
 --------
 
+`v2.0.0a1`_ (14, Mar. 2020)
+===========================
+
+Added
+-----
+
+* Structured interface of Kakasi class.(#21)
+
+Changed
+-------
+
+* Github workflows for packaging and release.(#91)
+
+Fixed
+-----
+
+* fix data kakasidict.utf8: “本蓮沼”
+
 `v1.2`_ (26, Sep, 2019)
 ========================
 
@@ -82,7 +100,8 @@ Fixed
 
 
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v1.2...HEAD
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.0.0a1...HEAD
+.. _v2.0.0a1: https://github.com/miurahr/pykakasi/compare/v1.2...v2.0.0a1
 .. _v1.2: https://github.com/miurahr/pykakasi/compare/v1.1...v1.2
 .. _v1.1: https://github.com/miurahr/pykakasi/compare/v1.0b2...v1.1
 .. _v1.1b2: https://github.com/miurahr/pykakasi/compare/v1.0b1...v1.1b2
