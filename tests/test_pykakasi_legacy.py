@@ -380,7 +380,6 @@ def test_kakasi_hepburn_nocapital():
         assert converter.do(case) == result
 
 
-@pytest.mark.xfail(reason="Cannot handle small kana extension")
 def test_kakasi_extended_kana():
     TESTS = [
         (u"\U0001b150", "wi"),
