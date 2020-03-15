@@ -14,6 +14,7 @@ class H2 (object):
     _kanadict = None
 
     _diff = 0x30a1 - 0x3041  # KATAKANA LETTER A - HIRAGANA A
+    _ediff = 0x1b164 - 0x1b150
 
     def __init__(self, mode, method="Hepburn"):
         conf = Configurations()
@@ -34,7 +35,7 @@ class H2 (object):
             self.convert = self.convert_noop
 
     def isRegion(self, char):
-        return ((0x3040 < ord(char[0]) and ord(char[0]) < 0x3097))
+        return 0x3040 < ord(char[0]) < 0x3097 or 0x1b150 <= ord(char[0]) <= 0x1b152
 
     def convert_a(self, text):
         Hstr = ""
@@ -52,8 +53,11 @@ class H2 (object):
         max_len = 0
         r = len(text)
         for x in range(r):
-            if self.isRegion(text[x]):
+            if 0x3040 < ord(text[x]) < 0x3097:
                 Hstr = Hstr + chr(ord(text[x]) + self._diff)
+                max_len += 1
+            elif 0x1b150 <= ord(text[x]) <= 0x1b152:
+                Hstr = Hstr + chr(ord(text[x]) + self._ediff)
                 max_len += 1
             else:  # pragma: no cover
                 break
@@ -68,6 +72,7 @@ class K2 (object):
     _kanadict = None
 
     _diff = 0x30a1 - 0x3041  # KATAKANA LETTER A - HIRAGANA A
+    _ediff = 0x1b164 - 0x1b150
 
     def __init__(self, mode, method="Hepburn"):
         conf = Configurations()
@@ -88,7 +93,7 @@ class K2 (object):
             self.convert = self.convert_noop
 
     def isRegion(self, char):
-        return 0x30a0 < ord(char[0]) < 0x30fd
+        return 0x30a0 < ord(char[0]) < 0x30fd or 0x1b164 <= ord(char[0]) <= 0x1b167
 
     def convert_a(self, text):
         Hstr = ""
@@ -106,10 +111,16 @@ class K2 (object):
         max_len = 0
         r = len(text)
         for x in range(r):
-            if self.isRegion(text[x]) and ord(text[x]) < 0x30f7:
+            if 0x1b164 <= ord(text[x]) < 0x1b167:
+                Hstr = Hstr + chr(ord(text[x]) - self._ediff)
+                max_len += 1
+            elif ord(text[x]) == 0x1b167:
+                Hstr = Hstr + '\u3093'
+                max_len += 1
+            elif 0x30a0 < ord(text[x]) < 0x30f7:
                 Hstr = Hstr + chr(ord(text[x]) - self._diff)
                 max_len += 1
-            elif self.isRegion(text[x]):
+            elif 0x30f7 <= ord(text[x]) < 0x30fd:
                 Hstr = Hstr + text[x]
                 max_len += 1
             else:  # pragma: no cover
