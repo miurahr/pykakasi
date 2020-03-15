@@ -1,3 +1,4 @@
+import codecs
 import os
 import re
 from typing import Dict, Tuple
@@ -9,6 +10,20 @@ root_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
 class Genkanwadict(object):
     records = {}  # type: Dict[str, Tuple[str, str]]
+
+    ESCAPE_SEQUENCE_RE = re.compile(r'''
+        ( \\U........      # 8-digit hex escapes
+        | \\u....          # 4-digit hex escapes
+        | \\x..            # 2-digit hex escapes
+        | \\[0-7]{1,3}     # Octal escapes
+        | \\N\{[^}]+\}     # Unicode characters by name
+        | \\[\\'"abfnrtv]  # Single-character escapes
+        )''', re.UNICODE | re.VERBOSE)
+
+    def decode_escapes(self, s):
+        def decode_match(match):
+            return codecs.decode(match.group(0), 'unicode-escape')
+        return self.ESCAPE_SEQUENCE_RE.sub(decode_match, s)
 
     def run(self, src, dst):
         with open(src, 'rb') as f:
@@ -30,8 +45,7 @@ class Genkanwadict(object):
                 if re.match(r"^$", line):
                     continue
                 try:
-                    (v, k) = (re.sub(r'\\u([0-9a-fA-F]{4})',
-                                     lambda x: chr(int(x.group(1), 16)), line)).split(' ')
+                    (v, k) = self.decode_escapes(line).split(' ')
                     dic[k] = v
                     max_key_len = max(max_key_len, len(k))
                 except ValueError:
