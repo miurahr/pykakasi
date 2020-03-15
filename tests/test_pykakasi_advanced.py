@@ -45,7 +45,7 @@ def test_kakasi_structured_constitution():
                 {'orig': "にわたつて", 'kana': "ニワタツテ", 'hira': "にわたつて", 'hepburn': "niwatatsute"},
                 {'orig': "自由", 'kana': "ジユウ", 'hira': "じゆう", 'hepburn': "jiyuu"},
                 {'orig': "のもたらす", 'kana': "ノモタラス", 'hira': 'のもたらす', 'hepburn': "nomotarasu"},
-                {'orig': "恵沢", 'kana': "ケイタク", 'hira':"けいたく", 'hepburn': "keitaku"},
+                {'orig': "恵沢", 'kana': "ケイタク", 'hira': "けいたく", 'hepburn': "keitaku"},
                 {'orig': "を", 'kana': "ヲ", 'hira': "を", 'hepburn': 'wo'},
                 {'orig': "確保", 'kana': "カクホ", 'hira': "かくほ", 'hepburn': "kakuho"},
                 {'orig': "し、", 'kana': "シ、", 'hira': "し、", 'hepburn': "shi,"},
