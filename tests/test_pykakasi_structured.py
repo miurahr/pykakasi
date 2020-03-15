@@ -5,9 +5,9 @@ import pykakasi
 
 def test_kakasi_structured():
     TESTS = [
-        (u"", [{'orig': '', 'hira': '', 'kana': '', 'kunrei': '', 'hepburn': '', 'passport': ''}]),
-        (u"構成", [{'orig': u"構成", 'kana': u"コウセイ", 'hira': u"こうせい", 'hepburn': 'kousei',
-                  'kunrei': "kousei", 'passport': "kosei"}]),
+        ("", [{'orig': '', 'hira': '', 'kana': '', 'kunrei': '', 'hepburn': '', 'passport': ''}]),
+        ("構成", [{'orig': u"構成", 'kana': "コウセイ", 'hira': "こうせい", 'hepburn': 'kousei',
+                  'kunrei': "kousei", 'passport': "kosei"}])
     ]
 
     kakasi = pykakasi.kakasi()
