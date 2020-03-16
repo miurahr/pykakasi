@@ -93,6 +93,11 @@ class kakasi:
                 otext = otext + text[i]
                 i += 1
 
+                if ord(otext[-1]) in Ch.endmark:
+                    _result.append(self._iconv(otext, otext))
+                    otext = ''
+                    _state = True
+
         return _result
 
     def _iconv(self, otext, hira):
