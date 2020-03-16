@@ -222,7 +222,7 @@ class kakasi:
 
                         # FIXME: q&d workaround when hiragana/katanaka dash is first char.
                         if self._mode[mode] is not None and len(chunk) > 0:
-                            # use previous char as a transiliteration for kana-dash
+                            # use previous char as a transliteration for kana-dash
                             orig += text[i]
                             chunk = chunk + chunk[-1]
                             i += 1
