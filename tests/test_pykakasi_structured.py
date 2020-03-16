@@ -16,7 +16,10 @@ import pytest
                                {'orig': "助け", 'kana': "タスケ", 'hira': "たすけ", 'hepburn': "tasuke", 'kunrei': "tasuke", 'passport': "tasuke"},
                                {'orig': "なきゃいけないってことだよね", 'kana': "ナキャイケナイッテコトダヨネ", 'hira': "なきゃいけないってことだよね",
                                 'hepburn': "nakyaikenaittekotodayone", 'kunrei': "nakyaikenaittekotodayone", 'passport': "nakyaikenaittekotodayone"}
-                           ])
+                           ]),
+                          ('やったー', [{'orig': 'やったー', 'kana': "ヤッター", 'hira': "やったー", 'hepburn': 'yattaa', 'kunrei': 'yattaa', 'passport': "yattaa"}]),
+                          ('でっでー', [{'orig': 'でっでー', 'kana': "デッデー", 'hira': 'でっでー', 'hepburn': 'deddee', 'kunrei': 'deddee', 'passport': 'deddee'}]),
+                          ('てんさーふろー', [{'orig': 'てんさーふろー', 'kana': "テンサーフロー", 'hira': 'てんさーふろー', 'hepburn': 'tensaafuroo', 'kunrei': 'tensaafuroo', 'passport': 'tensaafuroo'}]),
                           ])
 def test_kakasi_structured(case, expected):
     kakasi = pykakasi.kakasi()
