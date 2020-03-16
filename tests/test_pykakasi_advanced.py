@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import pykakasi
-import pytest
 
 
-@pytest.mark.xfail(reason='Wrong result for comma seperation.')
 def test_kakasi_structured_constitution():
 
     original_text = "日本国民は、正当に選挙された国会における代表者を通じて行動し、われらとわれらの子孫のために、" \
@@ -27,9 +25,8 @@ def test_kakasi_structured_constitution():
                 {'orig': "通じ", 'kana': "ツウジ", 'hira': "つうじ", 'hepburn': "tsuuji"},
                 {'orig': "て", 'kana': "テ", 'hira': "て", 'hepburn': 'te'},
                 {'orig': "行動", 'kana': "コウドウ", 'hira': "こうどう", 'hepburn': 'koudou'},
-                # {'orig': "し、", 'kana': "シ、", 'hira': "し、", 'hepburn': 'shi,'},
-                # {'orig': "われらとわれらの", 'kana': "ワレラトワレラノ", 'hira': "われらとわれらの", 'hepburn': "wareratowarerano"},
-                {'orig': 'し、われらとわれらの', 'kana': "シ、ワレラトワレラノ", 'hira': "し、われらとわれらの", 'hepburn': "shi,wareratowarerano"},
+                {'orig': "し、", 'kana': "シ、", 'hira': "し、", 'hepburn': 'shi,'},
+                {'orig': "われらとわれらの", 'kana': "ワレラトワレラノ", 'hira': "われらとわれらの", 'hepburn': "wareratowarerano"},
                 {'orig': "子孫", 'kana': "シソン", 'hira': "しそん", 'hepburn': "shison"},
                 {'orig': "のために、", 'kana': "ノタメニ、", 'hira': "のために、", 'hepburn': "notameni,"},
                 {'orig': "諸国民", 'kana': "ショコクミン", 'hira': "しょこくみん", 'hepburn': "shokokumin"},
@@ -39,7 +36,6 @@ def test_kakasi_structured_constitution():
                 {'orig': "成果", 'kana': "セイカ", 'hira': "せいか", 'hepburn': "seika"},
                 {'orig': "と、", 'kana': "ト、", 'hira': "と、", 'hepburn': "to,"},
                 {'orig': "わが", 'kana': "ワガ", 'hira': "わが", 'hepburn': "waga"},
-                # {'orig': 'と、わが','kana': "ト、ワガ", 'hira': "と、わが",  'hepburn': 'to,waga'},
                 {'orig': "国", 'kana': "クニ", 'hira': "くに", 'hepburn': "kuni"},
                 {'orig': "全土", 'kana': "ゼンド", 'hira': "ぜんど", 'hepburn': "zendo"},
                 {'orig': "にわたつて", 'kana': "ニワタツテ", 'hira': "にわたつて", 'hepburn': "niwatatsute"},
@@ -49,6 +45,13 @@ def test_kakasi_structured_constitution():
                 {'orig': "を", 'kana': "ヲ", 'hira': "を", 'hepburn': 'wo'},
                 {'orig': "確保", 'kana': "カクホ", 'hira': "かくほ", 'hepburn': "kakuho"},
                 {'orig': "し、", 'kana': "シ、", 'hira': "し、", 'hepburn': "shi,"},
+                {'orig': "政府", 'kana': "セイフ", 'hira': "せいふ", 'hepburn': "seifu"},
+                {'orig': "の", 'kana': "ノ", 'hira': "の", 'hepburn': "no"},
+                {'orig': "行為", 'kana': "コウイ", 'hira': "こうい", 'hepburn': "koui"},
+                {'orig': "によつて", 'kana': "ニヨツテ", 'hira': "によつて", 'hepburn': "niyotsute"},
+                {'orig': "再び", 'kana': "フタタビ", 'hira': "ふたたび", 'hepburn': "futatabi"},
+                {'orig': "戦争", 'kana': "センソウ", 'hira': "せんそう", 'hepburn': "sensou"},
+                {'orig': "の", 'kana': "ノ", 'hira': "の", 'hepburn': "no"},
                 ]
 
     kakasi = pykakasi.kakasi()
