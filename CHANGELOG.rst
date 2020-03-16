@@ -29,6 +29,25 @@ Removed
 Security
 --------
 
+`v2.0.0a2`_ (16, Mar. 2020)
+===========================
+
+Added
+-----
+
+* NewAPI: support kunrei and passport roman conversion rule.
+
+Changed
+-------
+
+* CI: test by github actions
+
+Fixed
+-----
+
+* Support an extended kana(#77)
+  (U0001b150-U0001b152, U0001b164-U0001b167)
+
 `v2.0.0a1`_ (14, Mar. 2020)
 ===========================
 
@@ -106,7 +125,8 @@ Fixed
 
 
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.0.0a1...HEAD
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.0.0a2...HEAD
+.. _v2.0.0a2: https://github.com/miurahr/pykakasi/compare/v2.0.0a1...v2.0.0a2
 .. _v2.0.0a1: https://github.com/miurahr/pykakasi/compare/v1.2...v2.0.0a1
 .. _v1.2: https://github.com/miurahr/pykakasi/compare/v1.1...v1.2
 .. _v1.1: https://github.com/miurahr/pykakasi/compare/v1.0b2...v1.1
