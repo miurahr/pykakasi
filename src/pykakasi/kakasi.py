@@ -44,7 +44,9 @@ class kakasi:
         self._separator = ' '
         self._separator_string = ' '
         self._jconv = J2()
-        self._haconv = H2("a")
+        self._hahconv = H2("a", method='Hepburn')
+        self._hakconv = H2("a", method='Kunrei')
+        self._hapconv = H2("a", method='Passport')
         self._hkconv = H2("K")
         self._khconv = K2("H")
         self._kaconv = K2("a")
@@ -103,7 +105,9 @@ class kakasi:
     def _iconv(self, otext, hira):
         tmp = {'orig': otext, 'hira': hira}
         tmp['kana'] = self._h2k(hira)
-        tmp['hepburn'] = self._s2a(self._h2a(hira))
+        tmp['hepburn'] = self._s2a(self._h2ah(hira))
+        tmp['kunrei'] = self._s2a(self._h2ak(hira))
+        tmp['passport'] = self._s2a(self._h2ap(hira))
         return tmp
 
     def _s2a(self, text):
@@ -134,12 +138,40 @@ class kakasi:
                 i += 1
         return result
 
-    def _h2a(self, text):
+    def _h2ak(self, text):
         result = ''
         i = 0
         while(i < len(text)):
             w = min(i + self._MAXLEN, len(text))
-            (t, l1) = self._haconv.convert(text[i:w])
+            (t, l1) = self._hakconv.convert(text[i:w])
+            if l1 > 0:
+                result += t
+                i += l1
+            else:
+                result += text[i:i + 1]
+                i += 1
+        return result
+
+    def _h2ah(self, text):
+        result = ''
+        i = 0
+        while(i < len(text)):
+            w = min(i + self._MAXLEN, len(text))
+            (t, l1) = self._hahconv.convert(text[i:w])
+            if l1 > 0:
+                result += t
+                i += l1
+            else:
+                result += text[i:i + 1]
+                i += 1
+        return result
+
+    def _h2ap(self, text):
+        result = ''
+        i = 0
+        while(i < len(text)):
+            w = min(i + self._MAXLEN, len(text))
+            (t, l1) = self._hapconv.convert(text[i:w])
             if l1 > 0:
                 result += t
                 i += l1
