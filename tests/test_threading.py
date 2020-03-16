@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import sys
 import threading
 
 import pykakasi
@@ -17,33 +17,63 @@ I_TEST = [
 
 @pytest.mark.thread
 def test_thread_itaiji():
+    tasks = []
     for i in range(10):
         t = threading.Thread(target=worker_itaiji)
+        tasks.append(t)
         t.start()
-    main_thread = threading.currentThread()
-    for t in threading.enumerate():
-        if t is not main_thread:
-            t.join()
+    for t in tasks:
+        t.join()
+
+
+@pytest.mark.thread
+@pytest.mark.skipif(sys.version_info < (3, 2), reason='Concurrent.futures introduced after 3.2')
+def test_threadpool_itaiji():
+    import concurrent.futures
+    with concurrent.futures.ThreadPoolExecutor(3) as texec:
+        tasks = [texec.submit(worker_itaiji) for _ in range(10)]
+        for task in concurrent.futures.as_completed(tasks):
+            if not task.result():
+                raise Exception("Failed.")
 
 
 def worker_itaiji():
-    j = pykakasi.J2("H")
-    for case, result in I_TEST:
-        assert j.itaiji_conv(case) == result
+    try:
+        j = pykakasi.kanji.J2("H")
+        for case, result in I_TEST:
+            assert j.itaiji_conv(case) == result
+    except AssertionError:
+        return False
+    return True
 
 
 @pytest.mark.thread
 def test_thread_kanwa():
+    tasks = []
     for i in range(10):
         t = threading.Thread(target=worker_kanwa)
+        tasks.append(t)
         t.start()
-    main_thread = threading.currentThread()
-    for t in threading.enumerate():
-        if t is not main_thread:
-            t.join()
+    for t in tasks:
+        t.join()
+
+
+@pytest.mark.thread
+@pytest.mark.skipif(sys.version_info < (3, 2), reason='Concurrent.futures introduced after 3.2')
+def test_threadpool_kanwa():
+    import concurrent.futures
+    with concurrent.futures.ThreadPoolExecutor(3) as texec:
+        tasks = [texec.submit(worker_kanwa) for _ in range(10)]
+        for task in concurrent.futures.as_completed(tasks):
+            if not task.result():
+                raise Exception("Failed.")
 
 
 def worker_kanwa():
-    k = pykakasi.kanwa.kanwa()
-    d = k.load(u"春")
-    assert d[u"春"] is not None
+    try:
+        k = pykakasi.kanji.Kanwa()
+        d = k.load(u"春")
+        assert d[u"春"] is not None
+    except AssertionError:
+        return False
+    return True
