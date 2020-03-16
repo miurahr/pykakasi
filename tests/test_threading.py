@@ -27,7 +27,7 @@ def test_thread_itaiji():
 
 
 def worker_itaiji():
-    j = pykakasi.J2("H")
+    j = pykakasi.kanji.J2("H")
     for case, result in I_TEST:
         assert j.itaiji_conv(case) == result
 
@@ -44,6 +44,6 @@ def test_thread_kanwa():
 
 
 def worker_kanwa():
-    k = pykakasi.kanwa.kanwa()
+    k = pykakasi.kanji.Kanwa()
     d = k.load(u"春")
     assert d[u"春"] is not None
