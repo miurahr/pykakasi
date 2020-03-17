@@ -5,8 +5,11 @@ import pytest
 
 @pytest.mark.parametrize("case, expected",
                          [("", [{'orig': '', 'hira': '', 'kana': '', 'kunrei': '', 'hepburn': '', 'passport': ''}]),
-                          ("構成", [{'orig': "構成", 'kana': "コウセイ", 'hira': "こうせい",
-                                   'hepburn': 'kousei', 'kunrei': "kousei", 'passport': "kosei"}]),
+                          ("構成",
+                           [
+                               {'orig': "構成", 'kana': "コウセイ", 'hira': "こうせい",
+                                'hepburn': 'kousei', 'kunrei': "kousei", 'passport': "kosei"}
+                           ]),
                           ("私がこの子を助けなきゃいけないってことだよね",
                            [
                                {'orig': "私", 'kana': "ワタシ", 'hira': "わたし", 'hepburn': "watashi", 'kunrei': "watasi", 'passport': "watashi"},
