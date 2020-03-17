@@ -1,0 +1,13 @@
+name: Greetings
+
+on: [pull_request, issues]
+
+jobs:
+  greeting:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/first-interaction@v1
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        issue-message: 'Thank you for your first ticket on pykakasi project! Please wait a moment for triagde an issue.'
+        pr-message: 'Thank you for your first proposal for modification on pykakasi project! Please check a CI test result and review comments.'
