@@ -447,7 +447,6 @@ def test_kakasi_long_symbol_H():
     kakasi.setMode('H', 'a')
     converter = kakasi.getConverter()
     for case, result in TESTS:
-        print(converter.do(case))
         assert converter.do(case) == result
 
 
@@ -464,7 +463,6 @@ def test_kakasi_long_symbol_K():
     kakasi.setMode('K', 'a')
     converter = kakasi.getConverter()
     for case, result in TESTS:
-        print(converter.do(case))
         assert converter.do(case) == result
 
 
@@ -482,7 +480,6 @@ def test_kakasi_long_symbol_mixed_HK():
     kakasi.setMode('H', 'a')
     converter = kakasi.getConverter()
     for case, result in TESTS:
-        print(converter.do(case))
         assert converter.do(case) == result
 
 
@@ -501,7 +498,6 @@ def test_kakasi_long_symbol_mixed_JHK():
     kakasi.setMode('J', 'a')
     converter = kakasi.getConverter()
     for case, result in TESTS:
-        print(converter.do(case))
         assert converter.do(case) == result
 
 
@@ -516,5 +512,4 @@ def test_kakasi_long_symbol_with_no_HK():
     kakasi.setMode('J', 'a')
     converter = kakasi.getConverter()
     for case, result in TESTS:
-        print(converter.do(case))
         assert converter.do(case) == result
