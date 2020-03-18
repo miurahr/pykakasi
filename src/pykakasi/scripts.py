@@ -193,7 +193,7 @@ class Sym2:
 
     def convert_a(self, text):
         t = self._convert(text)
-        if len(t):
+        if t is not None and len(t) > 0:
             return t, 1
         else:
             return "", 0
