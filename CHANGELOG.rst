@@ -29,6 +29,21 @@ Removed
 Security
 --------
 
+
+`v2.0.0a3`_ (18, Mar. 2020)
+===========================
+
+Changed
+-------
+
+* Update test cases.
+
+Fixed
+-----
+
+* Add guard for unknown symbol code point which lead NoneType error. 
+
+
 `v2.0.0a2`_ (16, Mar. 2020)
 ===========================
 
@@ -125,7 +140,8 @@ Fixed
 
 
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.0.0a2...HEAD
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.0.0a3...HEAD
+.. _v2.0.0a3: https://github.com/miurahr/pykakasi/compare/v2.0.0a2...v2.0.0a3
 .. _v2.0.0a2: https://github.com/miurahr/pykakasi/compare/v2.0.0a1...v2.0.0a2
 .. _v2.0.0a1: https://github.com/miurahr/pykakasi/compare/v1.2...v2.0.0a1
 .. _v1.2: https://github.com/miurahr/pykakasi/compare/v1.1...v1.2
