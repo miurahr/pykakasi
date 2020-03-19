@@ -4,10 +4,6 @@ PyKakasi ChangeLog
 
 All notable changes to this project will be documented in this file.
 
-***************
-Current changes
-***************
-
 `Unreleased`_
 =============
 
@@ -28,6 +24,28 @@ Removed
 
 Security
 --------
+
+`v2.0.0a4`_ (20, Mar. 2020)
+===========================
+
+Added
+-----
+
+* Add type hinting.
+
+Changed
+-------
+
+* Refactoring dictionary generation classes.
+* call super() from wakati.__init__()
+* test: detection whether tox or raw pytest by TOX_ENV environment variable.
+  When raw pytest, generate dictionaries as fixture.
+  Previous versions uses --runenv option for pytest.
+
+Fixed
+-----
+
+* NewAPI: fix return value when empty input string.
 
 
 `v2.0.0a3`_ (18, Mar. 2020)
@@ -140,7 +158,8 @@ Fixed
 
 
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.0.0a3...HEAD
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.0.0a4...HEAD
+.. _v2.0.0a4: https://github.com/miurahr/pykakasi/compare/v2.0.0a3...v2.0.0a4
 .. _v2.0.0a3: https://github.com/miurahr/pykakasi/compare/v2.0.0a2...v2.0.0a3
 .. _v2.0.0a2: https://github.com/miurahr/pykakasi/compare/v2.0.0a1...v2.0.0a2
 .. _v2.0.0a1: https://github.com/miurahr/pykakasi/compare/v1.2...v2.0.0a1
