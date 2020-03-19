@@ -3,8 +3,6 @@
 #
 # Copyright 2019 Hiroshi Miura <miurahr@linux.com>
 
-from __future__ import unicode_literals
-
 import os
 from typing import Dict
 
