@@ -180,28 +180,31 @@ class kakasi:
                 i += 1
         return result
 
-    def setMode(self, fr, to):
+    def setMode(self, fr: str, to: Optional[Union[bool, str]]) -> None:
         if fr in self._keys:
             if to is None:
-                self._mode[fr] = to
-            elif to[0] in self._values:
+                self._mode[fr] = None
+            elif isinstance(to, str) and to[0] in self._values:
                 self._mode[fr] = to[0]
                 if len(to) == 2 and to[1] == "F":
                     self._furi[fr] = True
             else:
                 raise InvalidModeValueException("Invalid value for mode")
         elif fr in self._flag.keys():
-            if to in [True, False]:
+            if isinstance(to, bool):
                 self._flag[fr] = to
             else:
                 raise InvalidFlagValueException("Invalid flag value")
         elif fr == "r":
-            if to in self._roman_vals:
+            if isinstance(to, str) and to in self._roman_vals:
                 self._option["r"] = to
             else:
                 raise UnsupportedRomanRulesException("Unknown roman table name")
         elif fr == "S":
-            self._separator = to
+            if isinstance(to, str):
+                self._separator = to
+            else:
+                raise InvalidFlagValueException("Incompatible separator value")
         else:
             raise UnknownOptionsException("Unhandled options")  # pragma: no cover
 
@@ -333,7 +336,7 @@ class wakati(kakasi):
 
     def setMode(self, fr, to):
         if fr in self._flag.keys():
-            if to in [True, False]:
+            if isinstance(to, bool):
                 self._flag[fr] = to
             else:
                 raise InvalidFlagValueException("Invalid flag value")
