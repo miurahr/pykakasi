@@ -1,15 +1,15 @@
 import codecs
 import os
 import re
-from typing import Dict, Tuple
+from typing import Dict, List, Tuple
 
 from klepto.archives import file_archive  # type: ignore # noqa
 
 root_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
 
-class Genkanwadict(object):
-    records = {}  # type: Dict[str, Tuple[str, str]]
+class Genkanwadict:
+    records = {}  # type: Dict[str, Dict[str, List[Tuple[str, str]]]]
 
     ESCAPE_SEQUENCE_RE = re.compile(r'''
         ( \\U........      # 8-digit hex escapes
@@ -20,26 +20,26 @@ class Genkanwadict(object):
         | \\[\\'"abfnrtv]  # Single-character escapes
         )''', re.UNICODE | re.VERBOSE)
 
-    def decode_escapes(self, s):
+    def decode_escapes(self, s: str) -> str:
         def decode_match(match):
             return codecs.decode(match.group(0), 'unicode-escape')
         return self.ESCAPE_SEQUENCE_RE.sub(decode_match, s)
 
-    def run(self, src, dst):
-        with open(src, 'rb') as f:
+    def run(self, src: str, dst: str):
+        with open(src, 'r', encoding="utf-8") as f:
             for line in f:
-                self.parsekdict(line.decode("utf-8"))
+                self.parsekdict(line.strip())
             f.close()
         self.kanwaout(dst)
 
     # for itaiji and kana dict
 
-    def mkdict(self, src, dst):
+    def mkdict(self, src: str, dst: str):
         max_key_len = 0
         dic = {}
-        with open(src, "rb") as f:
-            for line in f:
-                line = line.decode("utf-8").strip()
+        with open(src, "r", encoding="utf-8") as f:
+            for raw in f:
+                line = raw.strip()
                 if line.startswith(';;'):  # skip comment
                     continue
                 if re.match(r"^$", line):
@@ -56,8 +56,7 @@ class Genkanwadict(object):
 
     # for kanwadict
 
-    def parsekdict(self, line):
-        line = line.strip()
+    def parsekdict(self, line: str):
         if line.startswith(';;'):  # skip comment
             return
         (yomi, kanji) = line.split(' ')
@@ -68,7 +67,7 @@ class Genkanwadict(object):
             tail = ''
         self.updaterec(kanji, yomi, tail)
 
-    def updaterec(self, kanji, yomi, tail):
+    def updaterec(self, kanji: str, yomi: str, tail: str):
         key = "%04x" % ord(kanji[0])
         if key in self.records:
             if kanji in self.records[key]:

@@ -8,6 +8,8 @@ __license__ = 'GPL 3'
 __copyright__ = '2014-2020 Hiroshi Miura <miurahr@linux.com>'
 __docformat__ = 'restructuredtext en'
 
+from typing import Dict, List, Optional, Union
+
 from .exceptions import (InvalidFlagValueException, InvalidModeValueException,
                          UnknownOptionsException,
                          UnsupportedRomanRulesException)
@@ -18,10 +20,10 @@ from .scripts import A2, H2, K2, Sym2
 
 class kakasi:
 
-    _keys = ["J", "H", "K", "E", "a"]
-    _values = ["a", "E", "H", "K"]
-    _roman_vals = ["Hepburn", "Kunrei", "Passport"]
-    _MAXLEN = 32
+    _keys = ["J", "H", "K", "E", "a"]  # type: List[str]
+    _values = ["a", "E", "H", "K"]  # type: List[str]
+    _roman_vals = ["Hepburn", "Kunrei", "Passport"]  # type: List[str]
+    _MAXLEN = 32  # type: int
     _LONG_SYMBOL = [
         # 0x002D,  # -
         0x30FC,  # ー
@@ -32,18 +34,18 @@ class kakasi:
         0x2015,  # ―
         0x2212,  # −
         0xFF70  # ｰ
-    ]
+    ]  # type: List[int]
 
     def __init__(self):
-        self._conv = {}
-        self._mode = {"J": None, "H": None, "K": None, "E": None, "a": None}
-        self._furi = {"J": False, "H": False, "K": False, "E": False, "a": False}
+        self._conv = {}  # type: Dict[str, Union[J2, H2, K2, A2, Sym2]]
+        self._mode = {"J": None, "H": None, "K": None, "E": None, "a": None}  # type: Dict[str, Optional[str]]
+        self._furi = {"J": False, "H": False, "K": False, "E": False, "a": False}  # type: Dict[str, bool]
         self._flag = {"p": False, "s": False, "f": False, "c": False, "C": False, "U": False,
-                      "u": False, "t": True}
-        self._option = {"r": "Hepburn"}
-        self._separator = ' '
-        self._separator_string = ' '
-        self._jconv = J2()
+                      "u": False, "t": True}  # type: Dict[str, bool]
+        self._option = {"r": "Hepburn"}  # type: Dict[str, str]
+        self._separator = ' '  # type: str
+        self._separator_string = ' '  # type: str
+        self._jconv = J2("H")
         self._hahconv = H2("a", method='Hepburn')
         self._hakconv = H2("a", method='Kunrei')
         self._hapconv = H2("a", method='Passport')
@@ -53,11 +55,11 @@ class kakasi:
         self._aeconv = A2("E")
         self._saconv = Sym2("a")
 
-    def convert(self, text):
+    def convert(self, text: str) -> List[Dict[str, str]]:
         _state = True
 
         if len(text) == 0:
-            return ""
+            return [{'orig': "", 'kana': "", 'hira': "", 'hepburn': "", 'passport': "", 'kunrei': ""}]
 
         otext = ''
         _result = []
@@ -102,7 +104,7 @@ class kakasi:
 
         return _result
 
-    def _iconv(self, otext, hira):
+    def _iconv(self, otext: str, hira: str) -> Dict[str, str]:
         tmp = {'orig': otext, 'hira': hira}
         tmp['kana'] = self._h2k(hira)
         tmp['hepburn'] = self._s2a(self._h2ah(hira))
@@ -110,11 +112,11 @@ class kakasi:
         tmp['passport'] = self._s2a(self._h2ap(hira))
         return tmp
 
-    def _s2a(self, text):
-        result = ''
+    def _s2a(self, text: str) -> str:
+        result = ''  # type: str
         i = 0
         while(i < len(text)):
-            w = min(i + self._MAXLEN, len(text))
+            w = min(i + self._MAXLEN, len(text))  # type: int
             (t, l1) = self._saconv.convert(text[i:w])
             if l1 > 0:
                 result += t
@@ -124,7 +126,7 @@ class kakasi:
                 i += 1
         return result
 
-    def _h2k(self, text):
+    def _h2k(self, text: str) -> str:
         result = ''
         i = 0
         while(i < len(text)):
@@ -138,7 +140,7 @@ class kakasi:
                 i += 1
         return result
 
-    def _h2ak(self, text):
+    def _h2ak(self, text: str) -> str:
         result = ''
         i = 0
         while(i < len(text)):
@@ -152,7 +154,7 @@ class kakasi:
                 i += 1
         return result
 
-    def _h2ah(self, text):
+    def _h2ah(self, text: str) -> str:
         result = ''
         i = 0
         while(i < len(text)):
@@ -166,7 +168,7 @@ class kakasi:
                 i += 1
         return result
 
-    def _h2ap(self, text):
+    def _h2ap(self, text: str) -> str:
         result = ''
         i = 0
         while(i < len(text)):
@@ -180,28 +182,31 @@ class kakasi:
                 i += 1
         return result
 
-    def setMode(self, fr, to):
+    def setMode(self, fr: str, to: Optional[Union[bool, str]]) -> None:
         if fr in self._keys:
             if to is None:
-                self._mode[fr] = to
-            elif to[0] in self._values:
+                self._mode[fr] = None
+            elif isinstance(to, str) and to[0] in self._values:
                 self._mode[fr] = to[0]
                 if len(to) == 2 and to[1] == "F":
                     self._furi[fr] = True
             else:
                 raise InvalidModeValueException("Invalid value for mode")
         elif fr in self._flag.keys():
-            if to in [True, False]:
+            if isinstance(to, bool):
                 self._flag[fr] = to
             else:
                 raise InvalidFlagValueException("Invalid flag value")
         elif fr == "r":
-            if to in self._roman_vals:
+            if isinstance(to, str) and to in self._roman_vals:
                 self._option["r"] = to
             else:
                 raise UnsupportedRomanRulesException("Unknown roman table name")
         elif fr == "S":
-            self._separator = to
+            if isinstance(to, str):
+                self._separator = to
+            else:
+                raise InvalidFlagValueException("Incompatible separator value")
         else:
             raise UnknownOptionsException("Unhandled options")  # pragma: no cover
 
@@ -213,7 +218,7 @@ class kakasi:
         self._conv["a"] = A2(self._mode["a"])
         return self
 
-    def do(self, text):
+    def do(self, text: str) -> str:
         otext = ""
         i = 0
         while True:
@@ -320,26 +325,22 @@ class kakasi:
 
 class wakati(kakasi):
 
-    _jconv = None
-    _separator = " "
-    _state = True
-
     def __init__(self):
-        self._jconv = J2("H")
-        self._flag = {"f": False}
+        super(wakati, self).__init__()
+        self._state = True  # type: bool
 
     def getConverter(self):
         return self
 
-    def setMode(self, fr, to):
+    def setMode(self, fr: str, to: Optional[Union[bool, str]]) -> None:
         if fr in self._flag.keys():
-            if to in [True, False]:
+            if isinstance(to, bool):
                 self._flag[fr] = to
             else:
                 raise InvalidFlagValueException("Invalid flag value")
             raise UnknownOptionsException("Unhandled options")
 
-    def do(self, text):
+    def do(self, text: str) -> str:
 
         if len(text) == 0:
             return ""

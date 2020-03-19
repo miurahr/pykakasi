@@ -9,7 +9,7 @@ from .exceptions import UnsupportedRomanRulesException
 from .properties import Ch, Configurations, Convert_Tables
 
 
-class H2 (object):
+class H2:
 
     _kanadict = None
 

@@ -3,8 +3,6 @@
 #
 # Copyright 2019 Hiroshi Miura <miurahr@linux.com>
 
-from __future__ import unicode_literals
-
 import os
 from typing import Dict
 
@@ -12,7 +10,7 @@ import pkg_resources
 
 
 # This class is Borg
-class Configurations(object):
+class Configurations:
 
     _shared_state = {}  # type: Dict[str, object]
 
@@ -31,7 +29,7 @@ class Configurations(object):
         self.__dict__ = cls._shared_state
         return self
 
-    def dictpath(self, dbfile):
+    def dictpath(self, dbfile: str):
         return os.path.join(self.data_path, dbfile)
 
 
@@ -70,7 +68,7 @@ class Ch:
     endmark = [ord(a) for a in [")", "]", "!", ",", ".", u'\u3001', u'\u3002']]
 
 
-class Convert_Tables():
+class Convert_Tables:
     '''
     convert symbols to alphabet
     based on Original KAKASI's EUC_JP - alphabet converter table
