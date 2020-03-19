@@ -31,6 +31,7 @@ def test_thread_itaiji():
 
 
 @pytest.mark.thread
+@pytest.mark.skip
 def test_threadpool_itaiji():
     with concurrent.futures.ThreadPoolExecutor(3) as texec:
         tasks = [texec.submit(worker_itaiji) for _ in range(10)]
@@ -61,6 +62,7 @@ def test_thread_kanwa():
 
 
 @pytest.mark.thread
+@pytest.mark.skip
 def test_threadpool_kanwa():
     with concurrent.futures.ThreadPoolExecutor(3) as texec:
         tasks = [texec.submit(worker_kanwa) for _ in range(10)]
