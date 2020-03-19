@@ -57,7 +57,7 @@ class kakasi:
         _state = True
 
         if len(text) == 0:
-            return ""
+            return [{'orig': "", 'kana': "", 'hira': "", 'hepburn': "", 'passport': "", 'kunrei': ""}]
 
         otext = ''
         _result = []
