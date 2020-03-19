@@ -29,7 +29,7 @@ class Configurations:
         self.__dict__ = cls._shared_state
         return self
 
-    def dictpath(self, dbfile):
+    def dictpath(self, dbfile: str):
         return os.path.join(self.data_path, dbfile)
 
 

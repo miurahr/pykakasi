@@ -5,6 +5,7 @@
 
 import re
 import threading
+from typing import Tuple
 
 from klepto.archives import file_archive  # type: ignore # noqa
 
@@ -23,7 +24,7 @@ class J2:
                  "rl", "rl", "rl", "wiueo", "wiueo", "wiueo", "wiueo", "w", "n", "v", "k",
                  "k", "", "", "", "", "", "", "", "", ""]
 
-    def __init__(self, mode="H", method="Hepburn"):
+    def __init__(self, mode: str = "H", method: str = "Hepburn"):
         self._kanwa = Kanwa()
         self._itaiji = Itaiji()
         if mode == "H":
@@ -34,15 +35,15 @@ class J2:
         else:
             self.convert = self.convert_noop
 
-    def isRegion(self, c):
+    def isRegion(self, c: str):
         return 0x3400 <= ord(c[0]) < 0xe000 or 0xf900 <= ord(c[0]) < 0xfa2e
 
-    def isCletter(self, l, c):
+    def isCletter(self, l: str, c: str) -> bool:
         if (0x3041 <= ord(c) <= 0x309f) and (l in self._cl_table[ord(c) - 0x3040]):  # ぁ:= u\3041
             return True
         return False
 
-    def itaiji_conv(self, text):
+    def itaiji_conv(self, text: str) -> str:
         r = []
         for c in text:
             if self._itaiji.haskey(c):
@@ -51,7 +52,7 @@ class J2:
             text = re.sub(c, self._itaiji.lookup(c), text)
         return text
 
-    def convert_h(self, text):
+    def convert_h(self, text) -> Tuple[str, int]:
         max_len = 0
         Hstr = ""
         text = self._itaiji.convert(text)
@@ -123,13 +124,13 @@ class Itaiji:
                     self._itaijidict.load()
                     self._itaijidict_len = self._itaijidict['_max_key_len_']
 
-    def haskey(self, key):
+    def haskey(self, key: str) -> bool:
         return key in self._itaijidict
 
-    def lookup(self, key):
+    def lookup(self, key: str) -> str:
         return self._itaijidict[key]
 
-    def convert(self, text):
+    def convert(self, text: str) -> str:
         r = []
         for c in text:
             if self.haskey(c):
@@ -161,6 +162,6 @@ class Kanwa:
                     self._jisyo_table = file_archive(dictpath, {}, serialized=True)
                     self._jisyo_table.load()
 
-    def load(self, char):
+    def load(self, char: str):
         key = "%04x" % ord(char)
         return self._jisyo_table.get(key, None)
