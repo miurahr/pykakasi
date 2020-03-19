@@ -12,7 +12,7 @@ import pkg_resources
 
 
 # This class is Borg
-class Configurations(object):
+class Configurations:
 
     _shared_state = {}  # type: Dict[str, object]
 
@@ -70,7 +70,7 @@ class Ch:
     endmark = [ord(a) for a in [")", "]", "!", ",", ".", u'\u3001', u'\u3002']]
 
 
-class Convert_Tables():
+class Convert_Tables:
     '''
     convert symbols to alphabet
     based on Original KAKASI's EUC_JP - alphabet converter table

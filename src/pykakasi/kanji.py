@@ -12,9 +12,7 @@ from .properties import Configurations
 from .scripts import H2
 
 
-class J2(object):
-    _kanwa = None
-    _itaiji = None
+class J2:
 
     _cl_table = ["", "aiueow", "aiueow", "aiueow", "aiueow", "aiueow", "aiueow", "aiueow",
                  "aiueow", "aiueow", "aiueow", "k", "g", "k", "g", "k", "g", "k", "g", "k",
@@ -102,7 +100,7 @@ class J2(object):
         return text[0], 1
 
 
-class Itaiji(object):
+class Itaiji:
 
     # this class is Borg/Singleton
     _shared_state = {
@@ -144,7 +142,7 @@ class Itaiji(object):
 # This class is Borg/Singleton
 # It provides same results becase lookup from a static dictionary.
 # There is no state rather dictionary dbm.
-class Kanwa(object):
+class Kanwa:
     _shared_state = {
         '_lock': threading.Lock(),
         '_jisyo_table': None
