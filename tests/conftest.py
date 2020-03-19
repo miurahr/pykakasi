@@ -16,4 +16,3 @@ def dictionary_setup_fixture():
         kanwa = kakasidict.Genkanwadict()
         kanwa.generate_dictionaries(dpath)
         Configurations().data_path = dpath
-
