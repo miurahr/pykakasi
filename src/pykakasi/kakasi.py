@@ -323,13 +323,9 @@ class kakasi:
 
 class wakati(kakasi):
 
-    _jconv = None
-    _separator = " "
-    _state = True
-
     def __init__(self):
-        self._jconv = J2("H")
-        self._flag = {"f": False}
+        super(wakati, self).__init__()
+        self._state = True  # type: bool
 
     def getConverter(self):
         return self
