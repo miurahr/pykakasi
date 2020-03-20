@@ -59,12 +59,10 @@ Transliterate Japanese text to kana, hiragana and romaji:
     text = "かな漢字"
     result = kks.convert(text)
     for item in result:
-        print("{}: kana '{}', romaji: {}".format(item['orig'], item['kana'], item['hepburn']))
+        print("{}: kana '{}', hiragana '{}', romaji: '{}'".format(item['orig'], item['kana'], item['hira'], item['hepburn']))
 
-sample program will show
-
-かな: kana 'カナ', romaji: 'kana'
-漢字: kana 'カンジ', romaji: 'kanji'
+    かな: kana 'カナ', hiragana: 'かな', romaji: 'kana'
+    漢字: kana 'カンジ', hiragana: 'かんじ', romaji: 'kanji'
 
 
 Here is an example that output as similar with furigana mode.
