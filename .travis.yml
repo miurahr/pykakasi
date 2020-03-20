@@ -9,6 +9,8 @@ matrix:
     - python: 3.8
       env: TOXENV=check
     - python: 3.8
+      env: TOXENV=docs
+    - python: 3.8
       env: TOXENV=mypy
     - python: pypy3.6-7.1.1
       env: TOXENV=pypy3

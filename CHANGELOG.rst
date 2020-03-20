@@ -164,7 +164,7 @@ Fixed
 .. _v2.0.0a2: https://github.com/miurahr/pykakasi/compare/v2.0.0a1...v2.0.0a2
 .. _v2.0.0a1: https://github.com/miurahr/pykakasi/compare/v1.2...v2.0.0a1
 .. _v1.2: https://github.com/miurahr/pykakasi/compare/v1.1...v1.2
-.. _v1.1: https://github.com/miurahr/pykakasi/compare/v1.0b2...v1.1
-.. _v1.1b2: https://github.com/miurahr/pykakasi/compare/v1.0b1...v1.1b2
-.. _v1.1b1: https://github.com/miurahr/pykakasi/compare/v1.0a1...v1.1b1
+.. _v1.1: https://github.com/miurahr/pykakasi/compare/v1.1b2...v1.1
+.. _v1.1b2: https://github.com/miurahr/pykakasi/compare/v1.1b1...v1.1b2
+.. _v1.1b1: https://github.com/miurahr/pykakasi/compare/v1.1a1...v1.1b1
 .. _v1.1a1: https://github.com/miurahr/pykakasi/compare/v1.0c2...v1.1a1

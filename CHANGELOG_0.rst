@@ -209,7 +209,7 @@ Changed
 -------
 
 * Bump up version number.
-* Readme: recommend `pip install pykakasi`
+* Readme: recommend 'pip install pykakasi'
 * Replace anydbm with semidbm that is a pure dbm implementation with performance.
 
 Fixed
