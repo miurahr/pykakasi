@@ -46,8 +46,46 @@ Supported python versions
 
 * pykakasi 2.0 supports python 3.6, 3.7, 3.8, pypy3.6-7.1.1
 
-Examples
-========
+Usage
+=====
+
+Here is an usage of NewAPI for pykakasi v2.0.0 and later.
+Transliterate Japanese text to kana, hiragana and romaji:
+
+.. code-block:: pycon
+
+    import pykakasi
+    kks = pykakasi.kakasi()
+    text = "かな漢字"
+    result = kks.convert(text)
+    for item in result:
+        print("{}: kana '{}', romaji: {}".format(item['orig'], item['kana'], item['hepburn']))
+
+sample program will show
+
+かな: kana 'カナ', romaji: 'kana'
+漢字: kana 'カンジ', romaji: 'kanji'
+
+
+Here is an example that output as similar with furigana mode.
+
+.. code-block:: pycon
+
+    import pykakasi
+    kks = pykakasi.kakasi()
+    text = "かな漢字交じり文"
+    result = kks.convert(text)
+    for item in result:
+        print("{}[{}] ".format(item['orig'], item['hepburn'].capitalize()), end='')
+    print()
+
+    かな[Kana] 漢字[Kanji] 交じり[Majiri] 文[Bun]
+
+
+Old API
+=======
+
+There is also an old API for v1.2.
 
 Transliterate Japanese text to rōmaji:
 
