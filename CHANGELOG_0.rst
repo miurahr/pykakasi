@@ -1,12 +1,8 @@
-==========================
-PyKakasi ChangeLog in v0.x
-==========================
+==============================
+PyKakasi ChangeLog before v1.0
+==============================
 
 All notable changes to this project will be documented in this file.
-
-****************
-Previous changes
-****************
 
 `v1.0-rc1`_ (29, June, 2019)
 ============================

@@ -2,9 +2,10 @@
 import concurrent.futures
 import threading
 
+import pytest
+
 import pykakasi
 import pykakasi.kanji
-import pytest
 
 I_TEST = [
     (u"菟", u"兎"),

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-import pykakasi
 import pytest
+
+import pykakasi
 
 
 @pytest.mark.parametrize("case, expected",

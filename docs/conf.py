@@ -20,13 +20,13 @@
 # -- Project information -----------------------------------------------------
 
 project = 'pykakasi'
-copyright = '2011-2019, Hiroshi Miura'
+copyright = '2011-2020, Hiroshi Miura'
 author = 'Hiroshi Miura'
 
 # The short X.Y version
-version = '0.95-dev'
+version = '2.0'
 # The full version, including alpha/beta/rc tags
-release = ''
+release = '2.0.0a4'
 
 
 # -- General configuration ---------------------------------------------------

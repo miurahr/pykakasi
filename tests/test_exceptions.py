@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
+import pytest
 
 import pykakasi
-import pytest
 from pykakasi.exceptions import (InvalidFlagValueException,
                                  InvalidModeValueException,
                                  UnsupportedRomanRulesException)

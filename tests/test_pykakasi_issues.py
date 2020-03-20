@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import six
-
 import pykakasi
 
 
@@ -74,9 +72,9 @@ def test_issue68_2():
     kks.setMode("J", "H")
     convert = kks.getConverter()
     for case in range(0x3400, 0xdfff):
-        assert convert.do(six.unichr(case)) is not None
+        assert convert.do(chr(case)) is not None
     for case in range(0xf900, 0xfa2e):
-        assert convert.do(six.unichr(case)) is not None
+        assert convert.do(chr(case)) is not None
 
 
 def test_issue72():

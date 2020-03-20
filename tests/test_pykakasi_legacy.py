@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
+import pytest
 
 import pykakasi
-import pytest
 
 
 def test_kakasi_hepburn():
