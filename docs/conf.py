@@ -79,6 +79,12 @@ gettext_auto_build = True
 
 locale_dirs = ['locale/']
 
+linkcheck_ignore = [
+    'https://github.com/miurahr/pykakasi/compare/.*...HEAD'
+]
+
+linkcheck_anchors_ignore = ["^!"]
+
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for

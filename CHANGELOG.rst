@@ -4,8 +4,8 @@ PyKakasi ChangeLog
 
 All notable changes to this project will be documented in this file.
 
-`Unreleased`_
-=============
+Unreleased_
+===========
 
 Added
 -----
@@ -25,8 +25,8 @@ Removed
 Security
 --------
 
-`v2.0.0a4`_ (20, Mar. 2020)
-===========================
+!v2.0.0a4_ (20, Mar. 2020)
+==========================
 
 Added
 -----
@@ -159,7 +159,7 @@ Fixed
 
 
 .. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.0.0a4...HEAD
-.. _v2.0.0a4: https://github.com/miurahr/pykakasi/compare/v2.0.0a3...v2.0.0a4
+.. _!v2.0.0a4: https://github.com/miurahr/pykakasi/compare/v2.0.0a3...v2.0.0a4
 .. _v2.0.0a3: https://github.com/miurahr/pykakasi/compare/v2.0.0a2...v2.0.0a3
 .. _v2.0.0a2: https://github.com/miurahr/pykakasi/compare/v2.0.0a1...v2.0.0a2
 .. _v2.0.0a1: https://github.com/miurahr/pykakasi/compare/v1.2...v2.0.0a1
