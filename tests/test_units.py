@@ -15,7 +15,7 @@ def test_itaiji():
     ]
     j = pykakasi.kanji.J2("H")
     for case, result in I_TEST:
-        assert j.itaiji_conv(case) == result
+        assert j._itaiji.convert(case) == result
 
 
 def test_J2H():

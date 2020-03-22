@@ -32,7 +32,7 @@ class Genkanwadict:
             f.close()
         self.kanwaout(dst)
 
-    # for itaiji and kana dict
+    # for kana dict
 
     def mkdict(self, src: str, dst: str):
         max_key_len = 0
@@ -52,6 +52,27 @@ class Genkanwadict:
                     raise Exception("Cannot process dictionary line: ", line)
         d = file_archive(dst, dic, serialized=True)
         d['_max_key_len_'] = max_key_len
+        d.dump()
+
+    def maketrans(self, src, dst):
+        dict = {}
+        with open(src, 'r', encoding='utf-8') as f:
+            for raw in f:
+                line = raw.strip()
+                if line.startswith(';;'):  # skip commnet
+                    continue
+                if re.match(r"^$", line):
+                    continue
+                try:
+                    (v, k) = self.decode_escapes(line).split(' ')
+                    dict[ord(k)] = v
+                except ValueError:
+                    raise Exception("Cannot process dictionary line: ", line)
+        for i in range(0xFE00, 0xFE0F):
+            dict[i] = None
+        for i in range(0xE0100, 0xE01EF):
+            dict[i] = None
+        d = file_archive(dst, dict, serialized=True)
         d.dump()
 
     # for kanwadict
@@ -86,7 +107,6 @@ class Genkanwadict:
 
     def generate_dictionaries(self, dstdir):
         DICTS = [
-            ('itaijidict.utf8', 'itaijidict3.db'),
             ('hepburndict.utf8', 'hepburndict3.db'),
             ('kunreidict.utf8', 'kunreidict3.db'),
             ('passportdict.utf8', 'passportdict3.db'),
@@ -103,6 +123,13 @@ class Genkanwadict:
             if (os.path.exists(dst)):
                 os.unlink(dst)
             self.mkdict(src, dst)
+
+        src = os.path.join(srcdir, 'itaijidict.utf8')
+        dst = os.path.join(dstdir, 'itaijidict4.db')
+        if (os.path.exists(dst)):
+            os.unlink(dst)
+        self.maketrans(src, dst)
+
         src = os.path.join(srcdir, 'kakasidict.utf8')
         dst = os.path.join(dstdir, 'kanwadict4.db')
         if (os.path.exists(dst)):
