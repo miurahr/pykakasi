@@ -45,7 +45,7 @@ def worker_itaiji():
     try:
         j = pykakasi.kanji.J2("H")
         for case, result in I_TEST:
-            assert j.itaiji_conv(case) == result
+            assert j._itaiji.convert(case) == result
     except AssertionError:
         return False
     return True

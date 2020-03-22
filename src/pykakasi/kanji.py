@@ -2,7 +2,7 @@
 # j2.py
 #
 # Copyright 2011-2019 Hiroshi Miura <miurahr@linux.com>
-
+import pickle
 import re
 import threading
 from typing import Tuple
@@ -42,15 +42,6 @@ class J2:
         if (0x3041 <= ord(c) <= 0x309f) and (l in self._cl_table[ord(c) - 0x3040]):  # ぁ:= u\3041
             return True
         return False
-
-    def itaiji_conv(self, text: str) -> str:
-        r = []
-        for c in text:
-            if self._itaiji.haskey(c):
-                r.append(c)
-        for c in r:
-            text = re.sub(c, self._itaiji.lookup(c), text)
-        return text
 
     def convert_h(self, text) -> Tuple[str, int]:
         max_len = 0
@@ -106,7 +97,6 @@ class Itaiji:
     # this class is Borg/Singleton
     _shared_state = {
         '_itaijidict': None,
-        '_itaijidict_len': 0,
         '_lock': threading.Lock()
     }
 
@@ -122,22 +112,9 @@ class Itaiji:
                     itaijipath = Configurations().dictpath(Configurations().jisyo_itaiji)
                     self._itaijidict = file_archive(itaijipath, {}, serialized=True)
                     self._itaijidict.load()
-                    self._itaijidict_len = self._itaijidict['_max_key_len_']
-
-    def haskey(self, key: str) -> bool:
-        return key in self._itaijidict
-
-    def lookup(self, key: str) -> str:
-        return self._itaijidict[key]
 
     def convert(self, text: str) -> str:
-        r = []
-        for c in text:
-            if self.haskey(c):
-                r.append(c)
-        for c in r:
-            text = re.sub(c, self.lookup(c), text)
-        return text
+        return text.translate(self._itaijidict)
 
 
 # This class is Borg/Singleton
