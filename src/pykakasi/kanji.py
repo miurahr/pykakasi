@@ -2,8 +2,6 @@
 # j2.py
 #
 # Copyright 2011-2019 Hiroshi Miura <miurahr@linux.com>
-import pickle
-import re
 import threading
 from typing import Tuple
 
