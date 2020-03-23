@@ -80,10 +80,8 @@ gettext_auto_build = True
 locale_dirs = ['locale/']
 
 linkcheck_ignore = [
-    'https://github.com/miurahr/pykakasi/compare/.*...HEAD'
+    'https://github.com/miurahr/pykakasi/compare/v2.*'
 ]
-
-linkcheck_anchors_ignore = ["^!"]
 
 # -- Options for HTML output -------------------------------------------------
 
