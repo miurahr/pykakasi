@@ -25,7 +25,16 @@ Removed
 Security
 --------
 
-!v2.0.0a4_ (20, Mar. 2020)
+!v2.0.0a5_ (23, Mar. 2020)
+==========================
+
+Changed
+-------
+
+* Recognize UNICODE standard Ideographic Variation Selector(IVS) and transiliterate when used.(#97)
+
+
+v2.0.0a4_ (20, Mar. 2020)
 ==========================
 
 Added
@@ -158,8 +167,9 @@ Fixed
 
 
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.0.0a4...HEAD
-.. _!v2.0.0a4: https://github.com/miurahr/pykakasi/compare/v2.0.0a3...v2.0.0a4
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.0.0a5...HEAD
+.. _!v2.0.0a5: https://github.com/miurahr/pykakasi/compare/v2.0.0a4...v2.0.0a5
+.. _v2.0.0a4: https://github.com/miurahr/pykakasi/compare/v2.0.0a3...v2.0.0a4
 .. _v2.0.0a3: https://github.com/miurahr/pykakasi/compare/v2.0.0a2...v2.0.0a3
 .. _v2.0.0a2: https://github.com/miurahr/pykakasi/compare/v2.0.0a1...v2.0.0a2
 .. _v2.0.0a1: https://github.com/miurahr/pykakasi/compare/v1.2...v2.0.0a1
