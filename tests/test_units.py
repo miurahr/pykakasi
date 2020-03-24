@@ -1,36 +1,40 @@
 # -*- coding: utf-8 -*-
 
+import pytest
+
 import pykakasi
 import pykakasi.kanji
 import pykakasi.scripts
 
 
-def test_itaiji():
-    I_TEST = [
-        (u"菟", u"兎"),
-        (u"菟集", u"兎集"),
-        (u"熙", u"煕"),
-        (u"壱弍", u"一二"),
-        (u"森鷗外", u"森鴎外"),
-    ]
+@pytest.mark.parametrize("case, expected", [
+    ("菟", "兎"),
+    ("菟集", "兎集"),
+    ("熙", "煕"),
+    ("壱弍", "一二"),
+    ("森鷗外", "森鴎外"),
+    ("神", "神"),
+    ("\U0000FA30", "\U00004FAE"),
+    ("\U0000845B\U000E0101城市", "葛城市"),
+    ("\U0000845B\U000E0100飾区", "葛飾区"),
+    ("高橋祥", "高橋祥"),
+])
+def test_itaiji(case, expected):
     j = pykakasi.kanji.J2("H")
-    for case, result in I_TEST:
-        assert j._itaiji.convert(case) == result
+    assert j._itaiji.convert(case) == expected
 
+@pytest.mark.parametrize("case, expected", [
+    ("構成", ("こうせい", 2)),
+    ("好き", ("すき", 2)),
+    ("大きい", ("おおきい", 3)),
+    ("日本国民は、", ("にほんこくみん", 4)),
+    ("\U0000845B\U000E0101城市", ("かつらぎ", 3)),
+    ("\U0000845B\U000E0100飾区", ("かつしかく", 4))
 
-def test_J2H():
-
-    TESTS = [
-        ("構成", ("こうせい", 2)),
-        ("好き", ("すき", 2)),
-        ("大きい", ("おおきい", 3)),
-        ("日本国民は、", ("にほんこくみん", 4)),
-        ("\U0000845B\U000E0101城市", ("かつらぎ", 2)),
-        ("\U0000845B\U000E0100飾区", ("かつしかく", 3))
-    ]
+])
+def test_J2H(case, expected):
     j = pykakasi.kanji.J2("H")
-    for case, result in TESTS:
-        assert j.convert(case) == result
+    assert j.convert(case) == expected
 
 
 def test_H2a():

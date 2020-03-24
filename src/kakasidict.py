@@ -68,7 +68,7 @@ class Genkanwadict:
                     dict[ord(k)] = v
                 except ValueError:
                     raise Exception("Cannot process dictionary line: ", line)
-        for i in range(0xFE00, 0xFE0F):
+        for i in range(0xFE00, 0xFE02):
             dict[i] = None
         for i in range(0xE0100, 0xE01EF):
             dict[i] = None

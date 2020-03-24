@@ -34,17 +34,18 @@ class J2:
             self.convert = self.convert_noop
 
     def isRegion(self, c: str):
-        return 0x3400 <= ord(c[0]) < 0xe000 or 0xf900 <= ord(c[0]) < 0xfa2e
+        return 0x3400 <= ord(c[0]) < 0xe000 or self._itaiji.haskey(ord(c[0]))
 
     def isCletter(self, l: str, c: str) -> bool:
         if (0x3041 <= ord(c) <= 0x309f) and (l in self._cl_table[ord(c) - 0x3040]):  # ぁ:= u\3041
             return True
         return False
 
-    def convert_h(self, text) -> Tuple[str, int]:
+    def convert_h(self, itext) -> Tuple[str, int]:
         max_len = 0
         Hstr = ""
-        text = self._itaiji.convert(text)
+        text = self._itaiji.convert(itext)
+        num_vs =  len(itext) - len(text)
         table = self._kanwa.load(text[0])
         if table is None:
             return "", 0
@@ -61,7 +62,19 @@ class J2:
                                 and self.isCletter(tail, text[length]):
                             Hstr = ''.join([yomi, text[length]])
                             max_len = length + 1
+        for _ in range(num_vs):  # when converting string with kanji wit variation selector, calculate max_len again
+            if max_len > len(itext):
+                break
+            elif text[max_len - 1] != itext[max_len - 1]:
+                max_len += 1
+            elif max_len < num_vs + len(text) and max_len <= len(itext) and self._is_vschr(itext[max_len]):
+                max_len += 1
+            else:
+                pass
         return (Hstr, max_len)
+
+    def _is_vschr(self, ch):
+        return 0x0e0100 <= ord(ch) <= 0x0e1ef or 0xfe00 <= ord(ch) <= 0xfe02
 
     def convert_nonh(self, text):
         if not self.isRegion(text[0]):
@@ -110,6 +123,9 @@ class Itaiji:
                     itaijipath = Configurations().dictpath(Configurations().jisyo_itaiji)
                     self._itaijidict = file_archive(itaijipath, {}, serialized=True)
                     self._itaijidict.load()
+
+    def haskey(self, c):
+        return c in self._itaijidict
 
     def convert(self, text: str) -> str:
         return text.translate(self._itaijidict)
