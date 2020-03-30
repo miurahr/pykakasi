@@ -16,3 +16,4 @@ recursive-include docs *.site
 recursive-include docs *.txt
 recursive-include docs *.yml
 recursive-include docs Makefile
+recursive-include src *.typed
