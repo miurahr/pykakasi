@@ -4,25 +4,24 @@ import pytest
 import pykakasi
 
 
-def test_kakasi_hepburn():
-    TESTS = [
-        (u"", ""),
-        (u"構成", "Kousei"),
-        (u"好き", "Suki"),
-        (u"大きい", "Ookii"),
-        (u"かんたん", "kantan"),
-        (u"にゃ", "nya"),
-        (u"っき", "kki"),
-        (u"っふぁ", "ffa"),
-        (u"キャ", "kya"),
-        (u"キュ", "kyu"),
-        (u"キョ", "kyo"),
-        (u"漢字とひらがな交じり文", "Kanji tohiragana Majiri Bun"),
-        (u"Alphabet 123 and 漢字", "Alphabet 123 and Kanji"),
-        (u"日経新聞", "Nikkeishinbun"),
-        (u"日本国民は、", "Nihonkokumin ha,")
-    ]
-
+@pytest.mark.parametrize("case, expected", [
+    ("", ""),
+    ("構成", "Kousei"),
+    ("好き", "Suki"),
+    ("大きい", "Ookii"),
+    ("かんたん", "kantan"),
+    ("にゃ", "nya"),
+    ("っき", "kki"),
+    ("っふぁ", "ffa"),
+    ("キャ", "kya"),
+    ("キュ", "kyu"),
+    ("キョ", "kyo"),
+    ("漢字とひらがな交じり文", "Kanji tohiragana Majiri Bun"),
+    ("Alphabet 123 and 漢字", "Alphabet 123 and Kanji"),
+    ("日経新聞", "Nikkeishinbun"),
+    ("日本国民は、", "Nihonkokumin ha,")
+])
+def test_kakasi_hepburn(case, expected):
     kakasi = pykakasi.kakasi()
     kakasi.setMode("H", "a")
     kakasi.setMode("K", "a")
@@ -33,26 +32,24 @@ def test_kakasi_hepburn():
     kakasi.setMode("a", None)
     kakasi.setMode("C", True)
     converter = kakasi.getConverter()
-    for case, result in TESTS:
-        assert converter.do(case) == result
+    assert converter.do(case) == expected
 
 
-def test_kakasi_kunrei():
-    TESTS = [
-        (u"", ""),
-        (u"構成", "Kousei"),
-        (u"好き", "Suki"),
-        (u"大きい", "Ookii"),
-        (u"かんたん", "kantan"),
-        (u"にゃ", "nya"),
-        (u"っき", "kki"),
-        (u"っふぁ", "ffa"),
-        (u"漢字とひらがな交じり文", "Kanzi tohiragana Maziri Bun"),
-        (u"Alphabet 123 and 漢字", "Alphabet 123 and Kanzi"),
-        (u"日経新聞", "Nikkeisinbun"),
-        (u"日本国民は、", "Nihonkokumin ha,")
-    ]
-
+@pytest.mark.parametrize("case, expected", [
+    ("", ""),
+    ("構成", "Kousei"),
+    ("好き", "Suki"),
+    ("大きい", "Ookii"),
+    ("かんたん", "kantan"),
+    ("にゃ", "nya"),
+    ("っき", "kki"),
+    ("っふぁ", "ffa"),
+    ("漢字とひらがな交じり文", "Kanzi tohiragana Maziri Bun"),
+    ("Alphabet 123 and 漢字", "Alphabet 123 and Kanzi"),
+    ("日経新聞", "Nikkeisinbun"),
+    ("日本国民は、", "Nihonkokumin ha,")
+])
+def test_kakasi_kunrei(case, expected):
     kakasi = pykakasi.kakasi()
     kakasi.setMode("H", "a")
     kakasi.setMode("K", "a")
@@ -63,28 +60,25 @@ def test_kakasi_kunrei():
     kakasi.setMode("a", None)
     kakasi.setMode("C", True)
     converter = kakasi.getConverter()
-    for case, result in TESTS:
-        assert converter.do(case) == result
+    assert converter.do(case) == expected
 
 
-def test_kakasi_J2H():
-
-    TESTS = [
-        (u"", ""),
-        (u"構成", u"こうせい"),
-        (u"好き", u"すき"),
-        (u"大きい", u"おおきい"),
-        (u"かんたん", u"かんたん"),
-        (u"にゃ", u"にゃ"),
-        (u"っき", u"っき"),
-        (u"っふぁ", u"っふぁ"),
-        (u"漢字とひらがな交じり文", u"かんじとひらがなまじりぶん"),
-        (u"Alphabet 123 and 漢字", u"Alphabet 123 and かんじ"),
-        (u"日経新聞", u"にっけいしんぶん"),
-        (u"日本国民は、", u"にほんこくみんは、"),
-        (u"苦々しい", u"にがにがしい")
-    ]
-
+@pytest.mark.parametrize("case, expected", [
+    ("", ""),
+    ("構成", "こうせい"),
+    ("好き", "すき"),
+    ("大きい", "おおきい"),
+    ("かんたん", "かんたん"),
+    ("にゃ", "にゃ"),
+    ("っき", "っき"),
+    ("っふぁ", "っふぁ"),
+    ("漢字とひらがな交じり文", "かんじとひらがなまじりぶん"),
+    ("Alphabet 123 and 漢字", "Alphabet 123 and かんじ"),
+    ("日経新聞", "にっけいしんぶん"),
+    ("日本国民は、", "にほんこくみんは、"),
+    ("苦々しい", "にがにがしい")
+])
+def test_kakasi_J2H(case, expected):
     kakasi = pykakasi.kakasi()
     kakasi.setMode("H", None)
     kakasi.setMode("K", None)
@@ -94,22 +88,19 @@ def test_kakasi_J2H():
     kakasi.setMode("E", None)
     kakasi.setMode("a", None)
     converter = kakasi.getConverter()
-    for case, result in TESTS:
-        assert converter.do(case) == result
+    assert converter.do(case) == expected
 
 
-def test_kakasi_J2K():
-
-    TESTS = [
-        (u"", ""),
-        (u"構成", u"コウセイ"),
-        (u"好き", u"スキ"),
-        (u"大きい", u"オオキイ"),
-        (u"かんたん", u"かんたん"),
-        (u"漢字とひらがな交じり文", u"カンジとひらがなマジリブン"),
-        (u"Alphabet 123 and 漢字", u"Alphabet 123 and カンジ")
-    ]
-
+@pytest.mark.parametrize("case, expected", [
+    ("", ""),
+    ("構成", "コウセイ"),
+    ("好き", "スキ"),
+    ("大きい", "オオキイ"),
+    ("かんたん", "かんたん"),
+    ("漢字とひらがな交じり文", "カンジとひらがなマジリブン"),
+    ("Alphabet 123 and 漢字", "Alphabet 123 and カンジ")
+])
+def test_kakasi_J2K(case, expected):
     kakasi = pykakasi.kakasi()
     kakasi.setMode("H", None)
     kakasi.setMode("K", None)
@@ -119,50 +110,44 @@ def test_kakasi_J2K():
     kakasi.setMode("E", None)
     kakasi.setMode("a", None)
     converter = kakasi.getConverter()
-    for case, result in TESTS:
-        assert converter.do(case) == result
+    assert converter.do(case) == expected
 
 
-def test_kakasi_H2K():
-
-    TESTS = [
-        (u"", ""),
-        (u"かんたん", u"カンタン"),
-        (u"にゃ", u"ニャ")
-    ]
+@pytest.mark.parametrize("case, expected", [
+    ("", ""),
+    ("かんたん", "カンタン"),
+    ("にゃ", "ニャ")
+])
+def test_kakasi_H2K(case, expected):
     kakasi = pykakasi.kakasi()
     kakasi.setMode("H", "K")
     kakasi.setMode("S", " ")
     converter = kakasi.getConverter()
-    for case, result in TESTS:
-        assert converter.do(case) == result
+    assert converter.do(case) == expected
 
 
-def test_kakasi_K2H():
-
-    TESTS = [
-        (u"", ""),
-        (u"カンタン", u"かんたん"),
-        (u"ニャ", u"にゃ")
-    ]
+@pytest.mark.parametrize("case, expected", [
+    ("", ""),
+    ("カンタン", "かんたん"),
+    ("ニャ", "にゃ")
+])
+def test_kakasi_K2H(case, expected):
     kakasi = pykakasi.kakasi()
     kakasi.setMode("K", "H")
     converter = kakasi.getConverter()
-    for case, result in TESTS:
-        assert converter.do(case) == result
+    assert converter.do(case) == expected
 
 
-def test_wakati():
-    TESTS = [
-        (u"", u""),
-        (u"交じり文", u"交じり 文"),
-        (u"ひらがな交じり文", u"ひらがな 交じり 文"),
-        (u"漢字とひらがな交じり文", u"漢字 とひらがな 交じり 文")
-    ]
+@pytest.mark.parametrize("case, expected", [
+    ("", ""),
+    ("交じり文", "交じり 文"),
+    ("ひらがな交じり文", "ひらがな 交じり 文"),
+    ("漢字とひらがな交じり文", "漢字 とひらがな 交じり 文")
+])
+def test_wakati(case, expected):
     wakati = pykakasi.wakati()
     converter = wakati.getConverter()
-    for case, result in TESTS:
-        assert converter.do(case) == result
+    assert converter.do(case) == expected
 
 
 def test_katakana_furiagana():
@@ -211,32 +196,29 @@ def test_wakati_furiagana():
         assert converter.do(case) == result
 
 
-def test_kakasi_a2E():
-    TESTS = [
-        ("ABCDEFGHIJKLMNOPQRSTUVWXYZ", u"ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ"),
-        ("abcdefghijklmnopqrstuvwxyz", u"ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ"),
-        ("!\"#$%&'()*+,-./_ {|}~", u"！＂＃＄％＆＇（）＊＋，－．／＿　｛｜｝～")
-    ]
+@pytest.mark.parametrize("case, expected", [
+    ("ABCDEFGHIJKLMNOPQRSTUVWXYZ", u"ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ"),
+    ("abcdefghijklmnopqrstuvwxyz", u"ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ"),
+    ("!\"#$%&'()*+,-./_ {|}~", u"！＂＃＄％＆＇（）＊＋，－．／＿　｛｜｝～")
+])
+def test_kakasi_a2E(case, expected):
     kakasi = pykakasi.kakasi()
     kakasi.setMode("a", "E")
     converter = kakasi.getConverter()
-    for case, result in TESTS:
-        assert converter.do(case) == result
+    assert converter.do(case) == expected
 
 
-def test_kakasi_E2a():
 
-    TESTS = [
-        (u"ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ", "ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
-        (u"ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ", "abcdefghijklmnopqrstuvwxyz"),
-        (u"！＂＃＄％＆＇（）＊＋，－．／＿　｛｜｝～\uFF1A", "!\"#$%&'()*+,-./_ {|}~:")
-    ]
-
+@pytest.mark.parametrize("case, expected", [
+    ("ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ", "ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
+    ("ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ", "abcdefghijklmnopqrstuvwxyz"),
+    ("！＂＃＄％＆＇（）＊＋，－．／＿　｛｜｝～\uFF1A", "!\"#$%&'()*+,-./_ {|}~:")
+])
+def test_kakasi_E2a(case, expected):
     kakasi = pykakasi.kakasi()
     kakasi.setMode("E", "a")
     converter = kakasi.getConverter()
-    for case, result in TESTS:
-        assert converter.do(case) == result
+    assert converter.do(case) == expected
 
 
 def test_kakasi_E2a_upper():
@@ -279,44 +261,43 @@ def test_kakasi_numbers():
         assert converter.do(case) == result
 
 
-def test_kakasi_passport():
-
-    TESTS = [
-        (u"", ""),
-        (u"構成", "Kosei"),
-        (u"大野", "Ono"),
-        (u"斎藤", "Saito"),
-        (u"菅野", "Kanno"),
-        (u"本田", "Honda"),
-        (u"一式", "Isshiki"),
-        (u"別府", "Beppu"),
-        (u"ジェ", "jie"),
-        (u"チェ", "chie"),
-        (u"ティ", "tei"),
-        (u"ディ", "dei"),
-        (u"デュ", "deyu"),
-        (u"ファ", "fua"),
-        (u"フィ", "fui"),
-        (u"フェ", "fue"),
-        (u"フォ", "fuo"),
-        (u"ヴァ", "bua"),
-        (u"ヴィ", "bui"),
-        (u"ヴ", "bu"),
-        (u"ヴェ", "bue"),
-        (u"ヴォ", "buo"),
-        (u"キャ", "kya"),
-        (u"キュ", "kyu"),
-        (u"キョ", "kyo"),
-        (u"じぇ", "jie"),
-        (u"ちぇ", "chie"),
-        (u"てぃ", "tei"),
-        (u"でぃ", "dei"),
-        (u"でゅ", "deyu"),
-        (u"ふぁ", "fua"),
-        (u"ふぃ", "fui"),
-        (u"ふぇ", "fue"),
-        (u"ふぉ", "fuo")
-    ]
+@pytest.mark.parametrize("case, expected", [
+    ("", ""),
+    ("構成", "Kosei"),
+    ("大野", "Ono"),
+    ("斎藤", "Saito"),
+    ("菅野", "Kanno"),
+    ("本田", "Honda"),
+    ("一式", "Isshiki"),
+    ("別府", "Beppu"),
+    ("ジェ", "jie"),
+    ("チェ", "chie"),
+    ("ティ", "tei"),
+    ("ディ", "dei"),
+    ("デュ", "deyu"),
+    ("ファ", "fua"),
+    ("フィ", "fui"),
+    ("フェ", "fue"),
+    ("フォ", "fuo"),
+    ("ヴァ", "bua"),
+    ("ヴィ", "bui"),
+    ("ヴ", "bu"),
+    ("ヴェ", "bue"),
+    ("ヴォ", "buo"),
+    ("キャ", "kya"),
+    ("キュ", "kyu"),
+    ("キョ", "kyo"),
+    ("じぇ", "jie"),
+    ("ちぇ", "chie"),
+    ("てぃ", "tei"),
+    ("でぃ", "dei"),
+    ("でゅ", "deyu"),
+    ("ふぁ", "fua"),
+    ("ふぃ", "fui"),
+    ("ふぇ", "fue"),
+    ("ふぉ", "fuo")
+])
+def test_kakasi_passport(case, expected):
     kakasi = pykakasi.kakasi()
     kakasi.setMode("H", "a")
     kakasi.setMode("K", "a")
@@ -326,18 +307,16 @@ def test_kakasi_passport():
     kakasi.setMode("C", True)
     kakasi.setMode("a", None)
     converter = kakasi.getConverter()
-    for case, result in TESTS:
-        assert converter.do(case) == result
+    assert converter.do(case) == expected
 
 
-def test_kakasi_passport_specialcase():
-
-    TESTS = [
-        (u"えっちゅう", "etchu"),
-        (u"はっちょう", "hatcho"),
-        (u"エッチュウ", "etchu"),
-        (u"ハッチョウ", "hatcho")
-    ]
+@pytest.mark.parametrize("case, expected", [
+    ("えっちゅう", "etchu"),
+    ("はっちょう", "hatcho"),
+    ("エッチュウ", "etchu"),
+    ("ハッチョウ", "hatcho")
+])
+def test_kakasi_passport_specialcase(case, expected):
     kakasi = pykakasi.kakasi()
     kakasi.setMode("H", "a")
     kakasi.setMode("K", "a")
@@ -346,26 +325,24 @@ def test_kakasi_passport_specialcase():
     kakasi.setMode("E", "a")
     kakasi.setMode("a", None)
     converter = kakasi.getConverter()
-    for case, result in TESTS:
-        assert converter.do(case) == result
+    assert converter.do(case) == expected
 
 
-def test_kakasi_hepburn_nocapital():
-
-    TESTS = [
-        (u"", ""),
-        (u"構成", "kousei"),
-        (u"好き", "suki"),
-        (u"大きい", "ookii"),
-        (u"かんたん", "kantan"),
-        (u"にゃ", "nya"),
-        (u"っき", "kki"),
-        (u"っふぁ", "ffa"),
-        (u"漢字とひらがな交じり文", "kanji tohiragana majiri bun"),
-        (u"Alphabet 123 and 漢字", "Alphabet 123 and kanji"),
-        (u"日経新聞", "nikkeishinbun"),
-        (u"日本国民は、", "nihonkokumin ha,")
-    ]
+@pytest.mark.parametrize("case, expected", [
+    ("", ""),
+    ("構成", "kousei"),
+    ("好き", "suki"),
+    ("大きい", "ookii"),
+    ("かんたん", "kantan"),
+    ("にゃ", "nya"),
+    ("っき", "kki"),
+    ("っふぁ", "ffa"),
+    ("漢字とひらがな交じり文", "kanji tohiragana majiri bun"),
+    ("Alphabet 123 and 漢字", "Alphabet 123 and kanji"),
+    ("日経新聞", "nikkeishinbun"),
+    ("日本国民は、", "nihonkokumin ha,")
+])
+def test_kakasi_hepburn_nocapital(case, expected):
     kakasi = pykakasi.kakasi()
     kakasi.setMode("H", "a")
     kakasi.setMode("K", "a")
@@ -376,15 +353,14 @@ def test_kakasi_hepburn_nocapital():
     kakasi.setMode("a", None)
     kakasi.setMode("C", False)
     converter = kakasi.getConverter()
-    for case, result in TESTS:
-        assert converter.do(case) == result
+    assert converter.do(case) == expected
 
 
-def test_kakasi_extended_kana():
-    TESTS = [
-        (u"\U0001b150", "wi"),
-        (u"\U0001b151", "we")
-    ]
+@pytest.mark.parametrize("case, expected", [
+    ("\U0001b150", "wi"),
+    ("\U0001b151", "we")
+])
+def test_kakasi_extended_kana(case, expected):
     kakasi = pykakasi.kakasi()
     kakasi.setMode("H", "a")
     kakasi.setMode("K", "a")
@@ -395,8 +371,7 @@ def test_kakasi_extended_kana():
     kakasi.setMode("a", None)
     kakasi.setMode("C", False)
     converter = kakasi.getConverter()
-    for case, result in TESTS:
-        assert converter.do(case) == result
+    assert converter.do(case) == expected
 
 
 def test_kakasi_chinese_kanji():
@@ -434,71 +409,63 @@ def test_kakasi_chinese_kanji_replace():
         assert converter.do(case) == result
 
 
-def test_kakasi_long_symbol_H():
-    TESTS = [
-        (u'やったー', u'yattaa'),
-        (u'でっでー', u'deddee'),
-        (u'てんさーふろー', u'tensaafuroo'),
-        (u'がっがーん', u'gaggaan'),
-        (u'どーん', u'doon')
-    ]
-
+@pytest.mark.parametrize("case, expected", [
+    ('やったー', 'yattaa'),
+    ('でっでー', 'deddee'),
+    ('てんさーふろー', 'tensaafuroo'),
+    ('がっがーん', 'gaggaan'),
+    ('どーん', 'doon')
+])
+def test_kakasi_long_symbol_H(case, expected):
     kakasi = pykakasi.kakasi()
     kakasi.setMode('H', 'a')
     converter = kakasi.getConverter()
-    for case, result in TESTS:
-        assert converter.do(case) == result
+    assert converter.do(case) == expected
 
 
-def test_kakasi_long_symbol_K():
-    TESTS = [
-        (u'ヤッター', u'yattaa'),
-        (u'デッデー', u'deddee'),
-        (u'テンサーフロー', u'tensaafuroo'),
-        (u'ガッガーン', u'gaggaan'),
-        (u'ドーン', u'doon')
-    ]
-
+@pytest.mark.parametrize("case, expected", [
+    (u'ヤッター', u'yattaa'),
+    (u'デッデー', u'deddee'),
+    (u'テンサーフロー', u'tensaafuroo'),
+    (u'ガッガーン', u'gaggaan'),
+    (u'ドーン', u'doon')
+])
+def test_kakasi_long_symbol_K(case, expected):
     kakasi = pykakasi.kakasi()
     kakasi.setMode('K', 'a')
     converter = kakasi.getConverter()
-    for case, result in TESTS:
-        assert converter.do(case) == result
+    assert converter.do(case) == expected
 
 
-def test_kakasi_long_symbol_mixed_HK():
-    TESTS = [
-        (u'じゃーんデデーン', u'jaandedeen'),
-        (u'デッデーンじゃーん', u'deddeenjaan'),
-        (u'テンサーふろー', u'tensaafuroo'),
-        (u'ガッガーン', u'gaggaan'),
-        (u'ドーン', u'doon')
-    ]
-
+@pytest.mark.parametrize("case, expected",  [
+    ('じゃーんデデーン', 'jaandedeen'),
+    ('デッデーンじゃーん', 'deddeenjaan'),
+    ('テンサーふろー', 'tensaafuroo'),
+    ('ガッガーン', 'gaggaan'),
+    ('ドーン', 'doon')
+])
+def test_kakasi_long_symbol_mixed_HK(case, expected):
     kakasi = pykakasi.kakasi()
     kakasi.setMode('K', 'a')
     kakasi.setMode('H', 'a')
     converter = kakasi.getConverter()
-    for case, result in TESTS:
-        assert converter.do(case) == result
+    assert converter.do(case) == expected
 
 
-def test_kakasi_long_symbol_mixed_JHK():
-    TESTS = [
-        (u'順じゃーんデデーン', u'junjaandedeen'),
-        (u'デッデーン順じゃーん', u'deddeenjunjaan'),
-        (u'テンサーふろー風呂', u'tensaafuroofuro'),
-        (u'ガッガーン癌', u'gaggaangan'),
-        (u'ドーン', u'doon')
-    ]
-
+@pytest.mark.parametrize("case, expected", [
+    ('順じゃーんデデーン', 'junjaandedeen'),
+    ('デッデーン順じゃーん', 'deddeenjunjaan'),
+    ('テンサーふろー風呂', 'tensaafuroofuro'),
+    ('ガッガーン癌', 'gaggaangan'),
+    ('ドーン', 'doon')
+])
+def test_kakasi_long_symbol_mixed_JHK(case, expected):
     kakasi = pykakasi.kakasi()
     kakasi.setMode('K', 'a')
     kakasi.setMode('H', 'a')
     kakasi.setMode('J', 'a')
     converter = kakasi.getConverter()
-    for case, result in TESTS:
-        assert converter.do(case) == result
+    assert converter.do(case) == expected
 
 
 def test_kakasi_long_symbol_with_no_HK():

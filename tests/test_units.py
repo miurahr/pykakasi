@@ -37,184 +37,168 @@ def test_J2H(case, expected):
     assert j.convert(case) == expected
 
 
-def test_H2a():
-    TESTS = [
-        (u"かんたん", ("ka", 1)),
-        (u"にゃ", ("nya", 2)),
-        (u"っき", ("kki", 2)),
-        (u"っふぁ", ("ffa", 3)),
-        (u"しつもん", ("shi", 1)),
-        (u"ちがい", ("chi", 1)),
-    ]
+@pytest.mark.parametrize("case, expected", [
+        ("かんたん", ("ka", 1)),
+        ("にゃ", ("nya", 2)),
+        ("っき", ("kki", 2)),
+        ("っふぁ", ("ffa", 3)),
+        ("しつもん", ("shi", 1)),
+        ("ちがい", ("chi", 1)),
+])
+def test_H2a(case, expected):
     h = pykakasi.scripts.H2("a")
-    for case, result in TESTS:
-        assert h.convert(case) == result
+    assert h.convert(case) == expected
 
 
-def test_H2K():
-    TESTS = [
-        (u"かんたん", (u"カンタン", 4)),
-        (u"にゃ", (u"ニャ", 2)),
-        (u"っき", (u"ッキ", 2)),
-        (u"っふぁ", (u"ッファ", 3)),
-        (u"しつもん", (u"シツモン", 4)),
-        (u"ちがい", (u"チガイ", 3)),
-    ]
+@pytest.mark.parametrize("case, expected", [
+    ("かんたん", ("カンタン", 4)),
+    ("にゃ", ("ニャ", 2)),
+    ("っき", ("ッキ", 2)),
+    ("っふぁ", ("ッファ", 3)),
+    ("しつもん", ("シツモン", 4)),
+    ("ちがい", ("チガイ", 3)),
+])
+def test_H2K(case, expected):
     h = pykakasi.scripts.H2("K")
-    for case, result in TESTS:
-        assert h.convert(case) == result
+    assert h.convert(case) == expected
 
 
-def test_K2H():
-    TESTS = [
-        (u"カンタン", (u"かんたん", 4)),
-        (u"ニャ", (u"にゃ", 2)),
-        (u"ッキ", (u"っき", 2)),
-        (u"ッファ", (u"っふぁ", 3)),
-        (u"シツモン", (u"しつもん", 4)),
-        (u"チガイ", (u"ちがい", 3)),
-    ]
+@pytest.mark.parametrize("case, expected", [
+    ("カンタン", ("かんたん", 4)),
+    ("ニャ", ("にゃ", 2)),
+    ("ッキ", ("っき", 2)),
+    ("ッファ", ("っふぁ", 3)),
+    ("シツモン", ("しつもん", 4)),
+    ("チガイ", ("ちがい", 3)),
+])
+def test_K2H(case, expected):
     h = pykakasi.scripts.K2("H")
-    for case, result in TESTS:
-        assert h.convert(case) == result
+    assert h.convert(case) == expected
 
 
-def test_K2a():
-    TESTS = [
-        (u"カンタン", ("ka", 1)),
-        (u"ニャ", ("nya", 2)),
-        (u"ッキ", ("kki", 2)),
-        (u"ッファ", ("ffa", 3)),
-        (u"シツモン", ("shi", 1)),
-        (u"チガイ", ("chi", 1)),
-        (u"ジ", ("ji", 1)),
-    ]
+@pytest.mark.parametrize("case, expected", [
+    ("カンタン", ("ka", 1)),
+    ("ニャ", ("nya", 2)),
+    ("ッキ", ("kki", 2)),
+    ("ッファ", ("ffa", 3)),
+    ("シツモン", ("shi", 1)),
+    ("チガイ", ("chi", 1)),
+    ("ジ", ("ji", 1)),
+])
+def test_K2a(case, expected):
     h = pykakasi.scripts.K2("a")
-    for case, result in TESTS:
-        assert h.convert(case) == result
+    assert h.convert(case) == expected
 
 
-def test_H2a_kunrei():
-    TESTS = [
-        (u"しつもん", ("si", 1)),
-        (u"ちがい", ("ti", 1)),
-        (u"きゃ", ("kya", 2)), (u"きゅ", ("kyu", 2)), (u"きょ", ("kyo", 2)),
-        (u"しゃ", ("sya", 2)), (u"しゅ", ("syu", 2)), (u"しょ", ("syo", 2)),
-        (u"ちゃ", ("tya", 2)), (u"ちゅ", ("tyu", 2)), (u"ちょ", ("tyo", 2)),
-        (u"にゃ", ("nya", 2)), (u"にゅ", ("nyu", 2)), (u"にょ", ("nyo", 2)),
-        (u"りゃ", ("rya", 2)), (u"りゅ", ("ryu", 2)), (u"りょ", ("ryo", 2)),
-        (u"ざ", ("za", 1)), (u"じ", ("zi", 1)), (u"ず", ("zu", 1)),
-        (u"ぜ", ("ze", 1)), (u"ぞ", ("zo", 1)),
-        (u"だ", ("da", 1)), (u"ぢ", ("zi", 1)), (u"づ", ("zu", 1)),
-        (u"で", ("de", 1)), (u"ど", ("do", 1)),
-        (u"た", ("ta", 1)), (u"ち", ("ti", 1)), (u"つ", ("tu", 1)),
-        (u"て", ("te", 1)), (u"と", ("to", 1))
-    ]
+@pytest.mark.parametrize("case, expected", [
+    ("しつもん", ("si", 1)),
+    ("ちがい", ("ti", 1)),
+    ("きゃ", ("kya", 2)), ("きゅ", ("kyu", 2)), ("きょ", ("kyo", 2)),
+    ("しゃ", ("sya", 2)), ("しゅ", ("syu", 2)), ("しょ", ("syo", 2)),
+    ("ちゃ", ("tya", 2)), ("ちゅ", ("tyu", 2)), ("ちょ", ("tyo", 2)),
+    ("にゃ", ("nya", 2)), ("にゅ", ("nyu", 2)), ("にょ", ("nyo", 2)),
+    ("りゃ", ("rya", 2)), ("りゅ", ("ryu", 2)), ("りょ", ("ryo", 2)),
+    ("ざ", ("za", 1)), ("じ", ("zi", 1)), ("ず", ("zu", 1)),
+    ("ぜ", ("ze", 1)), ("ぞ", ("zo", 1)),
+    ("だ", ("da", 1)), ("ぢ", ("zi", 1)), ("づ", ("zu", 1)),
+    ("で", ("de", 1)), ("ど", ("do", 1)),
+    ("た", ("ta", 1)), ("ち", ("ti", 1)), ("つ", ("tu", 1)),
+    ("て", ("te", 1)), ("と", ("to", 1))
+])
+def test_H2a_kunrei(case, expected):
     h = pykakasi.scripts.H2("a", method="Kunrei")
-    for case, result in TESTS:
-        assert h.convert(case) == result
+    assert h.convert(case) == expected
 
 
-def test_K2a_kunrei():
-    TESTS = [
-        (u"シツモン", ("si", 1)),
-        (U"チガイ", ("ti", 1)),
-        (u"ジ", ("zi", 1)),
-        (u"ファジー", ("fa", 2)),
-        (u"ジー", ("zi", 1)),
-        (u"ウォークマン", ("u", 1)),
-        (u"キャ", ("kya", 2)), (u"キュ", ("kyu", 2)), (u"キョ", ("kyo", 2)),
-        (u"シャ", ("sya", 2)), (u"シュ", ("syu", 2)), (u"ショ", ("syo", 2)),
-        (u"チャ", ("tya", 2)), (u"チュ", ("tyu", 2)), (u"チョ", ("tyo", 2)),
-        (u"ニャ", ("nya", 2)), (u"ニュ", ("nyu", 2)), (u"ニョ", ("nyo", 2)),
-        (u"リャ", ("rya", 2)), (u"リュ", ("ryu", 2)), (u"リョ", ("ryo", 2)),
-        (u"ザ", ("za", 1)), (u"ジ", ("zi", 1)), (u"ズ", ("zu", 1)),
-        (u"ゼ", ("ze", 1)), (u"ゾ", ("zo", 1)),
-        (u"ダ", ("da", 1)), (u"ヂ", ("zi", 1)), (u"ヅ", ("zu", 1)),
-        (u"デ", ("de", 1)), (u"ド", ("do", 1)),
-        (u"タ", ("ta", 1)), (u"チ", ("ti", 1)), (u"ツ", ("tu", 1)),
-        (u"テ", ("te", 1)), (u"ト", ("to", 1))
-    ]
+@pytest.mark.parametrize("case, expected", [
+    ("シツモン", ("si", 1)),
+    ("チガイ", ("ti", 1)),
+    ("ジ", ("zi", 1)),
+    ("ファジー", ("fa", 2)),
+    ("ジー", ("zi", 1)),
+    ("ウォークマン", ("u", 1)),
+    ("キャ", ("kya", 2)), ("キュ", ("kyu", 2)), ("キョ", ("kyo", 2)),
+    ("シャ", ("sya", 2)), ("シュ", ("syu", 2)), ("ショ", ("syo", 2)),
+    ("チャ", ("tya", 2)), ("チュ", ("tyu", 2)), ("チョ", ("tyo", 2)),
+    ("ニャ", ("nya", 2)), ("ニュ", ("nyu", 2)), ("ニョ", ("nyo", 2)),
+    ("リャ", ("rya", 2)), ("リュ", ("ryu", 2)), ("リョ", ("ryo", 2)),
+    ("ザ", ("za", 1)), ("ジ", ("zi", 1)), ("ズ", ("zu", 1)),
+    ("ゼ", ("ze", 1)), ("ゾ", ("zo", 1)),
+    ("ダ", ("da", 1)), ("ヂ", ("zi", 1)), ("ヅ", ("zu", 1)),
+    ("デ", ("de", 1)), ("ド", ("do", 1)),
+    ("タ", ("ta", 1)), ("チ", ("ti", 1)), ("ツ", ("tu", 1)),
+    ("テ", ("te", 1)), ("ト", ("to", 1))
+])
+def test_K2a_kunrei(case, expected):
     h = pykakasi.scripts.K2("a", method="Kunrei")
-    for case, result in TESTS:
-        assert h.convert(case) == result
+    assert h.convert(case) == expected
 
 
-def test_H2a_passport():
-    TESTS = [
-        (u"しつもん", ("shi", 1)),
-        (u"ちがい", ("chi", 1)),
-        (u"おおの", ("o", 2)),
-        (u"さいとう", ("sa", 1)),
-        (u"とう", ("to", 2)),
-        (u"なんば", ("na", 1)),
-        (u"んば", ("mba", 2))
-    ]
+@pytest.mark.parametrize("case, expected", [
+    ("しつもん", ("shi", 1)),
+    ("ちがい", ("chi", 1)),
+    ("おおの", ("o", 2)),
+    ("さいとう", ("sa", 1)),
+    ("とう", ("to", 2)),
+    ("なんば", ("na", 1)),
+    ("んば", ("mba", 2))
+])
+def test_H2a_passport(case, expected):
     h = pykakasi.scripts.H2("a", method="Passport")
-    for case, result in TESTS:
-        assert h.convert(case) == result
+    assert h.convert(case) == expected
 
 
-def test_J2K():
-    TESTS = [
-        (u"構成", (u"コウセイ", 2)),
-        (u"好き", (u"スキ", 2)),
-        (u"大きい", (u"オオキイ", 3)),
-        (u"日本国民は、", (u"ニホンコクミン", 4))
-    ]
+@pytest.mark.parametrize("case, expected", [
+    ("構成", (u"コウセイ", 2)),
+    ("好き", (u"スキ", 2)),
+    ("大きい", (u"オオキイ", 3)),
+    ("日本国民は、", (u"ニホンコクミン", 4))
+])
+def test_J2K(case, expected):
     j = pykakasi.kanji.J2("K")
-    for case, result in TESTS:
-        assert j.convert(case) == result
+    assert j.convert(case) == expected
 
 
-def test_J2a():
-    TESTS = [
-        (u"構成", ("kousei", 2)),
-        (u"好き", ("suki", 2)),
-        (u"大きい", ("ookii", 3)),
-        (u"日本国民は、", ("nihonkokumin", 4)),
-        (u"\u31a0", ("", 0))  # non japanese character
-    ]
+@pytest.mark.parametrize("case, expected", [
+    ("構成", ("kousei", 2)),
+    ("好き", ("suki", 2)),
+    ("大きい", ("ookii", 3)),
+    ("日本国民は、", ("nihonkokumin", 4)),
+    ("\u31a0", ("", 0))  # non japanese character
+])
+def test_J2a(case, expected):
     j = pykakasi.kanji.J2("a")
-    for case, result in TESTS:
-        assert j.convert(case) == result
+    assert j.convert(case) == expected
 
 
-def test_a2E():
-    TESTS = [
-        ("ABCDEFGHIJKLMNOPQRSTUVWXYZ", u"ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ"),
-        ("abcdefghijklmnopqrstuvwxyz", u"ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ"),
-        ("!\"#$%&'()*+,-./_ {|}~", u"！＂＃＄％＆＇（）＊＋，－．／＿　｛｜｝～")
-    ]
+@pytest.mark.parametrize("case, expected", [
+    ("ABCDEFGHIJKLMNOPQRSTUVWXYZ", u"ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ"),
+    ("abcdefghijklmnopqrstuvwxyz", u"ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ"),
+    ("!\"#$%&'()*+,-./_ {|}~", u"！＂＃＄％＆＇（）＊＋，－．／＿　｛｜｝～")
+])
+def test_a2E(case, expected):
     a = pykakasi.scripts.A2("E")
-    for case, result in TESTS:
-        for i in range(len(case)):
-            assert a.convert(case[i]) == (result[i], 1)
+    for i in range(len(case)):
+        assert a.convert(case[i]) == (expected[i], 1)
 
 
-def test_sym2a():
-    TESTS = [
-        ([u"\u3000", u"\u3001", u"\u3002", u"\u3003", u"\u3004", u"\u3006", u"\u3008",
-          u"\u3009", u"\u300a", u"\u300b", u"\u300c", u"\u300d", u"\u300e", u"\u300f",
-          u"\u3010", u"\u3011", u"\u3012", u"\u3013", u"\u3014", u"\u3015", u"\u3016",
-          u"\u3017", u"\u3018", u"\u3019", u"\u301a", u"\u301b", u"\u301c", u"\u301d",
-          u"\u301e", u"\u301f", u"\u3020",
-          u"\u3030", u"\u3031", u"\u3032", u"\u3033", u"\u3034", u"\u3035", u"\u3036",
-          u"\u3037",
-          u"\u303c", u"\u303d", u"\u303e", u"\u303f",
-          u"\u03b1", u"\u03b2", u"\u03b6", u"\u03c9", u"\u0391", u"\u0392", u"\u0396",
-          u"\u03a9", u"\u03c2", u"\uff10",
-          u"\u0430", u"\u044f", u"\u0451", u"\u0401"],
-         [" ", ",", ".", '"', "(kigou)", "(sime)", "<", ">", "<<", ">>", "(", ")", "(", ")",
-          "(", ")", "(kigou)", "(geta)", "(", ")", "(", ")", "(", ")", "(",
-          ")", "~", "(kigou)", "\"", "(kigou)", "(kigou)", "-", "(kurikaesi)",
-          "(kurikaesi)", "(kurikaesi)", "(kurikaesi)", "(kurikaesi)",
-          "(kigou)", "XX", "(masu)", "(kurikaesi)", " ", " ", "alpha", "beta", "zeta", "omega",
-          "Alpha", "Beta", "Zeta", "Omega", "final sigma",
-          "0",
-          "a", "ya", "e", "E"])
-    ]
+@pytest.mark.parametrize("case, expected", [
+    ("\u3000", " "), ("\u3001", ","), ("\u3002", "."), ("\u3003", '"'),
+    ("\u3004", "(kigou)"), ("\u3006", "(sime)"), ("\u3008", "<"), ("\u3009", ">"),
+    ("\u300a", "<<"), ("\u300b", ">>"), ("\u300c", "("), ("\u300d", ")"),
+    ("\u300e", "("), ("\u300f", ")"), ("\u3010", "("), ("\u3011", ")"),
+    ("\u3012", "(kigou)"), ("\u3013", "(geta)"), ("\u3014", "("), ("\u3015", ")"),
+    ("\u3016", "("), ("\u3017", ")"), ("\u3018", "("), ("\u3019", ")"),
+    ("\u301a", "("), ("\u301b", ")"), ("\u301c", "~"), ("\u301d", "(kigou)"),
+    ("\u301e", "\""), ("\u301f", "(kigou)"), ("\u3020", "(kigou)"),
+    ("\u3030", "-"), ("\u3031", "(kurikaesi)"), ("\u3032",  "(kurikaesi)"),
+    ("\u3033", "(kurikaesi)"), ("\u3034", "(kurikaesi)"), ("\u3035", "(kurikaesi)"),
+    ("\u3036", "(kigou)"), ("\u3037", "XX"), ("\u303c", "(masu)"), ("\u303d", "(kurikaesi)"),
+    ("\u303e",  " "), ("\u303f", " "), ("\u03b1", "alpha"), ("\u03b2", "beta"),
+    ("\u03b6", "zeta"), ("\u03c9", "omega"), ("\u0391", "Alpha"), ("\u0392", "Beta"),
+    ("\u0396", "Zeta"), ("\u03a9", "Omega"), ("\u03c2", "final sigma"),  ("\uff10", "0"),
+    ("\u0430", "a"), ("\u044f", "ya"), ("\u0451", "e"), ("\u0401", "E")
+])
+def test_sym2a(case, expected):
     s = pykakasi.scripts.Sym2("a")
-    for case, result in TESTS:
-        for i in range(len(case)):
-            assert tuple([case[i] == s.convert(case[i])]), tuple([case[i], (result[i], 1)])
+    assert s.convert(case) == (expected, 1)
