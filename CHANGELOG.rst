@@ -25,6 +25,20 @@ Removed
 Security
 --------
 
+v2.0.0a6_ (30, Mar. 2020)
+=========================
+
+Added
+-----
+
+* Understand more kanji variations.
+
+Fixed
+-----
+
+* Fix IVS handling to return correct word length to consume.
+
+
 v2.0.0a5_ (23, Mar. 2020)
 =========================
 
@@ -167,7 +181,8 @@ Fixed
 
 
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.0.0a5...HEAD
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.0.0a6...HEAD
+.. _v2.0.0a6: https://github.com/miurahr/pykakasi/compare/v2.0.0a5...v2.0.0a6
 .. _v2.0.0a5: https://github.com/miurahr/pykakasi/compare/v2.0.0a4...v2.0.0a5
 .. _v2.0.0a4: https://github.com/miurahr/pykakasi/compare/v2.0.0a3...v2.0.0a4
 .. _v2.0.0a3: https://github.com/miurahr/pykakasi/compare/v2.0.0a2...v2.0.0a3
