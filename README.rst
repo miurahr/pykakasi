@@ -27,7 +27,7 @@ Overview
    :alt: Coverage status
 
 
-``pykakasi`` is a Python Natural Language Processing (NLP) library to transliterate *hiragana*, *katakana* and *kanji* (Japanese text) into *rōmaji* (Latin/Roman alphabet).
+``pykakasi`` is a Python Natural Language Processing (NLP) library to transliterate *hiragana*, *katakana* and *kanji* (Japanese text) into *rōmaji* (Latin/Roman alphabet). It can handle characters in NFC form.
 
 It is based on the `kakasi`_ library, which is written in C.
 
