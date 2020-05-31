@@ -208,7 +208,6 @@ def test_kakasi_a2E(case, expected):
     assert converter.do(case) == expected
 
 
-
 @pytest.mark.parametrize("case, expected", [
     ("ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ", "ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
     ("ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ", "abcdefghijklmnopqrstuvwxyz"),
@@ -437,7 +436,7 @@ def test_kakasi_long_symbol_K(case, expected):
     assert converter.do(case) == expected
 
 
-@pytest.mark.parametrize("case, expected",  [
+@pytest.mark.parametrize("case, expected", [
     ('じゃーんデデーン', 'jaandedeen'),
     ('デッデーンじゃーん', 'deddeenjaan'),
     ('テンサーふろー', 'tensaafuroo'),

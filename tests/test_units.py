@@ -23,6 +23,7 @@ def test_itaiji(case, expected):
     j = pykakasi.kanji.J2("H")
     assert j._itaiji.convert(case) == expected
 
+
 @pytest.mark.parametrize("case, expected", [
     ("構成", ("こうせい", 2)),
     ("好き", ("すき", 2)),
@@ -30,7 +31,6 @@ def test_itaiji(case, expected):
     ("日本国民は、", ("にほんこくみん", 4)),
     ("\U0000845B\U000E0101城市", ("かつらぎ", 3)),
     ("\U0000845B\U000E0100飾区", ("かつしかく", 4))
-
 ])
 def test_J2H(case, expected):
     j = pykakasi.kanji.J2("H")
@@ -38,12 +38,12 @@ def test_J2H(case, expected):
 
 
 @pytest.mark.parametrize("case, expected", [
-        ("かんたん", ("ka", 1)),
-        ("にゃ", ("nya", 2)),
-        ("っき", ("kki", 2)),
-        ("っふぁ", ("ffa", 3)),
-        ("しつもん", ("shi", 1)),
-        ("ちがい", ("chi", 1)),
+    ("かんたん", ("ka", 1)),
+    ("にゃ", ("nya", 2)),
+    ("っき", ("kki", 2)),
+    ("っふぁ", ("ffa", 3)),
+    ("しつもん", ("shi", 1)),
+    ("ちがい", ("chi", 1)),
 ])
 def test_H2a(case, expected):
     h = pykakasi.scripts.H2("a")
@@ -191,12 +191,12 @@ def test_a2E(case, expected):
     ("\u3016", "("), ("\u3017", ")"), ("\u3018", "("), ("\u3019", ")"),
     ("\u301a", "("), ("\u301b", ")"), ("\u301c", "~"), ("\u301d", "(kigou)"),
     ("\u301e", "\""), ("\u301f", "(kigou)"), ("\u3020", "(kigou)"),
-    ("\u3030", "-"), ("\u3031", "(kurikaesi)"), ("\u3032",  "(kurikaesi)"),
+    ("\u3030", "-"), ("\u3031", "(kurikaesi)"), ("\u3032", "(kurikaesi)"),
     ("\u3033", "(kurikaesi)"), ("\u3034", "(kurikaesi)"), ("\u3035", "(kurikaesi)"),
     ("\u3036", "(kigou)"), ("\u3037", "XX"), ("\u303c", "(masu)"), ("\u303d", "(kurikaesi)"),
-    ("\u303e",  " "), ("\u303f", " "), ("\u03b1", "alpha"), ("\u03b2", "beta"),
+    ("\u303e", " "), ("\u303f", " "), ("\u03b1", "alpha"), ("\u03b2", "beta"),
     ("\u03b6", "zeta"), ("\u03c9", "omega"), ("\u0391", "Alpha"), ("\u0392", "Beta"),
-    ("\u0396", "Zeta"), ("\u03a9", "Omega"), ("\u03c2", "final sigma"),  ("\uff10", "0"),
+    ("\u0396", "Zeta"), ("\u03a9", "Omega"), ("\u03c2", "final sigma"), ("\uff10", "0"),
     ("\u0430", "a"), ("\u044f", "ya"), ("\u0451", "e"), ("\u0401", "E")
 ])
 def test_sym2a(case, expected):
