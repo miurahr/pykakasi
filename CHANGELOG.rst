@@ -25,6 +25,14 @@ Removed
 Security
 --------
 
+v2.0.0_ (31, May. 2020)
+=======================
+
+Changed
+-------
+
+* Update test formatting.
+
 v2.0.0b1_ (9, May. 2020)
 ========================
 
@@ -190,7 +198,9 @@ Fixed
 
 
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.0.0a6...HEAD
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.0.0...HEAD
+.. _v2.0.0: https://github.com/miurahr/pykakasi/compare/v2.0.0b1...v2.0.0
+.. _v2.0.0b1: https://github.com/miurahr/pykakasi/compare/v2.0.0a6...v2.0.0b1
 .. _v2.0.0a6: https://github.com/miurahr/pykakasi/compare/v2.0.0a5...v2.0.0a6
 .. _v2.0.0a5: https://github.com/miurahr/pykakasi/compare/v2.0.0a4...v2.0.0a5
 .. _v2.0.0a4: https://github.com/miurahr/pykakasi/compare/v2.0.0a3...v2.0.0a4
