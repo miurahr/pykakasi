@@ -36,8 +36,8 @@ class J2:
     def isRegion(self, c: str):
         return 0x3400 <= ord(c[0]) < 0xe000 or self._itaiji.haskey(ord(c[0]))
 
-    def isCletter(self, l: str, c: str) -> bool:
-        if (0x3041 <= ord(c) <= 0x309f) and (l in self._cl_table[ord(c) - 0x3040]):  # ぁ:= u\3041
+    def isCletter(self, literal: str, c: str) -> bool:
+        if (0x3041 <= ord(c) <= 0x309f) and (literal in self._cl_table[ord(c) - 0x3040]):  # ぁ:= u\3041
             return True
         return False
 
@@ -45,7 +45,7 @@ class J2:
         max_len = 0
         Hstr = ""
         text = self._itaiji.convert(itext)
-        num_vs =  len(itext) - len(text)
+        num_vs = len(itext) - len(text)
         table = self._kanwa.load(text[0])
         if table is None:
             return "", 0
