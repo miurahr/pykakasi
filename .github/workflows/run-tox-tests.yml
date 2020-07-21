@@ -20,6 +20,23 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -U pip
-          pip install tox tox-gh-actions
+          pip install tox tox-gh-actions coveralls
       - name: Test project with tox
         run: tox
+      - name: Upload Coverage
+        run: coveralls
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COVERALLS_PARALLEL: true
+          COVERALLS_FLAG_NAME: ${{ matrix.python-version }}-${{ matrix.os }}
+  finish:
+    runs-on: ubuntu-latest
+    name: finish parallel build
+    needs: build
+    steps:
+      - name: Tell Coveralls that the parallel build is finished
+        run: |
+          pip install -U wheel setuptools coveralls
+          coveralls --finish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
