@@ -1,18 +1,16 @@
 language: python
-dist: xenial
+dist: bionic
 sudo: false
 cache: pip
 matrix:
   include:
-    - python: 3.5
-      env: TOXENV=py35
     - python: 3.8
       env: TOXENV=check
     - python: 3.8
       env: TOXENV=docs
     - python: 3.8
       env: TOXENV=mypy
-    - python: pypy3.6-7.1.1
+    - python: pypy3.6-7.2.0
       env: TOXENV=pypy3
 
 install:
@@ -24,6 +22,6 @@ script:
 
 after_success:
   # Hack for coveralls to find sources
-  - sed -E -ie 's/.tox.py(27|35|36|37|38|py3).(lib.python[2-3].[0-9].)?site-packages/src/g' .coverage
+  - sed -E -ie 's/.tox.py(36|37|38|py3).(lib.python[2-3].[0-9].)?site-packages/src/g' .coverage
   - coveralls
 
