@@ -64,34 +64,23 @@ class kakasi:
         otext = ''
         _result = []
         i = 0
-        while True:
-            if i >= len(text):
-                break
 
+        while i < len(text):
             if self._jconv.isRegion(text[i]):
                 t, ln = self._jconv.convert(text[i:])
                 if ln <= 0:  # pragma: no cover
                     otext = otext + text[i]
                     i += 1
                     _state = False
-                elif (i + ln) < len(text):
-                    if _state:
-                        _result.append(self._iconv(otext + text[i:i + ln], t))
-                        otext = ''
-                    else:
-                        _result.append(self._iconv(otext, otext))
-                        _result.append(self._iconv(text[i:i + ln], t))
-                        otext = ''
-                        _state = True
-                    i = i + ln
                 else:
                     if _state:
                         _result.append(self._iconv(otext + text[i:i + ln], t))
-                    else:  # pragma: no cover
+                    else:
                         _result.append(self._iconv(otext, otext))
                         _result.append(self._iconv(text[i:i + ln], t))
-                    break
-
+                        _state = True
+                    otext = ''
+                    i = i + ln
             else:
                 _state = False
                 otext = otext + text[i]
@@ -101,6 +90,9 @@ class kakasi:
                     _result.append(self._iconv(otext, otext))
                     otext = ''
                     _state = True
+
+        if otext:
+            _result.append(self._iconv(otext, otext))
 
         return _result
 
