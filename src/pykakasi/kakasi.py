@@ -113,6 +113,13 @@ class kakasi:
             if l1 > 0:
                 result += t
                 i += l1
+            elif ord(text[i]) in self._LONG_SYMBOL:  # handle chōonpu sound marks
+                # use previous char as a transliteration for kana-dash
+                if len(result) > 0:
+                    result += result[-1]
+                else:
+                    result += '-'
+                i += 1
             else:
                 result += text[i:i + 1]
                 i += 1
