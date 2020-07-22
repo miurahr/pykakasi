@@ -33,6 +33,7 @@ import pykakasi
 def test_kakasi_structured(case, expected):
     kakasi = pykakasi.kakasi()
     result = kakasi.convert(case)
+    assert len(result) == len(expected)
     for i, r in enumerate(result):
         assert r['orig'] == expected[i]['orig']
         assert r['hira'] == expected[i]['hira']
