@@ -34,9 +34,14 @@ jobs:
     name: finish parallel build
     needs: build
     steps:
+      - name: Setup python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+          architecture: x64
       - name: Tell Coveralls that the parallel build is finished
         run: |
-          pip install -U wheel setuptools coveralls
+          pip install -U coveralls
           coveralls --finish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
