@@ -21,6 +21,4 @@ class MyBuild(build_py):
             kanwa.generate_dictionaries(dstdir)
 
 
-setup(cmdclass={'build_py': MyBuild},
-      use_scm_version={"local_scheme": "no-local-version"},
-      setup_requires=['setuptools-scm>=3.5.0', 'setuptools>=42'])
+setup(cmdclass={'build_py': MyBuild}, use_scm_version={"local_scheme": "no-local-version"})

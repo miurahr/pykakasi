@@ -16,16 +16,9 @@ matrix:
 install:
   - pip install -U pip
   - pip install tox tox-travis coveralls
-
-script:
-  - tox
-
+script: tox
 after_success:
-  after_success:
   - |
     if [[ "$PYTEST_NO_COVERAGE" != 1 ]]; then
-      # Hack for coveralls to find sources
-      sed -E -ie 's/.tox.py(36|37|38|py3).(lib.python[2-3].[0-9].)?site-packages/src/g' .coverage
-      coverage xml --ignore-errors
       coveralls
     fi
