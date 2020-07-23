@@ -97,8 +97,11 @@ class kakasi:
         return _result
 
     def _iconv(self, otext: str, hira: str) -> Dict[str, str]:
-        tmp = {'orig': otext, 'hira': hira}
-        tmp['kana'] = self._h2k(hira)
+        kana = self._h2k(hira)
+        hira = self._k2h(hira)  # make sure hiragana doesn't contain katakana
+        tmp = {'orig': otext}
+        tmp['hira'] = hira
+        tmp['kana'] = kana
         tmp['hepburn'] = self._s2a(self._h2ah(hira))
         tmp['kunrei'] = self._s2a(self._h2ak(hira))
         tmp['passport'] = self._s2a(self._h2ap(hira))
@@ -120,6 +123,20 @@ class kakasi:
                 else:
                     result += '-'
                 i += 1
+            else:
+                result += text[i:i + 1]
+                i += 1
+        return result
+
+    def _k2h(self, text: str) -> str:
+        result = ''
+        i = 0
+        while(i < len(text)):
+            w = min(i + self._MAXLEN, len(text))
+            (t, l1) = self._khconv.convert(text[i:w])
+            if l1 > 0:
+                result += t
+                i += l1
             else:
                 result += text[i:i + 1]
                 i += 1
