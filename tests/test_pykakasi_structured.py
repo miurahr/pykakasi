@@ -11,6 +11,44 @@ import pykakasi
          {'orig': "構成", 'kana': "コウセイ", 'hira': "こうせい",
           'hepburn': 'kousei', 'kunrei': "kousei", 'passport': "kosei"}
      ]),
+    ('好き',
+     [{'orig': '好き', 'hira': 'すき', 'kana': 'スキ', 'hepburn': 'suki', 'kunrei': 'suki', 'passport': 'suki'}]),
+    ('大きい',
+     [{'orig': '大きい', 'hira': 'おおきい', 'kana': 'オオキイ', 'hepburn': 'ookii', 'kunrei': 'ookii', 'passport': 'okii'}]),
+    ('かんたん',
+     [{'orig': 'かんたん', 'hira': 'かんたん', 'kana': 'カンタン', 'hepburn': 'kantan', 'kunrei': 'kantan', 'passport': 'kantan'}]),
+    ('にゃ',
+     [{'orig': 'にゃ', 'hira': 'にゃ', 'kana': 'ニャ', 'hepburn': 'nya', 'kunrei': 'nya', 'passport': 'nya'}]),
+    ('っき',
+     [{'orig': 'っき', 'hira': 'っき', 'kana': 'ッキ', 'hepburn': 'kki', 'kunrei': 'kki', 'passport': 'kki'}]),
+    ('っふぁ',
+     [{'orig': 'っふぁ', 'hira': 'っふぁ', 'kana': 'ッファ', 'hepburn': 'ffa', 'kunrei': 'ffa', 'passport': 'ffa'}]),
+    ('キャ',
+     [{'orig': 'キャ', 'hira': 'キャ', 'kana': 'キャ', 'hepburn': 'キャ', 'kunrei': 'キャ', 'passport': 'キャ'}]),
+    ('キュ',
+     [{'orig': 'キュ', 'hira': 'キュ', 'kana': 'キュ', 'hepburn': 'キュ', 'kunrei': 'キュ', 'passport': 'キュ'}]),
+    ('キョ',
+     [{'orig': 'キョ', 'hira': 'キョ', 'kana': 'キョ', 'hepburn': 'キョ', 'kunrei': 'キョ', 'passport': 'キョ'}]),
+    ('漢字とひらがな交じり文',
+     [
+         {'orig': '漢字', 'hira': 'かんじ', 'kana': 'カンジ', 'hepburn': 'kanji', 'kunrei': 'kanzi', 'passport': 'kanji'},
+         {'orig': 'とひらがな', 'hira': 'とひらがな', 'kana': 'トヒラガナ', 'hepburn': 'tohiragana', 'kunrei': 'tohiragana', 'passport': 'tohiragana'},
+         {'orig': '交じり', 'hira': 'まじり', 'kana': 'マジリ', 'hepburn': 'majiri', 'kunrei': 'maziri', 'passport': 'majiri'},
+         {'orig': '文', 'hira': 'ぶん', 'kana': 'ブン', 'hepburn': 'bun', 'kunrei': 'bun', 'passport': 'bun'}
+     ]),
+    ('Alphabet 123 and 漢字',
+     [
+         {'orig': 'Alphabet 123 and ', 'hira': 'Alphabet 123 and ', 'kana': 'Alphabet 123 and ',
+             'hepburn': 'Alphabet 123 and ', 'kunrei': 'Alphabet 123 and ', 'passport': 'Alphabet 123 and '},
+         {'orig': '漢字', 'hira': 'かんじ', 'kana': 'カンジ', 'hepburn': 'kanji', 'kunrei': 'kanzi', 'passport': 'kanji'}
+     ]),
+    ('日経新聞',
+     [{'orig': '日経新聞', 'hira': 'にっけいしんぶん', 'kana': 'ニッケイシンブン', 'hepburn': 'nikkeishinbun', 'kunrei': 'nikkeisinbun', 'passport': 'nikkeishimbun'}]),
+    ('日本国民は、',
+     [
+         {'orig': '日本国民', 'hira': 'にほんこくみん', 'kana': 'ニホンコクミン', 'hepburn': 'nihonkokumin', 'kunrei': 'nihonkokumin', 'passport': 'nihonkokumin'},
+         {'orig': 'は、', 'hira': 'は、', 'kana': 'ハ、', 'hepburn': 'ha,', 'kunrei': 'ha,', 'passport': 'ha,'}
+     ]),
     ("私がこの子を助けなきゃいけないってことだよね",
      [
          {'orig': "私", 'kana': "ワタシ", 'hira': "わたし", 'hepburn': "watashi", 'kunrei': "watasi", 'passport': "watashi"},
@@ -33,6 +71,7 @@ import pykakasi
 def test_kakasi_structured(case, expected):
     kakasi = pykakasi.kakasi()
     result = kakasi.convert(case)
+    assert len(result) == len(expected)
     for i, r in enumerate(result):
         assert r['orig'] == expected[i]['orig']
         assert r['hira'] == expected[i]['hira']
