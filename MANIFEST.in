@@ -1,5 +1,6 @@
 recursive-include src/data *.utf8
 recursive-include tests *.py
+include .coveragerc
 include *.rst
 include *.txt
 include *.yml

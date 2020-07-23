@@ -1,0 +1,19 @@
+[run]
+branch = True
+parallel = True
+source =
+    pykakasi
+    tests
+
+[paths]
+source =
+    src
+    */site-packages
+
+[report]
+exclude_lines =
+    if __name__ == .__main__.:
+    pragma: no-cover
+    @abstract
+    # Don't complain about missing debug-only code:
+    def __repr__
