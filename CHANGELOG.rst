@@ -25,6 +25,15 @@ Removed
 Security
 --------
 
+v2.0.2_ (23, Jul. 2020)
+=======================
+
+Fixed
+-----
+
+* Fix convert() to handle Katakana correctly.(#103)
+
+
 v2.0.1_ (23, Jul. 2020)
 =======================
 
@@ -39,6 +48,7 @@ Fixed
 
 * Fix convert() misses last part of a text (#99, #100)
 * Fix CI, coverage, and coveralls configurations(#101)
+
 
 v2.0.0_ (31, May. 2020)
 =======================
@@ -213,7 +223,8 @@ Fixed
 
 
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.0.1...HEAD
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.0.2...HEAD
+.. _v2.0.2: https://github.com/miurahr/pykakasi/compare/v2.0.1...v2.0.2
 .. _v2.0.1: https://github.com/miurahr/pykakasi/compare/v2.0.0...v2.0.1
 .. _v2.0.0: https://github.com/miurahr/pykakasi/compare/v2.0.0b1...v2.0.0
 .. _v2.0.0b1: https://github.com/miurahr/pykakasi/compare/v2.0.0a6...v2.0.0b1
