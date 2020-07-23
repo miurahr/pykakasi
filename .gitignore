@@ -11,6 +11,8 @@ pykakasi.egg-info
 *.db
 .coveralls.yml
 .coverage
+.mypy_cache/
+out/
 .venv
 venv
 venv2
