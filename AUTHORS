@@ -2,6 +2,8 @@ Pykakasi is written and maintained by Hiroshi Miura <miurahr@linux.com>
 
 Contributors, listed alphabetically, are:
 
+* Ben -- Fix convert() function.
+* @FGtatsuro -- porting to python 3.x, introduce tox testing.
 * Jan Malakhovski -- word split and furigana mode
 * Michael Farrell -- README document
 * @Northernbird -- Implement function to handle long symbols
