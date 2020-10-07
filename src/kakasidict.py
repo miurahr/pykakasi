@@ -112,7 +112,8 @@ class Genkanwadict:
             ('passportdict.utf8', 'passportdict3.db'),
             ('hepburnhira.utf8', 'hepburnhira3.db'),
             ('kunreihira.utf8', 'kunreihira3.db'),
-            ('passporthira.utf8', 'passporthira3.db')
+            ('passporthira.utf8', 'passporthira3.db'),
+            ('halfkana.utf8', 'halfkana3.db')
         ]
         srcdir = os.path.join(root_dir, 'src', 'data')
         if not os.path.exists(dstdir):

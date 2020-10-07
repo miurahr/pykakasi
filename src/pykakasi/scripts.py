@@ -70,12 +70,14 @@ class H2:
 class K2 (object):
 
     _kanadict = None
+    _halfkanadict = None
 
     _diff = 0x30a1 - 0x3041  # KATAKANA LETTER A - HIRAGANA A
     _ediff = 0x1b164 - 0x1b150
 
     def __init__(self, mode, method="Hepburn"):
         conf = Configurations()
+        self._halfkanadict = Jisyo(conf.jisyo_halfkana)
         if mode == "a":
             if method == "Hepburn":
                 self._kanadict = Jisyo(conf.jisyo_hepburn)
@@ -93,7 +95,24 @@ class K2 (object):
             self.convert = self.convert_noop
 
     def isRegion(self, char):
-        return 0x30a0 < ord(char[0]) < 0x30fd or 0x1b164 <= ord(char[0]) <= 0x1b167
+        ch = ord(char[0])
+        return self._is_katakana(ch) or self._is_half_width_kana(ch) or 0x1b164 <= ch <= 0x1b167
+
+    def _is_katakana(self, ch):
+        return 0x30a0 < ch < 0x30fd
+
+    def _is_half_width_kana(self, ch):
+        return 0xff65 < ch < 0xff9f
+
+    def _convert_half_kana(self, text):
+        Hstr = ''
+        max_len = -1
+        for x in [2, 1]:
+            if self._halfkanadict.haskey(text[:x]):
+                max_len = x
+                Hstr = self._halfkanadict.lookup(text[:x])
+                break
+        return Hstr, max_len
 
     def convert_a(self, text):
         Hstr = ""
@@ -110,19 +129,30 @@ class K2 (object):
         Hstr = ""
         max_len = 0
         r = len(text)
-        for x in range(r):
+        x = 0
+        while x < r:
             if 0x1b164 <= ord(text[x]) < 0x1b167:
                 Hstr = Hstr + chr(ord(text[x]) - self._ediff)
                 max_len += 1
+                x += 1
             elif ord(text[x]) == 0x1b167:
                 Hstr = Hstr + '\u3093'
                 max_len += 1
+                x += 1
             elif 0x30a0 < ord(text[x]) < 0x30f7:
                 Hstr = Hstr + chr(ord(text[x]) - self._diff)
                 max_len += 1
+                x += 1
             elif 0x30f7 <= ord(text[x]) < 0x30fd:
                 Hstr = Hstr + text[x]
                 max_len += 1
+                x += 1
+            elif self._is_half_width_kana(ord(text[x])):
+                kstr, length = self._convert_half_kana(text[x:])
+                if length > 0:
+                    max_len += length
+                    x += length
+                    Hstr = Hstr + chr(ord(kstr) - self._diff)
             else:  # pragma: no cover
                 break
         return (Hstr, max_len)
