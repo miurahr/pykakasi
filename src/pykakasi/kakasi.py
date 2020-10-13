@@ -99,18 +99,14 @@ class kakasi:
     def _iconv(self, otext: str, hira: str) -> Dict[str, str]:
         kana = self._h2k(hira)
         hira = self._k2h(hira)  # make sure hiragana doesn't contain katakana
-        tmp = {'orig': otext}
-        tmp['hira'] = hira
-        tmp['kana'] = kana
-        tmp['hepburn'] = self._s2a(self._h2ah(hira))
-        tmp['kunrei'] = self._s2a(self._h2ak(hira))
-        tmp['passport'] = self._s2a(self._h2ap(hira))
+        tmp = {'orig': otext, 'hira': hira, 'kana': kana, 'hepburn': self._s2a(self._h2ah(hira)),
+               'kunrei': self._s2a(self._h2ak(hira)), 'passport': self._s2a(self._h2ap(hira))}
         return tmp
 
     def _s2a(self, text: str) -> str:
         result = ''  # type: str
         i = 0
-        while(i < len(text)):
+        while i < len(text):
             w = min(i + self._MAXLEN, len(text))  # type: int
             (t, l1) = self._saconv.convert(text[i:w])
             if l1 > 0:
@@ -131,7 +127,7 @@ class kakasi:
     def _k2h(self, text: str) -> str:
         result = ''
         i = 0
-        while(i < len(text)):
+        while i < len(text):
             w = min(i + self._MAXLEN, len(text))
             (t, l1) = self._khconv.convert(text[i:w])
             if l1 > 0:
@@ -145,7 +141,7 @@ class kakasi:
     def _h2k(self, text: str) -> str:
         result = ''
         i = 0
-        while(i < len(text)):
+        while i < len(text):
             w = min(i + self._MAXLEN, len(text))
             (t, l1) = self._hkconv.convert(text[i:w])
             if l1 > 0:
@@ -159,7 +155,7 @@ class kakasi:
     def _h2ak(self, text: str) -> str:
         result = ''
         i = 0
-        while(i < len(text)):
+        while i < len(text):
             w = min(i + self._MAXLEN, len(text))
             (t, l1) = self._hakconv.convert(text[i:w])
             if l1 > 0:

@@ -112,3 +112,21 @@ def test_issue90():
     convert = kks.getConverter()
     for case, result in TESTS:
         assert convert.do(case) == result
+
+
+def test_issue105():
+    text = 'ｿｳｿﾞｸﾆﾝ'
+    kks = pykakasi.kakasi()
+    result = kks.convert(text)
+    assert result[0]['kana'] == 'ｿｳｿﾞｸﾆﾝ'
+    assert result[0]['hepburn'] == 'souzokunin'
+    assert result[0]['hira'] == 'そうぞくにん'
+
+
+def test_issue105_legacy():
+    text = 'ｿｳｿﾞｸﾆﾝ'
+    kks = pykakasi.kakasi()
+    kks.setMode("K", "H")
+    converter = kks.getConverter()
+    result = converter.do(text)
+    assert result == 'そうぞくにん'
