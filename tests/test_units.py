@@ -202,3 +202,13 @@ def test_a2E(case, expected):
 def test_sym2a(case, expected):
     s = pykakasi.scripts.Sym2("a")
     assert s.convert(case) == (expected, 1)
+
+
+def test_extended_kana_unit():
+    s = pykakasi.scripts.K2('a')
+    assert s.convert('\U0001b164') == ('wi', 1)
+
+
+def test_extended_kana_hira():
+    s = pykakasi.scripts.K2('H')
+    assert s.convert('\U0001b167') == ('ん', 1)

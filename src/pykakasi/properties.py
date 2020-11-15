@@ -23,6 +23,7 @@ class Configurations:
     jisyo_hepburn = 'hepburndict3.db'
     jisyo_passport = 'passportdict3.db'
     jisyo_kunrei = 'kunreidict3.db'
+    jisyo_halfkana = 'halfkana3.db'
 
     def __new__(cls, *p, **k):
         self = object.__new__(cls, *p, **k)
