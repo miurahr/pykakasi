@@ -52,7 +52,7 @@ Usage
 Here is an usage of NewAPI for pykakasi v2.0.0 and later.
 Transliterate Japanese text to kana, hiragana and romaji:
 
-.. code-block:: pycon
+.. code-block:: python
 
     import pykakasi
     kks = pykakasi.kakasi()
@@ -67,7 +67,7 @@ Transliterate Japanese text to kana, hiragana and romaji:
 
 Here is an example that output as similar with furigana mode.
 
-.. code-block:: pycon
+.. code-block:: python
 
     import pykakasi
     kks = pykakasi.kakasi()

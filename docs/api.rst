@@ -4,9 +4,35 @@
 Programming Interface
 =====================
 
+Conversion Usage
+================
+
+convert method
+--------------
+
+"convert" returns result as dictionary.
+There are keys: 'orig', 'kana', 'hira', 'hepburn', 'kunrei', 'passport'
+
+Example:
+
+.. code-block:: python
+
+    kks = pykakasi.kakasi()
+    text = 'かな漢字'
+    result = kks.convert(text)
+    for item in result:
+        print("{}: kana '{}', hiragana '{}', romaji: '{}'".format(item['orig'], item['kana'], item['hira'], item['hepburn']))
+
+    かな: kana 'カナ', hiragana: 'かな', romaji: 'kana'
+    漢字: kana 'カンジ', hiragana: 'かんじ', romaji: 'kanji'
+
+
+
+Old API (v1.2)
+==============
 
 Conversion Options
-==================
+------------------
 
 These switch alphabets are derived from original Kakasi.
 Now it support following options:
@@ -36,7 +62,7 @@ Each character means character sets as follows::
 
 
 API usage example
-=================
+-----------------
 
 How to Install::
 
