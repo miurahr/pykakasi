@@ -1,14 +1,23 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os
+import platform
 import sys
 import getopt
 import pykakasi
 
+try:
+    from importlib import metadata as importlib_metadata  # noqa
+except ImportError:
+    import importlib_metadata
+
 
 def show_version():
-    print("{}: version {}".format(os.path.basename(sys.argv[0]),  pykakasi.__version__))
+    dist = importlib_metadata.distribution('pykakasi')
+    py_version = platform.python_version()
+    py_impl = platform.python_implementation()
+    py_build = platform.python_compiler()
+    print("pykakasi v{} on Python {} [{} {}]".format(dist.version, py_version, py_impl, py_build))
 
 
 def usage():
