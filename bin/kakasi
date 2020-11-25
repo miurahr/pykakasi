@@ -6,10 +6,7 @@ import sys
 import getopt
 import pykakasi
 
-try:
-    from importlib import metadata as importlib_metadata  # noqa
-except ImportError:
-    import importlib_metadata
+from importlib import metadata as importlib_metadata  # noqa
 
 
 def show_version():
@@ -17,7 +14,7 @@ def show_version():
     py_version = platform.python_version()
     py_impl = platform.python_implementation()
     py_build = platform.python_compiler()
-    print("pykakasi v{} on Python {} [{} {}]".format(dist.version, py_version, py_impl, py_build))
+    print("pykakasi: version {} on Python {} [{} {}]".format(dist.version, py_version, py_impl, py_build))
 
 
 def usage():
