@@ -6,7 +6,10 @@ import sys
 import getopt
 import pykakasi
 
-from importlib import metadata as importlib_metadata  # noqa
+try:
+    from importlib import metadata as importlib_metadata  # noqa
+except ImportError:
+    import importlib_metadata
 
 
 def show_version():
