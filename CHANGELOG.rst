@@ -25,6 +25,15 @@ Removed
 Security
 --------
 
+v2.0.4_ (26, Nov. 2020)
+=======================
+
+Fixed
+-----
+
+* CLI: Fix -v and -h option crash on python 3.7 and before (#108).
+
+
 v2.0.3_ (25, Nov. 2020)
 =======================
 
@@ -232,7 +241,8 @@ Fixed
 
 
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.0.3...HEAD
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.0.4...HEAD
+.. _v2.0.4: https://github.com/miurahr/pykakasi/compare/v2.0.3...v2.0.4
 .. _v2.0.3: https://github.com/miurahr/pykakasi/compare/v2.0.2...v2.0.3
 .. _v2.0.2: https://github.com/miurahr/pykakasi/compare/v2.0.1...v2.0.2
 .. _v2.0.1: https://github.com/miurahr/pykakasi/compare/v2.0.0...v2.0.1
