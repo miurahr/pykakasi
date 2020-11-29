@@ -21,9 +21,7 @@ def show_version():
 
 
 def usage():
-    print("Python implementation of kakasi\n")
-    print("{}".format(pykakasi.__copyright__))
-    print("URL: {}".format(pykakasi.__url__))
+    print("Python implementation of kakasi")
 
 
 def do_wakati(mode, infile, outfile):
