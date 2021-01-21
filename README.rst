@@ -2,7 +2,6 @@
 Pykakasi
 ========
 
-
 Overview
 ========
 
@@ -14,9 +13,9 @@ Overview
    :target: http://badge.fury.io/py/Pykakasi
    :alt: PyPI version
 
-.. image:: https://travis-ci.org/miurahr/pykakasi.svg?branch=master
-   :target: https://travis-ci.org/miurahr/pykakasi
-   :alt: Travis-CI
+.. image:: https://github.com/miurahr/pykakasi/workflows/Run%20Tox%20tests/badge.svg
+   :target: https://github.com/miurahr/pykakasi/actions?query=workflow%3A%22Run+Tox+tests%22
+   :alt: Run Tox tests
 
 .. image:: https://dev.azure.com/miurahr/github/_apis/build/status/miurahr.pykakasi?branchName=master
    :target: https://dev.azure.com/miurahr/github/_build?definitionId=13&branchName=master
