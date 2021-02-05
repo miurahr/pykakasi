@@ -23,7 +23,7 @@ jobs:
       - name: Test project with tox
         run: tox
       - name: Upload Coverage
-        run: coveralls --service=github
+        run: coveralls
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
