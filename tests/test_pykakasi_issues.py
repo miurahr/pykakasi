@@ -130,3 +130,11 @@ def test_issue105_legacy():
     converter = kks.getConverter()
     result = converter.do(text)
     assert result == 'そうぞくにん'
+
+def test_issue114():
+    text = '思った 言った 行った'
+    kks = pykakasi.kakasi()
+    result = kks.convert(text)
+    assert result[0]['hepburn'] == 'omotta'
+    assert result[2]['hepburn'] == 'itta'
+    assert result[4]['hepburn'] == 'itta'
