@@ -26,6 +26,7 @@ jobs:
         run: coveralls
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
           COVERALLS_PARALLEL: true
           COVERALLS_FLAG_NAME: ${{ matrix.python-version }}
   finish:
@@ -40,7 +41,9 @@ jobs:
           architecture: x64
       - name: Tell Coveralls that the parallel build is finished
         run: |
-          pip install -U coveralls
-          coveralls --finish
+          curl -k \
+              https://coveralls.io/webhook?repo_token=$COVERALLS_REPO_TOKEN \
+              -d "payload[build_num]=$GITHUB_SHA&payload[status]=done"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
