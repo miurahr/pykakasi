@@ -19,11 +19,11 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -U pip wheel setuptools
-          pip install tox tox-gh-actions coveralls
+          pip install tox tox-gh-actions 'coveralls<3.0.0'
       - name: Test project with tox
         run: tox
       - name: Upload Coverage
-        run: coveralls
+        run: coveralls --service=github
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}

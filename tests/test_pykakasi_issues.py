@@ -131,6 +131,7 @@ def test_issue105_legacy():
     result = converter.do(text)
     assert result == 'そうぞくにん'
 
+
 def test_issue114():
     text = '思った 言った 行った'
     kks = pykakasi.kakasi()
