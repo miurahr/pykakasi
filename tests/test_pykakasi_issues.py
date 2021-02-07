@@ -139,3 +139,11 @@ def test_issue114():
     assert result[0]['hepburn'] == 'omotta'
     assert result[2]['hepburn'] == 'itta'
     assert result[4]['hepburn'] == 'itta'
+
+
+def test_issue115():
+    kks = pykakasi.kakasi()
+    result = kks.convert('ﾞっ、')  # \uFF9E
+    assert result[0]['hira'] == '\u309Bっ、'
+    assert result[0]['kana'] == '\uFF9Eッ、'
+    assert result[0]['hepburn'] == '"tsu,'

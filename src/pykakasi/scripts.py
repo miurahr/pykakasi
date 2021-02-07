@@ -152,7 +152,13 @@ class K2 (object):
                 if length > 0:
                     max_len += length
                     x += length
-                    Hstr = Hstr + chr(ord(kstr) - self._diff)
+                    if ord(kstr) == 0x309B:
+                        Hstr = Hstr + kstr
+                    else:
+                        Hstr = Hstr + chr(ord(kstr) - self._diff)
+                else:
+                    max_len += 1
+                    x += 1  # skip unknown character(issue #115)
             else:  # pragma: no cover
                 break
         return (Hstr, max_len)
