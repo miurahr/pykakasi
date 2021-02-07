@@ -25,6 +25,15 @@ Removed
 Security
 --------
 
+v2.0.6_ (7, Feb. 2021)
+======================
+
+Fixed
+-----
+
+* Hiragana for Age countersa(#116,#117)
+
+
 v2.0.5_ (5, Feb. 2021)
 ======================
 
@@ -260,7 +269,8 @@ Fixed
 
 
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.0.5...HEAD
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.0.6...HEAD
+.. _v2.0.6: https://github.com/miurahr/pykakasi/compare/v2.0.5...v2.0.6
 .. _v2.0.5: https://github.com/miurahr/pykakasi/compare/v2.0.4...v2.0.5
 .. _v2.0.4: https://github.com/miurahr/pykakasi/compare/v2.0.3...v2.0.4
 .. _v2.0.3: https://github.com/miurahr/pykakasi/compare/v2.0.2...v2.0.3
