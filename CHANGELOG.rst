@@ -25,6 +25,17 @@ Removed
 Security
 --------
 
+
+v2.0.7_ (26, Feb. 2021)
+=======================
+
+Fixed
+-----
+
+* Infinite loop after running for a while,
+  handle independent HW VOICED SOUND MARK (#115, #118)
+
+
 v2.0.6_ (7, Feb. 2021)
 ======================
 
@@ -269,7 +280,8 @@ Fixed
 
 
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.0.6...HEAD
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.0.7...HEAD
+.. _v2.0.7: https://github.com/miurahr/pykakasi/compare/v2.0.6...v2.0.7
 .. _v2.0.6: https://github.com/miurahr/pykakasi/compare/v2.0.5...v2.0.6
 .. _v2.0.5: https://github.com/miurahr/pykakasi/compare/v2.0.4...v2.0.5
 .. _v2.0.4: https://github.com/miurahr/pykakasi/compare/v2.0.3...v2.0.4
