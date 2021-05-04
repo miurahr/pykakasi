@@ -20,21 +20,16 @@ from .scripts import A2, H2, K2, Sym2
 
 class kakasi:
 
-    _keys = ["J", "H", "K", "E", "a"]  # type: List[str]
-    _values = ["a", "E", "H", "K"]  # type: List[str]
-    _roman_vals = ["Hepburn", "Kunrei", "Passport"]  # type: List[str]
-    _MAXLEN = 32  # type: int
-    _LONG_SYMBOL = [
-        # 0x002D,  # -
-        "\u30FC",  # ー
-        # 0x2010,  # ‐
-        # 0x2011,  # ‑
-        # 0x2013,  # –
-        # 0x2014,  # —
-        "\u2015",  # ―
-        "\u2212",  # −
-        "\uFF70"  # ｰ
-    ]  # type: List[int]
+    _keys: List[str] = ["J", "H", "K", "E", "a"]
+    _values: List[str] = ["a", "E", "H", "K"]
+    _roman_vals: List[str] = ["Hepburn", "Kunrei", "Passport"]
+    _MAXLEN: int = 32
+    _LONG_SYMBOL: str = "\u30FC\u2015\u2212\uFF70"  # "ー  ―  −  ｰ "
+        # "\u002D" # -
+        # "\u2010" # ‐
+        # "\u2011" # ‑
+        # "\u2013" # –
+        # "\u2014" # —
 
     def __init__(self):
         self._conv = {}  # type: Dict[str, Union[J2, H2, K2, A2, Sym2]]
