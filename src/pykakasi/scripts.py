@@ -5,7 +5,6 @@
 
 from klepto.archives import file_archive  # type: ignore # noqa
 
-from .exceptions import UnsupportedRomanRulesException
 from .properties import Ch, Configurations, Convert_Tables
 
 
@@ -19,14 +18,12 @@ class H2:
     def __init__(self, mode, method="Hepburn"):
         conf = Configurations()
         if mode == "a":
-            if method == "Hepburn":
-                self._kanadict = Jisyo(conf.jisyo_hepburn_hira)
-            elif method == "Passport":
+            if method == "Passport":
                 self._kanadict = Jisyo(conf.jisyo_passport_hira)
             elif method == "Kunrei":
                 self._kanadict = Jisyo(conf.jisyo_kunrei_hira)
             else:
-                raise UnsupportedRomanRulesException("Unsupported roman rule")
+                self._kanadict = Jisyo(conf.jisyo_hepburn_hira)
 
             self.convert = self.convert_a
         elif mode == "K":
@@ -79,16 +76,12 @@ class K2(object):
         conf = Configurations()
         self._halfkanadict = Jisyo(conf.jisyo_halfkana)
         if mode == "a":
-            if method == "Hepburn":
-                self._kanadict = Jisyo(conf.jisyo_hepburn)
-            elif method == "Passport":
+            if method == "Passport":
                 self._kanadict = Jisyo(conf.jisyo_passport)
             elif method == "Kunrei":
                 self._kanadict = Jisyo(conf.jisyo_kunrei)
             else:
-                raise UnsupportedRomanRulesException(
-                    "Unsupported roman rule"
-                )  # pragma: no cover
+                self._kanadict = Jisyo(conf.jisyo_hepburn)
 
             self.convert = self.convert_a
         elif mode == "H":

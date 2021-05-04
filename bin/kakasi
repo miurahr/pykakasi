@@ -4,6 +4,7 @@
 import argparse
 import platform
 import sys
+import warnings
 from typing import Any, Optional
 
 import pykakasi
@@ -103,4 +104,5 @@ class Cli:
 
 
 if __name__ == "__main__":
+    warnings.simplefilter("ignore", category=DeprecationWarning)
     sys.exit(Cli().run())

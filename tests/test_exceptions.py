@@ -2,15 +2,10 @@
 import pytest
 
 import pykakasi
-from pykakasi.exceptions import (
-    InvalidFlagValueException,
-    InvalidModeValueException,
-    UnsupportedRomanRulesException,
-)
 
 
 def test_kakasi_unknown_rule():
-    with pytest.raises(UnsupportedRomanRulesException):
+    with pytest.raises(pykakasi.UnsupportedRomanRulesException):
         kakasi = pykakasi.kakasi()
         kakasi.setMode("H", "a")
         kakasi.setMode("K", "a")
@@ -19,7 +14,7 @@ def test_kakasi_unknown_rule():
 
 
 def test_kakasi_unknown_mode():
-    with pytest.raises(InvalidModeValueException):
+    with pytest.raises(pykakasi.InvalidModeValueException):
         kakasi = pykakasi.kakasi()
         kakasi.setMode("H", "a")
         kakasi.setMode("K", "a")
@@ -27,7 +22,7 @@ def test_kakasi_unknown_mode():
 
 
 def test_kakasi_invalid_flag_value():
-    with pytest.raises(InvalidFlagValueException):
+    with pytest.raises(pykakasi.InvalidFlagValueException):
         kakasi = pykakasi.kakasi()
         kakasi.setMode("H", "a")
         kakasi.setMode("K", "a")
