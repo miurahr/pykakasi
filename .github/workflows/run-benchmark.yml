@@ -59,3 +59,4 @@ jobs:
           python utils/github_comment_bench.py --repository ${GITHUB_REPOSITORY} --issue ${ISSUE_NUMBER} --runid ${GITHUB_RUN_ID} results_*.json
         env:
           ISSUE_NUMBER: 123
+          GITHUB_TOKEN: $${ secrets.GITHUB_TOKEN }}
