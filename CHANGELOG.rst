@@ -25,6 +25,20 @@ Removed
 Security
 --------
 
+v2.0.8_ (4, May 2021)
+=====================
+
+Added
+-----
+
+* test: Benchmark and profiling (#122)
+
+Changed
+-------
+
+* Performance: avoid ord() when checking long-mark, speed up about 6%
+* Reformat code by black(#121)
+
 
 v2.0.7_ (26, Feb. 2021)
 =======================
@@ -280,7 +294,8 @@ Fixed
 
 
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.0.7...HEAD
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.0.8...HEAD
+.. _v2.0.8: https://github.com/miurahr/pykakasi/compare/v2.0.7...v2.0.8
 .. _v2.0.7: https://github.com/miurahr/pykakasi/compare/v2.0.6...v2.0.7
 .. _v2.0.6: https://github.com/miurahr/pykakasi/compare/v2.0.5...v2.0.6
 .. _v2.0.5: https://github.com/miurahr/pykakasi/compare/v2.0.4...v2.0.5
