@@ -2,9 +2,11 @@
 import pytest
 
 import pykakasi
-from pykakasi.exceptions import (InvalidFlagValueException,
-                                 InvalidModeValueException,
-                                 UnsupportedRomanRulesException)
+from pykakasi.exceptions import (
+    InvalidFlagValueException,
+    InvalidModeValueException,
+    UnsupportedRomanRulesException,
+)
 
 
 def test_kakasi_unknown_rule():
