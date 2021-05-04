@@ -4,15 +4,18 @@
 # Copyright 2011-2018 Hiroshi Miura <miurahr@linux.com>
 #
 
-__license__ = 'GPL 3'
-__copyright__ = '2014-2020 Hiroshi Miura <miurahr@linux.com>'
-__docformat__ = 'restructuredtext en'
+__license__ = "GPL 3"
+__copyright__ = "2014-2020 Hiroshi Miura <miurahr@linux.com>"
+__docformat__ = "restructuredtext en"
 
 from typing import Dict, List, Optional, Union
 
-from .exceptions import (InvalidFlagValueException, InvalidModeValueException,
-                         UnknownOptionsException,
-                         UnsupportedRomanRulesException)
+from .exceptions import (
+    InvalidFlagValueException,
+    InvalidModeValueException,
+    UnknownOptionsException,
+    UnsupportedRomanRulesException,
+)
 from .kanji import J2
 from .properties import Ch
 from .scripts import A2, H2, K2, Sym2
@@ -28,17 +31,37 @@ class kakasi:
 
     def __init__(self):
         self._conv = {}  # type: Dict[str, Union[J2, H2, K2, A2, Sym2]]
-        self._mode = {"J": None, "H": None, "K": None, "E": None, "a": None}  # type: Dict[str, Optional[str]]
-        self._furi = {"J": False, "H": False, "K": False, "E": False, "a": False}  # type: Dict[str, bool]
-        self._flag = {"p": False, "s": False, "f": False, "c": False, "C": False, "U": False,
-                      "u": False, "t": True}  # type: Dict[str, bool]
+        self._mode = {
+            "J": None,
+            "H": None,
+            "K": None,
+            "E": None,
+            "a": None,
+        }  # type: Dict[str, Optional[str]]
+        self._furi = {
+            "J": False,
+            "H": False,
+            "K": False,
+            "E": False,
+            "a": False,
+        }  # type: Dict[str, bool]
+        self._flag = {
+            "p": False,
+            "s": False,
+            "f": False,
+            "c": False,
+            "C": False,
+            "U": False,
+            "u": False,
+            "t": True,
+        }  # type: Dict[str, bool]
         self._option = {"r": "Hepburn"}  # type: Dict[str, str]
-        self._separator = ' '  # type: str
-        self._separator_string = ' '  # type: str
+        self._separator = " "  # type: str
+        self._separator_string = " "  # type: str
         self._jconv = J2("H")
-        self._hahconv = H2("a", method='Hepburn')
-        self._hakconv = H2("a", method='Kunrei')
-        self._hapconv = H2("a", method='Passport')
+        self._hahconv = H2("a", method="Hepburn")
+        self._hakconv = H2("a", method="Kunrei")
+        self._hapconv = H2("a", method="Passport")
         self._hkconv = H2("K")
         self._khconv = K2("H")
         self._kaconv = K2("a")
@@ -49,9 +72,18 @@ class kakasi:
         _state = True
 
         if len(text) == 0:
-            return [{'orig': "", 'kana': "", 'hira': "", 'hepburn': "", 'passport': "", 'kunrei': ""}]
+            return [
+                {
+                    "orig": "",
+                    "kana": "",
+                    "hira": "",
+                    "hepburn": "",
+                    "passport": "",
+                    "kunrei": "",
+                }
+            ]
 
-        otext = ''
+        otext = ""
         _result = []
         i = 0
 
@@ -64,12 +96,12 @@ class kakasi:
                     _state = False
                 else:
                     if _state:
-                        _result.append(self._iconv(otext + text[i:i + ln], t))
+                        _result.append(self._iconv(otext + text[i : i + ln], t))
                     else:
                         _result.append(self._iconv(otext, otext))
-                        _result.append(self._iconv(text[i:i + ln], t))
+                        _result.append(self._iconv(text[i : i + ln], t))
                         _state = True
-                    otext = ''
+                    otext = ""
                     i = i + ln
             else:
                 _state = False
@@ -78,7 +110,7 @@ class kakasi:
 
                 if ord(otext[-1]) in Ch.endmark:
                     _result.append(self._iconv(otext, otext))
-                    otext = ''
+                    otext = ""
                     _state = True
 
         if otext:
@@ -89,12 +121,18 @@ class kakasi:
     def _iconv(self, otext: str, hira: str) -> Dict[str, str]:
         kana = self._h2k(hira)
         hira = self._k2h(hira)  # make sure hiragana doesn't contain katakana
-        tmp = {'orig': otext, 'hira': hira, 'kana': kana, 'hepburn': self._s2a(self._h2ah(hira)),
-               'kunrei': self._s2a(self._h2ak(hira)), 'passport': self._s2a(self._h2ap(hira))}
+        tmp = {
+            "orig": otext,
+            "hira": hira,
+            "kana": kana,
+            "hepburn": self._s2a(self._h2ah(hira)),
+            "kunrei": self._s2a(self._h2ak(hira)),
+            "passport": self._s2a(self._h2ap(hira)),
+        }
         return tmp
 
     def _s2a(self, text: str) -> str:
-        result = ''  # type: str
+        result = ""  # type: str
         i = 0
         length = len(text)
         while i < length:
@@ -108,15 +146,15 @@ class kakasi:
                 if len(result) > 0:
                     result += result[-1]
                 else:
-                    result += '-'
+                    result += "-"
                 i += 1
             else:
-                result += text[i:i + 1]
+                result += text[i : i + 1]
                 i += 1
         return result
 
     def _k2h(self, text: str) -> str:
-        result = ''
+        result = ""
         i = 0
         while i < len(text):
             w = min(i + self._MAXLEN, len(text))
@@ -125,12 +163,12 @@ class kakasi:
                 result += t
                 i += l1
             else:
-                result += text[i:i + 1]
+                result += text[i : i + 1]
                 i += 1
         return result
 
     def _h2k(self, text: str) -> str:
-        result = ''
+        result = ""
         i = 0
         while i < len(text):
             w = min(i + self._MAXLEN, len(text))
@@ -139,12 +177,12 @@ class kakasi:
                 result += t
                 i += l1
             else:
-                result += text[i:i + 1]
+                result += text[i : i + 1]
                 i += 1
         return result
 
     def _h2ak(self, text: str) -> str:
-        result = ''
+        result = ""
         i = 0
         while i < len(text):
             w = min(i + self._MAXLEN, len(text))
@@ -153,35 +191,35 @@ class kakasi:
                 result += t
                 i += l1
             else:
-                result += text[i:i + 1]
+                result += text[i : i + 1]
                 i += 1
         return result
 
     def _h2ah(self, text: str) -> str:
-        result = ''
+        result = ""
         i = 0
-        while(i < len(text)):
+        while i < len(text):
             w = min(i + self._MAXLEN, len(text))
             (t, l1) = self._hahconv.convert(text[i:w])
             if l1 > 0:
                 result += t
                 i += l1
             else:
-                result += text[i:i + 1]
+                result += text[i : i + 1]
                 i += 1
         return result
 
     def _h2ap(self, text: str) -> str:
-        result = ''
+        result = ""
         i = 0
-        while(i < len(text)):
+        while i < len(text):
             w = min(i + self._MAXLEN, len(text))
             (t, l1) = self._hapconv.convert(text[i:w])
             if l1 > 0:
                 result += t
                 i += l1
             else:
-                result += text[i:i + 1]
+                result += text[i : i + 1]
                 i += 1
         return result
 
@@ -246,11 +284,11 @@ class kakasi:
                 (t, l1) = self._conv[mode].convert(text[i:w])
 
                 if l1 > 0:
-                    orig = text[i:i + l1]
+                    orig = text[i : i + l1]
                     chunk = t
                     i += l1
                 else:
-                    orig = text[i:i + 1]
+                    orig = text[i : i + 1]
                     if self._flag["t"]:
                         chunk = orig
                     else:
@@ -258,8 +296,8 @@ class kakasi:
                     i += 1
 
             elif mode in ("H", "K", "a"):
-                orig = ''
-                chunk = ''
+                orig = ""
+                chunk = ""
 
                 while i < len(text):
 
@@ -273,7 +311,7 @@ class kakasi:
                             i += 1
                         elif len(chunk) == 0:
                             orig += text[i]
-                            chunk += '-'
+                            chunk += "-"
                             i += 1
                             break
                         else:
@@ -286,11 +324,11 @@ class kakasi:
                         w = min(i + self._MAXLEN, len(text))
                         (t, l1) = self._conv[mode].convert(text[i:w])
                         if l1 > 0:
-                            orig += text[i:i + l1]
+                            orig += text[i : i + l1]
                             chunk += t
                             i += l1
                         else:
-                            orig = text[i:i + 1]
+                            orig = text[i : i + 1]
                             if self._flag["t"]:
                                 chunk = orig
                             else:
@@ -319,15 +357,18 @@ class kakasi:
                 otext += chunk
 
             # insert separator when option specified and it is not a last character and not an end mark
-            if self._flag["s"] and otext[-len(self._separator):] != self._separator \
-                    and i < len(text) and not (ord(text[i]) in Ch.endmark):
+            if (
+                self._flag["s"]
+                and otext[-len(self._separator) :] != self._separator
+                and i < len(text)
+                and not (ord(text[i]) in Ch.endmark)
+            ):
                 otext += self._separator
 
         return otext
 
 
 class wakati(kakasi):
-
     def __init__(self):
         super(wakati, self).__init__()
         self._state = True  # type: bool
@@ -348,7 +389,7 @@ class wakati(kakasi):
         if len(text) == 0:
             return ""
 
-        otext = ''
+        otext = ""
         i = 0
         while True:
             if i >= len(text):
@@ -362,16 +403,18 @@ class wakati(kakasi):
                     self._state = False
                 elif (i + ln) < len(text):
                     if self._state:
-                        otext = otext + text[i:i + ln] + self._separator
+                        otext = otext + text[i : i + ln] + self._separator
                     else:
-                        otext = otext + self._separator + text[i:i + ln] + self._separator
+                        otext = (
+                            otext + self._separator + text[i : i + ln] + self._separator
+                        )
                         self._state = True
                     i = i + ln
                 else:
                     if self._state:
-                        otext = otext + text[i:i + ln]
+                        otext = otext + text[i : i + ln]
                     else:  # pragma: no cover
-                        otext = otext + self._separator + text[i:i + ln]
+                        otext = otext + self._separator + text[i : i + ln]
                     break
 
             else:

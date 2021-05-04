@@ -13,8 +13,8 @@ class H2:
 
     _kanadict = None
 
-    _diff = 0x30a1 - 0x3041  # KATAKANA LETTER A - HIRAGANA A
-    _ediff = 0x1b164 - 0x1b150
+    _diff = 0x30A1 - 0x3041  # KATAKANA LETTER A - HIRAGANA A
+    _ediff = 0x1B164 - 0x1B150
 
     def __init__(self, mode, method="Hepburn"):
         conf = Configurations()
@@ -35,7 +35,7 @@ class H2:
             self.convert = self.convert_noop
 
     def isRegion(self, char):
-        return 0x3040 < ord(char[0]) < 0x3097 or 0x1b150 <= ord(char[0]) <= 0x1b152
+        return 0x3040 < ord(char[0]) < 0x3097 or 0x1B150 <= ord(char[0]) <= 0x1B152
 
     def convert_a(self, text):
         Hstr = ""
@@ -56,7 +56,7 @@ class H2:
             if 0x3040 < ord(text[x]) < 0x3097:
                 Hstr = Hstr + chr(ord(text[x]) + self._diff)
                 max_len += 1
-            elif 0x1b150 <= ord(text[x]) <= 0x1b152:
+            elif 0x1B150 <= ord(text[x]) <= 0x1B152:
                 Hstr = Hstr + chr(ord(text[x]) + self._ediff)
                 max_len += 1
             else:  # pragma: no cover
@@ -67,13 +67,13 @@ class H2:
         return (text[0], 1)
 
 
-class K2 (object):
+class K2(object):
 
     _kanadict = None
     _halfkanadict = None
 
-    _diff = 0x30a1 - 0x3041  # KATAKANA LETTER A - HIRAGANA A
-    _ediff = 0x1b164 - 0x1b150
+    _diff = 0x30A1 - 0x3041  # KATAKANA LETTER A - HIRAGANA A
+    _ediff = 0x1B164 - 0x1B150
 
     def __init__(self, mode, method="Hepburn"):
         conf = Configurations()
@@ -86,7 +86,9 @@ class K2 (object):
             elif method == "Kunrei":
                 self._kanadict = Jisyo(conf.jisyo_kunrei)
             else:
-                raise UnsupportedRomanRulesException("Unsupported roman rule")  # pragma: no cover
+                raise UnsupportedRomanRulesException(
+                    "Unsupported roman rule"
+                )  # pragma: no cover
 
             self.convert = self.convert_a
         elif mode == "H":
@@ -96,16 +98,20 @@ class K2 (object):
 
     def isRegion(self, char):
         ch = ord(char[0])
-        return self._is_katakana(ch) or self._is_half_width_kana(ch) or 0x1b164 <= ch <= 0x1b167
+        return (
+            self._is_katakana(ch)
+            or self._is_half_width_kana(ch)
+            or 0x1B164 <= ch <= 0x1B167
+        )
 
     def _is_katakana(self, ch):
-        return 0x30a0 < ch < 0x30fd
+        return 0x30A0 < ch < 0x30FD
 
     def _is_half_width_kana(self, ch):
-        return 0xff65 < ch < 0xff9f
+        return 0xFF65 < ch < 0xFF9F
 
     def _convert_half_kana(self, text):
-        Hstr = ''
+        Hstr = ""
         max_len = -1
         for x in [2, 1]:
             if self._halfkanadict.haskey(text[:x]):
@@ -131,19 +137,19 @@ class K2 (object):
         r = len(text)
         x = 0
         while x < r:
-            if 0x1b164 <= ord(text[x]) < 0x1b167:
+            if 0x1B164 <= ord(text[x]) < 0x1B167:
                 Hstr = Hstr + chr(ord(text[x]) - self._ediff)
                 max_len += 1
                 x += 1
-            elif ord(text[x]) == 0x1b167:
-                Hstr = Hstr + '\u3093'
+            elif ord(text[x]) == 0x1B167:
+                Hstr = Hstr + "\u3093"
                 max_len += 1
                 x += 1
-            elif 0x30a0 < ord(text[x]) < 0x30f7:
+            elif 0x30A0 < ord(text[x]) < 0x30F7:
                 Hstr = Hstr + chr(ord(text[x]) - self._diff)
                 max_len += 1
                 x += 1
-            elif 0x30f7 <= ord(text[x]) < 0x30fd:
+            elif 0x30F7 <= ord(text[x]) < 0x30FD:
                 Hstr = Hstr + text[x]
                 max_len += 1
                 x += 1
@@ -171,7 +177,9 @@ class Jisyo:
     _dict = None
 
     def __init__(self, dictname):
-        self._dict = file_archive(Configurations().dictpath(dictname), {}, serialized=True)
+        self._dict = file_archive(
+            Configurations().dictpath(dictname), {}, serialized=True
+        )
         self._dict.load()
 
     def haskey(self, key):
@@ -181,11 +189,10 @@ class Jisyo:
         return self._dict[key]
 
     def maxkeylen(self):
-        return self._dict['_max_key_len_']
+        return self._dict["_max_key_len_"]
 
 
 class Sym2:
-
     def __init__(self, mode):
         if mode == "a":
             self.convert = self.convert_a
@@ -194,13 +201,18 @@ class Sym2:
 
     def isRegion(self, char):
         c = ord(char[0])
-        return (Ch.ideographic_space <= c <= Ch.postal_mark_face) or \
-               (Ch.wavy_dash <= c <= Ch.ideographic_half_fill_space) or \
-               (Ch.greece_Alpha <= c <= Ch.greece_Rho) or (Ch.greece_Sigma <= c <= Ch.greece_Omega) or \
-               (Ch.greece_alpha <= c <= Ch.greece_omega) or \
-               (Ch.cyrillic_A <= c <= Ch.cyrillic_ya) or \
-               (Ch.zenkaku_exc_mark <= c <= Ch.zenkaku_number_nine) or \
-               (0xff20 <= c <= 0xff5e) or c == 0x0451 or c == 0x0401
+        return (
+            (Ch.ideographic_space <= c <= Ch.postal_mark_face)
+            or (Ch.wavy_dash <= c <= Ch.ideographic_half_fill_space)
+            or (Ch.greece_Alpha <= c <= Ch.greece_Rho)
+            or (Ch.greece_Sigma <= c <= Ch.greece_Omega)
+            or (Ch.greece_alpha <= c <= Ch.greece_omega)
+            or (Ch.cyrillic_A <= c <= Ch.cyrillic_ya)
+            or (Ch.zenkaku_exc_mark <= c <= Ch.zenkaku_number_nine)
+            or (0xFF20 <= c <= 0xFF5E)
+            or c == 0x0451
+            or c == 0x0401
+        )
 
     def _convert(self, text):
         c = ord(text[0])
@@ -219,11 +231,11 @@ class Sym2:
         elif Ch.zenkaku_exc_mark <= c <= Ch.zenkaku_slash_mark:
             return Convert_Tables.symbol_table_5[c - Ch.zenkaku_exc_mark]
         elif Ch.zenkaku_number_zero <= c <= Ch.zenkaku_number_nine:
-            return chr(c - Ch.zenkaku_number_zero + ord('0'))
-        elif 0xff20 <= c <= 0xff40:
-            return chr(0x0041 + c - 0xff21)  # u\ff21Ａ => u\0041:@A..Z[\]^_`
-        elif 0xff41 <= c < 0xff5f:
-            return chr(0x0061 + c - 0xff41)  # u\ff41ａ => u\0061:a..z{|}
+            return chr(c - Ch.zenkaku_number_zero + ord("0"))
+        elif 0xFF20 <= c <= 0xFF40:
+            return chr(0x0041 + c - 0xFF21)  # u\ff21Ａ => u\0041:@A..Z[\]^_`
+        elif 0xFF41 <= c < 0xFF5F:
+            return chr(0x0061 + c - 0xFF41)  # u\ff41ａ => u\0061:a..z{|}
         else:
             return ""  # pragma: no cover
 
@@ -239,7 +251,6 @@ class Sym2:
 
 
 class A2:
-
     def __init__(self, mode):
         if mode == "E":
             self.convert = self.convert_E
