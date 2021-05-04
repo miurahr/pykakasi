@@ -16,8 +16,8 @@ class CommentBenchmark:
         parser.add_argument('jsonfiles', nargs='+', type=pathlib.Path, help='pytest-benchmark saved result')
         args = parser.parse_args()
         self.repository = args.repository
-        self.issue_number = args.issue_number
-        self.run_id = args.run_id
+        self.issue_number = args.issue
+        self.run_id = args.runid
         self.jsonfiles = args.jsonfiles
 
     def post_comment(self):
