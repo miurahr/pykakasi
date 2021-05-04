@@ -79,6 +79,12 @@ Here is an example that output as similar with furigana mode.
     かな[Kana] 漢字[Kanji] 交じり[Majiri] 文[Bun]
 
 
+Benchmark result
+================
+
+You can see benchmark result on various versions and platforms at https://github.com/miurahr/pykakasi/issues/123
+
+
 Old API
 =======
 
