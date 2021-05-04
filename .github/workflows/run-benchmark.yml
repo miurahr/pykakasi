@@ -27,7 +27,6 @@ jobs:
         run: |
           pip install -U pip
           pip install tox tox-gh-actions
-          pip install -r utils/requirements.txt
       - name: Run benchmark with tox
         run: |
           tox
@@ -55,6 +54,8 @@ jobs:
           python-version: 3.9
       - name: post result to issue
         run: |
+          python -m pip install -U pip
+          python -m pip install -r utils/requirements.txt
           python utils/github_comment_bench.py --repository ${GITHUB_REPOSITORY} --issue ${ISSUE_NUMBER} --runid ${GITHUB_RUN_ID} results_*.json
         env:
           ISSUE_NUMBER: 123
