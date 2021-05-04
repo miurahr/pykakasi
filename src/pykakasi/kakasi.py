@@ -26,14 +26,14 @@ class kakasi:
     _MAXLEN = 32  # type: int
     _LONG_SYMBOL = [
         # 0x002D,  # -
-        0x30FC,  # ー
+        "\u30FC",  # ー
         # 0x2010,  # ‐
         # 0x2011,  # ‑
         # 0x2013,  # –
         # 0x2014,  # —
-        0x2015,  # ―
-        0x2212,  # −
-        0xFF70  # ｰ
+        "\u2015",  # ―
+        "\u2212",  # −
+        "\uFF70"  # ｰ
     ]  # type: List[int]
 
     def __init__(self):
@@ -106,13 +106,14 @@ class kakasi:
     def _s2a(self, text: str) -> str:
         result = ''  # type: str
         i = 0
-        while i < len(text):
-            w = min(i + self._MAXLEN, len(text))  # type: int
+        length = len(text)
+        while i < length:
+            w = min(i + self._MAXLEN, length)  # type: int
             (t, l1) = self._saconv.convert(text[i:w])
             if l1 > 0:
                 result += t
                 i += l1
-            elif ord(text[i]) in self._LONG_SYMBOL:  # handle chōonpu sound marks
+            elif text[i] in self._LONG_SYMBOL:  # handle chōonpu sound marks
                 # use previous char as a transliteration for kana-dash
                 if len(result) > 0:
                     result += result[-1]
@@ -272,7 +273,7 @@ class kakasi:
 
                 while i < len(text):
 
-                    if ord(text[i]) in self._LONG_SYMBOL:
+                    if text[i] in self._LONG_SYMBOL:
 
                         # FIXME: q&d workaround when hiragana/katanaka dash is first char.
                         if self._mode[mode] is not None and len(chunk) > 0:
