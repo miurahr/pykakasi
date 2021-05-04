@@ -29,12 +29,12 @@ jobs:
         run: |
           tox
         env:
-          PYTEST_ADDOPTS: '--benchmark-only --no-cov --benchmark-json=${{ github.workspace }}/results_${{ matrix.os }}_${{ matrix.python-version }}.json'
+          PYTEST_ADDOPTS: '--benchmark-only --no-cov --benchmark-json=results_${{ matrix.os }}_${{ matrix.python-version }}.json'
       - name: upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: benchmark_result
-          path: ${{ github.workspace }}/results_${{ matrix.os }}_${{ matrix.python-version }}.json
+          path: results_${{ matrix.os }}_${{ matrix.python-version }}.json
 
   comparison:
     runs-on: ubuntu-latest
