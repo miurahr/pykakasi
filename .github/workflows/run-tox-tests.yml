@@ -22,6 +22,8 @@ jobs:
           pip install tox tox-gh-actions 'coveralls<3.0.0'
       - name: Test project with tox
         run: tox
+        env:
+          PYTEST_ADDOPTS: --benchmark-skip --cov-config=pyproject.toml --cov --cov-append --verbose
       - name: Upload Coverage
         run: coveralls
         env:
