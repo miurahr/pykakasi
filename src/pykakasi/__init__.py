@@ -16,7 +16,16 @@ from .kanji import J2
 from .properties import Ch
 from .scripts import A2, H2, K2, Sym2
 
-__all__ = ["kakasi", "wakati", "exceptions"]
+__all__ = [
+    "kakasi",
+    "wakati",
+    "PyKakasiException",
+    "UnknownCharacterException",
+    "UnsupportedRomanRulesException",
+    "UnknownOptionsException",
+    "InvalidModeValueException",
+    "InvalidFlagValueException",
+]
 
 
 class PyKakasiException(Exception):
