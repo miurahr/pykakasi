@@ -175,8 +175,8 @@ Fixed
 * Sometimes fails to insert space after punctuation(#79).
 * Special case in kana-roman passport conversion such as 'etchu' etc.
 
-`v1.0c1`_ (29, June, 2019)
-==========================
+`v1.0-rc1`_ (29, June, 2019)
+============================
 
 Added
 -----
@@ -502,8 +502,8 @@ Version 0.10 (25, April, 2014)
 .. _v1.1: https://github.com/miurahr/pykakasi/compare/v1.1b2...v1.1
 .. _v1.1b2: https://github.com/miurahr/pykakasi/compare/v1.1b1...v1.1b2
 .. _v1.1b1: https://github.com/miurahr/pykakasi/compare/v1.1a1...v1.1b1
-.. _v1.1a1: https://github.com/miurahr/pykakasi/compare/v1.0c1...v1.1a1
-.. _v1.0c1: https://github.com/miurahr/pykakasi/compare/v1.0c2...v1.0c1
+.. _v1.1a1: https://github.com/miurahr/pykakasi/compare/v1.0-rc1...v1.1a1
+.. _`v1.0-rc1`: https://github.com/miurahr/pykakasi/compare/v0.96...v1.0-rc1
 .. _v0.96: https://github.com/miurahr/pykakasi/compare/v0.95...v0.96
 .. _v0.95: https://github.com/miurahr/pykakasi/compare/v0.94...v0.95
 .. _v0.94: https://github.com/miurahr/pykakasi/compare/v0.93...v0.94
