@@ -31,6 +31,10 @@ Example:
 Old API (v1.2)
 ==============
 
+.. warning::
+    The OLD v1.2 API, wakati class, and setMode(), getConverter() and do() functions,  will be deprecated when v3.0 released.
+    Please consider to use convert() method.
+
 Conversion Options
 ------------------
 
@@ -71,10 +75,6 @@ How to Install::
 Building library, setup script build dictionary db file and generate pickled db files.
 Without dictionary files, a library fails to run.
 
-Dependencies::
-
-    six and semidbm
-
 Sample source code::
 
     from pykakasi import kakasi,wakati
@@ -105,3 +105,58 @@ You can use  "Hepburn" , "Kunrei" or "Passport" as mode "r", Roman table switch.
 Also "s" used for separator switch, "C" for capitalize switch.
 "S" for separator storing option.
 
+
+Transliterate Japanese text to rōmaji:
+
+.. code-block:: pycon
+
+    >>> import pykakasi
+    >>>
+    >>> text = u"かな漢字交じり文"
+    >>> kakasi = pykakasi.kakasi()
+    >>> kakasi.setMode("H","a") # Hiragana to ascii, default: no conversion
+    >>> kakasi.setMode("K","a") # Katakana to ascii, default: no conversion
+    >>> kakasi.setMode("J","a") # Japanese to ascii, default: no conversion
+    >>> kakasi.setMode("r","Hepburn") # default: use Hepburn Roman table
+    >>> kakasi.setMode("s", True) # add space, default: no separator
+    >>> kakasi.setMode("C", True) # capitalize, default: no capitalize
+    >>> conv = kakasi.getConverter()
+    >>> result = conv.do(text)
+    >>> print(result)
+    kana Kanji Majiri Bun
+
+Tokenize Japanese text (split by word boundaries), equivalent to ``kakasi``'s wakati gaki option:
+
+.. code-block:: pycon
+
+    >>> wakati = pykakasi.wakati()
+    >>> conv = wakati.getConverter()
+    >>> result = conv.do(text)
+    >>> print(result)
+    かな 漢字 交じり 文
+
+Add `furigana`_ (pronounciation aid) in rōmaji to text:
+
+.. code-block:: pycon
+
+    >>> kakasi = pykakasi.kakasi()
+    >>> kakasi.setMode("J","aF") # Japanese to furigana
+    >>> kakasi.setMode("H","aF") # Japanese to furigana
+    >>> conv = kakasi.getConverter()
+    >>> result = conv.do(text)
+    >>> print(result)
+    かな[kana] 漢字[Kanji] 交じり[Majiri] 文[Bun]
+
+Input mode values: "J" (Japanese: kanji, hiragana and katakana), "H" (hiragana), "K" (katakana).
+
+Output mode values: "H" (hiragana), "K" (katakana), "a" (alphabet / rōmaji), "aF" (furigana in rōmaji).
+
+There are other ``setMode`` switches which control output:
+
+* "r": Romanisation table: `Hepburn`_ (default), `Kunrei`_ or ``Passport``
+* "s": Separator: ``False`` adds no spaces between words (default), ``True`` adds spaces between words
+* "C": Capitalize: ``False`` adds no capital letters (default), ``True`` makes each word start with a capital letter
+
+.. _`furigana`: https://en.wikipedia.org/wiki/Furigana
+.. _`Hepburn`: https://en.wikipedia.org/wiki/Hepburn_romanization
+.. _`Kunrei`: https://en.wikipedia.org/wiki/Kunrei-shiki_romanization
