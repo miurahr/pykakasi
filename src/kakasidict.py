@@ -1,9 +1,8 @@
 import codecs
 import os
+import pickle
 import re
-from typing import Dict, List, Tuple
-
-from klepto.archives import file_archive  # type: ignore # noqa
+from typing import Dict, List, Tuple, Union, Optional
 
 root_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
@@ -40,7 +39,7 @@ class Genkanwadict:
 
     def mkdict(self, src: str, dst: str):
         max_key_len = 0
-        dic = {}
+        dic: Dict[str, Union[str, int]] = {}
         with open(src, "r", encoding="utf-8") as f:
             for raw in f:
                 line = raw.strip()
@@ -54,12 +53,12 @@ class Genkanwadict:
                     max_key_len = max(max_key_len, len(k))
                 except ValueError:
                     raise Exception("Cannot process dictionary line: ", line)
-        d = file_archive(dst, dic, serialized=True)
-        d["_max_key_len_"] = max_key_len
-        d.dump()
+        dic["_max_key_len_"] = max_key_len
+        with open(dst, "wb") as o:
+            pickle.dump(dic, o)
 
     def maketrans(self, src, dst):
-        dict = {}
+        dict: Dict[str, Optional[str]] = {}
         with open(src, "r", encoding="utf-8") as f:
             for raw in f:
                 line = raw.strip()
@@ -76,8 +75,8 @@ class Genkanwadict:
             dict[i] = None
         for i in range(0xE0100, 0xE01EF):
             dict[i] = None
-        d = file_archive(dst, dict, serialized=True)
-        d.dump()
+        with open(dst, "wb") as f:
+            pickle.dump(dict, f)
 
     # for kanwadict
 
@@ -106,8 +105,8 @@ class Genkanwadict:
             self.records[key][kanji] = [(yomi, tail)]
 
     def kanwaout(self, out):
-        dic = file_archive(out, self.records, serialized=True)
-        dic.dump()
+        with open(out, "wb") as f:
+            pickle.dump(self.records, f, protocol=4)
 
     def generate_dictionaries(self, dstdir):
         DICTS = [

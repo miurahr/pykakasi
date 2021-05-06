@@ -2,10 +2,9 @@
 # j2.py
 #
 # Copyright 2011-2019 Hiroshi Miura <miurahr@linux.com>
+import pickle
 import threading
 from typing import Tuple
-
-from klepto.archives import file_archive  # type: ignore # noqa
 
 from .properties import Configurations
 from .scripts import H2
@@ -219,8 +218,8 @@ class Itaiji:
             with self._lock:
                 if self._itaijidict is None:
                     itaijipath = Configurations.dictpath(Configurations.jisyo_itaiji)
-                    self._itaijidict = file_archive(itaijipath, {}, serialized=True)
-                    self._itaijidict.load()
+                    with open(itaijipath, "rb") as d:
+                        self._itaijidict = pickle.load(d)
 
     def haskey(self, c):
         return c in self._itaijidict
@@ -245,8 +244,8 @@ class Kanwa:
             with self._lock:
                 if self._jisyo_table is None:
                     dictpath = Configurations.dictpath(Configurations.jisyo_kanwa)
-                    self._jisyo_table = file_archive(dictpath, {}, serialized=True)
-                    self._jisyo_table.load()
+                    with open(dictpath, "rb") as d:
+                        self._jisyo_table = pickle.load(d)
 
     def load(self, char: str):
         key = "%04x" % ord(char)
