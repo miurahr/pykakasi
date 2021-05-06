@@ -16,14 +16,13 @@ class H2:
     _ediff = 0x1B164 - 0x1B150
 
     def __init__(self, mode, method="Hepburn"):
-        conf = Configurations()
         if mode == "a":
             if method == "Passport":
-                self._kanadict = Jisyo(conf.jisyo_passport_hira)
+                self._kanadict = Jisyo(Configurations.jisyo_passport_hira)
             elif method == "Kunrei":
-                self._kanadict = Jisyo(conf.jisyo_kunrei_hira)
+                self._kanadict = Jisyo(Configurations.jisyo_kunrei_hira)
             else:
-                self._kanadict = Jisyo(conf.jisyo_hepburn_hira)
+                self._kanadict = Jisyo(Configurations.jisyo_hepburn_hira)
 
             self.convert = self.convert_a
         elif mode == "K":
@@ -73,15 +72,14 @@ class K2(object):
     _ediff = 0x1B164 - 0x1B150
 
     def __init__(self, mode, method="Hepburn"):
-        conf = Configurations()
-        self._halfkanadict = Jisyo(conf.jisyo_halfkana)
+        self._halfkanadict = Jisyo(Configurations.jisyo_halfkana)
         if mode == "a":
             if method == "Passport":
-                self._kanadict = Jisyo(conf.jisyo_passport)
+                self._kanadict = Jisyo(Configurations.jisyo_passport)
             elif method == "Kunrei":
-                self._kanadict = Jisyo(conf.jisyo_kunrei)
+                self._kanadict = Jisyo(Configurations.jisyo_kunrei)
             else:
-                self._kanadict = Jisyo(conf.jisyo_hepburn)
+                self._kanadict = Jisyo(Configurations.jisyo_hepburn)
 
             self.convert = self.convert_a
         elif mode == "H":
@@ -171,7 +169,7 @@ class Jisyo:
 
     def __init__(self, dictname):
         self._dict = file_archive(
-            Configurations().dictpath(dictname), {}, serialized=True
+            Configurations.dictpath(dictname), {}, serialized=True
         )
         self._dict.load()
 

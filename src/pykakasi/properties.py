@@ -4,15 +4,11 @@
 # Copyright 2019 Hiroshi Miura <miurahr@linux.com>
 
 import os
-from typing import Dict
 
 import pkg_resources
 
 
-# This class is Borg
 class Configurations:
-
-    _shared_state = {}  # type: Dict[str, object]
 
     data_path = pkg_resources.resource_filename(__name__, "data")
     jisyo_hepburn_hira = "hepburnhira3.db"
@@ -25,13 +21,11 @@ class Configurations:
     jisyo_kunrei = "kunreidict3.db"
     jisyo_halfkana = "halfkana3.db"
 
-    def __new__(cls, *p, **k):
-        self = object.__new__(cls, *p, **k)
-        self.__dict__ = cls._shared_state
-        return self
-
     def dictpath(self, dbfile: str):
         return os.path.join(self.data_path, dbfile)
+
+
+Configurations = Configurations()
 
 
 class Ch:
@@ -67,6 +61,9 @@ class Ch:
     zenkaku_A = 0xFF21
     zenkaku_a = 0xFF41
     endmark = [ord(a) for a in [")", "]", "!", ",", ".", u"\u3001", u"\u3002"]]
+
+
+Ch = Ch()
 
 
 class Convert_Tables:
@@ -360,3 +357,6 @@ class Convert_Tables:
         "\uff40",
     ]  # ［＼］＾＿｀
     alpha_table_3 = ["\uff5b", "\uff5c", "\uff5d", "\uff5e"]  # ｛｜｝～
+
+
+Convert_Tables = Convert_Tables()

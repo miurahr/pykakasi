@@ -218,9 +218,7 @@ class Itaiji:
         if self._itaijidict is None:
             with self._lock:
                 if self._itaijidict is None:
-                    itaijipath = Configurations().dictpath(
-                        Configurations().jisyo_itaiji
-                    )
+                    itaijipath = Configurations.dictpath(Configurations.jisyo_itaiji)
                     self._itaijidict = file_archive(itaijipath, {}, serialized=True)
                     self._itaijidict.load()
 
@@ -246,7 +244,7 @@ class Kanwa:
         if self._jisyo_table is None:
             with self._lock:
                 if self._jisyo_table is None:
-                    dictpath = Configurations().dictpath(Configurations().jisyo_kanwa)
+                    dictpath = Configurations.dictpath(Configurations.jisyo_kanwa)
                     self._jisyo_table = file_archive(dictpath, {}, serialized=True)
                     self._jisyo_table.load()
 
