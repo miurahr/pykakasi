@@ -3,7 +3,7 @@ name: Run Tox tests
 on: [push, pull_request]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -19,33 +19,27 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -U pip wheel setuptools
-          pip install tox tox-gh-actions 'coveralls<3.0.0'
+          pip install tox tox-gh-actions coveralls
       - name: Test project with tox
         run: tox
         env:
           PYTEST_ADDOPTS: --benchmark-skip --cov-config=pyproject.toml --cov --cov-append --verbose
       - name: Upload Coverage
-        run: coveralls
+        run: coveralls --service=github
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
           COVERALLS_PARALLEL: true
           COVERALLS_FLAG_NAME: ${{ matrix.python-version }}
-  finish:
+
+  coveralls:
+    name: Indicate completion to coveralls.io
+    needs: test
     runs-on: ubuntu-latest
-    name: finish parallel build
-    needs: build
+    container: python:3-slim
     steps:
-      - name: Setup python
-        uses: actions/setup-python@v1
-        with:
-          python-version: 3.8
-          architecture: x64
-      - name: Tell Coveralls that the parallel build is finished
-        run: |
-          curl -k \
-              https://coveralls.io/webhook?repo_token=$COVERALLS_REPO_TOKEN \
-              -d "payload[build_num]=$GITHUB_SHA&payload[status]=done"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+    - name: Finished
+      run: |
+        pip3 install --upgrade coveralls
+        coveralls --finish
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
