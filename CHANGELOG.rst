@@ -12,7 +12,6 @@ Added
 
 Changed
 -------
-* Exceptions module is pykakasi,  not pykakasi.exceptions.*
 
 Fixed
 -----
@@ -25,6 +24,26 @@ Removed
 
 Security
 --------
+
+v2.1.0_ (6, May 2021)
+=====================
+
+Added
+-----
+* Deprecation warning when using old api(#124)
+* Add type hint file(pyi) (#124)
+* Benchmark test codes(#122)
+
+Changed
+-------
+* Cache internal results and improve performance about 30-40 times.(#128)
+* Use standard pickle for database file(#128)
+* Exceptions module is now `pykakasi`, not `pykakasi.exceptions`
+
+Removed
+-------
+* Dependency for klepto(#128)
+
 
 v2.0.8_ (4, May 2021)
 =====================
@@ -126,7 +145,8 @@ v2.0.0_ (31, May. 2020)
 =======================
 
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.0.8...HEAD
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.1.0...HEAD
+.. _v2.1.0: https://github.com/miurahr/pykakasi/compare/v2.0.8...v2.1.0
 .. _v2.0.8: https://github.com/miurahr/pykakasi/compare/v2.0.7...v2.0.8
 .. _v2.0.7: https://github.com/miurahr/pykakasi/compare/v2.0.6...v2.0.7
 .. _v2.0.6: https://github.com/miurahr/pykakasi/compare/v2.0.5...v2.0.6
