@@ -12,6 +12,7 @@ import functools
 from typing import Dict, List, Optional, Union
 
 from deprecated import deprecated
+import jaconv
 
 from .kanji import J2
 from .properties import Ch
@@ -163,6 +164,10 @@ class kakasi:
             "passport": self._s2a(self._h2ap(hira)),
         }
         return tmp
+
+    @classmethod
+    def normalize(cls, text):
+        return jaconv.normalize(text)
 
     def _s2a(self, text: str) -> str:
         result = ""  # type: str
