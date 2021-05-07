@@ -5,6 +5,8 @@
 #
 from typing import Dict, List
 
+import jaconv
+
 from .kanji import Itaiji, JConv
 from .properties import Ch
 from .scripts import IConv
@@ -25,6 +27,10 @@ class Kakasi:
         self._jconv = JConv()
         self._iconv = IConv()
         self._itaiji = Itaiji()
+
+    @classmethod
+    def normalize(cls, text):
+        return jaconv.normalize(text)
 
     def _isKanji(self, c: str):
         return 0x3400 <= ord(c[0]) < 0xE000 or self._itaiji.haskey(ord(c[0]))
