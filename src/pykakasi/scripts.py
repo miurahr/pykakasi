@@ -2,9 +2,132 @@
 # scripts.py
 #
 # Copyright 2011-2019 Hiroshi Miura <miurahr@linux.com>
+import functools
 import pickle
+from typing import Dict
 
 from .properties import Ch, Configurations, Convert_Tables
+
+
+class IConv:
+
+    _MAXLEN: int = 32
+    _LONG_SYMBOLS: str = "\u30FC\u2015\u2212\uFF70"  # "ー  ―  −  ｰ "
+    # _UNCHECKED_LONG_SYMBOLS: str = "\u002D\u2010\u2011\u2013\u2014" # "-  ‐ ‑ – —"
+
+    def __init__(self):
+        self._hahconv = H2("a", method="Hepburn")
+        self._hakconv = H2("a", method="Kunrei")
+        self._hapconv = H2("a", method="Passport")
+        self._hkconv = H2("K")
+        self._khconv = K2("H")
+        self._saconv = Sym2("a")
+
+    @functools.lru_cache(maxsize=256)
+    def convert(self, otext: str, hira: str) -> Dict[str, str]:
+        kana = self._h2k(hira)
+        hira = self._k2h(hira)  # make sure hiragana doesn't contain katakana
+        tmp = {
+            "orig": otext,
+            "hira": hira,
+            "kana": kana,
+            "hepburn": self._s2a(self._h2ah(hira)),
+            "kunrei": self._s2a(self._h2ak(hira)),
+            "passport": self._s2a(self._h2ap(hira)),
+        }
+        return tmp
+
+    def _s2a(self, text: str) -> str:
+        result = ""  # type: str
+        i = 0
+        length = len(text)
+        while i < length:
+            w = min(i + self._MAXLEN, length)  # type: int
+            (t, l1) = self._saconv.convert(text[i:w])
+            if l1 > 0:
+                result += t
+                i += l1
+            elif text[i] in self._LONG_SYMBOLS:  # handle chōonpu sound marks
+                # use previous char as a transliteration for kana-dash
+                if len(result) > 0:
+                    result += result[-1]
+                else:
+                    result += "-"
+                i += 1
+            else:
+                result += text[i : i + 1]
+                i += 1
+        return result
+
+    def _k2h(self, text: str) -> str:
+        result = ""
+        i = 0
+        while i < len(text):
+            w = min(i + self._MAXLEN, len(text))
+            (t, l1) = self._khconv.convert(text[i:w])
+            if l1 > 0:
+                result += t
+                i += l1
+            else:
+                result += text[i : i + 1]
+                i += 1
+        return result
+
+    def _h2k(self, text: str) -> str:
+        result = ""
+        i = 0
+        while i < len(text):
+            w = min(i + self._MAXLEN, len(text))
+            (t, l1) = self._hkconv.convert(text[i:w])
+            if l1 > 0:
+                result += t
+                i += l1
+            else:
+                result += text[i : i + 1]
+                i += 1
+        return result
+
+    def _h2ak(self, text: str) -> str:
+        result = ""
+        i = 0
+        while i < len(text):
+            w = min(i + self._MAXLEN, len(text))
+            (t, l1) = self._hakconv.convert(text[i:w])
+            if l1 > 0:
+                result += t
+                i += l1
+            else:
+                result += text[i : i + 1]
+                i += 1
+        return result
+
+    def _h2ah(self, text: str) -> str:
+        result = ""
+        i = 0
+        while i < len(text):
+            w = min(i + self._MAXLEN, len(text))
+            (t, l1) = self._hahconv.convert(text[i:w])
+            if l1 > 0:
+                result += t
+                i += l1
+            else:
+                result += text[i : i + 1]
+                i += 1
+        return result
+
+    def _h2ap(self, text: str) -> str:
+        result = ""
+        i = 0
+        while i < len(text):
+            w = min(i + self._MAXLEN, len(text))
+            (t, l1) = self._hapconv.convert(text[i:w])
+            if l1 > 0:
+                result += t
+                i += l1
+            else:
+                result += text[i : i + 1]
+                i += 1
+        return result
 
 
 class H2:
@@ -62,7 +185,7 @@ class H2:
         return (text[0], 1)
 
 
-class K2(object):
+class K2:
 
     _kanadict = None
     _halfkanadict = None

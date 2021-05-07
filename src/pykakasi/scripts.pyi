@@ -1,8 +1,13 @@
-from typing import Any
+from .properties import (
+    Ch as Ch,
+    Configurations as Configurations,
+    Convert_Tables as Convert_Tables,
+)
+from typing import Any, Dict
 
-from .properties import Ch as Ch
-from .properties import Configurations as Configurations
-from .properties import Convert_Tables as Convert_Tables
+class IConv:
+    def __init__(self) -> None: ...
+    def convert(self, otext: str, hira: str) -> Dict[str, str]: ...
 
 class H2:
     convert: Any = ...

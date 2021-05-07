@@ -8,10 +8,9 @@ import threading
 from typing import Tuple
 
 from .properties import Configurations
-from .scripts import H2
 
 
-class J2:
+class JConv:
 
     _cl_table = [
         "",
@@ -112,29 +111,15 @@ class J2:
         "",
     ]
 
-    def __init__(self, mode: str = "H", method: str = "Hepburn"):
+    def __init__(self):
         self._kanwa = Kanwa()
         self._itaiji = Itaiji()
-        if mode == "H":
-            self.convert = self.convert_h
-        elif mode in ("a", "K"):
-            self._hconv = H2(mode, method)
-            self.convert = self.convert_nonh
-        else:
-            self.convert = self.convert_noop
 
     def isRegion(self, c: str):
         return 0x3400 <= ord(c[0]) < 0xE000 or self._itaiji.haskey(ord(c[0]))
 
-    def isCletter(self, literal: str, c: str) -> bool:
-        if (0x3041 <= ord(c) <= 0x309F) and (
-            literal in self._cl_table[ord(c) - 0x3040]
-        ):  # ぁ:= u\3041
-            return True
-        return False
-
     @functools.lru_cache(maxsize=512)
-    def convert_h(self, itext) -> Tuple[str, int]:
+    def convert(self, itext: str) -> Tuple[str, int]:
         max_len = 0
         Hstr = ""
         text = self._itaiji.convert(itext)
@@ -154,7 +139,7 @@ class J2:
                         elif (
                             max_len < length + 1
                             and len(text) > length
-                            and self.isCletter(tail, text[length])
+                            and self._isCletter(tail, text[length])
                         ):
                             Hstr = "".join([yomi, text[length]])
                             max_len = length + 1
@@ -175,34 +160,15 @@ class J2:
                 pass
         return (Hstr, max_len)
 
+    def _isCletter(self, literal: str, c: str) -> bool:
+        if (0x3041 <= ord(c) <= 0x309F) and (
+            literal in self._cl_table[ord(c) - 0x3040]
+        ):  # ぁ:= u\3041
+            return True
+        return False
+
     def _is_vschr(self, ch):
         return 0x0E0100 <= ord(ch) <= 0x0E1EF or 0xFE00 <= ord(ch) <= 0xFE02
-
-    def convert_nonh(self, text):
-        if not self.isRegion(text[0]):
-            return "", 0
-
-        (t, l1) = self.convert_h(text)
-        if l1 <= 0:  # pragma: no cover
-            return "", 0
-
-        m = 0
-        otext = ""
-
-        while True:
-            if m >= len(t):
-                break
-            (s, n) = self._hconv.convert(t[m:])
-            if n <= 0:  # pragma: no cover
-                m = m + 1
-            else:
-                m = m + n
-                otext = otext + s
-
-        return otext, l1
-
-    def convert_noop(self, text):
-        return text[0], 1
 
 
 class Itaiji:

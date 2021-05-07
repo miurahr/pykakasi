@@ -45,7 +45,7 @@ def test_threadpool_itaiji():
 
 def worker_itaiji():
     try:
-        j = pykakasi.kanji.J2("H")
+        j = pykakasi.kanji.JConv()
         for case, result in I_TEST:
             assert j._itaiji.convert(case) == result
     except AssertionError:
