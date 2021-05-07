@@ -90,8 +90,10 @@ PyKakasi::
 
 Dictionary::
     Copyright (C) 2010-2021 Hiroshi Miura and contributors(see AUTHORS)
+
     Copyright (C) 1992 1993 1994 Hironobu Takahashi, Masahiko Sato,
-    Yukiyoshi Kameyama, Miki Inooka, Akihiko Sasaki, Dai Ando, Junichi Okukawa
+    Yukiyoshi Kameyama, Miki Inooka, Akihiko Sasaki, Dai Ando, Junichi Okukawa,
+    Katsushi Sato and Nobuhiro Yamagishi
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
