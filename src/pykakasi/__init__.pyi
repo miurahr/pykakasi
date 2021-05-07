@@ -11,6 +11,3 @@ from .legacy import (
     kakasi as kakasi,
     wakati as wakati,
 )
-
-class PyKakasiException(Exception): ...
-class UnknownCharacterException(PyKakasiException): ...
