@@ -4,6 +4,7 @@
 # Copyright 2011-2019 Hiroshi Miura <miurahr@linux.com>
 import functools
 import pickle
+import shelve
 import threading
 from typing import Tuple
 
@@ -246,8 +247,7 @@ class Kanwa:
             with self._lock:
                 if self._jisyo_table is None:
                     dictpath = Configurations.dictpath(Configurations.jisyo_kanwa)
-                    with open(dictpath, "rb") as d:
-                        self._jisyo_table = pickle.load(d)
+                    self._jisyo_table = shelve.open(dictpath)
 
     def load(self, char: str):
         key = "%04x" % ord(char)

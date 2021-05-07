@@ -2,13 +2,13 @@ import codecs
 import os
 import pickle
 import re
+import shelve
 from typing import Dict, List, Optional, Tuple, Union
 
 root_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
 
 class Genkanwadict:
-    records = {}  # type: Dict[str, Dict[str, List[Tuple[str, str]]]]
 
     ESCAPE_SEQUENCE_RE = re.compile(
         r"""
@@ -27,13 +27,6 @@ class Genkanwadict:
             return codecs.decode(match.group(0), "unicode-escape")
 
         return self.ESCAPE_SEQUENCE_RE.sub(decode_match, s)
-
-    def run(self, src: str, dst: str):
-        with open(src, "r", encoding="utf-8") as f:
-            for line in f:
-                self.parsekdict(line.strip())
-            f.close()
-        self.kanwaout(dst)
 
     # for kana dict
 
@@ -80,6 +73,14 @@ class Genkanwadict:
 
     # for kanwadict
 
+    def makekanwa(self, src, dst):
+        # self.records = {}  # type: Dict[str, Dict[str, List[Tuple[str, str]]]]
+        self.records = shelve.open(dst, protocol=4, writeback=True)
+        with open(src, "r", encoding="utf-8") as f:
+            for line in f:
+                self.parsekdict(line.strip())
+        self.records.close()
+
     def parsekdict(self, line: str):
         if line.startswith(";;"):  # skip comment
             return
@@ -103,10 +104,6 @@ class Genkanwadict:
         else:
             self.records[key] = {}
             self.records[key][kanji] = [(yomi, tail)]
-
-    def kanwaout(self, out):
-        with open(out, "wb") as f:
-            pickle.dump(self.records, f, protocol=4)
 
     def generate_dictionaries(self, dstdir):
         DICTS = [
@@ -138,4 +135,4 @@ class Genkanwadict:
         dst = os.path.join(dstdir, "kanwadict4.db")
         if os.path.exists(dst):
             os.unlink(dst)
-        self.run(src, dst)
+        self.makekanwa(src, dst)
