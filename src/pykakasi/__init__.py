@@ -11,6 +11,7 @@ __docformat__ = "restructuredtext en"
 import functools
 from typing import Dict, List, Optional, Union
 
+import jaconv
 from deprecated import deprecated
 
 from .kanji import J2
@@ -163,6 +164,10 @@ class kakasi:
             "passport": self._s2a(self._h2ap(hira)),
         }
         return tmp
+
+    @classmethod
+    def normalize(cls, text):
+        return jaconv.normalize(text)
 
     def _s2a(self, text: str) -> str:
         result = ""  # type: str
