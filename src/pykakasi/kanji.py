@@ -2,6 +2,7 @@
 # j2.py
 #
 # Copyright 2011-2019 Hiroshi Miura <miurahr@linux.com>
+import functools
 import pickle
 import threading
 from typing import Tuple
@@ -132,6 +133,7 @@ class J2:
             return True
         return False
 
+    @functools.lru_cache(maxsize=512)
     def convert_h(self, itext) -> Tuple[str, int]:
         max_len = 0
         Hstr = ""
