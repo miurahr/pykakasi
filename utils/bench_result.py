@@ -13,11 +13,13 @@ def generate_results(results_files, type):
             root = json.load(results)
         benchmarks = root['benchmarks']
         machine_info = root['machine_info']
-        meta = '{} {} on {} {}'.format(machine_info["python_implementation"], machine_info["python_version"],
-                                       machine_info['system'], machine_info['release'])
+        commit_info = root['commit_info']
+        meta = "{}-{}({})".format(machine_info["python_implementation"], machine_info["python_version"],
+                                       machine_info['system'])
+        commit = "{}@{}".format(commit_info['id'], commit_info['branch'])
         assert len(benchmarks) == 1
         for bm in benchmarks:
-            rate = bm['extra_info']['rate']
+            rate = bm['extra_info']['rate']  / 1000
             if rate < 100:
                 rate = round(rate, 1)
             else:
@@ -25,10 +27,10 @@ def generate_results(results_files, type):
             min = bm['stats']['min']
             max = bm['stats']['max']
             avr = bm['stats']['mean']
-            table.append([meta, rate, min, max, avr])
+            table.append([meta, commit, rate, min, max, avr])
     sortsecond = lambda val: val[1]
     table.sort(reverse=True, key=sortsecond)
-    return tabulate(table, headers=['platform', 'rate(char/sec)', 'min(sec)', 'max(sec)', 'mean(sec)'],
+    return tabulate(table, headers=['platform', 'commit', 'rate (char/mSec)', 'min(sec)', 'max(sec)', 'mean(sec)'],
                     tablefmt=type)
 
 
