@@ -8,7 +8,7 @@ root_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
 
 class Genkanwadict:
-    records = {}  # type: Dict[str, Dict[str, List[Tuple[str, str]]]]
+    records = {}  # type: Dict[str, Dict[str, List[Tuple[str, ...]]]]
 
     ESCAPE_SEQUENCE_RE = re.compile(
         r"""
@@ -80,9 +80,10 @@ class Genkanwadict:
             f.close()
         self.kanwaout(dst)
 
-    def parse_kakasi_dict(self, line: str):
+    def parse_kakasi_dict(self, line: str) -> None:
         if line.startswith(";;"):  # skip comment
             return
+        val: Tuple[str, ...]
         token = line.split(" ")
         yomi = token[0]
         kanji = token[1]
@@ -97,7 +98,7 @@ class Genkanwadict:
             val = (yomi, tail)
         self.updaterec(kanji, val)
 
-    def updaterec(self, kanji: str, val: Tuple[str]):
+    def updaterec(self, kanji: str, val: Tuple[str, ...]) -> None:
         key = "%04x" % ord(kanji[0])
         if key in self.records:
             if kanji in self.records[key]:
