@@ -146,14 +146,15 @@ class JConv:
                             max_len < length + 1
                             and len(text) > length
                             and self._isCletter(tail, text[length])
-                            and len(tok) > 2 and btext in tok[2:]
+                            and len(tok) > 2
+                            and btext in tok[2:]
                         ):
                             Hstr = "".join([yomi, text[length]])
                             max_len = length + 1
                         elif (
-                                max_len < length + 1
-                                and len(text) > length
-                                and self._isCletter(tail, text[length])
+                            max_len < length + 1
+                            and len(text) > length
+                            and self._isCletter(tail, text[length])
                         ):
                             Hstr = "".join([yomi, text[length]])
                             max_len = length + 1

@@ -2,7 +2,7 @@ import codecs
 import os
 import pickle
 import re
-from typing import Dict, List, Optional, Tuple, Union, Set
+from typing import Dict, List, Optional, Tuple, Union
 
 root_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 

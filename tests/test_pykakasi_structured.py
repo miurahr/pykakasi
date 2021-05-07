@@ -352,7 +352,7 @@ import pykakasi
                     "hepburn": "iro",
                     "kunrei": "iro",
                     "passport": "iro",
-                }
+                },
             ],
         ),
         (
@@ -389,9 +389,9 @@ import pykakasi
                     "hepburn": "iro",
                     "kunrei": "iro",
                     "passport": "iro",
-                }
+                },
             ],
-        )
+        ),
     ],
 )
 def test_kakasi_structured(case, expected):
