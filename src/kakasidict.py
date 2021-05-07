@@ -3,7 +3,7 @@ import os
 import pickle
 import re
 import shelve
-from typing import Dict, List, Optional, Tuple, Union
+from typing import Dict, Optional, Union
 
 root_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
