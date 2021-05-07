@@ -28,8 +28,8 @@ def generate_results(results_files, type):
             max = bm['stats']['max']
             avr = bm['stats']['mean']
             table.append([meta, commit, rate, min, max, avr])
-    sortsecond = lambda val: val[1]
-    table.sort(reverse=True, key=sortsecond)
+    sortrate = lambda val: val[2]
+    table.sort(reverse=True, key=sortrate)
     return tabulate(table, headers=['platform', 'commit', 'rate (char/mSec)', 'min(sec)', 'max(sec)', 'mean(sec)'],
                     tablefmt=type)
 
