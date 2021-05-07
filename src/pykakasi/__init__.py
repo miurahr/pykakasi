@@ -8,6 +8,7 @@ __license__ = "GPL 3"
 __copyright__ = "2014-2021 Hiroshi Miura <miurahr@linux.com>"
 __docformat__ = "restructuredtext en"
 
+import functools
 from typing import Dict, List, Optional, Union
 
 from deprecated import deprecated
@@ -149,6 +150,7 @@ class kakasi:
 
         return _result
 
+    @functools.lru_cache(maxsize=256)
     def _iconv(self, otext: str, hira: str) -> Dict[str, str]:
         kana = self._h2k(hira)
         hira = self._k2h(hira)  # make sure hiragana doesn't contain katakana

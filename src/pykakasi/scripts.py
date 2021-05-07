@@ -2,8 +2,7 @@
 # scripts.py
 #
 # Copyright 2011-2019 Hiroshi Miura <miurahr@linux.com>
-
-from klepto.archives import file_archive  # type: ignore # noqa
+import pickle
 
 from .properties import Ch, Configurations, Convert_Tables
 
@@ -168,10 +167,9 @@ class Jisyo:
     _dict = None
 
     def __init__(self, dictname):
-        self._dict = file_archive(
-            Configurations.dictpath(dictname), {}, serialized=True
-        )
-        self._dict.load()
+        src = Configurations.dictpath(dictname)
+        with open(src, "rb") as d:
+            self._dict = pickle.load(d)
 
     def haskey(self, key):
         return key in self._dict
