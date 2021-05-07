@@ -2,7 +2,7 @@ import codecs
 import os
 import pickle
 import re
-from typing import Dict, List, Optional, Tuple, Union
+from typing import Dict, List, Optional, Tuple, Union, Set
 
 root_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
@@ -27,13 +27,6 @@ class Genkanwadict:
             return codecs.decode(match.group(0), "unicode-escape")
 
         return self.ESCAPE_SEQUENCE_RE.sub(decode_match, s)
-
-    def run(self, src: str, dst: str):
-        with open(src, "r", encoding="utf-8") as f:
-            for line in f:
-                self.parsekdict(line.strip())
-            f.close()
-        self.kanwaout(dst)
 
     # for kana dict
 
@@ -80,29 +73,42 @@ class Genkanwadict:
 
     # for kanwadict
 
-    def parsekdict(self, line: str):
+    def run(self, src: str, dst: str):
+        with open(src, "r", encoding="utf-8") as f:
+            for line in f:
+                self.parse_kakasi_dict(line.strip())
+            f.close()
+        self.kanwaout(dst)
+
+    def parse_kakasi_dict(self, line: str):
         if line.startswith(";;"):  # skip comment
             return
-        (yomi, kanji) = line.split(" ")
+        token = line.split(" ")
+        yomi = token[0]
+        kanji = token[1]
         if ord(yomi[-1:]) <= ord("z"):
             tail = yomi[-1:]
             yomi = yomi[:-1]
         else:
             tail = ""
-        self.updaterec(kanji, yomi, tail)
+        if len(token) > 2:  # has context
+            val = (yomi, tail) + tuple(token[2:])
+        else:
+            val = (yomi, tail)
+        self.updaterec(kanji, val)
 
-    def updaterec(self, kanji: str, yomi: str, tail: str):
+    def updaterec(self, kanji: str, val: Tuple[str]):
         key = "%04x" % ord(kanji[0])
         if key in self.records:
             if kanji in self.records[key]:
                 rec = self.records[key][kanji]
-                rec.append((yomi, tail))
+                rec.append(val)
                 self.records[key].update({kanji: rec})
             else:
-                self.records[key][kanji] = [(yomi, tail)]
+                self.records[key][kanji] = [val]
         else:
             self.records[key] = {}
-            self.records[key][kanji] = [(yomi, tail)]
+            self.records[key][kanji] = [val]
 
     def kanwaout(self, out):
         with open(out, "wb") as f:
