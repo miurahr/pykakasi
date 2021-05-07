@@ -11,8 +11,8 @@ __docformat__ = "restructuredtext en"
 import functools
 from typing import Dict, List, Optional, Union
 
-from deprecated import deprecated
 import jaconv
+from deprecated import deprecated
 
 from .kanji import J2
 from .properties import Ch
