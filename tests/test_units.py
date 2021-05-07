@@ -3,44 +3,7 @@
 import pytest
 
 import pykakasi
-import pykakasi.kanji
 import pykakasi.scripts
-
-
-@pytest.mark.parametrize(
-    "case, expected",
-    [
-        ("菟", "兎"),
-        ("菟集", "兎集"),
-        ("熙", "煕"),
-        ("壱弍", "一二"),
-        ("森鷗外", "森鴎外"),
-        ("神", "神"),
-        ("\U0000FA30", "\U00004FAE"),
-        ("\U0000845B\U000E0101城市", "葛城市"),
-        ("\U0000845B\U000E0100飾区", "葛飾区"),
-        ("高橋祥", "高橋祥"),
-    ],
-)
-def test_itaiji(case, expected):
-    j = pykakasi.kanji.J2("H")
-    assert j._itaiji.convert(case) == expected
-
-
-@pytest.mark.parametrize(
-    "case, expected",
-    [
-        ("構成", ("こうせい", 2)),
-        ("好き", ("すき", 2)),
-        ("大きい", ("おおきい", 3)),
-        ("日本国民は、", ("にほんこくみん", 4)),
-        ("\U0000845B\U000E0101城市", ("かつらぎ", 3)),
-        ("\U0000845B\U000E0100飾区", ("かつしかく", 4)),
-    ],
-)
-def test_J2H(case, expected):
-    j = pykakasi.kanji.J2("H")
-    assert j.convert(case) == expected
 
 
 @pytest.mark.parametrize(
@@ -211,35 +174,6 @@ def test_K2a_kunrei(case, expected):
 def test_H2a_passport(case, expected):
     h = pykakasi.scripts.H2("a", method="Passport")
     assert h.convert(case) == expected
-
-
-@pytest.mark.parametrize(
-    "case, expected",
-    [
-        ("構成", (u"コウセイ", 2)),
-        ("好き", (u"スキ", 2)),
-        ("大きい", (u"オオキイ", 3)),
-        ("日本国民は、", (u"ニホンコクミン", 4)),
-    ],
-)
-def test_J2K(case, expected):
-    j = pykakasi.kanji.J2("K")
-    assert j.convert(case) == expected
-
-
-@pytest.mark.parametrize(
-    "case, expected",
-    [
-        ("構成", ("kousei", 2)),
-        ("好き", ("suki", 2)),
-        ("大きい", ("ookii", 3)),
-        ("日本国民は、", ("nihonkokumin", 4)),
-        ("\u31a0", ("", 0)),  # non japanese character
-    ],
-)
-def test_J2a(case, expected):
-    j = pykakasi.kanji.J2("a")
-    assert j.convert(case) == expected
 
 
 @pytest.mark.parametrize(

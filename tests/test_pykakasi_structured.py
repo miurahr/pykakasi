@@ -347,3 +347,38 @@ def test_kakasi_structured(case, expected):
         assert r["hepburn"] == expected[i]["hepburn"]
         assert r["kunrei"] == expected[i]["kunrei"]
         assert r["passport"] == expected[i]["passport"]
+
+
+def test_issue90():
+    text = "私がこの子を助けなきゃいけないってことだよね"
+    expected = ["ワタシ", "ガコノ", "コ", "ヲ", "タスケ", "ナキャイケナイッテコトダヨネ"]
+    kks = pykakasi.kakasi()
+    result = kks.convert(text)
+    for i in range(len(expected)):
+        assert result[i]["kana"] == expected[i]
+
+
+def test_issue105():
+    text = "ｿｳｿﾞｸﾆﾝ"
+    kks = pykakasi.kakasi()
+    result = kks.convert(text)
+    assert result[0]["kana"] == "ｿｳｿﾞｸﾆﾝ"
+    assert result[0]["hepburn"] == "souzokunin"
+    assert result[0]["hira"] == "そうぞくにん"
+
+
+def test_issue114():
+    text = "思った 言った 行った"
+    kks = pykakasi.kakasi()
+    result = kks.convert(text)
+    assert result[0]["hepburn"] == "omotta"
+    assert result[2]["hepburn"] == "itta"
+    assert result[4]["hepburn"] == "itta"
+
+
+def test_issue115():
+    kks = pykakasi.kakasi()
+    result = kks.convert("ﾞっ、")  # \uFF9E
+    assert result[0]["hira"] == "\u309Bっ、"
+    assert result[0]["kana"] == "\uFF9Eッ、"
+    assert result[0]["hepburn"] == '"tsu,'
