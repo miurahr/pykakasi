@@ -334,6 +334,64 @@ import pykakasi
                 }
             ],
         ),
+        (
+            "オレンジ色",
+            [
+                {
+                    "orig": "オレンジ",
+                    "kana": "オレンジ",
+                    "hira": "おれんじ",
+                    "hepburn": "orenji",
+                    "kunrei": "orenzi",
+                    "passport": "orenji",
+                },
+                {
+                    "orig": "色",
+                    "kana": "イロ",
+                    "hira": "いろ",
+                    "hepburn": "iro",
+                    "kunrei": "iro",
+                    "passport": "iro",
+                }
+            ],
+        ),
+        (
+            "檸檬は、レモン色",
+            [
+                {
+                    "orig": "檸檬",
+                    "hira": "れもん",
+                    "kana": "レモン",
+                    "hepburn": "remon",
+                    "kunrei": "remon",
+                    "passport": "remon",
+                },
+                {
+                    "orig": "は、",
+                    "hira": "は、",
+                    "kana": "ハ、",
+                    "hepburn": "ha,",
+                    "kunrei": "ha,",
+                    "passport": "ha,",
+                },
+                {
+                    "orig": "レモン",
+                    "kana": "レモン",
+                    "hira": "れもん",
+                    "hepburn": "remon",
+                    "kunrei": "remon",
+                    "passport": "remon",
+                },
+                {
+                    "orig": "色",
+                    "kana": "イロ",
+                    "hira": "いろ",
+                    "hepburn": "iro",
+                    "kunrei": "iro",
+                    "passport": "iro",
+                }
+            ],
+        )
     ],
 )
 def test_kakasi_structured(case, expected):

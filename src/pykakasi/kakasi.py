@@ -57,7 +57,7 @@ class Kakasi:
 
         while i < len(text):
             if self._isKanji(text[i]):
-                t, ln = self._jconv.convert(text[i:])
+                t, ln = self._jconv.convert(text[i:], otext)
                 if ln <= 0:  # pragma: no cover
                     otext = otext + text[i]
                     i += 1

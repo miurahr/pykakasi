@@ -119,7 +119,7 @@ class JConv:
         return 0x3400 <= ord(c[0]) < 0xE000 or self._itaiji.haskey(ord(c[0]))
 
     @functools.lru_cache(maxsize=512)
-    def convert(self, itext: str) -> Tuple[str, int]:
+    def convert(self, itext: str, btext: str) -> Tuple[str, int]:
         max_len = 0
         Hstr = ""
         text = self._itaiji.convert(itext)
@@ -131,8 +131,14 @@ class JConv:
             length = len(k)
             if len(text) >= length:
                 if text.startswith(k):
-                    for (yomi, tail) in v:
-                        if tail == "":
+                    for tok in v:
+                        yomi = tok[0]
+                        tail = tok[1]
+                        con = tok[2:]
+                        if btext in con:
+                            Hstr = yomi
+                            max_len = length
+                        elif tail == "":
                             if max_len < length:
                                 Hstr = yomi
                                 max_len = length
@@ -140,9 +146,19 @@ class JConv:
                             max_len < length + 1
                             and len(text) > length
                             and self._isCletter(tail, text[length])
+                            and len(tok) > 2 and btext in tok[2:]
                         ):
                             Hstr = "".join([yomi, text[length]])
                             max_len = length + 1
+                        elif (
+                                max_len < length + 1
+                                and len(text) > length
+                                and self._isCletter(tail, text[length])
+                        ):
+                            Hstr = "".join([yomi, text[length]])
+                            max_len = length + 1
+                        else:
+                            pass
         for _ in range(
             num_vs
         ):  # when converting string with kanji wit variation selector, calculate max_len again
