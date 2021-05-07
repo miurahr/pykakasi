@@ -1,0 +1,4 @@
+unidic-cwj and unidic-csj are copyrighted free software by the UniDic Consortium,
+and are released under any of the GPL (see the file GPL), the LGPL (see
+the file LGPL), or the BSD License (see the file BSD).
+
