@@ -2,13 +2,16 @@ import codecs
 import os
 import pickle
 import re
+import shutil
+import tempfile
 from typing import Dict, List, Optional, Tuple, Union
+
+import py7zr  # type: ignore  # noqa
 
 root_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
 
 class Genkanwadict:
-    records = {}  # type: Dict[str, Dict[str, List[Tuple[str, str]]]]
 
     ESCAPE_SEQUENCE_RE = re.compile(
         r"""
@@ -27,13 +30,6 @@ class Genkanwadict:
             return codecs.decode(match.group(0), "unicode-escape")
 
         return self.ESCAPE_SEQUENCE_RE.sub(decode_match, s)
-
-    def run(self, src: str, dst: str):
-        with open(src, "r", encoding="utf-8") as f:
-            for line in f:
-                self.parsekdict(line.strip())
-            f.close()
-        self.kanwaout(dst)
 
     # for kana dict
 
@@ -80,7 +76,22 @@ class Genkanwadict:
 
     # for kanwadict
 
-    def parsekdict(self, line: str):
+    def _makekanwa(self, src: str, unidicz, dst: str):
+        self.records: Dict[str, Dict[str, List[Tuple[str, ...]]]] = {}
+        with open(src, "r", encoding="utf-8") as f:
+            for line in f:
+                self._parse_kakasi_dict(line.strip())
+            f.close()
+        unidic = tempfile.mkdtemp()
+        with py7zr.SevenZipFile(unidicz, "r") as u:
+            u.extractall(path=unidic)
+        with open(os.path.join(unidic, "lex_3_1.csv"), "r", encoding="utf-8") as f:
+            for line in f:
+                self._parse_unidic(line.strip())
+        shutil.rmtree(unidic)
+        self.kanwaout(dst)
+
+    def _parse_kakasi_dict(self, line: str) -> None:
         if line.startswith(";;"):  # skip comment
             return
         (yomi, kanji) = line.split(" ")
@@ -89,9 +100,54 @@ class Genkanwadict:
             yomi = yomi[:-1]
         else:
             tail = ""
-        self.updaterec(kanji, yomi, tail)
+        self._updaterec(kanji, yomi, tail)
 
-    def updaterec(self, kanji: str, yomi: str, tail: str):
+    def _parse_unidic(self, line: str) -> None:
+        token = line.split(",")
+        key = token[0]
+        yomi = token[10]
+        role = token[4]
+        if role not in ["名詞"]:
+            return
+        if not self._is_kanji(key):
+            return
+        self._updaterec(key, yomi, "")
+
+    def k2h(self, text):
+        _diff = 0x30A1 - 0x3041  # KATAKANA LETTER A - HIRAGANA A
+        _ediff = 0x1B164 - 0x1B150
+        Hstr = ""
+        max_len = 0
+        r = len(text)
+        x = 0
+        while x < r:
+            if 0x1B164 <= ord(text[x]) < 0x1B167:
+                Hstr = Hstr + chr(ord(text[x]) - _ediff)
+                max_len += 1
+                x += 1
+            elif ord(text[x]) == 0x1B167:
+                Hstr = Hstr + "\u3093"
+                max_len += 1
+                x += 1
+            elif 0x30A0 < ord(text[x]) < 0x30F7:
+                Hstr = Hstr + chr(ord(text[x]) - _diff)
+                max_len += 1
+                x += 1
+            elif 0x30F7 <= ord(text[x]) < 0x30FD:
+                Hstr = Hstr + text[x]
+                max_len += 1
+                x += 1
+            else:  # pragma: no cover
+                break
+        return Hstr
+
+    def _is_kanji(self, word: str):
+        for c in word:
+            if not (0x3400 <= ord(c[0]) < 0xE000):
+                return False
+        return True
+
+    def _updaterec(self, kanji: str, yomi, tail) -> None:
         key = "%04x" % ord(kanji[0])
         if key in self.records:
             if kanji in self.records[key]:
@@ -135,7 +191,8 @@ class Genkanwadict:
         self.maketrans(src, dst)
 
         src = os.path.join(srcdir, "kakasidict.utf8")
+        unidic = os.path.join(srcdir, "unidic", "lex.7z")
         dst = os.path.join(dstdir, "kanwadict4.db")
         if os.path.exists(dst):
             os.unlink(dst)
-        self.run(src, dst)
+        self._makekanwa(src, unidic, dst)

@@ -1,5 +1,3 @@
-recursive-include src/data *.utf8
-recursive-include tests *.py
 include .coveragerc
 include *.rst
 include *.toml
@@ -20,5 +18,9 @@ recursive-include docs *.yml
 recursive-include docs Makefile
 recursive-include src *.typed
 recursive-include src *.pyi
+recursive-include src/data *.utf8
+recursive-include src/data *.7z
+recursive-include src/data *.txt
+recursive-include tests *.py
 recursive-include utils *.py
 recursive-include utils *.txt
