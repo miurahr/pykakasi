@@ -33,16 +33,6 @@ def test_thread_itaiji():
         t.join()
 
 
-@pytest.mark.thread
-@pytest.mark.skip
-def test_threadpool_itaiji():
-    with concurrent.futures.ThreadPoolExecutor(3) as texec:
-        tasks = [texec.submit(worker_itaiji) for _ in range(10)]
-        for task in concurrent.futures.as_completed(tasks):
-            if not task.result():
-                raise Exception("Failed.")
-
-
 def worker_itaiji():
     try:
         j = pykakasi.kanji.JConv()
@@ -64,21 +54,11 @@ def test_thread_kanwa():
         t.join()
 
 
-@pytest.mark.thread
-@pytest.mark.skip
-def test_threadpool_kanwa():
-    with concurrent.futures.ThreadPoolExecutor(3) as texec:
-        tasks = [texec.submit(worker_kanwa) for _ in range(10)]
-        for task in concurrent.futures.as_completed(tasks):
-            if not task.result():
-                raise Exception("Failed.")
-
-
 def worker_kanwa():
     try:
         k = pykakasi.kanji.Kanwa()
-        d = k.load(u"春")
-        assert d[u"春"] is not None
+        d = k.load("春")
+        assert d["春"] is not None
     except AssertionError:
         return False
     return True
