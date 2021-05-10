@@ -109,7 +109,7 @@ class Genkanwadict:
         role = token[4]
         if role not in ["名詞"]:
             return
-        if not self._is_kanji(key[0]):
+        if not self._is_kanji(key):
             return
         self._updaterec(key, yomi, "")
 
