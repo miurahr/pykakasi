@@ -339,14 +339,22 @@ import pykakasi
 def test_kakasi_structured(case, expected):
     kakasi = pykakasi.kakasi()
     result = kakasi.convert(case)
-    assert len(result) == len(expected)
-    for i, r in enumerate(result):
-        assert r["orig"] == expected[i]["orig"]
-        assert r["hira"] == expected[i]["hira"]
-        assert r["kana"] == expected[i]["kana"]
-        assert r["hepburn"] == expected[i]["hepburn"]
-        assert r["kunrei"] == expected[i]["kunrei"]
-        assert r["passport"] == expected[i]["passport"]
+    if len(result) >= len(expected):
+        for i, r in enumerate(result):
+            assert r["orig"] == expected[i]["orig"]
+            assert r["hira"] == expected[i]["hira"]
+            assert r["kana"] == expected[i]["kana"]
+            assert r["hepburn"] == expected[i]["hepburn"]
+            assert r["kunrei"] == expected[i]["kunrei"]
+            assert r["passport"] == expected[i]["passport"]
+    else:
+        for i, e in enumerate(expected):
+            assert result[i]["orig"] == e["orig"]
+            assert result[i]["hira"] == e["hira"]
+            assert result[i]["kana"] == e["kana"]
+            assert result[i]["hepburn"] == e["hepburn"]
+            assert result[i]["kunrei"] == e["kunrei"]
+            assert result[i]["passport"] == e["passport"]
 
 
 def test_issue90():
@@ -382,3 +390,12 @@ def test_issue115():
     assert result[0]["hira"] == "\u309Bっ、"
     assert result[0]["kana"] == "\uFF9Eッ、"
     assert result[0]["hepburn"] == '"tsu,'
+
+
+@pytest.mark.parametrize("case, expected", [("藍之介", "あいのすけ"), ("藍水", "らんすい")])
+def test_kakasi_unidic_noun(case, expected):
+    kakasi = pykakasi.Kakasi()
+    result = kakasi.convert(case)
+    key = kakasi._jconv._kanwa._jisyo_table.get("85cd", None)
+    assert result[0]["orig"] == case
+    assert result[0]["hira"] == expected
