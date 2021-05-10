@@ -111,9 +111,24 @@ class Genkanwadict:
             return
         if not self._is_kanji(key):
             return
-        self._updaterec(key, yomi, "")
+        hira = self._k2h(yomi)
+        self._updaterec(key, hira, "")
 
-    def k2h(self, text):
+    def _is_symbol(self, c: int):
+        return (
+            Ch.ideographic_space <= c <= Ch.postal_mark_face
+            or (Ch.wavy_dash <= c <= Ch.ideographic_half_fill_space)
+            or (Ch.greece_Alpha <= c <= Ch.greece_Rho)
+            or (Ch.greece_Sigma <= c <= Ch.greece_Omega)
+            or (Ch.greece_alpha <= c <= Ch.greece_omega)
+            or (Ch.cyrillic_A <= c <= Ch.cyrillic_ya)
+            or (Ch.zenkaku_exc_mark <= c <= Ch.zenkaku_number_nine)
+            or (0xFF20 <= c <= 0xFF5E)
+            or c == 0x0451
+            or c == 0x0401
+        )
+
+    def _k2h(self, text):
         _diff = 0x30A1 - 0x3041  # KATAKANA LETTER A - HIRAGANA A
         _ediff = 0x1B164 - 0x1B150
         Hstr = ""
@@ -196,3 +211,40 @@ class Genkanwadict:
         if os.path.exists(dst):
             os.unlink(dst)
         self._makekanwa(src, unidic, dst)
+
+class Ch:
+    space = 0x20
+    at_mark = 0x40
+    alphabet_A = 0x41
+    alphabet_Z = 0x5A
+    square_bra = 0x5B
+    back_quote = 0x60
+    alphabet_a = 0x61
+    alphabet_z = 0x7A
+    bracket_bra = 0x7B
+    tilda = 0x7E
+    delete = 0x7F
+    ideographic_space = 0x3000
+    postal_mark_face = 0x3020
+    wavy_dash = 0x3030
+    ideographic_half_fill_space = 0x303F
+    greece_Alpha = 0x0391
+    greece_Rho = 0x30A1
+    greece_Sigma = 0x30A3
+    greece_Omega = 0x03A9
+    greece_alpha = 0x03B1
+    greece_omega = 0x03C9
+    cyrillic_A = 0x0410
+    cyrillic_E = 0x0401
+    cyrillic_e = 0x0451
+    cyrillic_ya = 0x044F
+    zenkaku_exc_mark = 0xFF01
+    zenkaku_slash_mark = 0xFF0F
+    zenkaku_number_zero = 0xFF10
+    zenkaku_number_nine = 0xFF1A
+    zenkaku_A = 0xFF21
+    zenkaku_a = 0xFF41
+    zenkaku_z = 0xFF5A
+    endmark = [ord(a) for a in [")", "]", "!", ",", ".", u"\u3001", u"\u3002"]]
+
+Ch = Ch()
