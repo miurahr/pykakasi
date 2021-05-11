@@ -212,6 +212,7 @@ class Genkanwadict:
             os.unlink(dst)
         self._makekanwa(src, unidic, dst)
 
+
 class Ch:
     space = 0x20
     at_mark = 0x40
@@ -247,4 +248,5 @@ class Ch:
     zenkaku_z = 0xFF5A
     endmark = [ord(a) for a in [")", "]", "!", ",", ".", u"\u3001", u"\u3002"]]
 
-Ch = Ch()
+
+Ch = Ch()  # type: ignore
