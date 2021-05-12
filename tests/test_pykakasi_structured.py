@@ -399,3 +399,71 @@ def test_kakasi_unidic_noun(case, expected):
     key = kakasi._jconv._kanwa._jisyo_table.get("85cd", None)
     assert result[0]["orig"] == case
     assert result[0]["hira"] == expected
+
+
+@pytest.mark.parametrize(
+    "case, expected",
+    [
+        (
+            "オレンジ色",
+            [
+                {
+                    "orig": "オレンジ色",
+                    "kana": "オレンジイロ",
+                    "hira": "おれんじいろ",
+                    "hepburn": "orenjiiro",
+                    "kunrei": "orenziiro",
+                    "passport": "orenjiiro",
+                },
+            ],
+        ),
+        (
+            "檸檬は、レモン色",
+            [
+                {
+                    "orig": "檸檬",
+                    "hira": "れもん",
+                    "kana": "レモン",
+                    "hepburn": "remon",
+                    "kunrei": "remon",
+                    "passport": "remon",
+                },
+                {
+                    "orig": "は、",
+                    "hira": "は、",
+                    "kana": "ハ、",
+                    "hepburn": "ha,",
+                    "kunrei": "ha,",
+                    "passport": "ha,",
+                },
+                {
+                    "orig": "レモン色",
+                    "kana": "レモンイロ",
+                    "hira": "れもんいろ",
+                    "hepburn": "remon'iro",
+                    "kunrei": "remon'iro",
+                    "passport": "remon'iro",
+                },
+            ],
+        )
+    ],
+)
+def test_kakasi_wagakuni(case, expected):
+    kakasi = pykakasi.kakasi()
+    result = kakasi.convert(case)
+    if len(result) >= len(expected):
+        for i, r in enumerate(result):
+            assert r["orig"] == expected[i]["orig"]
+            assert r["hira"] == expected[i]["hira"]
+            assert r["kana"] == expected[i]["kana"]
+            assert r["hepburn"] == expected[i]["hepburn"]
+            assert r["kunrei"] == expected[i]["kunrei"]
+            assert r["passport"] == expected[i]["passport"]
+    else:
+        for i, e in enumerate(expected):
+            assert result[i]["orig"] == e["orig"]
+            assert result[i]["hira"] == e["hira"]
+            assert result[i]["kana"] == e["kana"]
+            assert result[i]["hepburn"] == e["hepburn"]
+            assert result[i]["kunrei"] == e["kunrei"]
+            assert result[i]["passport"] == e["passport"]
