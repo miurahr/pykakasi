@@ -13,7 +13,6 @@ from .properties import Configurations
 
 
 class JConv:
-
     def __init__(self):
         self._kanwa = Kanwa()
         self._itaiji = Itaiji()
@@ -36,7 +35,9 @@ class JConv:
                 Hstr = yomi
                 break
 
-        for _ in range(num_vs):  # when converting string with variation selector, calculate max_len again
+        for _ in range(
+            num_vs
+        ):  # when converting string with variation selector, calculate max_len again
             if max_len > len(itext):
                 break
             elif text[max_len - 1] != itext[max_len - 1]:
@@ -102,4 +103,3 @@ class Kanwa:
 
     def search(self, key):
         return self._jisyo_table.longest_prefix(key)
-
