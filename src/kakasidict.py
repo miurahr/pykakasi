@@ -4,7 +4,7 @@ import pickle
 import re
 import shutil
 import tempfile
-from typing import Dict, List, Optional, Tuple, Union
+from typing import Dict, Optional, Union
 
 import pygtrie  # type: ignore  # noqa
 import py7zr  # type: ignore  # noqa
