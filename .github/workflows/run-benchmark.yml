@@ -23,7 +23,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -U pip
-          pip install tox tox-gh-actions
+          pip install tox tox-gh-actions build
       - name: Run benchmark with tox
         run: |
           tox
