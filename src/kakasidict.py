@@ -6,7 +6,7 @@ import shutil
 import tempfile
 from typing import Dict, List, Optional, Tuple, Union
 
-import pygtrie
+import pygtrie  # type: ignore  # noqa
 import py7zr  # type: ignore  # noqa
 
 root_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))

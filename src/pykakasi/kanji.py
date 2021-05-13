@@ -7,7 +7,7 @@ import pickle
 import threading
 from typing import Tuple
 
-import pygtrie
+import pygtrie  # type: ignore  # noqa
 
 from .properties import Configurations
 
