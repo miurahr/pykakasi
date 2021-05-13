@@ -216,5 +216,5 @@ class Kanwa:
                         self._jisyo_table = pickle.load(d)
 
     def load(self, char: str):
-        key = "%04x" % ord(char)
+        key = ord(char[0])
         return self._jisyo_table.get(key, None)

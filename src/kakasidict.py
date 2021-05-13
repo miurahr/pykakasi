@@ -77,7 +77,7 @@ class Genkanwadict:
     # for kanwadict
 
     def _makekanwa(self, src: str, unidicz, dst: str):
-        self.records: Dict[str, Dict[str, List[Tuple[str, ...]]]] = {}
+        self.records: Dict[int, Dict[str, List[Tuple[str, ...]]]] = {}
         with open(src, "r", encoding="utf-8") as f:
             for line in f:
                 self._parse_kakasi_dict(line.strip())
@@ -163,7 +163,7 @@ class Genkanwadict:
         return True
 
     def _updaterec(self, kanji: str, yomi, tail) -> None:
-        key = "%04x" % ord(kanji[0])
+        key = ord(kanji[0])
         if key in self.records:
             if kanji in self.records[key]:
                 rec = self.records[key][kanji]
