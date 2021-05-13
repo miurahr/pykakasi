@@ -7,109 +7,12 @@ import pickle
 import threading
 from typing import Tuple
 
+import pygtrie
+
 from .properties import Configurations
 
 
 class JConv:
-
-    _cl_table = [
-        "",
-        "aiueow",
-        "aiueow",
-        "aiueow",
-        "aiueow",
-        "aiueow",
-        "aiueow",
-        "aiueow",
-        "aiueow",
-        "aiueow",
-        "aiueow",
-        "k",
-        "g",
-        "k",
-        "g",
-        "k",
-        "g",
-        "k",
-        "g",
-        "k",
-        "g",
-        "s",
-        "zj",
-        "s",
-        "zj",
-        "s",
-        "zj",
-        "s",
-        "zj",
-        "s",
-        "zj",
-        "t",
-        "d",
-        "tc",
-        "d",
-        "aiueokstchgzjfdbpw",
-        "t",
-        "d",
-        "t",
-        "d",
-        "t",
-        "d",
-        "n",
-        "n",
-        "n",
-        "n",
-        "n",
-        "h",
-        "b",
-        "p",
-        "h",
-        "b",
-        "p",
-        "hf",
-        "b",
-        "p",
-        "h",
-        "b",
-        "p",
-        "h",
-        "b",
-        "p",
-        "m",
-        "m",
-        "m",
-        "m",
-        "m",
-        "y",
-        "y",
-        "y",
-        "y",
-        "y",
-        "y",
-        "rl",
-        "rl",
-        "rl",
-        "rl",
-        "rl",
-        "wiueo",
-        "wiueo",
-        "wiueo",
-        "wiueo",
-        "w",
-        "n",
-        "v",
-        "k",
-        "k",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-    ]
 
     def __init__(self):
         self._kanwa = Kanwa()
@@ -124,28 +27,16 @@ class JConv:
         Hstr = ""
         text = self._itaiji.convert(itext)
         num_vs = len(itext) - len(text)
-        table = self._kanwa.load(text[0])
-        if table is None:
-            return "", 0
-        for (k, v) in table.items():
-            length = len(k)
-            if len(text) >= length:
-                if text.startswith(k):
-                    for (yomi, tail) in v:
-                        if tail == "":
-                            if max_len < length:
-                                Hstr = yomi
-                                max_len = length
-                        elif (
-                            max_len < length + 1
-                            and len(text) > length
-                            and self._isCletter(tail, text[length])
-                        ):
-                            Hstr = "".join([yomi, text[length]])
-                            max_len = length + 1
-        for _ in range(
-            num_vs
-        ):  # when converting string with kanji wit variation selector, calculate max_len again
+        res = self._kanwa.search(text)
+        if bool(res):
+            length = len(res.key)
+            max_len = length
+            for yomi in res.value:
+                # FIXME: how to select from multiple candidate
+                Hstr = yomi
+                break
+
+        for _ in range(num_vs):  # when converting string with variation selector, calculate max_len again
             if max_len > len(itext):
                 break
             elif text[max_len - 1] != itext[max_len - 1]:
@@ -159,13 +50,6 @@ class JConv:
             else:
                 pass
         return (Hstr, max_len)
-
-    def _isCletter(self, literal: str, c: str) -> bool:
-        if (0x3041 <= ord(c) <= 0x309F) and (
-            literal in self._cl_table[ord(c) - 0x3040]
-        ):  # ぁ:= u\3041
-            return True
-        return False
 
     def _is_vschr(self, ch):
         return 0x0E0100 <= ord(ch) <= 0x0E1EF or 0xFE00 <= ord(ch) <= 0xFE02
@@ -205,6 +89,7 @@ class Kanwa:
     def __new__(cls, *p, **k):
         self = object.__new__(cls, *p, **k)
         self.__dict__ = cls._shared_state
+        self._jisyo_table: pygtrie.CharTrie
         return self
 
     def __init__(self):
@@ -215,6 +100,6 @@ class Kanwa:
                     with open(dictpath, "rb") as d:
                         self._jisyo_table = pickle.load(d)
 
-    def load(self, char: str):
-        key = "%04x" % ord(char)
-        return self._jisyo_table.get(key, None)
+    def search(self, key):
+        return self._jisyo_table.longest_prefix(key)
+
