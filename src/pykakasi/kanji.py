@@ -135,9 +135,12 @@ class JConv:
                         yomi = tok[0]
                         tail = tok[1]
                         con = tok[2:]
-                        if btext in con:
-                            Hstr = yomi
-                            max_len = length
+                        if len(con) > 0:
+                            if btext in con:
+                                Hstr = yomi
+                                max_len = length
+                            else:
+                                pass
                         elif tail == "":
                             if max_len < length:
                                 Hstr = yomi
