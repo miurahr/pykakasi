@@ -164,4 +164,3 @@ class Genkanwadict:
         if os.path.exists(dst):
             os.unlink(dst)
         self._makekanwa(src, dst)
-
