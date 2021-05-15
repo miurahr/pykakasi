@@ -12,105 +12,6 @@ from .properties import Configurations
 
 class JConv:
 
-    _cl_table = [
-        "",
-        "aiueow",
-        "aiueow",
-        "aiueow",
-        "aiueow",
-        "aiueow",
-        "aiueow",
-        "aiueow",
-        "aiueow",
-        "aiueow",
-        "aiueow",
-        "k",
-        "g",
-        "k",
-        "g",
-        "k",
-        "g",
-        "k",
-        "g",
-        "k",
-        "g",
-        "s",
-        "zj",
-        "s",
-        "zj",
-        "s",
-        "zj",
-        "s",
-        "zj",
-        "s",
-        "zj",
-        "t",
-        "d",
-        "tc",
-        "d",
-        "aiueokstchgzjfdbpw",
-        "t",
-        "d",
-        "t",
-        "d",
-        "t",
-        "d",
-        "n",
-        "n",
-        "n",
-        "n",
-        "n",
-        "h",
-        "b",
-        "p",
-        "h",
-        "b",
-        "p",
-        "hf",
-        "b",
-        "p",
-        "h",
-        "b",
-        "p",
-        "h",
-        "b",
-        "p",
-        "m",
-        "m",
-        "m",
-        "m",
-        "m",
-        "y",
-        "y",
-        "y",
-        "y",
-        "y",
-        "y",
-        "rl",
-        "rl",
-        "rl",
-        "rl",
-        "rl",
-        "wiueo",
-        "wiueo",
-        "wiueo",
-        "wiueo",
-        "w",
-        "n",
-        "v",
-        "k",
-        "k",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-    ]
-
     def __init__(self):
         self._kanwa = Kanwa()
         self._itaiji = Itaiji()
@@ -131,18 +32,10 @@ class JConv:
             length = len(k)
             if len(text) >= length:
                 if text.startswith(k):
-                    for (yomi, tail) in v:
-                        if tail == "":
-                            if max_len < length:
-                                Hstr = yomi
-                                max_len = length
-                        elif (
-                            max_len < length + 1
-                            and len(text) > length
-                            and self._isCletter(tail, text[length])
-                        ):
-                            Hstr = "".join([yomi, text[length]])
-                            max_len = length + 1
+                    for yomi in v:
+                        if max_len < length:
+                            Hstr = yomi
+                            max_len = length
         for _ in range(
             num_vs
         ):  # when converting string with kanji wit variation selector, calculate max_len again
