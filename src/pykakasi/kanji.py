@@ -11,7 +11,6 @@ from .properties import Configurations
 
 
 class JConv:
-
     def __init__(self):
         self._kanwa = Kanwa()
         self._itaiji = Itaiji()
