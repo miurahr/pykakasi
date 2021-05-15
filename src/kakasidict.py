@@ -2,8 +2,6 @@ import codecs
 import os
 import pickle
 import re
-import shutil
-import tempfile
 from typing import Dict, List, Optional, Tuple, Union
 
 import py7zr  # type: ignore  # noqa
