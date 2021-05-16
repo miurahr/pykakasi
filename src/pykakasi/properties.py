@@ -60,7 +60,7 @@ class Ch:
     zenkaku_number_nine = 0xFF1A
     zenkaku_A = 0xFF21
     zenkaku_a = 0xFF41
-    endmark = [ord(a) for a in [")", "]", "!", ",", ".", u"\u3001", u"\u3002"]]
+    endmark = ")]!,.,\u3001\u3002"
 
 
 Ch = Ch()
