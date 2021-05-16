@@ -387,6 +387,91 @@ def test_issue114():
 def test_issue115():
     kks = pykakasi.kakasi()
     result = kks.convert("ﾞっ、")  # \uFF9E
-    assert result[0]["hira"] == "\u309Bっ、"
-    assert result[0]["kana"] == "\uFF9Eッ、"
-    assert result[0]["hepburn"] == '"tsu,'
+    expected = [
+        {"hira": "\u309B", "kana": "\uFF9E", "hepburn": '"'},
+        {"hira": "っ、", "kana": "ッ、", "hepburn": "tsu,"},
+    ]
+    for i in range(len(expected)):
+        assert result[i]["hira"] == expected[i]["hira"]
+        assert result[i]["kana"] == expected[i]["kana"]
+        assert result[i]["hepburn"] == expected[i]["hepburn"]
+
+
+@pytest.mark.parametrize("case, expected", [("藍之介", "あいのすけ"), ("藍水", "らんすい")])
+def test_kakasi_unidic_noun(case, expected):
+    kakasi = pykakasi.Kakasi()
+    result = kakasi.convert(case)
+    key = kakasi._jconv._kanwa._jisyo_table.get("85cd", None)
+    assert result[0]["orig"] == case
+    assert result[0]["hira"] == expected
+
+
+@pytest.mark.parametrize(
+    "case, expected",
+    [
+        (
+            "バニーちゃんちのシャワーノズルの先端",
+            [
+                {
+                    "orig": "バニー",
+                    "hira": "ばにー",
+                    "kana": "バニー",
+                    "hepburn": "banii",
+                    "kunrei": "banii",
+                    "passport": "banii",
+                },
+                {
+                    "orig": "ちゃんちの",
+                    "hira": "ちゃんちの",
+                    "kana": "チャンチノ",
+                    "hepburn": "chanchino",
+                    "kunrei": "tyantino",
+                    "passport": "chanchino",
+                },
+                {
+                    "orig": "シャワーノズル",
+                    "hira": "しゃわーのずる",
+                    "kana": "シャワーノズル",
+                    "hepburn": "shawaanozuru",
+                    "kunrei": "syawaanozuru",
+                    "passport": "shawaanozuru",
+                },
+                {
+                    "orig": "の",
+                    "hira": "の",
+                    "kana": "ノ",
+                    "hepburn": "no",
+                    "kunrei": "no",
+                    "passport": "no",
+                },
+                {
+                    "orig": "先端",
+                    "hira": "せんたん",
+                    "kana": "センタン",
+                    "hepburn": "sentan",
+                    "kunrei": "sentan",
+                    "passport": "sentan",
+                },
+            ],
+        )
+    ],
+)
+def test_kakasi_unihandecode(case, expected):
+    kakasi = pykakasi.Kakasi()
+    result = kakasi.convert(case)
+    if len(result) < len(expected):
+        for i, r in enumerate(result):
+            assert r["orig"] == expected[i]["orig"]
+            assert r["hira"] == expected[i]["hira"]
+            assert r["kana"] == expected[i]["kana"]
+            assert r["hepburn"] == expected[i]["hepburn"]
+            assert r["kunrei"] == expected[i]["kunrei"]
+            assert r["passport"] == expected[i]["passport"]
+    else:
+        for i, e in enumerate(expected):
+            assert result[i]["orig"] == e["orig"]
+            assert result[i]["hira"] == e["hira"]
+            assert result[i]["kana"] == e["kana"]
+            assert result[i]["hepburn"] == e["hepburn"]
+            assert result[i]["kunrei"] == e["kunrei"]
+            assert result[i]["passport"] == e["passport"]
