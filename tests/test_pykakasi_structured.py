@@ -452,7 +452,7 @@ def test_kakasi_unidic_noun(case, expected):
                     "kunrei": "sentan",
                     "passport": "sentan",
                 },
-            ]
+            ],
         ),
         (
             "明日は明日の風が吹く",
@@ -512,9 +512,9 @@ def test_kakasi_unidic_noun(case, expected):
                     "hepburn": "fuku",
                     "kunrei": "fuku",
                     "passport": "fuku",
-                }
-            ]
-        )
+                },
+            ],
+        ),
     ],
 )
 def test_kakasi_unihandecode(case, expected):
