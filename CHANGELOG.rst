@@ -25,6 +25,26 @@ Removed
 Security
 --------
 
+v2.1.1_ (16, May 2021)
+======================
+
+Added
+-----
+* Provide Kakasi.normalize(text) class method
+* Add unidic data into data (not used yet), and add parse utility.
+
+Fixed
+-----
+* Put type hint stub into package
+* Copyright notifications
+
+Changed
+-------
+* Expand all cletter into dictionary (#139)
+* Change primary kanwadict index from str to int
+* test: gather all legacy test into test_pykakasi_legacy.py file.
+
+
 v2.1.0_ (6, May 2021)
 =====================
 
@@ -145,7 +165,8 @@ v2.0.0_ (31, May. 2020)
 =======================
 
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.1.0...HEAD
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.1.1...HEAD
+.. _v2.1.1: https://github.com/miurahr/pykakasi/compare/v2.1.0...v2.1.1
 .. _v2.1.0: https://github.com/miurahr/pykakasi/compare/v2.0.8...v2.1.0
 .. _v2.0.8: https://github.com/miurahr/pykakasi/compare/v2.0.7...v2.0.8
 .. _v2.0.7: https://github.com/miurahr/pykakasi/compare/v2.0.6...v2.0.7
