@@ -452,7 +452,68 @@ def test_kakasi_unidic_noun(case, expected):
                     "kunrei": "sentan",
                     "passport": "sentan",
                 },
-            ],
+            ]
+        ),
+        (
+            "明日は明日の風が吹く",
+            [
+                {
+                    "orig": "明日",
+                    "hira": "あした",
+                    "kana": "アシタ",
+                    "hepburn": "ashita",
+                    "kunrei": "asita",
+                    "passport": "ashita",
+                },
+                {
+                    "orig": "は",
+                    "hira": "は",
+                    "kana": "ハ",
+                    "hepburn": "ha",
+                    "kunrei": "ha",
+                    "passport": "ha",
+                },
+                {
+                    "orig": "明日",
+                    "hira": "あした",
+                    "kana": "アシタ",
+                    "hepburn": "ashita",
+                    "kunrei": "asita",
+                    "passport": "ashita",
+                },
+                {
+                    "orig": "の",
+                    "hira": "の",
+                    "kana": "ノ",
+                    "hepburn": "no",
+                    "kunrei": "no",
+                    "passport": "no",
+                },
+                {
+                    "orig": "風",
+                    "hira": "かぜ",
+                    "kana": "カゼ",
+                    "hepburn": "kaze",
+                    "kunrei": "kaze",
+                    "passport": "kaze",
+                },
+                {
+                    "orig": "が",
+                    "hira": "が",
+                    "kana": "ガ",
+                    "hepburn": "ga",
+                    "kunrei": "ga",
+                    "passport": "ga",
+                },
+                {
+                    "orig": "吹く",
+                    "hira": "ふく",
+                    "kana": "フク",
+                    "hepburn": "fuku",
+                    "kunrei": "fuku",
+                    "passport": "fuku",
+                }
+            ]
         )
     ],
 )
