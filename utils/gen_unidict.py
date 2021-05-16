@@ -1,8 +1,10 @@
 import os
 import pathlib
+import pickle
 import shutil
 import sys
 import tempfile
+import threading
 
 import py7zr
 
@@ -12,6 +14,7 @@ root_dir = pathlib.Path(os.path.abspath(os.path.dirname(os.path.dirname(__file__
 class GenUnidict:
     def __init__(self, unidicz):
         self.unidicz = unidicz
+        self.records = {}
 
     def generate(self, target):
         tmpd = tempfile.mkdtemp()
@@ -39,7 +42,20 @@ class GenUnidict:
         if not self._is_kanji(key):
             return None
         hira = self._k2h(yomi)
+        if self._duplicated(key, hira):
+            return None
         return "{} {}".format(hira, key)
+
+    def _duplicated(self, kanji, hira):
+        key = ord(kanji[0])
+        table = self.records.get(key, None)
+        if table is None:
+            return False
+        if kanji in table:
+            for (yomi, tail) in table[kanji]:
+                if yomi == hira and tail == "":
+                    return True
+        return False
 
     def _is_symbol(self, c: int):
         return (
@@ -89,6 +105,36 @@ class GenUnidict:
                 return False
         return True
 
+    def load_kakasidict(self, src):
+        with open(src, "r", encoding="utf-8") as f:
+            for line in f:
+                self._parse_kakasi_dict(line.strip())
+            f.close()
+
+    def _parse_kakasi_dict(self, line: str) -> None:
+        if line.startswith(";;"):  # skip comment
+            return
+        (yomi, kanji) = line.split(" ")
+        if ord(yomi[-1:]) <= ord("z"):
+            tail = yomi[-1:]
+            yomi = yomi[:-1]
+        else:
+            tail = ""
+        self._updaterec(kanji, yomi, tail)
+
+    def _updaterec(self, kanji: str, yomi, tail) -> None:
+        key = ord(kanji[0])
+        if key in self.records:
+            if kanji in self.records[key]:
+                rec = self.records[key][kanji]
+                rec.append((yomi, tail))
+                self.records[key].update({kanji: rec})
+            else:
+                self.records[key][kanji] = [(yomi, tail)]
+        else:
+            self.records[key] = {}
+            self.records[key][kanji] = [(yomi, tail)]
+
 
 class Ch:
     space = 0x20
@@ -131,8 +177,10 @@ Ch = Ch()  # type: ignore
 
 def main():
     unidicz = root_dir / "src" / "data" / "unidic" / "lex.7z"
+    kakasidict = root_dir / "src" / "data" / "kakasidict.utf8"
     target = root_dir / "src" / "data" / "unidict.utf8"
     generator = GenUnidict(unidicz)
+    generator.load_kakasidict(kakasidict)
     generator.generate(target)
     return 0
 
