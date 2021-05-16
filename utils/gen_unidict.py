@@ -18,9 +18,11 @@ class GenUnidict:
     def generate_adjective(self, src, target):
         with open(src, "r", encoding="utf-8") as f:
             with target.open("w") as o:
-                o.write(";; KAKASI (Kanji Kana Simple inversion program)\n"
-                        ";; unidict - dictionary distilled from unidic v3.1.0\n"
-                        ";; Copyright (c) 2011-2021, The UniDic Consortium\n")
+                o.write(
+                    ";; KAKASI (Kanji Kana Simple inversion program)\n"
+                    ";; unidict - dictionary distilled from unidic v3.1.0\n"
+                    ";; Copyright (c) 2011-2021, The UniDic Consortium\n"
+                )
                 for line in f:
                     rec = self._parse_unidic_adjective(line.strip())
                     if rec is not None:
@@ -29,11 +31,13 @@ class GenUnidict:
                             o.write("\n")
 
     def generate_noun(self, src, target):
-       with open(src, "r", encoding="utf-8") as f:
+        with open(src, "r", encoding="utf-8") as f:
             with target.open("w") as o:
-                o.write(";; KAKASI (Kanji Kana Simple inversion program)\n"
-                        ";; unidict - dictionary distilled from unidic v3.1.0\n"
-                        ";; Copyright (c) 2011-2021, The UniDic Consortium\n")
+                o.write(
+                    ";; KAKASI (Kanji Kana Simple inversion program)\n"
+                    ";; unidict - dictionary distilled from unidic v3.1.0\n"
+                    ";; Copyright (c) 2011-2021, The UniDic Consortium\n"
+                )
                 for line in f:
                     rec = self._parse_unidic_noun(line.strip())
                     if rec is not None:
@@ -223,6 +227,7 @@ def main():
     #
     shutil.rmtree(tmpd)
     return 0
+
 
 if __name__ == "__main__":
     sys.exit(main())
