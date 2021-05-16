@@ -167,7 +167,8 @@ class Genkanwadict:
 
         sources = [
             os.path.join(srcdir, "kakasidict.utf8"),
-            os.path.join(srcdir, "unidict_noun.utf8")
+            os.path.join(srcdir, "unidict_noun.utf8"),
+            os.path.join(srcdir, "unidict_adj.utf8")
         ]
         dst = os.path.join(dstdir, "kanwadict4.db")
         if os.path.exists(dst):
