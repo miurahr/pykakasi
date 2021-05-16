@@ -390,3 +390,12 @@ def test_issue115():
     assert result[0]["hira"] == "\u309Bっ、"
     assert result[0]["kana"] == "\uFF9Eッ、"
     assert result[0]["hepburn"] == '"tsu,'
+
+
+@pytest.mark.parametrize("case, expected", [("藍之介", "あいのすけ"), ("藍水", "らんすい")])
+def test_kakasi_unidic_noun(case, expected):
+    kakasi = pykakasi.Kakasi()
+    result = kakasi.convert(case)
+    key = kakasi._jconv._kanwa._jisyo_table.get("85cd", None)
+    assert result[0]["orig"] == case
+    assert result[0]["hira"] == expected
