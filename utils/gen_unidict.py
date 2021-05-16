@@ -1,8 +1,10 @@
 import os
 import pathlib
+import pickle
 import shutil
 import sys
 import tempfile
+import threading
 
 import py7zr
 
@@ -10,26 +12,40 @@ root_dir = pathlib.Path(os.path.abspath(os.path.dirname(os.path.dirname(__file__
 
 
 class GenUnidict:
-    def __init__(self, unidicz):
-        self.unidicz = unidicz
+    def __init__(self):
+        self.records = {}
 
-    def generate(self, target):
-        tmpd = tempfile.mkdtemp()
-        with py7zr.SevenZipFile(self.unidicz, "r") as u:
-            u.extractall(path=tmpd)
-        with open(os.path.join(tmpd, "lex_3_1.csv"), "r", encoding="utf-8") as f:
+    def generate_adjective(self, src, target):
+        with open(src, "r", encoding="utf-8") as f:
             with target.open("w") as o:
-                o.write(";; KAKASI (Kanji Kana Simple inversion program)\n"
-                        ";; unidict - dictionary distilled from unidic v3.1.0\n"
-                        ";; Copyright (c) 2011-2021, The UniDic Consortium\n")
+                o.write(
+                    ";; KAKASI (Kanji Kana Simple inversion program)\n"
+                    ";; unidict - dictionary distilled from unidic v3.1.0\n"
+                    ";; Copyright (c) 2011-2021, The UniDic Consortium\n"
+                )
                 for line in f:
-                    rec = self._parse_unidic(line.strip())
+                    rec = self._parse_unidic_adjective(line.strip())
                     if rec is not None:
-                        o.write(rec)
-                        o.write("\n")
-        shutil.rmtree(tmpd)
+                        for t in rec:
+                            o.write(t)
+                            o.write("\n")
 
-    def _parse_unidic(self, line: str):
+    def generate_noun(self, src, target):
+        with open(src, "r", encoding="utf-8") as f:
+            with target.open("w") as o:
+                o.write(
+                    ";; KAKASI (Kanji Kana Simple inversion program)\n"
+                    ";; unidict - dictionary distilled from unidic v3.1.0\n"
+                    ";; Copyright (c) 2011-2021, The UniDic Consortium\n"
+                )
+                for line in f:
+                    rec = self._parse_unidic_noun(line.strip())
+                    if rec is not None:
+                        for t in rec:
+                            o.write(t)
+                            o.write("\n")
+
+    def _parse_unidic_noun(self, line: str):
         token = line.split(",")
         key = token[0]
         yomi = token[10]
@@ -39,7 +55,40 @@ class GenUnidict:
         if not self._is_kanji(key):
             return None
         hira = self._k2h(yomi)
-        return "{} {}".format(hira, key)
+        if self._duplicated(key, hira, ""):
+            return None
+        return ["{} {}".format(hira, key)]
+
+    def _parse_unidic_adjective(self, line: str):
+        token = line.split(",")
+        key = token[0]
+        yomi = token[13]
+        role = token[4]
+        var = token[9]
+        if role not in ["形容詞"]:
+            return None
+        if "語幹" not in var:
+            return None
+        if not self._is_kanji(key[0]):
+            return None
+        hira = self._k2h(yomi)
+        if self._duplicated(key, hira, "i"):
+            return None
+        result = []
+        for c in ["i", "k", "s"]:
+            result.append("{} {}".format(hira + c, key))
+        return result
+
+    def _duplicated(self, kanji, hira, c):
+        key = ord(kanji[0])
+        table = self.records.get(key, None)
+        if table is None:
+            return False
+        if kanji in table:
+            for (yomi, tail) in table[kanji]:
+                if yomi == hira and tail == c:
+                    return True
+        return False
 
     def _is_symbol(self, c: int):
         return (
@@ -89,6 +138,36 @@ class GenUnidict:
                 return False
         return True
 
+    def load_kakasidict(self, src):
+        with open(src, "r", encoding="utf-8") as f:
+            for line in f:
+                self._parse_kakasi_dict(line.strip())
+            f.close()
+
+    def _parse_kakasi_dict(self, line: str) -> None:
+        if line.startswith(";;"):  # skip comment
+            return
+        (yomi, kanji) = line.split(" ")
+        if ord(yomi[-1:]) <= ord("z"):
+            tail = yomi[-1:]
+            yomi = yomi[:-1]
+        else:
+            tail = ""
+        self._updaterec(kanji, yomi, tail)
+
+    def _updaterec(self, kanji: str, yomi, tail) -> None:
+        key = ord(kanji[0])
+        if key in self.records:
+            if kanji in self.records[key]:
+                rec = self.records[key][kanji]
+                rec.append((yomi, tail))
+                self.records[key].update({kanji: rec})
+            else:
+                self.records[key][kanji] = [(yomi, tail)]
+        else:
+            self.records[key] = {}
+            self.records[key][kanji] = [(yomi, tail)]
+
 
 class Ch:
     space = 0x20
@@ -131,10 +210,24 @@ Ch = Ch()  # type: ignore
 
 def main():
     unidicz = root_dir / "src" / "data" / "unidic" / "lex.7z"
-    target = root_dir / "src" / "data" / "unidict.utf8"
-    generator = GenUnidict(unidicz)
-    generator.generate(target)
+    kakasidict = root_dir / "src" / "data" / "kakasidict.utf8"
+    target_noun = root_dir / "src" / "data" / "unidict_noun.utf8"
+    target_adj = root_dir / "src" / "data" / "unidict_adj.utf8"
+    #
+    generator = GenUnidict()
+    generator.load_kakasidict(kakasidict)
+    #
+    tmpd = tempfile.mkdtemp()
+    with py7zr.SevenZipFile(unidicz, "r") as u:
+        u.extractall(path=tmpd)
+    unidic = os.path.join(tmpd, "lex_3_1.csv")
+    #
+    # generator.generate_noun(unidic, target_noun)
+    generator.generate_adjective(unidic, target_adj)
+    #
+    shutil.rmtree(tmpd)
     return 0
+
 
 if __name__ == "__main__":
     sys.exit(main())

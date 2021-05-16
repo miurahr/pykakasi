@@ -72,11 +72,12 @@ class Genkanwadict:
 
     # for kanwadict
 
-    def _makekanwa(self, src: str, dst: str):
+    def _makekanwa(self, sources: List[str], dst: str):
         self.records: Dict[int, Dict[str, List[Tuple[str, ...]]]] = {}
-        with open(src, "r", encoding="utf-8") as f:
-            for line in f:
-                self._parse_kakasi_dict(line.strip())
+        for src in sources:
+            with open(src, "r", encoding="utf-8") as f:
+                for line in f:
+                    self._parse_kakasi_dict(line.strip())
         self.kanwaout(dst)
 
     def _parse_kakasi_dict(self, line: str) -> None:
@@ -164,8 +165,12 @@ class Genkanwadict:
             os.unlink(dst)
         self.maketrans(src, dst)
 
-        src = os.path.join(srcdir, "kakasidict.utf8")
+        sources = [
+            os.path.join(srcdir, "kakasidict.utf8"),
+            os.path.join(srcdir, "unidict_noun.utf8"),
+            os.path.join(srcdir, "unidict_adj.utf8"),
+        ]
         dst = os.path.join(dstdir, "kanwadict4.db")
         if os.path.exists(dst):
             os.unlink(dst)
-        self._makekanwa(src, dst)
+        self._makekanwa(sources, dst)
