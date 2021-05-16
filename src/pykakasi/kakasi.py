@@ -56,16 +56,21 @@ class Kakasi:
         i = 0
 
         while i < len(text):
-            t, ln = self._jconv.convert(text[i:])
-            if ln > 0:  # When JConv successfully convert text
-                if _state:
-                    _result.append(self._iconv.convert(otext + text[i : i + ln], t))
+            if self._isKanji(text[i]):
+                t, ln = self._jconv.convert(text[i:])
+                if ln <= 0:  # When JConv successfully convert text
+                    _state = False
+                    otext = otext + text[i]
+                    i += 1
                 else:
-                    _result.append(self._iconv.convert(otext, otext))
-                    _result.append(self._iconv.convert(text[i : i + ln], t))
-                    _state = True
-                otext = ""
-                i += ln
+                    if _state:
+                        _result.append(self._iconv.convert(otext + text[i : i + ln], t))
+                    else:
+                        _result.append(self._iconv.convert(otext, otext))
+                        _result.append(self._iconv.convert(text[i : i + ln], t))
+                        _state = True
+                    otext = ""
+                    i += ln
             else:
                 _state = False
                 otext = otext + text[i]

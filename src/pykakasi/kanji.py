@@ -27,14 +27,14 @@ class JConv:
         text = self._itaiji.convert(itext)
         num_vs = len(itext) - len(text)
         res = self._kanwa.search(text)
-        if bool(res):
-            length = len(res.key)
-            max_len = length
-            for yomi in res.value:
-                # FIXME: how to select from multiple candidate
-                Hstr = yomi
-                break
-
+        if not bool(res):
+            return "", 0
+        length = len(res.key)
+        max_len = length
+        for yomi in res.value:
+            # FIXME: how to select from multiple candidate
+            Hstr = yomi
+            break
         for _ in range(
             num_vs
         ):  # when converting string with variation selector, calculate max_len again
