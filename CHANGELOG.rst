@@ -9,6 +9,7 @@ Unreleased_
 
 Added
 -----
+* dictionary: add noun and adjectives from UniDic(#140)
 
 Changed
 -------
