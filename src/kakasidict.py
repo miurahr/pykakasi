@@ -4,8 +4,6 @@ import pickle
 import re
 from typing import Dict, List, Optional, Tuple, Union
 
-import py7zr  # type: ignore  # noqa
-
 root_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
 
