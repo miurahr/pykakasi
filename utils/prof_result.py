@@ -12,8 +12,8 @@ def print_prof(file):
 
 
 def main():
-    parser = argparse.ArgumentParser(prog='prof_result')
-    parser.add_argument('prof', type=pathlib.Path, help='pytest-profile saved prof.')
+    parser = argparse.ArgumentParser(prog="prof_result")
+    parser.add_argument("prof", type=pathlib.Path, help="pytest-profile saved prof.")
     args = parser.parse_args()
     print_prof(args.prof)
 
