@@ -2,7 +2,7 @@ import codecs
 import os
 import pickle
 import re
-from typing import Dict, List, Optional, Tuple, Union
+from typing import Dict, Optional, Union
 
 import pygtrie  # type: ignore  # noqa
 
