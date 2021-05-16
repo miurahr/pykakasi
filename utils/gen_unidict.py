@@ -178,7 +178,7 @@ Ch = Ch()  # type: ignore
 def main():
     unidicz = root_dir / "src" / "data" / "unidic" / "lex.7z"
     kakasidict = root_dir / "src" / "data" / "kakasidict.utf8"
-    target = root_dir / "src" / "data" / "unidict.utf8"
+    target = root_dir / "src" / "data" / "unidict_noun.utf8"
     generator = GenUnidict(unidicz)
     generator.load_kakasidict(kakasidict)
     generator.generate(target)
