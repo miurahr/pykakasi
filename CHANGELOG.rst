@@ -16,6 +16,7 @@ Changed
 
 Fixed
 -----
+* Fix segmentation (wakati) when combination with Katakana and Hiragana(#142)
 
 Deprecated
 ----------
