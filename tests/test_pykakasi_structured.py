@@ -519,14 +519,6 @@ def test_kakasi_unidic_noun(case, expected):
             "\uF862\u6709\u9650\u4F1A\u793E",  # Adobe CID 8321
             [
                 {
-                    "orig": "\uF862",
-                    "hira": "",
-                    "kana": "",
-                    "hepburn": "",
-                    "kunrei": "",
-                    "passport": "",
-                },
-                {
                     "orig": "\u6709\u9650\u4F1A\u793E",
                     "hira": "ゆうげんがいしゃ",
                     "kana": "ユウゲンガイシャ",
