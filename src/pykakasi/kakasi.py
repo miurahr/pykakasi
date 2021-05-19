@@ -4,13 +4,13 @@
 # Copyright 2011-2021 Hiroshi Miura <miurahr@linux.com>
 #
 import enum
-from typing import Dict, List
+from typing import Dict, List, Tuple
 
 import jaconv
 
 from .kanji import Itaiji, JConv
 from .properties import Ch
-from .scripts import A2, H2, IConv, K2
+from .scripts import A2, H2, IConv, K2, Sym2
 
 
 class PyKakasiException(Exception):
@@ -41,25 +41,23 @@ class Kakasi:
     def normalize(cls, text):
         return jaconv.normalize(text)
 
-    def _type(self, c: str):
-        if K2.isRegion(c):
-            return _TYPE.KANA
-        elif A2.isRegion(c):
-            return _TYPE.ALPHA
-        elif H2.isRegion(c):
-            return _TYPE.HIRAGANA
-        # always not Kanji
-        # elif self._isKanji(c):
-        #    return _TYPE.KANJI
-        else:
-            return _TYPE.SYMBOL
+    def _isAlpha(self, c: str):
+        return A2.isRegion(c)
+
+    def _isSymbol(self, c: str):
+        return Sym2.isRegion(c)
+
+    def _isKana(self, c: str):
+        return K2.isRegion(c)
+
+    def _isHira(self, c: str):
+        return H2.isRegion(c)
 
     def _isKanji(self, c: str):
         return 0x3400 <= ord(c[0]) < 0xE000 or self._itaiji.haskey(ord(c[0]))
 
     def convert(self, text: str) -> List[Dict[str, str]]:
         """Convert input text to dictionary contains KANA, HIRA and romaji results."""
-        _state = True
 
         if len(text) == 0:
             return [
@@ -73,63 +71,84 @@ class Kakasi:
                 }
             ]
 
-        otext = ""
+        original_text = ""
+        kana_text = ""
         _result = []
         i = 0
         prev_type = _TYPE.KANJI
+        output_flag: Tuple[bool, bool, bool] = (False, False, False)
 
         while i < len(text):
-            if self._isKanji(text[i]):
+            # output_flag
+            # means (output buffer?, output text[i]?, copy and increment i?)
+            # possible (False, True, True), (True, False, False), (True, True, True)
+            #          (False, False, True)
+            if text[i] in Ch.endmark:
+                prev_type = _TYPE.SYMBOL
+                output_flag = (True, True, True)
+            elif text[i] in Ch.long_symbols:
+                # FIXME: special case
+                output_flag = (False, False, True)
+            elif self._isSymbol(text[i]):
+                if prev_type != _TYPE.SYMBOL:
+                    output_flag = (True, False, True)
+                else:
+                    output_flag = (False, True, True)
+                prev_type = _TYPE.SYMBOL
+            elif self._isKana(text[i]):
+                output_flag = (prev_type != _TYPE.KANA, False, True)
+                prev_type = _TYPE.KANA
+            elif self._isHira(text[i]):
+                output_flag = (prev_type != _TYPE.HIRAGANA, False, True)
+                prev_type = _TYPE.HIRAGANA
+            elif self._isAlpha(text[i]):
+                output_flag = (prev_type != _TYPE.ALPHA, False, True)
+                prev_type = _TYPE.ALPHA
+            elif self._isKanji(text[i]):
+                if len(original_text) > 0:
+                    _result.append(self._iconv.convert(original_text, kana_text))
                 t, ln = self._jconv.convert(text[i:])
-                if ln <= 0:
-                    # When JConv does not convert text
-                    # FIXME: maybe a bug
-                    _state = False
-                    otext = otext + text[i]  # pass through
-                    i += 1
-                else:
-                    if _state:
-                        _result.append(self._iconv.convert(otext + text[i : i + ln], t))
-                    else:
-                        _result.append(self._iconv.convert(otext, otext))
-                        _result.append(self._iconv.convert(text[i : i + ln], t))
-                        _state = True
-                    otext = ""
+                prev_type = _TYPE.KANJI
+                if ln > 0:
+                    original_text = text[i : i + ln]
+                    kana_text = t
                     i += ln
-            elif self._type(text[i]) != prev_type:
-                if text[i] in Ch.endmark:
-                    otext += text[i]
-                    _result.append(self._iconv.convert(otext, otext))
-                    otext = ""
+                    output_flag = (False, False, False)
+                else:  # unknown kanji
+                    original_text = text[i]
+                    kana_text = ""
                     i += 1
-                    _state = True
-                elif text[i] in self._iconv.LONG_SYMBOLS:
-                    otext += text[i]
-                    i += 1
-                    _state = False
-                else:
-                    prev_type = self._type(text[i])
-                    if len(otext) > 0:
-                        _result.append(self._iconv.convert(otext, otext))
-                        otext = text[i]
-                        _state = False
-                        i += 1
-                    else:
-                        _state = False
-                        otext = otext + text[i]
-                        i += 1
+                    output_flag = (True, False, False)
             else:
-                _state = False
-                otext = otext + text[i]
+                if len(original_text) > 0:
+                    _result.append(self._iconv.convert(original_text, kana_text))
+                _result.append(self._iconv.convert(text[i], ""))
                 i += 1
+                output_flag = (False, False, False)
 
-                if otext[-1] in Ch.endmark:
-                    _result.append(self._iconv.convert(otext, otext))
-                    otext = ""
-                    _state = True
+            # Convert to kana and Output based on flag
+            if output_flag[0] and output_flag[1]:
+                original_text += text[i]
+                kana_text += text[i]
+                _result.append(self._iconv.convert(original_text, kana_text))
+                original_text = ""
+                kana_text = ""
+                i += 1
+            elif output_flag[0] and output_flag[2]:
+                if len(original_text) > 0:
+                    _result.append(self._iconv.convert(original_text, kana_text))
+                original_text = text[i]
+                kana_text = text[i]
+                i += 1
+            elif output_flag[2]:
+                original_text += text[i]
+                kana_text += text[i]
+                i += 1
+            else:
+                pass
 
-        if otext:
-            # last word
-            _result.append(self._iconv.convert(otext, otext))
+        # last word
+        if len(original_text) > 0:
+            _result.append(self._iconv.convert(original_text, kana_text))
 
         return _result
