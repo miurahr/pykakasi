@@ -12,8 +12,6 @@ from .properties import Ch, Configurations, Convert_Tables
 class IConv:
 
     _MAXLEN: int = 32
-    LONG_SYMBOLS: str = "\u30FC\u2015\u2212\uFF70"  # "ー  ―  −  ｰ "
-    # _UNCHECKED_LONG_SYMBOLS: str = "\u002D\u2010\u2011\u2013\u2014" # "-  ‐ ‑ – —"
 
     def __init__(self):
         self._hahconv = H2("a", method="Hepburn")
@@ -47,7 +45,7 @@ class IConv:
             if l1 > 0:
                 result += t
                 i += l1
-            elif text[i] in self.LONG_SYMBOLS:  # handle chōonpu sound marks
+            elif text[i] in Ch.long_symbols:  # handle chōonpu sound marks
                 # use previous char as a transliteration for kana-dash
                 if len(result) > 0:
                     result += result[-1]
@@ -315,7 +313,8 @@ class Sym2:
         else:
             self.convert = self.convert_noop
 
-    def isRegion(self, char):
+    @classmethod
+    def isRegion(cls, char: str):
         c = ord(char[0])
         return (
             (Ch.ideographic_space <= c <= Ch.postal_mark_face)
