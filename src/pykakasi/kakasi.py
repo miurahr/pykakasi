@@ -8,7 +8,7 @@ from typing import Dict, List, Tuple
 
 import jaconv
 
-from .kanji import Itaiji, JConv
+from .kanji import JConv
 from .properties import Ch
 from .scripts import A2, H2, IConv, K2, Sym2
 
@@ -103,7 +103,9 @@ class Kakasi:
                     kana_text = ""
                     i += 1
                     output_flag = (True, False, False)
-            elif 0xF000 <= ord(text[i]) <= 0xFFFD or 0x10000 <= ord(text[i]) <= 0x10FFFD:
+            elif (
+                0xF000 <= ord(text[i]) <= 0xFFFD or 0x10000 <= ord(text[i]) <= 0x10FFFD
+            ):
                 # PUA: ignore and drop
                 if len(original_text) > 0:
                     _result.append(self._iconv.convert(original_text, kana_text))
