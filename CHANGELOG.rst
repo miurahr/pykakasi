@@ -13,6 +13,7 @@ Added
 
 Changed
 -------
+* Refactoring main loop logics for convert()(#144)
 
 Fixed
 -----
