@@ -532,10 +532,10 @@ def test_kakasi_unidic_noun(case, expected):
                     "kana": "ユウゲンガイシャ",
                     "hepburn": "yuugengaisha",
                     "kunrei": "yuugengaisya",
-                    "passport": "yuugengaisha"
-                }
-            ]
-        )
+                    "passport": "yuugengaisha",
+                },
+            ],
+        ),
     ],
 )
 def test_kakasi_unihandecode(case, expected):

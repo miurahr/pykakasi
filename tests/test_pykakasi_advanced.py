@@ -361,7 +361,7 @@ expected = [
     {
         "orig": "ことのないやうにすることを",
         "kana": "コトノナイヤウニスルコトヲ",
-        "hira":  "ことのないやうにすることを",
+        "hira": "ことのないやうにすることを",
         "hepburn": "kotononaiyaunisurukotowo",
         "kunrei": "kotononaiyaunisurukotowo",
         "passport": "kotononaiyaunisurukotowo",
@@ -959,6 +959,8 @@ expected = [
         "passport": "suru.",
     },
 ]
+
+
 def test_kakasi_structured_constitution():
     kakasi = pykakasi.kakasi()
     result = kakasi.convert(original_text)

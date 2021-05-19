@@ -64,6 +64,7 @@ class Ch:
     long_symbols = "\u30FC\u2015\u2212\uFF70"  # "ー  ―  −  ｰ "
     # _UNCHECKED_LONG_SYMBOLS: str = "\u002D\u2010\u2011\u2013\u2014" # "-  ‐ ‑ – —"
 
+
 Ch = Ch()
 
 
