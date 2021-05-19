@@ -35,26 +35,10 @@ class Kakasi:
     def __init__(self):
         self._jconv = JConv()
         self._iconv = IConv()
-        self._itaiji = Itaiji()
 
     @classmethod
     def normalize(cls, text):
         return jaconv.normalize(text)
-
-    def _isAlpha(self, c: str):
-        return A2.isRegion(c)
-
-    def _isSymbol(self, c: str):
-        return Sym2.isRegion(c)
-
-    def _isKana(self, c: str):
-        return K2.isRegion(c)
-
-    def _isHira(self, c: str):
-        return H2.isRegion(c)
-
-    def _isKanji(self, c: str):
-        return 0x3400 <= ord(c[0]) < 0xE000 or self._itaiji.haskey(ord(c[0]))
 
     def convert(self, text: str) -> List[Dict[str, str]]:
         """Convert input text to dictionary contains KANA, HIRA and romaji results."""
@@ -89,22 +73,22 @@ class Kakasi:
             elif text[i] in Ch.long_symbols:
                 # FIXME: special case
                 output_flag = (False, False, True)
-            elif self._isSymbol(text[i]):
+            elif Sym2.isRegion(text[i]):
                 if prev_type != _TYPE.SYMBOL:
                     output_flag = (True, False, True)
                 else:
                     output_flag = (False, True, True)
                 prev_type = _TYPE.SYMBOL
-            elif self._isKana(text[i]):
+            elif K2.isRegion(text[i]):
                 output_flag = (prev_type != _TYPE.KANA, False, True)
                 prev_type = _TYPE.KANA
-            elif self._isHira(text[i]):
+            elif H2.isRegion(text[i]):
                 output_flag = (prev_type != _TYPE.HIRAGANA, False, True)
                 prev_type = _TYPE.HIRAGANA
-            elif self._isAlpha(text[i]):
+            elif A2.isRegion(text[i]):
                 output_flag = (prev_type != _TYPE.ALPHA, False, True)
                 prev_type = _TYPE.ALPHA
-            elif self._isKanji(text[i]):
+            elif self._jconv.isRegion(text[i]):
                 if len(original_text) > 0:
                     _result.append(self._iconv.convert(original_text, kana_text))
                 t, ln = self._jconv.convert(text[i:])
