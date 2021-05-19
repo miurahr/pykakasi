@@ -29,10 +29,6 @@ class _TYPE(enum.Enum):
     ALPHA = 5
 
 
-class _STATE(enum.Enum):
-    START = 0
-
-
 class Kakasi:
     """Kakasi is a conversion class for Japanese text."""
 
