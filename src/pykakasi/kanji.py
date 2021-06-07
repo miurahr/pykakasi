@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 # j2.py
 #
-# Copyright 2011-2019 Hiroshi Miura <miurahr@linux.com>
+# Copyright 2011-2021 Hiroshi Miura <miurahr@linux.com>
+
 import functools
 import pickle
 import threading
@@ -31,16 +32,8 @@ class JConv:
             length = len(k)
             if len(text) >= length:
                 if text.startswith(k):
-                    for tok in v:
-                        yomi = tok[0]
-                        con = tok[1:]
-                        if len(con) > 0:
-                            if btext in con:
-                                Hstr = yomi
-                                max_len = length
-                            else:
-                                pass
-                        else:
+                    for yomi, con in v:
+                        if con is None or btext in con:
                             if max_len < length:
                                 Hstr = yomi
                                 max_len = length
