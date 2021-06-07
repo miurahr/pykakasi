@@ -12,8 +12,6 @@ from .properties import Ch, Configurations, Convert_Tables
 class IConv:
 
     _MAXLEN: int = 32
-    _LONG_SYMBOLS: str = "\u30FC\u2015\u2212\uFF70"  # "ー  ―  −  ｰ "
-    # _UNCHECKED_LONG_SYMBOLS: str = "\u002D\u2010\u2011\u2013\u2014" # "-  ‐ ‑ – —"
 
     def __init__(self):
         self._hahconv = H2("a", method="Hepburn")
@@ -47,7 +45,7 @@ class IConv:
             if l1 > 0:
                 result += t
                 i += l1
-            elif text[i] in self._LONG_SYMBOLS:  # handle chōonpu sound marks
+            elif text[i] in Ch.long_symbols:  # handle chōonpu sound marks
                 # use previous char as a transliteration for kana-dash
                 if len(result) > 0:
                     result += result[-1]
@@ -152,7 +150,8 @@ class H2:
         else:
             self.convert = self.convert_noop
 
-    def isRegion(self, char):
+    @classmethod
+    def isRegion(cls, char):
         return 0x3040 < ord(char[0]) < 0x3097 or 0x1B150 <= ord(char[0]) <= 0x1B152
 
     def convert_a(self, text):
@@ -209,18 +208,21 @@ class K2:
         else:
             self.convert = self.convert_noop
 
-    def isRegion(self, char):
+    @classmethod
+    def isRegion(cls, char):
         ch = ord(char[0])
         return (
-            self._is_katakana(ch)
-            or self._is_half_width_kana(ch)
+            cls._is_katakana(ch)
+            or cls._is_half_width_kana(ch)
             or 0x1B164 <= ch <= 0x1B167
         )
 
-    def _is_katakana(self, ch):
+    @classmethod
+    def _is_katakana(cls, ch):
         return 0x30A0 < ch < 0x30FD
 
-    def _is_half_width_kana(self, ch):
+    @classmethod
+    def _is_half_width_kana(cls, ch):
         return 0xFF65 < ch < 0xFF9F
 
     def _convert_half_kana(self, text):
@@ -311,7 +313,8 @@ class Sym2:
         else:
             self.convert = self.convert_noop
 
-    def isRegion(self, char):
+    @classmethod
+    def isRegion(cls, char: str):
         c = ord(char[0])
         return (
             (Ch.ideographic_space <= c <= Ch.postal_mark_face)
@@ -369,7 +372,8 @@ class A2:
         else:
             self.convert = self.convert_noop
 
-    def isRegion(self, char):
+    @classmethod
+    def isRegion(cls, char):
         return Ch.space <= ord(char[0]) < Ch.delete
 
     def _convert(self, text):

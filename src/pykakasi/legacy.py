@@ -213,7 +213,7 @@ class kakasi:
                 self._flag["s"]
                 and otext[-len(self._separator) :] != self._separator
                 and i < len(text)
-                and not (ord(text[i]) in Ch.endmark)
+                and text[i] not in Ch.endmark
             ):
                 otext += self._separator
 

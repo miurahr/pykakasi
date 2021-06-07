@@ -17,7 +17,7 @@ def dictionary_setup_fixture():
         print("Generating kanwa dictionary in %s\n" % dpath)
         kanwa = kakasidict.Genkanwadict()
         kanwa.generate_dictionaries(dpath)
-        Configurations().data_path = dpath
+        Configurations.data_path = dpath
 
 
 def pytest_benchmark_update_json(config, benchmarks, output_json):

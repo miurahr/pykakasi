@@ -11,106 +11,6 @@ from .properties import Configurations
 
 
 class JConv:
-
-    _cl_table = [
-        "",
-        "aiueow",
-        "aiueow",
-        "aiueow",
-        "aiueow",
-        "aiueow",
-        "aiueow",
-        "aiueow",
-        "aiueow",
-        "aiueow",
-        "aiueow",
-        "k",
-        "g",
-        "k",
-        "g",
-        "k",
-        "g",
-        "k",
-        "g",
-        "k",
-        "g",
-        "s",
-        "zj",
-        "s",
-        "zj",
-        "s",
-        "zj",
-        "s",
-        "zj",
-        "s",
-        "zj",
-        "t",
-        "d",
-        "tc",
-        "d",
-        "aiueokstchgzjfdbpw",
-        "t",
-        "d",
-        "t",
-        "d",
-        "t",
-        "d",
-        "n",
-        "n",
-        "n",
-        "n",
-        "n",
-        "h",
-        "b",
-        "p",
-        "h",
-        "b",
-        "p",
-        "hf",
-        "b",
-        "p",
-        "h",
-        "b",
-        "p",
-        "h",
-        "b",
-        "p",
-        "m",
-        "m",
-        "m",
-        "m",
-        "m",
-        "y",
-        "y",
-        "y",
-        "y",
-        "y",
-        "y",
-        "rl",
-        "rl",
-        "rl",
-        "rl",
-        "rl",
-        "wiueo",
-        "wiueo",
-        "wiueo",
-        "wiueo",
-        "w",
-        "n",
-        "v",
-        "k",
-        "k",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-    ]
-
     def __init__(self):
         self._kanwa = Kanwa()
         self._itaiji = Itaiji()
@@ -133,36 +33,17 @@ class JConv:
                 if text.startswith(k):
                     for tok in v:
                         yomi = tok[0]
-                        tail = tok[1]
-                        con = tok[2:]
+                        con = tok[1:]
                         if len(con) > 0:
                             if btext in con:
                                 Hstr = yomi
                                 max_len = length
                             else:
                                 pass
-                        elif tail == "":
+                        else:
                             if max_len < length:
                                 Hstr = yomi
                                 max_len = length
-                        elif (
-                            max_len < length + 1
-                            and len(text) > length
-                            and self._isCletter(tail, text[length])
-                            and len(tok) > 2
-                            and btext in tok[2:]
-                        ):
-                            Hstr = "".join([yomi, text[length]])
-                            max_len = length + 1
-                        elif (
-                            max_len < length + 1
-                            and len(text) > length
-                            and self._isCletter(tail, text[length])
-                        ):
-                            Hstr = "".join([yomi, text[length]])
-                            max_len = length + 1
-                        else:
-                            pass
         for _ in range(
             num_vs
         ):  # when converting string with kanji wit variation selector, calculate max_len again
@@ -236,5 +117,5 @@ class Kanwa:
                         self._jisyo_table = pickle.load(d)
 
     def load(self, char: str):
-        key = "%04x" % ord(char)
+        key = ord(char[0])
         return self._jisyo_table.get(key, None)

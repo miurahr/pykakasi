@@ -88,12 +88,21 @@ Copyright and License
 PyKakasi::
     Copyright (C) 2010-2021 Hiroshi Miura and contributors(see AUTHORS)
 
-Dictionary::
+KAKASI Dictionary::
     Copyright (C) 2010-2021 Hiroshi Miura and contributors(see AUTHORS)
 
     Copyright (C) 1992 1993 1994 Hironobu Takahashi, Masahiko Sato,
     Yukiyoshi Kameyama, Miki Inooka, Akihiko Sasaki, Dai Ando, Junichi Okukawa,
     Katsushi Sato and Nobuhiro Yamagishi
+
+UniDic::
+    Copyright (c) 2011-2021, The UniDic Consortium
+
+    All rights reserved.
+
+    Unidic is released under any of the GPL2, the LGPL2.1,
+    or the 3-clause BSD License. (See src/data/unidic/BSD.txt)
+    PyKakasi relicenses a part of the unidic with GPL3+.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

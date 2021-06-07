@@ -8,7 +8,6 @@ root_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
 
 class Genkanwadict:
-    records = {}  # type: Dict[str, Dict[str, List[Tuple[str, ...]]]]
 
     ESCAPE_SEQUENCE_RE = re.compile(
         r"""
@@ -73,14 +72,15 @@ class Genkanwadict:
 
     # for kanwadict
 
-    def run(self, src: str, dst: str):
-        with open(src, "r", encoding="utf-8") as f:
-            for line in f:
-                self.parse_kakasi_dict(line.strip())
-            f.close()
+    def _makekanwa(self, sources: List[str], dst: str):
+        self.records: Dict[int, Dict[str, List[Tuple[str, ...]]]] = {}
+        for src in sources:
+            with open(src, "r", encoding="utf-8") as f:
+                for line in f:
+                    self._parse_kakasi_dict(line.strip())
         self.kanwaout(dst)
 
-    def parse_kakasi_dict(self, line: str) -> None:
+    def _parse_kakasi_dict(self, line: str) -> None:
         if line.startswith(";;"):  # skip comment
             return
         val: Tuple[str, ...]
@@ -93,23 +93,54 @@ class Genkanwadict:
         else:
             tail = ""
         if len(token) > 2:  # has context
-            val = (yomi, tail) + tuple(token[2:])
+            val = tuple([yomi, token[2:]])
         else:
-            val = (yomi, tail)
-        self.updaterec(kanji, val)
+            val = (yomi)
+        self.updaterec(kanji, val, tail)
 
-    def updaterec(self, kanji: str, val: Tuple[str, ...]) -> None:
-        key = "%04x" % ord(kanji[0])
-        if key in self.records:
-            if kanji in self.records[key]:
-                rec = self.records[key][kanji]
-                rec.append(val)
-                self.records[key].update({kanji: rec})
-            else:
-                self.records[key][kanji] = [val]
+    _cletters = {
+        "a": ("あ", "ぁ", "っ", "わ", "ゎ"),
+        "i": ("い", "ぃ", "っ", "ゐ"),
+        "u": ("う", "ぅ", "っ"),
+        "e": ("え", "ぇ", "っ", "ゑ"),
+        "o": ("お", "ぉ", "っ"),
+        "k": ("か", "ゕ", "き", "く", "け", "ゖ", "こ", "っ"),
+        "g": ("が", "ぎ", "ぐ", "げ", "ご", "っ"),
+        "s": ("さ", "し", "す", "せ", "そ", "っ"),
+        "z": ("ざ", "じ", "ず", "ぜ", "ぞ", "っ"),
+        "j": ("ざ", "じ", "ず", "ぜ", "ぞ", "っ"),
+        "t": ("た", "ち", "つ", "て", "と", "っ"),
+        "d": ("だ", "ぢ", "づ", "で", "ど", "っ"),
+        "c": ("ち", "っ"),
+        "n": ("な", "に", "ぬ", "ね", "の", "ん"),
+        "h": ("は", "ひ", "ふ", "へ", "ほ", "っ"),
+        "b": ("ば", "び", "ぶ", "べ", "ぼ", "っ"),
+        "f": ("ふ", "っ"),
+        "p": ("ぱ", "ぴ", "ぷ", "ぺ", "ぽ", "っ"),
+        "m": ("ま", "み", "む", "め", "も"),
+        "y": ("や", "ゃ", "ゆ", "ゅ", "よ", "ょ"),
+        "r": ("ら", "り", "る", "れ", "ろ"),
+        "l": ("ら", "り", "る", "れ", "ろ"),
+        "w": ("わ", "ゐ", "ゑ", "ゎ", "を", "っ"),
+        "v": ("ゔ"),
+    }
+
+    def updaterec(self, kanji: str, val: Tuple[str, ...], tail: str) -> None:
+        if tail != "":
+            for c in self._cletters.get(tail, ""):
+                self.updaterec(kanji + c, tuple([val[0] + c, val[1:]]), "")
         else:
-            self.records[key] = {}
-            self.records[key][kanji] = [val]
+            key = ord(kanji[0])
+            if key in self.records:
+                if kanji in self.records[key]:
+                    rec = self.records[key][kanji]
+                    rec.append(val)
+                    self.records[key].update({kanji: rec})
+                else:
+                    self.records[key][kanji] = [val]
+            else:
+                self.records[key] = {}
+                self.records[key][kanji] = [val]
 
     def kanwaout(self, out):
         with open(out, "wb") as f:
@@ -141,8 +172,12 @@ class Genkanwadict:
             os.unlink(dst)
         self.maketrans(src, dst)
 
-        src = os.path.join(srcdir, "kakasidict.utf8")
+        sources = [
+            os.path.join(srcdir, "kakasidict.utf8"),
+            os.path.join(srcdir, "unidict_noun.utf8"),
+            os.path.join(srcdir, "unidict_adj.utf8"),
+        ]
         dst = os.path.join(dstdir, "kanwadict4.db")
         if os.path.exists(dst):
             os.unlink(dst)
-        self.run(src, dst)
+        self._makekanwa(sources, dst)
