@@ -124,7 +124,9 @@ class Genkanwadict:
         "v": ("ゔ"),
     }
 
-    def updaterec(self, kanji: str, yomi: str, tail: str, con: Optional[List[str]]) -> None:
+    def updaterec(
+        self, kanji: str, yomi: str, tail: str, con: Optional[List[str]]
+    ) -> None:
         if tail == "":
             key = ord(kanji[0])
             if key in self.records:
