@@ -250,7 +250,7 @@ class wakati(kakasi):
                 break
 
             if self._jconv.isRegion(text[i]):
-                _, ln = self._jconv.convert(text[i:])
+                _, ln = self._jconv.convert(text[i:], "")
                 if ln <= 0:  # pragma: no cover
                     otext = otext + text[i]
                     i += 1
@@ -295,7 +295,7 @@ class J2:
         return 0x3400 <= ord(c[0]) < 0xE000 or self._itaiji.haskey(ord(c[0]))
 
     def convert_h(self, itext) -> Tuple[str, int]:
-        return self._jconv.convert(itext)
+        return self._jconv.convert(itext, "")
 
     def convert_nonh(self, text):
         if not self.isRegion(text[0]):

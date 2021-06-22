@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 # j2.py
 #
-# Copyright 2011-2019 Hiroshi Miura <miurahr@linux.com>
+# Copyright 2011-2021 Hiroshi Miura <miurahr@linux.com>
+
 import functools
 import pickle
 import threading
@@ -19,7 +20,7 @@ class JConv:
         return 0x3400 <= ord(c[0]) < 0xE000 or self._itaiji.haskey(ord(c[0]))
 
     @functools.lru_cache(maxsize=512)
-    def convert(self, itext: str) -> Tuple[str, int]:
+    def convert(self, itext: str, btext: str) -> Tuple[str, int]:
         max_len = 0
         Hstr = ""
         text = self._itaiji.convert(itext)
@@ -31,10 +32,11 @@ class JConv:
             length = len(k)
             if len(text) >= length:
                 if text.startswith(k):
-                    for yomi in v:
-                        if max_len < length:
-                            Hstr = yomi
-                            max_len = length
+                    for yomi, con in v:
+                        if con is None or btext in con:
+                            if max_len < length:
+                                Hstr = yomi
+                                max_len = length
         for _ in range(
             num_vs
         ):  # when converting string with kanji wit variation selector, calculate max_len again

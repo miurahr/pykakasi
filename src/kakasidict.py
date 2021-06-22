@@ -73,7 +73,7 @@ class Genkanwadict:
     # for kanwadict
 
     def _makekanwa(self, sources: List[str], dst: str):
-        self.records: Dict[int, Dict[str, List[Tuple[str, ...]]]] = {}
+        self.records: Dict[int, Dict[str, List[Tuple[str, Optional[List[str]]]]]] = {}
         for src in sources:
             with open(src, "r", encoding="utf-8") as f:
                 for line in f:
@@ -83,13 +83,19 @@ class Genkanwadict:
     def _parse_kakasi_dict(self, line: str) -> None:
         if line.startswith(";;"):  # skip comment
             return
-        (yomi, kanji) = line.split(" ")
+        token = line.split(" ")
+        yomi = token[0]
+        kanji = token[1]
         if ord(yomi[-1:]) <= ord("z"):
             tail = yomi[-1:]
             yomi = yomi[:-1]
         else:
             tail = ""
-        self._updaterec(kanji, yomi, tail)
+        if len(token) > 2:  # has context
+            con: Optional[List[str]] = token[2:]
+        else:
+            con = None
+        self.updaterec(kanji, yomi, tail, con)
 
     _cletters = {
         "a": ("あ", "ぁ", "っ", "わ", "ゎ"),
@@ -118,22 +124,24 @@ class Genkanwadict:
         "v": ("ゔ"),
     }
 
-    def _updaterec(self, kanji: str, yomi, tail) -> None:
-        key = ord(kanji[0])
+    def updaterec(
+        self, kanji: str, yomi: str, tail: str, con: Optional[List[str]]
+    ) -> None:
         if tail == "":
+            key = ord(kanji[0])
             if key in self.records:
                 if kanji in self.records[key]:
                     rec = self.records[key][kanji]
-                    rec.append(yomi)
+                    rec.append((yomi, con))
                     self.records[key].update({kanji: rec})
                 else:
-                    self.records[key][kanji] = [yomi]
+                    self.records[key][kanji] = [(yomi, con)]
             else:
                 self.records[key] = {}
-                self.records[key][kanji] = [yomi]
+                self.records[key][kanji] = [(yomi, con)]
         else:
             for c in self._cletters.get(tail, ""):
-                self._updaterec(kanji + c, yomi + c, "")
+                self.updaterec(kanji + c, yomi + c, "", con)
 
     def kanwaout(self, out):
         with open(out, "wb") as f:

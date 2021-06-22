@@ -91,7 +91,7 @@ class Kakasi:
             elif self._jconv.isRegion(text[i]):
                 if len(original_text) > 0:
                     _result.append(self._iconv.convert(original_text, kana_text))
-                t, ln = self._jconv.convert(text[i:])
+                t, ln = self._jconv.convert(text[i:], original_text)
                 prev_type = _TYPE.KANJI
                 if ln > 0:
                     original_text = text[i : i + ln]
