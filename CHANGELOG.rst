@@ -7,6 +7,9 @@ All notable changes to this project will be documented in this file.
 Unreleased_
 ===========
 
+v2.2.0_ (22, June 2021)
+=======================
+
 Added
 -----
 * dictionary: add noun and adjectives from UniDic(#140)
@@ -18,15 +21,6 @@ Changed
 Fixed
 -----
 * Fix segmentation (wakati) when combination with Katakana and Hiragana(#142)
-
-Deprecated
-----------
-
-Removed
--------
-
-Security
---------
 
 v2.1.1_ (16, May 2021)
 ======================
@@ -168,7 +162,8 @@ v2.0.0_ (31, May. 2020)
 =======================
 
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.1.1...HEAD
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.2.0...HEAD
+.. _v2.2.0: https://github.com/miurahr/pykakasi/compare/v2.1.1...v2.2.0
 .. _v2.1.1: https://github.com/miurahr/pykakasi/compare/v2.1.0...v2.1.1
 .. _v2.1.0: https://github.com/miurahr/pykakasi/compare/v2.0.8...v2.1.0
 .. _v2.0.8: https://github.com/miurahr/pykakasi/compare/v2.0.7...v2.0.8
