@@ -8,7 +8,7 @@ from typing import Dict, List, Tuple
 
 import jaconv
 
-from .kanji import Itaiji, JConv
+from .kanji import JConv
 from .properties import Ch
 from .scripts import A2, H2, IConv, K2, Sym2
 
