@@ -60,7 +60,7 @@ class Ch:
     zenkaku_number_nine = 0xFF1A
     zenkaku_A = 0xFF21
     zenkaku_a = 0xFF41
-    endmark = ")]!,.,\u3001\u3002"
+    endmark = ")]!,.,\u3001\u3002\uff1f\uff10\uff1e\uff1c"
     long_symbols = "\u30FC\u2015\u2212\uFF70"  # "ー  ―  −  ｰ "
     # _UNCHECKED_LONG_SYMBOLS: str = "\u002D\u2010\u2011\u2013\u2014" # "-  ‐ ‑ – —"
 
