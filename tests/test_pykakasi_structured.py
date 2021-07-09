@@ -464,6 +464,22 @@ def test_kakasi_unidic_noun(case, expected):
     assert result[0]["hira"] == expected
 
 
+def test_issue_145():
+    case = "見えますか？"
+    expected = {
+        "orig": "ますか？",
+        "hira": "ますか？",
+        "kana": "マスカ？",
+        "hepburn": "masuka?",
+        "kunrei": "masuka?",
+        "passport": "masuka?",
+    }
+    kakasi = pykakasi.Kakasi()
+    result = kakasi.convert(case)
+    assert result[1]["orig"] == expected["orig"]
+    assert result[1]["hira"] == expected["hira"]
+
+
 @pytest.mark.parametrize(
     "case, expected",
     [
