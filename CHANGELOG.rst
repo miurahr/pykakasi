@@ -16,6 +16,7 @@ Changed
 
 Fixed
 -----
+￼* Add Zenkaku-Question(\uFF1F) and other Zenkaku marks as endmark (#146)
 
 Deprecated
 ----------
