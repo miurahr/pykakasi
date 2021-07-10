@@ -7,6 +7,32 @@ All notable changes to this project will be documented in this file.
 Unreleased_
 ===========
 
+Added
+-----
+
+Changed
+-------
+
+Fixed
+-----
+
+Deprecated
+----------
+
+Removed
+-------
+
+Security
+--------
+
+v2.2.1_ (10, July 2021)
+=======================
+
+Fixed
+-----
+* Add Zenkaku-Question(\uFF1F) and other Zenkaku marks as endmark (#146)
+
+
 v2.2.0_ (22, June 2021)
 =======================
 
@@ -162,7 +188,8 @@ v2.0.0_ (31, May. 2020)
 =======================
 
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.2.0...HEAD
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.2.1...HEAD
+.. _v2.2.1: https://github.com/miurahr/pykakasi/compare/v2.2.0...v2.2.1
 .. _v2.2.0: https://github.com/miurahr/pykakasi/compare/v2.1.1...v2.2.0
 .. _v2.1.1: https://github.com/miurahr/pykakasi/compare/v2.1.0...v2.1.1
 .. _v2.1.0: https://github.com/miurahr/pykakasi/compare/v2.0.8...v2.1.0
