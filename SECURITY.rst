@@ -9,7 +9,7 @@ Only recent version of pykakasi are currently being supported with security upda
 +---------+--------------------+
 | Version | Status             |
 +=========+====================+
-| 2.x     | Development        |
+| 2.3.x   | Development        |
 +---------+--------------------+
 | 2.2.x   | Stable             |
 |         | bug fix and        |
