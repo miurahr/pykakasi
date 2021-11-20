@@ -31,9 +31,11 @@ Overview
 Its algorithms are based on the `kakasi`_ library, which is written in C.
 
 * Install (from `PyPI`_): ``pip install pykakasi``
+* Install (from `conda-forge`_): ``conda install -c conda-forge pykakasi``
 * `Documentation available on readthedocs`_
 
 .. _`PyPI`: https://pypi.org/project/pykakasi/
+.. _`conda-forge`: https://github.com/conda-forge/pykakasi-feedstock
 .. _`kakasi`: http://kakasi.namazu.org/
 .. _`Documentation available on readthedocs`: https://pykakasi.readthedocs.io/en/latest/index.html
 
