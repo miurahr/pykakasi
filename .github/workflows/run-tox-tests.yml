@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -U pip wheel setuptools
-          pip install tox tox-gh-actions coveralls
+          pip install tox tox-gh-actions coveralls coverage[toml]
       - name: Test project with tox
         run: tox
         env:
@@ -39,7 +39,7 @@ jobs:
     steps:
     - name: Finished
       run: |
-        pip3 install --upgrade coveralls
+        pip3 install coveralls coverage[toml]
         coveralls --finish
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
