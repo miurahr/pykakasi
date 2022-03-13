@@ -25,6 +25,9 @@ Overview
    :target: https://coveralls.io/r/miurahr/pykakasi?branch=master
    :alt: Coverage status
 
+.. image:: https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg
+   :target: https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md
+
 
 ``pykakasi`` is a Python Natural Language Processing (NLP) library to transliterate *hiragana*, *katakana* and *kanji* (Japanese text) into *rōmaji* (Latin/Roman alphabet). It can handle characters in NFC form.
 
