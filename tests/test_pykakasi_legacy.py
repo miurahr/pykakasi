@@ -228,9 +228,7 @@ def test_kakasi_E2a(case, expected):
 
 
 def test_kakasi_E2a_upper():
-    TESTS = [
-        (u"ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ", "ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
-    ]
+    TESTS = [(u"ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ", "ABCDEFGHIJKLMNOPQRSTUVWXYZ")]
     kakasi = pykakasi.kakasi()
     kakasi.setMode("E", "a")
     kakasi.setMode("U", True)
@@ -240,9 +238,7 @@ def test_kakasi_E2a_upper():
 
 
 def test_kakasi_J2a_upper():
-    TESTS = [
-        (u"かな漢字", "kana KANJI"),
-    ]
+    TESTS = [(u"かな漢字", "kana KANJI")]
     kakasi = pykakasi.kakasi()
     kakasi.setMode("J", "a")
     kakasi.setMode("H", "a")

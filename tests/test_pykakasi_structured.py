@@ -599,7 +599,7 @@ def test_issue_145():
                     "hepburn": "yuugengaisha",
                     "kunrei": "yuugengaisya",
                     "passport": "yuugengaisha",
-                },
+                }
             ],
         ),
     ],
