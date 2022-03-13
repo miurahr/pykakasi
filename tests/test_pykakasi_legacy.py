@@ -158,7 +158,7 @@ def test_wakati(case, expected):
 
 
 def test_katakana_furiagana():
-    TESTS = [(u"変換前の漢字の脇に", u"変換前[ヘンカンマエ]の漢字[カンジ]の脇[ワキ]に")]
+    TESTS = [("変換前の漢字の脇に", "変換前[ヘンカンマエ]の漢字[カンジ]の脇[ワキ]に")]
     kakasi = pykakasi.kakasi()
     kakasi.setMode("H", None)
     kakasi.setMode("K", None)
@@ -173,7 +173,7 @@ def test_katakana_furiagana():
 
 
 def test_hiragana_furiagana():
-    TESTS = [(u"変換前の漢字の脇に", u"変換前[へんかんまえ]の漢字[かんじ]の脇[わき]に")]
+    TESTS = [("変換前の漢字の脇に", "変換前[へんかんまえ]の漢字[かんじ]の脇[わき]に")]
     kakasi = pykakasi.kakasi()
     kakasi.setMode("H", None)
     kakasi.setMode("K", None)
@@ -189,7 +189,7 @@ def test_hiragana_furiagana():
 
 @pytest.mark.xfail(reason="Not implemented yet furigana mode for wakati")
 def test_wakati_furiagana():
-    TESTS = [(u"変換前の漢字の脇に", u"変換前[へんかんまえ] の 漢字[かんじ] の 脇[わき] に")]
+    TESTS = [("変換前の漢字の脇に", "変換前[へんかんまえ] の 漢字[かんじ] の 脇[わき] に")]
     kakasi = pykakasi.wakati()
     kakasi.setMode("f", True)
     converter = kakasi.getConverter()
@@ -200,9 +200,9 @@ def test_wakati_furiagana():
 @pytest.mark.parametrize(
     "case, expected",
     [
-        ("ABCDEFGHIJKLMNOPQRSTUVWXYZ", u"ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ"),
-        ("abcdefghijklmnopqrstuvwxyz", u"ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ"),
-        ("!\"#$%&'()*+,-./_ {|}~", u"！＂＃＄％＆＇（）＊＋，－．／＿　｛｜｝～"),
+        ("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ"),
+        ("abcdefghijklmnopqrstuvwxyz", "ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ"),
+        ("!\"#$%&'()*+,-./_ {|}~", "！＂＃＄％＆＇（）＊＋，－．／＿　｛｜｝～"),
     ],
 )
 def test_kakasi_a2E(case, expected):
@@ -228,7 +228,7 @@ def test_kakasi_E2a(case, expected):
 
 
 def test_kakasi_E2a_upper():
-    TESTS = [(u"ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ", "ABCDEFGHIJKLMNOPQRSTUVWXYZ")]
+    TESTS = [("ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ", "ABCDEFGHIJKLMNOPQRSTUVWXYZ")]
     kakasi = pykakasi.kakasi()
     kakasi.setMode("E", "a")
     kakasi.setMode("U", True)
@@ -238,7 +238,7 @@ def test_kakasi_E2a_upper():
 
 
 def test_kakasi_J2a_upper():
-    TESTS = [(u"かな漢字", "kana KANJI")]
+    TESTS = [("かな漢字", "kana KANJI")]
     kakasi = pykakasi.kakasi()
     kakasi.setMode("J", "a")
     kakasi.setMode("H", "a")
@@ -252,8 +252,8 @@ def test_kakasi_J2a_upper():
 def test_kakasi_numbers():
 
     TESTS = [
-        (u"１２３４５６７８９０", "1234567890"),
-        (u"一 二 三 四 五 六 七 八 九 〇", "ichi ni san shi go roku shichi hachi kyuu (maru)"),
+        ("１２３４５６７８９０", "1234567890"),
+        ("一 二 三 四 五 六 七 八 九 〇", "ichi ni san shi go roku shichi hachi kyuu (maru)"),
     ]
     kakasi = pykakasi.kakasi()
     kakasi.setMode("E", "a")
@@ -378,7 +378,7 @@ def test_kakasi_extended_kana(case, expected):
 
 
 def test_kakasi_chinese_kanji():
-    TESTS = [(u"您好", u"您 kou")]
+    TESTS = [("您好", "您 kou")]
     kakasi = pykakasi.kakasi()
     kakasi.setMode("H", "a")
     kakasi.setMode("K", "a")
@@ -393,7 +393,7 @@ def test_kakasi_chinese_kanji():
 
 
 def test_kakasi_chinese_kanji_replace():
-    TESTS = [(u"您好", u"??? kou")]
+    TESTS = [("您好", "??? kou")]
     kakasi = pykakasi.kakasi()
     kakasi.setMode("H", "a")
     kakasi.setMode("K", "a")
@@ -428,11 +428,11 @@ def test_kakasi_long_symbol_H(case, expected):
 @pytest.mark.parametrize(
     "case, expected",
     [
-        (u"ヤッター", u"yattaa"),
-        (u"デッデー", u"deddee"),
-        (u"テンサーフロー", u"tensaafuroo"),
-        (u"ガッガーン", u"gaggaan"),
-        (u"ドーン", u"doon"),
+        ("ヤッター", "yattaa"),
+        ("デッデー", "deddee"),
+        ("テンサーフロー", "tensaafuroo"),
+        ("ガッガーン", "gaggaan"),
+        ("ドーン", "doon"),
     ],
 )
 def test_kakasi_long_symbol_K(case, expected):
@@ -480,7 +480,7 @@ def test_kakasi_long_symbol_mixed_JHK(case, expected):
 
 
 def test_kakasi_long_symbol_with_no_HK():
-    TESTS = [(u"順ーデデーン", u"jun-dedeen"), (u"デッデーン順ー", u"deddeenjun-")]
+    TESTS = [("順ーデデーン", "jun-dedeen"), ("デッデーン順ー", "deddeenjun-")]
     kakasi = pykakasi.kakasi()
     kakasi.setMode("K", "a")
     kakasi.setMode("H", "a")
@@ -493,12 +493,12 @@ def test_kakasi_long_symbol_with_no_HK():
 def test_kakasi_legacy_constitution():
 
     original_text = (
-        u"日本国民は、正当に選挙された国会における代表者を通じて行動し、われらとわれらの子孫のために、"
-        u"諸国民との協和による成果と、わが国全土にわたつて自由のもたらす恵沢を確保し、"
-        u"政府の行為によつて再び戦争の惨禍が起ることのないやうにすることを決意し、ここに主権が国民に存することを宣言し、"
-        u"この憲法を確定する。そもそも国政は、国民の厳粛な信託によるものであつて、その権威は国民に由来し、"
-        u"その権力は国民の代表者がこれを行使し、その福利は国民がこれを享受する。これは人類普遍の原理であり、"
-        u"この憲法は、かかる原理に基くものである。われらは、これに反する一切の憲法、法令及び詔勅を排除する。"
+        "日本国民は、正当に選挙された国会における代表者を通じて行動し、われらとわれらの子孫のために、"
+        "諸国民との協和による成果と、わが国全土にわたつて自由のもたらす恵沢を確保し、"
+        "政府の行為によつて再び戦争の惨禍が起ることのないやうにすることを決意し、ここに主権が国民に存することを宣言し、"
+        "この憲法を確定する。そもそも国政は、国民の厳粛な信託によるものであつて、その権威は国民に由来し、"
+        "その権力は国民の代表者がこれを行使し、その福利は国民がこれを享受する。これは人類普遍の原理であり、"
+        "この憲法は、かかる原理に基くものである。われらは、これに反する一切の憲法、法令及び詔勅を排除する。"
     )
     result = (
         "Nihonkokumin ha, Seitou ni Senkyo sareta Kokkai niokeru Daihyousha wo Tsuuji te Koudou shi, "
@@ -527,21 +527,21 @@ def test_kakasi_legacy_constitution():
 def test_wakati_constitution():
 
     original_text = (
-        u"日本国民は、正当に選挙された国会における代表者を通じて行動し、われらとわれらの子孫のために、"
-        u"諸国民との協和による成果と、わが国全土にわたつて自由のもたらす恵沢を確保し、"
-        u"政府の行為によつて再び戦争の惨禍が起ることのないやうにすることを決意し、ここに主権が国民に存することを宣言し、"
-        u"この憲法を確定する。そもそも国政は、国民の厳粛な信託によるものであつて、その権威は国民に由来し、"
-        u"その権力は国民の代表者がこれを行使し、その福利は国民がこれを享受する。これは人類普遍の原理であり、"
-        u"この憲法は、かかる原理に基くものである。われらは、これに反する一切の憲法、法令及び詔勅を排除する。"
+        "日本国民は、正当に選挙された国会における代表者を通じて行動し、われらとわれらの子孫のために、"
+        "諸国民との協和による成果と、わが国全土にわたつて自由のもたらす恵沢を確保し、"
+        "政府の行為によつて再び戦争の惨禍が起ることのないやうにすることを決意し、ここに主権が国民に存することを宣言し、"
+        "この憲法を確定する。そもそも国政は、国民の厳粛な信託によるものであつて、その権威は国民に由来し、"
+        "その権力は国民の代表者がこれを行使し、その福利は国民がこれを享受する。これは人類普遍の原理であり、"
+        "この憲法は、かかる原理に基くものである。われらは、これに反する一切の憲法、法令及び詔勅を排除する。"
     )
     result = (
-        u"日本国民 は、 正当 に 選挙 された 国会 における 代表者 を 通じ て 行動 し、われらとわれらの 子孫 のために、 "
-        u"諸国民 との 協和 による 成果 と、わが 国 全土 にわたつて 自由 のもたらす 恵沢 を 確保 し、 政府 の 行為 によつて 再び 戦争 "
-        u"の 惨禍 が 起る ことのないやうにすることを 決意 し、ここに 主権 が 国民 に 存す ることを "
-        u"宣言 し、この 憲法 を 確定す る。そもそも 国政 は、 国民 の 厳粛 な 信託 によるものであつて、"
-        u"その 権威 は 国民 に 由来 し、その 権力 は 国民 の 代表者 がこれを 行使 し、その 福利 は 国民 "
-        u"がこれを 享受 する。これは 人類普遍 の 原理 であり、この 憲法 は、かかる 原理 に 基く ものである。われらは、"
-        u"これに 反す る 一切 の 憲法 、 法令 及び 詔勅 を 排除 する。"
+        "日本国民 は、 正当 に 選挙 された 国会 における 代表者 を 通じ て 行動 し、われらとわれらの 子孫 のために、 "
+        "諸国民 との 協和 による 成果 と、わが 国 全土 にわたつて 自由 のもたらす 恵沢 を 確保 し、 政府 の 行為 によつて 再び 戦争 "
+        "の 惨禍 が 起る ことのないやうにすることを 決意 し、ここに 主権 が 国民 に 存す ることを "
+        "宣言 し、この 憲法 を 確定す る。そもそも 国政 は、 国民 の 厳粛 な 信託 によるものであつて、"
+        "その 権威 は 国民 に 由来 し、その 権力 は 国民 の 代表者 がこれを 行使 し、その 福利 は 国民 "
+        "がこれを 享受 する。これは 人類普遍 の 原理 であり、この 憲法 は、かかる 原理 に 基く ものである。われらは、"
+        "これに 反す る 一切 の 憲法 、 法令 及び 詔勅 を 排除 する。"
     )
 
     wakati = pykakasi.wakati()
@@ -550,7 +550,7 @@ def test_wakati_constitution():
 
 
 def test_issues60():
-    TESTS = [(u"市立", u"しりつ")]
+    TESTS = [("市立", "しりつ")]
     kakasi = pykakasi.kakasi()
     kakasi.setMode("H", None)
     kakasi.setMode("K", None)
@@ -565,7 +565,7 @@ def test_issues60():
 
 
 def test_issues59():
-    TESTS = [(u"じゃーん", u"じゃーん"), (u"ヷヸヹヺ", u"ヷヸヹヺ")]
+    TESTS = [("じゃーん", "じゃーん"), ("ヷヸヹヺ", "ヷヸヹヺ")]
     kakasi = pykakasi.kakasi()
     kakasi.setMode("H", None)
     kakasi.setMode("K", "H")
@@ -581,12 +581,12 @@ def test_issues59():
 
 def test_issue66():
     TESTS = [
-        (u"月々", "tukizuki"),
-        (u"毎月々", "maitukizuki"),
-        (u"佐々木", "sasaki"),
-        (u"中佐々木", "nakasasaki"),
-        (u"代々木", "yoyogi"),
-        (u"次代々木", "tugiyoyogi"),
+        ("月々", "tukizuki"),
+        ("毎月々", "maitukizuki"),
+        ("佐々木", "sasaki"),
+        ("中佐々木", "nakasasaki"),
+        ("代々木", "yoyogi"),
+        ("次代々木", "tugiyoyogi"),
     ]
     kakasi = pykakasi.kakasi()
     kakasi.setMode("J", "a")
@@ -597,7 +597,7 @@ def test_issue66():
 
 
 def test_issues68():
-    TESTS = [(u"", u""), (u"埇", u"よう")]
+    TESTS = [("", ""), ("埇", "よう")]
     kks = pykakasi.kakasi()
     kks.setMode("J", "H")
     convert = kks.getConverter()
@@ -616,7 +616,7 @@ def test_issue68_2():
 
 
 def test_issue72():
-    TESTS = [(u"㐂", u"き")]
+    TESTS = [("㐂", "き")]
     kks = pykakasi.kakasi()
     kks.setMode("J", "H")
     convert = kks.getConverter()
@@ -626,8 +626,8 @@ def test_issue72():
 
 def test_issue78():
     TESTS = [
-        (u"由来し、この", u"ゆらい し、 この"),
-        (u"これは人類普遍であり、かかる原理に", u"これは じんるいふへん であり、 かかる げんり に"),
+        ("由来し、この", "ゆらい し、 この"),
+        ("これは人類普遍であり、かかる原理に", "これは じんるいふへん であり、 かかる げんり に"),
     ]
     kks = pykakasi.kakasi()
     kks.setMode("J", "H")
@@ -638,7 +638,7 @@ def test_issue78():
 
 
 def test_issue90_legacy():
-    TESTS = [(u"私がこの子を助けなきゃいけないってことだよね", u"ワタシガコノコヲタスケナキャイケナイッテコトダヨネ")]
+    TESTS = [("私がこの子を助けなきゃいけないってことだよね", "ワタシガコノコヲタスケナキャイケナイッテコトダヨネ")]
     kks = pykakasi.kakasi()
     kks.setMode("J", "K")
     kks.setMode("H", "K")
@@ -699,10 +699,10 @@ def test_J2a(case, expected):
 @pytest.mark.parametrize(
     "case, expected",
     [
-        ("構成", (u"コウセイ", 2)),
-        ("好き", (u"スキ", 2)),
-        ("大きい", (u"オオキイ", 3)),
-        ("日本国民は、", (u"ニホンコクミン", 4)),
+        ("構成", ("コウセイ", 2)),
+        ("好き", ("スキ", 2)),
+        ("大きい", ("オオキイ", 3)),
+        ("日本国民は、", ("ニホンコクミン", 4)),
     ],
 )
 def test_J2K(case, expected):
