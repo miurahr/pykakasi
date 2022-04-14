@@ -13,6 +13,7 @@ Added
 
 Changed
 -------
+* Support Latin-1 characters (#150,#152)
 
 Fixed
 -----
