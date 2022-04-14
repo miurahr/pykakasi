@@ -324,6 +324,7 @@ class Sym2:
             or (Ch.greece_alpha <= c <= Ch.greece_omega)
             or (Ch.cyrillic_A <= c <= Ch.cyrillic_ya)
             or (Ch.zenkaku_exc_mark <= c <= Ch.zenkaku_number_nine)
+            or (Ch.latin1_inverted_exclam <= c <= Ch.latin1_y_diaeresis)
             or (0xFF20 <= c <= 0xFF5E)
             or c == 0x0451
             or c == 0x0401
@@ -351,6 +352,8 @@ class Sym2:
             return chr(0x0041 + c - 0xFF21)  # u\ff21Ａ => u\0041:@A..Z[\]^_`
         elif 0xFF41 <= c < 0xFF5F:
             return chr(0x0061 + c - 0xFF41)  # u\ff41ａ => u\0061:a..z{|}
+        elif Ch.latin1_inverted_exclam <= c <= Ch.latin1_y_diaeresis:
+            return Convert_Tables.latin1_table[c - Ch.latin1_inverted_exclam]
         else:
             return ""  # pragma: no cover
 

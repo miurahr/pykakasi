@@ -40,6 +40,8 @@ class Ch:
     bracket_bra = 0x7B
     tilda = 0x7E
     delete = 0x7F
+    latin1_inverted_exclam = 0x00A1
+    latin1_y_diaeresis = 0x00FF
     ideographic_space = 0x3000
     postal_mark_face = 0x3020
     wavy_dash = 0x3030
@@ -101,7 +103,7 @@ class Convert_Tables:
      a2 f0 | Å ‰ ♯ ♭ ♪ † ‡ ¶ ◯
     ----------------------------------------------------------
 
-    Greek convertion table
+    Greek conversion table
     ----------------------------------------------------------
        "Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Zeta", "Eta", "Theta",
        "Iota", "Kappa", "Lambda", "Mu", "Nu", "Xi", "Omicron", "Pi", "Rho",
@@ -245,7 +247,7 @@ class Convert_Tables:
         ".",
         "/",
     ]
-    # cyriilic
+    # cyrillic
     cyrillic_table = {  # basic cyrillic characters
         "\u0410": "A",
         "\u0411": "B",
@@ -359,6 +361,103 @@ class Convert_Tables:
         "\uff40",
     ]  # ［＼］＾＿｀
     alpha_table_3 = ["\uff5b", "\uff5c", "\uff5d", "\uff5e"]  # ｛｜｝～
+    latin1_table = [
+        "!",  # inverted exclamation
+        "cent",  # cent mark
+        "GBP",  # pound mark
+        "currency",  # currency mark
+        "yen",  # Yen mark
+        "|",  # broken bar
+        "ss",  # section sign
+        "..",  # diaeresis
+        "(c)",  # copyright
+        "a",  # Feminine Ordinal Indicator
+        "<<",  # left pointing double angle
+        "not",  # not sign
+        "-",  # soft hyphen
+        "(R)",  # registered
+        "~",  # macron
+        ".",  # degree symbol
+        "+-",  # plus-minus sign
+        "^2",  # superscript two
+        "^3",  # superscript three
+        "`",  # acute
+        "u",  # micro sign
+        "D",  # pilcrow sign
+        ".",  # middle dot
+        ",",  # cedilla
+        "^1",  # superscript one
+        "",  # Masculine ordinal indicator
+        ">>",  # right pointing double angle
+        "1/4",  # Vulgar fraction one quarter
+        "1/2",  # Vulgar fraction one half
+        "3/4",  # Vulgar fraction three quarters
+        "?",  # Inverted question mark
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "AE",
+        "C",
+        "E",
+        "E",
+        "E",
+        "E",
+        "I",
+        "I",
+        "I",
+        "I",
+        "Eth",
+        "N",
+        "O",
+        "O",
+        "O",
+        "O",
+        "O",
+        "x",
+        "O",
+        "U",
+        "U",
+        "U",
+        "U",
+        "Y",
+        "",
+        "",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "a",
+        "ae",
+        "c",
+        "e",
+        "e",
+        "e",
+        "e",
+        "i",
+        "i",
+        "i",
+        "i",
+        "eth",
+        "n",
+        "o",
+        "o",
+        "o",
+        "o",
+        "o",
+        "/",
+        "o",
+        "u",
+        "u",
+        "u",
+        "u",
+        "y",
+        "",
+        "y",
+    ]
 
 
 Convert_Tables = Convert_Tables()

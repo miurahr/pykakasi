@@ -623,3 +623,13 @@ def test_kakasi_unihandecode(case, expected):
             assert result[i]["hepburn"] == e["hepburn"]
             assert result[i]["kunrei"] == e["kunrei"]
             assert result[i]["passport"] == e["passport"]
+
+
+def test_issue_150():
+    kakasi = pykakasi.kakasi()
+    result = kakasi.convert("三\u00D7五")
+    assert result[0]["hira"] == "さん"
+    assert result[1]["orig"] == "\u00D7"
+    assert result[1]["hira"] == "×"
+    assert result[2]["hira"] == "ご"
+    assert len(result) == 3
