@@ -42,82 +42,19 @@ Its algorithms are based on the `kakasi`_ library, which is written in C.
 .. _`kakasi`: http://kakasi.namazu.org/
 .. _`Documentation available on readthedocs`: https://pykakasi.readthedocs.io/en/latest/index.html
 
+Give Up GitHub
+--------------
 
-Supported python versions
-=========================
+This project has given up GitHub.  (See Software Freedom Conservancy's *`Give Up  GitHub`_* site for details)
 
-* pykakasi supports python 3.6, 3.7, 3.8, 3.9, and pypy3
+You can now find this project at  https://codeberg.org/miurahr/pykakasi  instead.
 
-Usage
-=====
+Any use of this project's code by GitHub Copilot, past or present, is done without our permission.  We do not consent to GitHub's use of this project's code in Copilot.
 
-Transliterate Japanese text to kana, hiragana and romaji:
+Join us; you can `Give Up GitHub` too!
 
-.. code-block:: python
+.. _`Give Up GitHub`: https://GiveUpGitHub.org
 
-    import pykakasi
-    kks = pykakasi.kakasi()
-    text = "かな漢字"
-    result = kks.convert(text)
-    for item in result:
-        print("{}: kana '{}', hiragana '{}', romaji: '{}'".format(item['orig'], item['kana'], item['hira'], item['hepburn']))
-
-    かな: kana 'カナ', hiragana: 'かな', romaji: 'kana'
-    漢字: kana 'カンジ', hiragana: 'かんじ', romaji: 'kanji'
-
-
-Here is an example that output as similar with furigana mode.
-
-.. code-block:: python
-
-    import pykakasi
-    kks = pykakasi.kakasi()
-    text = "かな漢字交じり文"
-    result = kks.convert(text)
-    for item in result:
-        print("{}[{}] ".format(item['orig'], item['hepburn'].capitalize()), end='')
-    print()
-
-    かな[Kana] 漢字[Kanji] 交じり[Majiri] 文[Bun]
-
-
-Benchmark result
-================
-
-You can see benchmark result on various versions and platforms at https://github.com/miurahr/pykakasi/issues/123
-
-
-Copyright and License
-=====================
-
-PyKakasi::
-    Copyright (C) 2010-2021 Hiroshi Miura and contributors(see AUTHORS)
-
-KAKASI Dictionary::
-    Copyright (C) 2010-2021 Hiroshi Miura and contributors(see AUTHORS)
-
-    Copyright (C) 1992 1993 1994 Hironobu Takahashi, Masahiko Sato,
-    Yukiyoshi Kameyama, Miki Inooka, Akihiko Sasaki, Dai Ando, Junichi Okukawa,
-    Katsushi Sato and Nobuhiro Yamagishi
-
-UniDic::
-    Copyright (c) 2011-2021, The UniDic Consortium
-
-    All rights reserved.
-
-    Unidic is released under any of the GPL2, the LGPL2.1,
-    or the 3-clause BSD License. (See src/data/unidic/BSD.txt)
-    PyKakasi relicenses a part of the unidic with GPL3+.
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+.. image:: https://sfconservancy.org/img/GiveUpGitHub.png
+  :width: 400
+  :alt: Logo of the GiveUpGitHub campaign
