@@ -12,6 +12,7 @@ Table of contents
    authors
    devguide
    changes
+   glossary
 
 
 ==================
@@ -27,4 +28,3 @@ Indices and tables
 .. only:: not builder_html
 
    * :ref:`glossary`
-

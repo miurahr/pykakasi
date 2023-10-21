@@ -26,6 +26,8 @@ pykakasi is a free software, and available on `GitHub`_ project.
 :ref:`contents`
     Access to all of document contents
 
+:ref:`glossary`
+    Glossary of Japanese linguistic terms
 
 
 Supported python versions
@@ -78,7 +80,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .. _GitHub: https://github.com/miurahr/pykakasi
 
 
-.. include:: contents.rst
+.. include:: contents.rst.inc
 
 .. rubric:: Footnotes
 

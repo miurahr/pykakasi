@@ -98,6 +98,7 @@ Behavior Options
 
 	Roman word conversion rule
 	it takes following keywords::
+
 		- h: hepburn
 		- k: kunrei
 		- p: passport

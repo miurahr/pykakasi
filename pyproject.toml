@@ -2,7 +2,7 @@
 requires = ["setuptools>=42", "wheel", "setuptools_scm[toml]>=3.5.0"]
 build-backend = "setuptools.build_meta"
 
-[tools.setuptools_scm]
+[tool.setuptools_scm]
 local_scheme = "no-local-version"
 
 [tool.coverage.paths]
