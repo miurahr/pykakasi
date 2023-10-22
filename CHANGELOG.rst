@@ -17,7 +17,7 @@ Changed
 
 Fixed
 -----
-￼* Add Zenkaku-Question(\uFF1F) and other Zenkaku marks as endmark (#146)
+* Add Zenkaku-Question(\uFF1F) and other Zenkaku marks as endmark (#146)
 
 Deprecated
 ----------
@@ -76,7 +76,7 @@ Changed
 -------
 * Cache internal results and improve performance about 30-40 times.(#128)
 * Use standard pickle for database file(#128)
-* Exceptions module is now `pykakasi`, not `pykakasi.exceptions`
+* Exceptions module is now ``pykakasi``, not ``pykakasi.exceptions``
 
 Removed
 -------

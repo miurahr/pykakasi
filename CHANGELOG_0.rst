@@ -204,6 +204,7 @@ Added
 -----
 
 * Add few words(#66).
+
 Fixed
 -----
 
