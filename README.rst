@@ -13,18 +13,6 @@ Overview
    :target: http://badge.fury.io/py/Pykakasi
    :alt: PyPI version
 
-.. image:: https://github.com/miurahr/pykakasi/workflows/Run%20Tox%20tests/badge.svg
-   :target: https://github.com/miurahr/pykakasi/actions?query=workflow%3A%22Run+Tox+tests%22
-   :alt: Run Tox tests
-
-.. image:: https://dev.azure.com/miurahr/github/_apis/build/status/miurahr.pykakasi?branchName=master
-   :target: https://dev.azure.com/miurahr/github/_build?definitionId=13&branchName=master
-   :alt: Azure-Pipelines
-
-.. image:: https://coveralls.io/repos/miurahr/pykakasi/badge.svg?branch=master
-   :target: https://coveralls.io/r/miurahr/pykakasi?branch=master
-   :alt: Coverage status
-
 .. image:: https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg
    :target: https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md
 
@@ -46,7 +34,7 @@ Its algorithms are based on the `kakasi`_ library, which is written in C.
 Supported python versions
 =========================
 
-* pykakasi supports python 3.6, 3.7, 3.8, 3.9, and pypy3
+* pykakasi supports python 3.8, 3.9, 3.10, 3.11, 3.12 and pypy3
 
 Usage
 =====
@@ -81,17 +69,13 @@ Here is an example that output as similar with furigana mode.
     かな[Kana] 漢字[Kanji] 交じり[Majiri] 文[Bun]
 
 
-Benchmark result
-================
-
-You can see benchmark result on various versions and platforms at https://github.com/miurahr/pykakasi/issues/123
 
 
 Copyright and License
 =====================
 
 PyKakasi::
-    Copyright (C) 2010-2021 Hiroshi Miura and contributors(see AUTHORS)
+    Copyright (C) 2010-2024 Hiroshi Miura and contributors(see AUTHORS)
 
 KAKASI Dictionary::
     Copyright (C) 2010-2021 Hiroshi Miura and contributors(see AUTHORS)
