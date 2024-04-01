@@ -28,7 +28,7 @@ class JConv:
         table = self._kanwa.load(text[0])
         if table is None:
             return "", 0
-        for (k, v) in table.items():
+        for k, v in table.items():
             length = len(k)
             if len(text) >= length:
                 if text.startswith(k):
@@ -37,27 +37,19 @@ class JConv:
                             if max_len < length:
                                 Hstr = yomi
                                 max_len = length
-        for _ in range(
-            num_vs
-        ):  # when converting string with kanji wit variation selector, calculate max_len again
+        for _ in range(num_vs):  # when converting string with kanji wit variation selector, calculate max_len again
             if max_len > len(itext):
                 break
             elif text[max_len - 1] != itext[max_len - 1]:
                 max_len += 1
-            elif (
-                max_len < num_vs + len(text)
-                and max_len <= len(itext)
-                and self._is_vschr(itext[max_len])
-            ):
+            elif max_len < num_vs + len(text) and max_len <= len(itext) and self._is_vschr(itext[max_len]):
                 max_len += 1
             else:
                 pass
         return (Hstr, max_len)
 
     def _isCletter(self, literal: str, c: str) -> bool:
-        if (0x3041 <= ord(c) <= 0x309F) and (
-            literal in self._cl_table[ord(c) - 0x3040]
-        ):  # ぁ:= u\3041
+        if (0x3041 <= ord(c) <= 0x309F) and (literal in self._cl_table[ord(c) - 0x3040]):  # ぁ:= u\3041
             return True
         return False
 

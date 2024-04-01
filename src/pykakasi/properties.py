@@ -3,14 +3,14 @@
 #
 # Copyright 2019 Hiroshi Miura <miurahr@linux.com>
 
+from contextlib import ExitStack
+from importlib_resources import as_file, files
 import os
-
-import pkg_resources
 
 
 class Configurations:
 
-    data_path = pkg_resources.resource_filename(__name__, "data")
+    data_path = ExitStack().enter_context(as_file(files(__name__) / "data"))
     jisyo_hepburn_hira = "hepburnhira3.db"
     jisyo_passport_hira = "passporthira3.db"
     jisyo_kunrei_hira = "kunreihira3.db"

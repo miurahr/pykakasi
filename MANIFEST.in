@@ -3,11 +3,11 @@ include *.rst
 include *.toml
 include *.txt
 include *.yml
+include .flake8
 include AUTHORS
 include COPYING
 include pytest.ini
 include setup.py
-include src/kakasidict.py
 include tox.ini
 recursive-include docs *.po
 recursive-include docs *.py
@@ -15,9 +15,10 @@ recursive-include docs *.rst
 recursive-include docs *.site
 recursive-include docs *.txt
 recursive-include docs *.yml
+recursive-include docs *.inc
 recursive-include docs Makefile
+recursive-include src *.py
 recursive-include src *.typed
-recursive-include src *.pyi
 recursive-include src/data *.utf8
 recursive-include src/data *.7z
 recursive-include src/data *.txt

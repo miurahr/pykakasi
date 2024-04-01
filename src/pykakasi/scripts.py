@@ -211,11 +211,7 @@ class K2:
     @classmethod
     def isRegion(cls, char):
         ch = ord(char[0])
-        return (
-            cls._is_katakana(ch)
-            or cls._is_half_width_kana(ch)
-            or 0x1B164 <= ch <= 0x1B167
-        )
+        return cls._is_katakana(ch) or cls._is_half_width_kana(ch) or 0x1B164 <= ch <= 0x1B167
 
     @classmethod
     def _is_katakana(cls, ch):

@@ -124,9 +124,7 @@ class Genkanwadict:
         "v": ("ゔ"),
     }
 
-    def updaterec(
-        self, kanji: str, yomi: str, tail: str, con: Optional[List[str]]
-    ) -> None:
+    def updaterec(self, kanji: str, yomi: str, tail: str, con: Optional[List[str]]) -> None:
         if tail == "":
             key = ord(kanji[0])
             if key in self.records:
@@ -160,7 +158,7 @@ class Genkanwadict:
         srcdir = os.path.join(root_dir, "src", "data")
         if not os.path.exists(dstdir):
             os.makedirs(dstdir)
-        for (src_f, pkl_f) in DICTS:
+        for src_f, pkl_f in DICTS:
             src = os.path.join(srcdir, src_f)
             dst = os.path.join(dstdir, pkl_f)
             if os.path.exists(dst):

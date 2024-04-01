@@ -259,9 +259,7 @@ class wakati(kakasi):
                     if self._state:
                         otext = otext + text[i : i + ln] + self._separator
                     else:
-                        otext = (
-                            otext + self._separator + text[i : i + ln] + self._separator
-                        )
+                        otext = otext + self._separator + text[i : i + ln] + self._separator
                         self._state = True
                     i = i + ln
                 else:
