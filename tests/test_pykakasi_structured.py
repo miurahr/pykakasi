@@ -633,3 +633,19 @@ def test_issue_150():
     assert result[1]["hira"] == "×"
     assert result[2]["hira"] == "ご"
     assert len(result) == 3
+
+
+def test_aozora():
+    kakasi = pykakasi.Kakasi()
+    result = kakasi.convert("私は品行方正な人間として周囲から待遇されて居る。")
+    assert result[0]['kana'] == 'ワタシ'
+    assert result[1]['kana'] == 'ハ'
+    assert result[2]['kana'] == 'ヒンコウホウセイ'
+    assert result[3]['kana'] == 'ナ'
+    assert result[4]['kana'] == 'ニンゲン'
+    assert result[5]['kana'] == 'トシテ'
+    assert result[6]['kana'] == 'シュウイ'
+    assert result[7]['kana'] == 'カラ'
+    assert result[8]['kana'] == 'タイグウ'
+    assert result[9]['kana'] == 'サレテ'
+    assert result[10]['kana'] == 'イル。'
