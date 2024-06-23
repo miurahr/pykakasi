@@ -22,10 +22,11 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3 :: Only",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-dependencies = ["importlib_resources", "jaconv", "deprecated"]
+dependencies = ["importlib_resources; python_version < '3.9'", "jaconv", "deprecated"]
 dynamic = ["version"]
 
 [tool.setuptools.packages.find]
@@ -39,7 +40,7 @@ kakasi = "pykakasi.cli:cli_main"
 
 [project.optional-dependencies]
 test = [
-    "pytest",
+    "pytest>7",
     "pytest-benchmark",
     "coverage[toml]>=5.2",
     "py-cpuinfo"
@@ -73,6 +74,11 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools_scm]
 local_scheme = "no-local-version"
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "src"
+]
 
 [tool.coverage.paths]
 source = ["src", "*/site-packages"]
