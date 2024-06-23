@@ -15,11 +15,13 @@ Changed
 -------
 * Support Latin-1 characters (#150,#152)
 * Bump pytest>7
+* Depend importlib_resources only for 3.8.*
 
 Fixed
 -----
 * Add Zenkaku-Question(\uFF1F) and other Zenkaku marks as endmark (#146)
 * Configure pytest to recognize "src" project structure
+* Compatibility from python 3.8 - 3.18 with importlib_resources
 
 Deprecated
 ----------
