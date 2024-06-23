@@ -6,14 +6,14 @@
 import os
 from pathlib import Path
 try:
-    import importlib.resources as pkg_resources
+    from importlib.resources import files
 except ImportError:
-    import importlib_resources as pkg_resources
+    from importlib_resources import files
 
 
 class Configurations:
 
-    data_path = pkg_resources.files(__package__) / "data"
+    data_path = files(__package__) / "data"
     jisyo_hepburn_hira = "hepburnhira3.db"
     jisyo_passport_hira = "passporthira3.db"
     jisyo_kunrei_hira = "kunreihira3.db"
