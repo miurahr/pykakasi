@@ -245,10 +245,7 @@ class wakati(kakasi):
 
         otext = ""
         i = 0
-        while True:
-            if i >= len(text):
-                break
-
+        while i < len(text):
             if self._jconv.isRegion(text[i]):
                 _, ln = self._jconv.convert(text[i:], "")
                 if ln <= 0:  # pragma: no cover
