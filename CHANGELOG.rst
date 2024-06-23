@@ -14,10 +14,12 @@ Added
 Changed
 -------
 * Support Latin-1 characters (#150,#152)
+* Bump pytest>7
 
 Fixed
 -----
 * Add Zenkaku-Question(\uFF1F) and other Zenkaku marks as endmark (#146)
+* Configure pytest to recognize "src" project structure
 
 Deprecated
 ----------

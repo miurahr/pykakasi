@@ -39,7 +39,7 @@ kakasi = "pykakasi.cli:cli_main"
 
 [project.optional-dependencies]
 test = [
-    "pytest",
+    "pytest>7",
     "pytest-benchmark",
     "coverage[toml]>=5.2",
     "py-cpuinfo"
@@ -73,6 +73,11 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools_scm]
 local_scheme = "no-local-version"
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "src"
+]
 
 [tool.coverage.paths]
 source = ["src", "*/site-packages"]
