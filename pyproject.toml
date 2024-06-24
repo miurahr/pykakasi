@@ -27,7 +27,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = ["importlib_resources; python_version < '3.9'", "jaconv", "deprecated"]
-dynamic = ["version"]
+dynamic = ["version", "readme"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
