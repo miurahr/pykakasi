@@ -22,6 +22,7 @@ Fixed
 * Add Zenkaku-Question(\uFF1F) and other Zenkaku marks as endmark (#146)
 * Configure pytest to recognize "src" project structure
 * Compatibility from python 3.8 - 3.18 with importlib_resources
+* Properly handle punctuation to separate it from previous string (#163, #168)
 
 Deprecated
 ----------
