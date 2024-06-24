@@ -233,13 +233,22 @@ import pykakasi
                     "passport": "nihonkokumin",
                 },
                 {
-                    "orig": "は、",
-                    "hira": "は、",
-                    "kana": "ハ、",
-                    "hepburn": "ha,",
-                    "kunrei": "ha,",
-                    "passport": "ha,",
+                    "orig": "は",
+                    "hira": "は",
+                    "kana": "ハ",
+                    "hepburn": "ha",
+                    "kunrei": "ha",
+                    "passport": "ha",
                 },
+                {
+                    "orig": "、",
+                    "kana": "、",
+                    "hira": "、",
+                    "hepburn": ",",
+                    "kunrei": ",",
+                    "passport": ",",
+                },
+
             ],
         ),
         (
@@ -367,12 +376,20 @@ import pykakasi
                     "passport": "remon",
                 },
                 {
-                    "orig": "は、",
-                    "hira": "は、",
-                    "kana": "ハ、",
-                    "hepburn": "ha,",
-                    "kunrei": "ha,",
-                    "passport": "ha,",
+                    "orig": "は",
+                    "hira": "は",
+                    "kana": "ハ",
+                    "hepburn": "ha",
+                    "kunrei": "ha",
+                    "passport": "ha",
+                },
+                {
+                    "orig": "、",
+                    "kana": "、",
+                    "hira": "、",
+                    "hepburn": ",",
+                    "kunrei": ",",
+                    "passport": ",",
                 },
                 {
                     "orig": "レモン",
@@ -447,7 +464,8 @@ def test_issue115():
     result = kks.convert("ﾞっ、")  # \uFF9E
     expected = [
         {"hira": "\u309B", "kana": "\uFF9E", "hepburn": '"'},
-        {"hira": "っ、", "kana": "ッ、", "hepburn": "tsu,"},
+        {"hira": "っ", "kana": "ッ", "hepburn": "tsu"},
+        {"hira": "、", "kana": "、", "hepburn": ","},
     ]
     for i in range(len(expected)):
         assert result[i]["hira"] == expected[i]["hira"]
@@ -467,12 +485,12 @@ def test_kakasi_unidic_noun(case, expected):
 def test_issue_145():
     case = "見えますか？"
     expected = {
-        "orig": "ますか？",
-        "hira": "ますか？",
-        "kana": "マスカ？",
-        "hepburn": "masuka?",
-        "kunrei": "masuka?",
-        "passport": "masuka?",
+        "orig": "ますか",
+        "hira": "ますか",
+        "kana": "マスカ",
+        "hepburn": "masuka",
+        "kunrei": "masuka",
+        "passport": "masuka",
     }
     kakasi = pykakasi.Kakasi()
     result = kakasi.convert(case)
