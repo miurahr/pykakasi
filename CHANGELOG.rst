@@ -9,6 +9,27 @@ Unreleased_
 
 Added
 -----
+
+Changed
+-------
+
+Fixed
+-----
+
+Deprecated
+----------
+
+Removed
+-------
+
+Security
+--------
+
+v2.3.0_ (24, June 2024)
+=======================
+
+Added
+-----
 * backtrack matching mechanism(#132)
 
 Changed
@@ -23,15 +44,6 @@ Fixed
 * Configure pytest to recognize "src" project structure
 * Compatibility from python 3.8 - 3.18 with importlib_resources
 * Properly handle punctuation to separate it from previous string (#163, #168)
-
-Deprecated
-----------
-
-Removed
--------
-
-Security
---------
 
 v2.2.0_ (22, June 2021)
 =======================
@@ -188,7 +200,8 @@ v2.0.0_ (31, May. 2020)
 =======================
 
 
-.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.2.0...HEAD
+.. _Unreleased: https://github.com/miurahr/pykakasi/compare/v2.3.0...HEAD
+.. _v2.3.0: https://github.com/miurahr/pykakasi/compare/v2.2.0...v2.3.0
 .. _v2.2.0: https://github.com/miurahr/pykakasi/compare/v2.1.1...v2.2.0
 .. _v2.1.1: https://github.com/miurahr/pykakasi/compare/v2.1.0...v2.1.1
 .. _v2.1.0: https://github.com/miurahr/pykakasi/compare/v2.0.8...v2.1.0

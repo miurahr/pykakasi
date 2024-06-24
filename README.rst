@@ -34,7 +34,7 @@ Its algorithms are based on the `kakasi`_ library, which is written in C.
 Supported python versions
 =========================
 
-* pykakasi supports python 3.8, 3.9, 3.10, 3.11, 3.12 and pypy3
+* pykakasi supports python 3.8, 3.9, 3.10, 3.11, 3.12, 3.13 and pypy3
 
 Usage
 =====

@@ -9,15 +9,15 @@ Only recent version of pykakasi are currently being supported with security upda
 +---------+--------------------+
 | Version | Status             |
 +=========+====================+
-| 2.3.x   | Development        |
+| 2.4.x   | Development        |
 +---------+--------------------+
-| 2.2.x   | Stable             |
+| 2.3.x   | Stable             |
 |         | bug fix and        |
 |         | security update    |
 +---------+--------------------+
-| 1.x     | Security update    |
+| 2.2.x   | Security update    |
 +---------+--------------------+
-| < 1.2   | not supported      |
+| < 2.2   | not supported      |
 +---------+--------------------+
 
 Reporting a Vulnerability
