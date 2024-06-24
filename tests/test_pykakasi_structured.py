@@ -666,4 +666,5 @@ def test_aozora():
     assert result[7]['kana'] == 'カラ'
     assert result[8]['kana'] == 'タイグウ'
     assert result[9]['kana'] == 'サレテ'
-    assert result[10]['kana'] == 'イル。'
+    assert result[10]['kana'] == 'イル'
+    assert result[11]['kana'] == '。'
