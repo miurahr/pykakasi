@@ -68,6 +68,9 @@ check = [
 
 [project.urls]
 Source = "https://codeberg.org/miurahr/pykakasi"
+Documentation = "https://pykakasi.readthedocs.io/"
+"Bug Tracker" = "https://codeberg.org/miurahr/pykakasi/issues"
+Changelog = "https://pykakasi.readthedocs.io/en/latest/changes.html"
 
 [build-system]
 requires = ["setuptools>=42", "wheel", "setuptools_scm[toml]>=3.5.0"]
