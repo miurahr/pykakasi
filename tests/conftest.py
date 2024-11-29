@@ -1,7 +1,6 @@
 import os
 import sys
 
-import cpuinfo
 import pytest
 
 import kakasidict
@@ -18,6 +17,7 @@ def dictionary_setup_fixture():
     Configurations.data_path = dpath
 
 
+@pytest.hookimpl(optionalhook=True)
 def pytest_benchmark_update_json(config, benchmarks, output_json):
     """Calculate speed and add as extra_info"""
     for benchmark in output_json["benchmarks"]:
@@ -26,7 +26,9 @@ def pytest_benchmark_update_json(config, benchmarks, output_json):
             benchmark["extra_info"]["rate"] = rate
 
 
+@pytest.hookimpl(optionalhook=True)
 def pytest_benchmark_update_machine_info(config, machine_info):
+    import cpuinfo
     cpu_info = cpuinfo.get_cpu_info()
     brand = cpu_info.get("brand_raw", None)
     if brand is None:
