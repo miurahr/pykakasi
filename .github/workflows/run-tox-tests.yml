@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.12, 3.13, 3.14, pypy3]
+        python-version: [3.12, 3.13, 3.14, pypy3.11]
     name: Test on Python ${{ matrix.python-version }}
     steps:
       - uses: actions/checkout@v6
