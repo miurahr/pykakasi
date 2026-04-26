@@ -9,15 +9,15 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: [3.7, 3.9, pypy3]
+        python-version: [3.12, 3.13, pypy3]
         exclude:
           - os: windows-latest
             python-version: pypy3
     name: Benchmark on Python ${{ matrix.python-version }} on ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
       - name: Setup python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
@@ -30,7 +30,7 @@ jobs:
         env:
           PYTEST_ADDOPTS: '--benchmark-only --no-cov --benchmark-json=results_${{ matrix.os }}_${{ matrix.python-version }}.json'
       - name: upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v7
         with:
           name: benchmark_result
           path: results_${{ matrix.os }}_${{ matrix.python-version }}.json
@@ -40,15 +40,15 @@ jobs:
     name: compare benchmark results
     needs: run
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
       - name: download artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v7
         with:
           name: benchmark_result
       - name: setup python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v6
         with:
-          python-version: 3.9
+          python-version: 3.13
       - name: post result to issue
         run: |
           python -m pip install -U pip
