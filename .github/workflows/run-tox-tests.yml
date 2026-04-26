@@ -1,25 +1,28 @@
 name: Run Tox tests
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
 
 jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.7, 3.8, 3.9, pypy3]
+        python-version: [3.12, 3.13, 3.14, pypy3.11]
     name: Test on Python ${{ matrix.python-version }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
       - name: Setup python
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
-          architecture: x64
       - name: Install dependencies
         run: |
           pip install -U pip wheel setuptools
-          pip install tox tox-gh-actions coveralls coverage[toml]
+          pip install tox tox-gh-actions coveralls coverage[toml] pytest-cov
       - name: Test project with tox
         run: tox
         env:
