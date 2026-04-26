@@ -18,7 +18,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -U pip wheel setuptools
-          pip install tox tox-gh-actions coveralls coverage[toml]
+          pip install tox tox-gh-actions coveralls coverage[toml] pytest-cov
       - name: Test project with tox
         run: tox
         env:

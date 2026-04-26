@@ -42,6 +42,7 @@ kakasi = "pykakasi.cli:cli_main"
 test = [
     "pytest>7",
     "pytest-benchmark",
+    "pytest-cov",
     "coverage[toml]>=5.2",
     "py-cpuinfo"
     ]
