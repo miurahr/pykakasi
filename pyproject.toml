@@ -84,6 +84,7 @@ pythonpath = ["src"]
 python_files = "test_*.py"
 norecursedirs = [".git", "_build", "tmp*", ".eggs"]
 markers = ["thread: test with threading"]
+filterwarnings = "ignore::DeprecationWarning"
 
 [tool.coverage.paths]
 source = ["src", "*/site-packages"]
