@@ -172,7 +172,7 @@ class Genkanwadict:
             os.path.join(srcdir, "unidict_noun.utf8"),
             os.path.join(srcdir, "unidict_adj.utf8"),
         ]
-        dst = os.path.join(dstdir, "kanwadict4.db")
+        dst = os.path.join(dstdir, "kanwadict5.db")
         if os.path.exists(dst):
             os.unlink(dst)
         self._makekanwa(sources, dst)
