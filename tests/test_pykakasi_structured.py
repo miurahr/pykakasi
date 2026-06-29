@@ -112,6 +112,19 @@ import pykakasi
             ],
         ),
         (
+            "っでぃ",
+            [
+                {
+                    "orig": "っでぃ",
+                    "hira": "っでぃ",
+                    "kana": "ッディ",
+                    "hepburn": "ddi",
+                    "kunrei": "ddi",
+                    "passport": "ddei",
+                }
+            ],
+        ),
+        (
             "キャ",
             [
                 {
