@@ -670,6 +670,53 @@ def test_aozora():
     assert result[11]['kana'] == '。'
 
 
+def test_issue_170_variation_selector_after_kanji():
+    """Codeberg #170 - input ending in a Variation Selectors Supplement
+    character (here U+E0100) raised IndexError. Two underlying bugs:
+    `_is_vschr` had a typo (0x0E1EF vs the intended 0xE01EF) so VS
+    Supplement chars failed the range check, and the kanji `convert`
+    didn't guard `text[0]` against the empty-text case. With both fixed,
+    the selector is consumed as part of the same entry as the kanji it
+    follows — matching the behavior already produced for the basic VS
+    block (U+FE00..)."""
+    kks = pykakasi.kakasi()
+    result = kks.convert("まるちゃん味噌\U000E0100")
+    assert len(result) == 2
+    assert result[0]["orig"] == "まるちゃん"
+    assert result[0]["hira"] == "まるちゃん"
+    assert result[1]["orig"] == "味噌\U000E0100"
+    assert result[1]["hira"] == "みそ"
+
+
+def test_issue_177_variation_selector_after_kanji():
+    """Codeberg #177 - same root cause as #170. C-kakasi handles this
+    string; pykakasi crashed. The variant kanji form is preserved in
+    `orig` and reads through to the unornamented form's reading."""
+    kks = pykakasi.kakasi()
+    result = kks.convert("大辻\U000E0100")
+    assert len(result) == 1
+    assert result[0]["orig"] == "大辻\U000E0100"
+    assert result[0]["hira"] == "おおつじ"
+
+
+def test_variation_selector_basic_range_and_standalone():
+    """Coverage for the broader fix surface: the basic Variation Selectors
+    block (U+FE00..U+FE0F) was already handled correctly by `_is_vschr`
+    and continues to be. A standalone variation selector with no
+    surrounding text must not crash on `text[0]` of the empty itaiji
+    result."""
+    kks = pykakasi.kakasi()
+    # Basic VS block — unchanged behavior, no split.
+    r = kks.convert("味噌︀")
+    assert len(r) == 1
+    assert r[0]["orig"] == "味噌︀"
+    assert r[0]["hira"] == "みそ"
+    # Standalone Variation Selectors Supplement char — used to crash.
+    r = kks.convert("\U000E0100")
+    assert r[0]["orig"] == "\U000E0100"
+    assert r[0]["hira"] == ""
+
+
 def test_issue_179_sokuon_doubling_for_n_m_w_z():
     """Codeberg #179 - small tsu (sokuon) before n/m/w+vowel or ze was
     emitted as a standalone 'tsu' instead of doubling the following

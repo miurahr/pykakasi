@@ -25,6 +25,11 @@ class JConv:
         Hstr = ""
         text = self._itaiji.convert(itext)
         num_vs = len(itext) - len(text)
+        if not text:
+            # itext was entirely characters that itaijidict drops (variation
+            # selectors / tag characters). Tell the caller to advance past
+            # them with an empty reading rather than crashing on text[0].
+            return "", num_vs
         table = self._kanwa.load(text[0])
         if table is None:
             return "", 0
@@ -54,7 +59,12 @@ class JConv:
         return False
 
     def _is_vschr(self, ch):
-        return 0x0E0100 <= ord(ch) <= 0x0E1EF or 0xFE00 <= ord(ch) <= 0xFE02
+        # Variation Selectors Supplement is U+E0100..U+E01EF (917760..917999).
+        # The previous upper bound 0x0E1EF (57839) was a typo missing a zero,
+        # which made every selector in this block fail the check and forced
+        # the convert() caller to re-enter on the bare selector — where it
+        # used to crash on text[0] of an empty string.
+        return 0xE0100 <= ord(ch) <= 0xE01EF or 0xFE00 <= ord(ch) <= 0xFE02
 
 
 class Itaiji:
